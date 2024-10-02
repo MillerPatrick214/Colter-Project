@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnyxac75sfnna"]
+
+[ext_resource type="Script" path="res://Items/TestDirectionalSprite/DirectionalController.cs" id="1_p0o32"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_45s82"]
+load_path = "res://Items/TestDirectionalSprite/Textures/Anvil Front.png-394270c90ec8a5521eadcacc9083ebcb.ctex"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_etttk"]
+
+[node name="Anvil" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.352165, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+texture = SubResource("CompressedTexture2D_45s82")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_etttk")
+
+[node name="Directional Controller" type="Node" parent="."]
+script = ExtResource("1_p0o32")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.999998, -0.00169048, 0.000581136, 0.00168993, 0.999998, 0.000951011, -0.000582724, -0.000950039, 0.999999, 0, 0, 0)
+target_position = Vector3(1, 0, 0)

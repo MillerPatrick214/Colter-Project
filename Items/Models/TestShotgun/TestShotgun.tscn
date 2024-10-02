@@ -1,0 +1,32 @@
+[gd_scene load_steps=10 format=3 uid="uid://nibj0rjwjcr3"]
+
+[ext_resource type="PackedScene" uid="uid://cc81xw7vslwte" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/SM_CubicSingleBarrelShotgun_005_FBX.fbx" id="1_qxbl3"]
+[ext_resource type="Texture2D" uid="uid://cvnyp75euw3yw" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_DIFFUSE_2048.png" id="2_0s3s8"]
+[ext_resource type="Texture2D" uid="uid://cpj81u0ml06ea" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedAllDiffuseTextures/Cubic12GuageSingleShotgun_AO_2048.png" id="3_k32uc"]
+[ext_resource type="Texture2D" uid="uid://b3uhhbok5tt4h" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_EMIT_2048.png" id="4_dej0x"]
+[ext_resource type="Texture2D" uid="uid://3ome186knqbl" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_METALLIC_2048.png" id="5_88nay"]
+[ext_resource type="Texture2D" uid="uid://2n0vdkfg2kue" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_HEIGHT_2048.png" id="5_rfvnw"]
+[ext_resource type="Texture2D" uid="uid://cni58uqy6arru" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_NORMAL_2048.png" id="6_q2q85"]
+[ext_resource type="Texture2D" uid="uid://085d3bjk8sfs" path="res://Items/Models/TestShotgun/Free Cubic 12 Gauge Single Shotgun/Textures/SM_CubicSingleBarrelShotgun_005_BakedRealisticTextures/Cubic12GuageSingleShotgun_ROUGHNESS_2048.png" id="7_wjgbv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5noi"]
+albedo_texture = ExtResource("2_0s3s8")
+albedo_texture_force_srgb = true
+metallic = 1.0
+metallic_texture = ExtResource("5_88nay")
+roughness_texture = ExtResource("7_wjgbv")
+emission_enabled = true
+emission_on_uv2 = true
+emission_texture = ExtResource("4_dej0x")
+normal_enabled = true
+normal_texture = ExtResource("6_q2q85")
+ao_enabled = true
+ao_texture = ExtResource("3_k32uc")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_rfvnw")
+
+[node name="Root Scene" instance=ExtResource("1_qxbl3")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+
+[node name="Cubic12GuageSingleShotgun" parent="RootNode" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_r5noi")

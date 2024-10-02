@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4x77krwgrmgr"]
+
+[ext_resource type="PackedScene" uid="uid://dyok68xwis166" path="res://UI/pause_menu.tscn" id="1_3dg4j"]
+[ext_resource type="PackedScene" uid="uid://bqfdsm3jx7vpv" path="res://UI/InteractText.tscn" id="2_dowrc"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause Menu" parent="." instance=ExtResource("1_3dg4j")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 9.0
+offset_bottom = 61.0
+
+[node name="InteractText" parent="." instance=ExtResource("2_dowrc")]
+layout_mode = 1
+offset_top = 587.0

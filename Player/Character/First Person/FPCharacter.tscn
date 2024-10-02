@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://bn5ecyco6dg4n"]
+
+[ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
+[ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
+[ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
+[ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
+[ext_resource type="Script" path="res://Player/States/Idle.cs" id="9_g3auy"]
+[ext_resource type="Script" path="res://Player/States/Walk.cs" id="10_k5338"]
+[ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
+[ext_resource type="Script" path="res://Player/Character/Interact.cs" id="12_1d8mr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s8qte"]
+radius = 0.2
+height = 1.0
+
+[node name="Character" type="CharacterBody3D" groups=["PlayerCharacter"]]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 0.00911731, -0.0129818)
+script = ExtResource("1_815m1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
+shape = SubResource("CapsuleShape3D_s8qte")
+
+[node name="CamPivot" type="Marker3D" parent="."]
+script = ExtResource("5_kks8j")
+
+[node name="InteractRayCast" type="RayCast3D" parent="CamPivot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.28, 0)
+script = ExtResource("7_g3eq3")
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28006, 2.81259e-07)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("8_rpjm1")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("9_g3auy")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("10_k5338")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("11_q68kc")
+
+[node name="Interact" type="Node" parent="."]
+script = ExtResource("12_1d8mr")

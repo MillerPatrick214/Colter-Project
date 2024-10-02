@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbycffn14mpg"]
+
+[ext_resource type="PackedScene" uid="uid://nibj0rjwjcr3" path="res://Items/Models/TestShotgun/TestShotgun.tscn" id="1_btb0w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y2aew"]
+radius = 0.15
+height = 1.0
+
+[node name="RigidBody3D" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.174176)
+collision_layer = 3
+collision_mask = 3
+
+[node name="TestShotgunScene" parent="." instance=ExtResource("1_btb0w")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.00530529, 0, 0.000222206)
+shape = SubResource("CapsuleShape3D_y2aew")
