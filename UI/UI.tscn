@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=4 format=3 uid="uid://c4x77krwgrmgr"]
 
 [ext_resource type="PackedScene" uid="uid://dyok68xwis166" path="res://UI/pause_menu.tscn" id="1_3dg4j"]
 [ext_resource type="PackedScene" uid="uid://bqfdsm3jx7vpv" path="res://UI/InteractText.tscn" id="2_dowrc"]
+[ext_resource type="PackedScene" uid="uid://cay8lyk26nkop" path="res://fpscounter.tscn" id="3_q381y"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -24,3 +25,5 @@ offset_bottom = 61.0
 [node name="InteractText" parent="." instance=ExtResource("2_dowrc")]
 layout_mode = 1
 offset_top = 587.0
+
+[node name="FPS" parent="." instance=ExtResource("3_q381y")]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cay8lyk26nkop"]
+
+[ext_resource type="Script" path="res://UI/FPS.cs" id="1_vpbtd"]
+
+[node name="FPS" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 879.0
+offset_top = 4.0
+offset_right = 1147.0
+offset_bottom = 93.0
+script = ExtResource("1_vpbtd")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 15.0
+offset_right = 231.0
+offset_bottom = 57.0
