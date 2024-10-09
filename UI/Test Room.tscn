@@ -34,7 +34,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.965926, 0.111905, -0.233376, -0.0669873, 0.979064, 0.192212, 0.25, -0.170029, 0.9532, 0, 2.5885, 0)
+transform = Transform3D(0.965926, 0.111905, -0.233376, 0.183013, 0.342283, 0.921601, 0.183013, -0.932909, 0.31014, 0, 6.5885, 4)
 
 [node name="TestShotgunRigidBody" parent="." instance=ExtResource("3_nlb3v")]
 transform = Transform3D(-0.0337308, -0.999431, 0, 0.999431, -0.0337308, 0, 0, 0, 1, 0, 1.6554, 1.51495)

@@ -3,6 +3,8 @@ using System;
 
 public partial class CamPivot : Marker3D
 {
+	[Signal]
+	public delegate void AimSignalEventHandler(bool isAiming);
 
 	float lookAroundSpeed = .5f;
 	float mouseRotX = 0f;
@@ -14,7 +16,9 @@ public partial class CamPivot : Marker3D
 	SpringArm3D springArm;
 
 	float DefaultFOV = 70;
-	float AimFOV = 50;
+
+	[Export]
+	float AimFOV = 30;
 
 
 	Vector3 CurrentArmPos;
@@ -31,23 +35,23 @@ public partial class CamPivot : Marker3D
 		Camera = GetNodeOrNull<Camera3D>("Camera3D");
 		if (Camera == null) {
 			GD.Print("CamPivot: Camera3d returned null");
-		}
-		
+		}		
 	}
 
 	public override void _Process(double delta) { 
 		Aiming(isAiming, delta);
 
-		if (Input.IsActionPressed("Aim")) {
+		if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
 			isAiming = true;
+			EmitSignal(SignalName.AimSignal, isAiming);
 			//GD.Print("Aiming activated");
 		}
 			
 		else if (Input.IsActionJustReleased("Aim")) {
 			//GD.Print("Aiming deactivated");
 			isAiming = false;
+			EmitSignal(SignalName.AimSignal, isAiming);
 		}
-
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

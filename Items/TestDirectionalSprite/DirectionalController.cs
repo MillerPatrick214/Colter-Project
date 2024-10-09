@@ -70,8 +70,8 @@ public partial class DirectionalController : Node
 		//theta *= 100; //converts into readible decimal
 		
 
-		GD.Print("Theta: " + theta);
-		GD.Print(TwoDPlayerVector);
+		/* GD.Print("Theta: " + theta);
+		GD.Print(TwoDPlayerVector); */
 
 		theta = Mathf.RadToDeg(theta);
 
