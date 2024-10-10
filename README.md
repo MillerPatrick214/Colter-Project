@@ -1,0 +1,9 @@
+- Look into omnibus system for handling signals & potentially serving node data to other nodes?
+- Bake animation into weapon -- not into player
+- Go over everything with jarred or more experienced programmer if possible - organize everything and have a clear system in place for expansion.
+- XML for storing item/weapon info.
+- Inventory
+- UI
+- Guns currently can't actually fire.
+- Align irons with center.
+- 
