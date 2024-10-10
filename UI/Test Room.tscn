@@ -40,6 +40,7 @@ transform = Transform3D(0.965926, 0.111905, -0.233376, 0.183013, 0.342283, 0.921
 transform = Transform3D(-0.0337308, -0.999431, 0, 0.999431, -0.0337308, 0, 0, 0, 1, 0, 1.6554, 1.51495)
 
 [node name="Character" parent="." instance=ExtResource("3_nhaq8")]
+unique_name_in_owner = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
 
 [node name="Anvil" parent="." instance=ExtResource("1_wv2u4")]

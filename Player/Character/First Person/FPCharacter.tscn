@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn5ecyco6dg4n"]
+[gd_scene load_steps=16 format=3 uid="uid://bn5ecyco6dg4n"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
 [ext_resource type="PackedScene" uid="uid://b6pnk5x7c6mob" path="res://Items/TestDoubleBarrel.tscn" id="5_1ovhw"]
@@ -16,9 +16,9 @@
 radius = 0.2
 height = 1.0
 
-[sub_resource type="Animation" id="Animation_8y3d3"]
+[sub_resource type="Animation" id="Animation_dectw"]
 resource_name = "Aiming"
-length = 0.5
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,13 +26,25 @@ tracks/0/path = NodePath("../CamPivot/ItemMarker:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1.93187, 1),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(2, 1),
 "update": 0,
-"values": [Vector3(0.122377, 0.202001, -0.0904308), Vector3(0, 0.22693, 0)]
+"values": [Vector3(0.0730524, 0.204294, -0.0918579), Vector3(0, 0.242651, -0.0277644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CamPivot/ItemMarker:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector3(-0.623083, 0.523599, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_02q2w"]
+[sub_resource type="Animation" id="Animation_vv7un"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -44,30 +56,25 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.122377, 0.202001, -0.0904308)]
+"values": [Vector3(0.0730524, 0.204294, -0.0918579)]
 }
-
-[sub_resource type="Animation" id="Animation_po1io"]
-resource_name = "Weapon sway"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../CamPivot/ItemMarker:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1.07178),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CamPivot/ItemMarker:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.122377, 0.202001, -0.0904308), Vector3(0.022, 0.21, -0.11)]
+"values": [Vector3(-0.623083, 0.523599, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wooot"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ee0wn"]
 _data = {
-"Aiming": SubResource("Animation_8y3d3"),
-"RESET": SubResource("Animation_02q2w"),
-"Weapon sway": SubResource("Animation_po1io")
+"Aiming": SubResource("Animation_dectw"),
+"RESET": SubResource("Animation_vv7un")
 }
 
 [node name="Character" type="CharacterBody3D" groups=["PlayerCharacter"]]
@@ -80,7 +87,7 @@ shape = SubResource("CapsuleShape3D_s8qte")
 
 [node name="CamPivot" type="Marker3D" parent="."]
 script = ExtResource("5_kks8j")
-AimFOV = 40.0
+AimFOV = 50.0
 
 [node name="InteractRayCast" type="RayCast3D" parent="CamPivot"]
 unique_name_in_owner = true
@@ -89,12 +96,13 @@ script = ExtResource("7_g3eq3")
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28006, 2.81259e-07)
+near = 0.025
 
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.122377, 0.202001, -0.0904308)
+transform = Transform3D(0.866025, -0.291771, 0.406042, 0, 0.812083, 0.583542, -0.5, -0.505362, 0.703285, 0.0730524, 0.204294, -0.0918579)
 script = ExtResource("9_gmr6g")
 
-[node name="Node3D" parent="CamPivot/ItemMarker" instance=ExtResource("5_1ovhw")]
+[node name="TestShotGun" parent="CamPivot/ItemMarker" instance=ExtResource("5_1ovhw")]
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("8_rpjm1")
@@ -116,5 +124,5 @@ script = ExtResource("11_3chbb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationNode"]
 libraries = {
-"": SubResource("AnimationLibrary_wooot")
+"": SubResource("AnimationLibrary_ee0wn")
 }

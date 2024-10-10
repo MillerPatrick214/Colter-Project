@@ -44,7 +44,7 @@ public partial class AnimationNode : Node
 		}
 
 		else {
-				AniPlayer.PlayBackwards("Aiming");
+			AniPlayer.PlayBackwards("Aiming");
 		}
 	}
 }

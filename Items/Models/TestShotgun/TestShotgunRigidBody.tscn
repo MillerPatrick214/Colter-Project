@@ -7,12 +7,12 @@ radius = 0.15
 height = 1.0
 
 [node name="RigidBody3D" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.174176)
+transform = Transform3D(0.94282, -0.3174, -0.101727, -0.154001, -0.685515, 0.711585, -0.295592, -0.65523, -0.695196, 0, 0, -0.174176)
 collision_layer = 3
 collision_mask = 3
 
 [node name="TestShotgunScene" parent="." instance=ExtResource("1_btb0w")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.00530529, 0, 0.000222206)
+transform = Transform3D(0.224092, 0.959197, 0.172406, 0.0235931, 0.171514, -0.984899, -0.974282, 0.224776, 0.0158046, -0.00530529, 0, 0.000222206)
 shape = SubResource("CapsuleShape3D_y2aew")
