@@ -11,7 +11,7 @@ public partial class FPS : Control
 		if (labelNode == null) {
 			GD.Print("FPS Node: returned null for child node");
 		}
-
+		
 		else {
 			GD.Print("Ladies and gentlemen... We got him...");
 		}

@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=6 format=3 uid="uid://c4x77krwgrmgr"]
 
 [ext_resource type="PackedScene" uid="uid://dyok68xwis166" path="res://UI/pause_menu.tscn" id="1_3dg4j"]
 [ext_resource type="PackedScene" uid="uid://bqfdsm3jx7vpv" path="res://UI/InteractText.tscn" id="2_dowrc"]
 [ext_resource type="PackedScene" uid="uid://cay8lyk26nkop" path="res://fpscounter.tscn" id="3_q381y"]
+[ext_resource type="Script" path="res://UI/InteractEvent.cs" id="4_777am"]
+[ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="4_ybldy"]
 
 [node name="UI" type="Control"]
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,3 +30,31 @@ layout_mode = 1
 offset_top = 587.0
 
 [node name="FPS" parent="." instance=ExtResource("3_q381y")]
+
+[node name="InteractEvent" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_777am")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="InteractEvent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="InteractEvent/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="BaseLayerSprite1" type="Sprite2D" parent="InteractEvent/SubViewportContainer/SubViewport"]
+position = Vector2(158, 157)
+texture = ExtResource("4_ybldy")

@@ -1,9 +1,67 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6pnk5x7c6mob"]
+[gd_scene load_steps=30 format=3 uid="uid://b6pnk5x7c6mob"]
 
 [ext_resource type="Script" path="res://Items/TestDoubleBarrel.cs" id="1_lau05"]
 [ext_resource type="PackedScene" uid="uid://dshicn7lorymy" path="res://DoubleBarrelShotgun_00.fbx" id="1_svi4x"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="2_jveks"]
+[ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="2_l75i1"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_yjjah"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q8yp8"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+angle_min = -45.0
+angle_max = 45.0
+inherit_velocity_ratio = 1.0
+velocity_pivot = Vector3(1, 0, 0)
+direction = Vector3(0, 0, 1)
+spread = 10.0
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.5
+damping_max = 1.0
+turbulence_noise_scale = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley4k"]
+transparency = 1
+albedo_texture = ExtResource("2_l75i1")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_1n72l"]
+material = SubResource("StandardMaterial3D_ley4k")
+size = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_g7mbn"]
+resource_name = "Aiming"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.24, 0), Vector3(0, 0.23, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.623083, 0.523599, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_b3hhh"]
 resource_name = "Bang"
@@ -23,26 +81,65 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath("Recoil marker/Root Scene:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.05), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.06), Vector3(0, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
+tracks/2/path = NodePath("Recoil marker:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 3.14159, 0), Vector3(-0.174533, 3.14159, 0), Vector3(0, 3.14159, 0)]
+"values": [Vector3(2.38419e-08, 3.4106e-15, 4.76837e-08), Vector3(-0.0872665, 0, 0), Vector3(2.38419e-08, 3.4106e-15, 4.76837e-08)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Recoil marker/OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_2a5da"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.073, 0.204, -0.092)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.623083, 0.523599, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_3p5rj"]
@@ -57,7 +154,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0.073, 0.204, -0.092)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -69,13 +166,79 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 3.14159, 0)]
+"values": [Vector3(0.623083, 0.523599, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Recoil marker/Root Scene:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Recoil marker:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.38419e-08, 3.4106e-15, 4.76837e-08)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Recoil marker/OmniLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pxba2"]
+resource_name = "Return"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.23, 0), Vector3(0.073, 0.204, -0.092)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.623083, 0.523599, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n7ra1"]
 _data = {
+"Aiming": SubResource("Animation_g7mbn"),
 "Bang": SubResource("Animation_b3hhh"),
-"RESET": SubResource("Animation_3p5rj")
+"Idle": SubResource("Animation_2a5da"),
+"RESET": SubResource("Animation_3p5rj"),
+"Return": SubResource("Animation_pxba2")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh7w6"]
@@ -138,40 +301,104 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ypnjs")
 }],
-"loop": true,
+"loop": false,
 "name": &"Bang",
 "speed": 30.0
 }]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yohko"]
+animation = &"Bang"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ebnv1"]
+animation = &"Aiming"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_eg1lw"]
+filters = [".:position", ".:rotation"]
+sync = true
+mix_mode = 1
+fadein_time = 0.2
+fadeout_time = 0.2
+autorestart_delay = 0.0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_5r4jd"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ng72k"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_elolx"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_yohko")
+nodes/Animation/position = Vector2(-180, 340)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_ebnv1")
+nodes/Idle/position = Vector2(-280, 160)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_eg1lw")
+nodes/OneShot/position = Vector2(140, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ng72k")
+nodes/TimeScale/position = Vector2(-140, 160)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_5r4jd")
+"nodes/TimeScale 2/position" = Vector2(-20, 340)
+nodes/output/position = Vector2(360, 260)
+node_connections = [&"OneShot", 0, &"TimeScale", &"OneShot", 1, &"TimeScale 2", &"TimeScale", 0, &"Idle", &"TimeScale 2", 0, &"Animation", &"output", 0, &"OneShot"]
+
 [node name="TestShotGun" type="Node3D"]
-transform = Transform3D(-0.7, 0, 1.77463e-06, 0, 0.7, 0, -1.77463e-06, 0, -0.7, 0, 0, 0)
+transform = Transform3D(0.866025, 0.291771, 0.406042, 0, 0.812083, -0.583542, -0.5, 0.505362, 0.703285, 0.073, 0.204, -0.092)
 script = ExtResource("1_lau05")
 
-[node name="Root Scene" parent="." instance=ExtResource("1_svi4x")]
+[node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, -0.000559374, 0.0263524, 0.697477)
+transparency = 0.5
+emitting = false
+amount = 10
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_q8yp8")
+draw_pass_1 = SubResource("QuadMesh_1n72l")
+
+[node name="Recoil marker" type="Marker3D" parent="."]
+transform = Transform3D(1, -4.76837e-08, 3.4106e-15, 4.76837e-08, 1, -2.38419e-08, -2.27373e-15, 2.38419e-08, 1, 0, 0, 0)
+
+[node name="Root Scene" parent="Recoil marker" instance=ExtResource("1_svi4x")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Recoil marker"]
+transform = Transform3D(1, 2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, 0, 0, 1, 2.98023e-08, 0.0282603, 0.703109)
+light_color = Color(1, 0.658824, 0.494118, 1)
+light_energy = 2.0
+light_size = 0.1
+shadow_enabled = true
+omni_range = 3.0
+
 [node name="Barrel End" type="Marker3D" parent="."]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.03008e-07, 0.0312614, 0.682191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0.7)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Barrel End"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_n7ra1")
 }
-speed_scale = 3.0
 
 [node name="Bang" type="AnimatedSprite3D" parent="Barrel End"]
-transform = Transform3D(-3, 0, 4.52988e-07, 0, 3, 0, -4.52988e-07, 0, -3, 0, 0, 0)
+transform = Transform3D(-3, 0, 4.52988e-07, 0, 3, 0, -4.52988e-07, 0, -3, 0, 0, -0.050121)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_danbj")
 animation = &"Bang"
 
-[node name="RayCast3D" type="RayCast3D" parent="Barrel End"]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
-target_position = Vector3(0, 0, 150)
+[node name="AnimationTree" type="AnimationTree" parent="Barrel End"]
+deterministic = false
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_n7ra1")
+}
+tree_root = SubResource("AnimationNodeBlendTree_elolx")
+anim_player = NodePath("../AnimationPlayer")
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/TimeScale/scale = -3.0
+"parameters/TimeScale 2/scale" = 4.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 
 [node name="Gunshot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_yjjah")
+volume_db = 5.0

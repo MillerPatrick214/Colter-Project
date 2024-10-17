@@ -14,7 +14,6 @@ public partial class CamPivot : Marker3D
 	float yRotMax = 70f;
 	CharacterBody3D char3D;
 	SpringArm3D springArm;
-
 	float DefaultFOV = 70;
 
 	[Export]
@@ -23,63 +22,77 @@ public partial class CamPivot : Marker3D
 
 	Vector3 CurrentArmPos;
 
+	bool isInteracting;
+
 	bool isAiming; 
 
 	Camera3D Camera;
 
 	public override void _Ready()
-	{
+	{	
+		isInteracting = false;
 		isAiming = false;		
 		char3D = GetParent() as CharacterBody3D;		//need this as we are rotating the actual character with mousemovement. We only move camera up & down. 
 		Input.MouseMode = Input.MouseModeEnum.Captured; 
 		Camera = GetNodeOrNull<Camera3D>("Camera3D");
-		if (Camera == null) {
+
+		
+		/*if (Camera == null || InteractEventNode == null) {
 			GD.Print("CamPivot: Camera3d returned null");
-		}		
+			GD.Print("Or InteractEventNode returned null");
+		}		 */
 	}
 
 	public override void _Process(double delta) { 
-		Aiming(isAiming, delta);
+		if (!isInteracting) {
+			Aiming(isAiming, delta);
 
-		if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
-			isAiming = true;
-			EmitSignal(SignalName.AimSignal, isAiming);
-			//GD.Print("Aiming activated");
+
+			if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
+				isAiming = true;
+				EmitSignal(SignalName.AimSignal, isAiming);
+				//GD.Print("Aiming activated");
+			}
+				
+			else if (Input.IsActionJustReleased("Aim")) {
+				//GD.Print("Aiming deactivated");
+				isAiming = false;
+				EmitSignal(SignalName.AimSignal, isAiming);
 		}
-			
-		else if (Input.IsActionJustReleased("Aim")) {
-			//GD.Print("Aiming deactivated");
-			isAiming = false;
-			EmitSignal(SignalName.AimSignal, isAiming);
 		}
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Input(InputEvent @event) {
-		if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
-			// modify accumulated mouse rotation
-			mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;
-			mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
-			mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
-		
-			char3D.RotationDegrees = new Vector3(0,-mouseRotX, 0); 		//sets rotation for char and camera separently for x & y.
-			this.RotationDegrees = new Vector3(mouseRotY, 0, 0); 
-			}
+		if (!isInteracting) {
+			if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
+				// modify accumulated mouse rotation
+				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;
+				mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
+				mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
+			
+				char3D.RotationDegrees = new Vector3(0,-mouseRotX, 0); 		//sets rotation for char and camera separently for x & y.
+				this.RotationDegrees = new Vector3(mouseRotY, 0, 0); 
+				}
 		}
+	}
 
 	public void Aiming(bool isAiming, double delta) {
 		float currentFOV = Camera.Fov;
 
 		if (isAiming) {
-			Camera.Fov = currentFOV + (AimFOV - currentFOV) * 4 *(float)delta;
+			Camera.Fov = currentFOV + (AimFOV - currentFOV) * 4 * (float)delta;
 		}
 
 		if (!(isAiming)) {
-			Camera.Fov = currentFOV + (DefaultFOV - currentFOV) * 4 *(float)delta;
+			Camera.Fov = currentFOV + (DefaultFOV - currentFOV) * 4 * (float)delta;
 
 		} 
 	}
-}
 
+	public void ChangeIsInteracting(bool isActive) {
+		isInteracting = isActive;
+	}
+}
 
 

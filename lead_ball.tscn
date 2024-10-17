@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://16p2434xcmje"]
+[gd_scene load_steps=6 format=3 uid="uid://16p2434xcmje"]
+
+[ext_resource type="Script" path="res://lead_ball.cs" id="1_gtt60"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_76n2g"]
-radius = 0.01
+radius = 0.025
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4qbi"]
 albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
@@ -17,8 +19,12 @@ height = 0.05
 [sub_resource type="Skin" id="Skin_gv7j0"]
 
 [node name="Lead Ball" type="RigidBody3D"]
-collision_layer = 4
+collision_mask = 2
+continuous_cd = true
+max_contacts_reported = 2
+contact_monitor = true
 constant_force = Vector3(0, -9.81, 0)
+script = ExtResource("1_gtt60")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_76n2g")

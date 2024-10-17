@@ -1,19 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8frf2nj2nwe"]
+[gd_scene load_steps=9 format=3 uid="uid://b8frf2nj2nwe"]
 
+[ext_resource type="Script" path="res://UI/TestRoom.cs" id="1_aoumg"]
 [ext_resource type="PackedScene" uid="uid://bnyxac75sfnna" path="res://Items/TestDirectionalSprite/Anvil.tscn" id="1_wv2u4"]
-[ext_resource type="PackedScene" uid="uid://c4x77krwgrmgr" path="res://UI/UI.tscn" id="3_k8r7f"]
 [ext_resource type="PackedScene" uid="uid://bn5ecyco6dg4n" path="res://Player/Character/First Person/FPCharacter.tscn" id="3_nhaq8"]
 [ext_resource type="PackedScene" uid="uid://dvbycffn14mpg" path="res://Items/Models/TestShotgun/TestShotgunRigidBody.tscn" id="3_nlb3v"]
+[ext_resource type="PackedScene" uid="uid://d1tywn615fc2s" path="res://CAPYBARA TEST/Capybara.tscn" id="6_dxtdp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ve3rs"]
-size = Vector3(10, 0.25, 10)
+size = Vector3(40, 0.25, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hj5dj"]
-size = Vector3(10, 0.25, 10)
+size = Vector3(40, 0.25, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_usk27"]
 
 [node name="TestMap" type="Node3D"]
+script = ExtResource("1_aoumg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -26,15 +28,8 @@ mesh = SubResource("BoxMesh_hj5dj")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_usk27")
 
-[node name="UI" parent="." instance=ExtResource("3_k8r7f")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.965926, 0.111905, -0.233376, 0.183013, 0.342283, 0.921601, 0.183013, -0.932909, 0.31014, 0, 6.5885, 4)
+transform = Transform3D(0.965926, 0.111905, -0.233377, 0.183013, 0.342283, 0.921601, 0.183013, -0.932909, 0.31014, -0.00189567, 6.57203, 4.00108)
 
 [node name="TestShotgunRigidBody" parent="." instance=ExtResource("3_nlb3v")]
 transform = Transform3D(-0.0337308, -0.999431, 0, 0.999431, -0.0337308, 0, 0, 0, 1, 0, 1.6554, 1.51495)
@@ -45,3 +40,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
 
 [node name="Anvil" parent="." instance=ExtResource("1_wv2u4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232792, 0.714764, -0.0126286)
+
+[node name="Capy Boy!!!" parent="." instance=ExtResource("6_dxtdp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03394, 0.558716, -2.22676)
