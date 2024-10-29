@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://16p2434xcmje"]
+[gd_scene load_steps=7 format=3 uid="uid://16p2434xcmje"]
 
 [ext_resource type="Script" path="res://lead_ball.cs" id="1_gtt60"]
 
@@ -18,13 +18,20 @@ height = 0.05
 
 [sub_resource type="Skin" id="Skin_gv7j0"]
 
+[sub_resource type="FogMaterial" id="FogMaterial_dj22w"]
+density = 0.5
+albedo = Color(1, 0.184314, 1, 1)
+emission = Color(1, 0, 0, 1)
+
 [node name="Lead Ball" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142056, -0.120901, 0.601847)
 collision_mask = 2
+mass = 0.04
 continuous_cd = true
 max_contacts_reported = 2
 contact_monitor = true
-constant_force = Vector3(0, -9.81, 0)
 script = ExtResource("1_gtt60")
+Damage = 7.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_76n2g")
@@ -33,3 +40,9 @@ shape = SubResource("SphereShape3D_76n2g")
 mesh = SubResource("SphereMesh_25ans")
 skin = SubResource("Skin_gv7j0")
 skeleton = NodePath("../..")
+
+[node name="TrailEmitter" type="TrailEmitter" parent="."]
+material = SubResource("FogMaterial_dj22w")
+geometry_nodepath = NodePath("..")
+size = 0.1
+visible = false

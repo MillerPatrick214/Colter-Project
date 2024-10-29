@@ -4,10 +4,9 @@ using System;
 public partial class InteractRayCast : RayCast3D
 {
 	[Signal]
-	public delegate void InteractableSeenEventHandler(GodotObject InteractableObject);
+	public delegate void InteractableScanEventHandler(GodotObject InteractableObject);
 
-	[Signal]
-	public delegate void InteractableLostEventHandler();
+	GodotObject LookingAt;
 
 	public override void _Ready()
 	{
@@ -19,13 +18,22 @@ public partial class InteractRayCast : RayCast3D
 	public override void _PhysicsProcess(double delta)
 	{	
 		GodotObject InteractableObject = GetCollider();
-		if (InteractableObject != null) {
+
+		if (InteractableObject != LookingAt) {
+			EmitSignal(SignalName.InteractableScan, InteractableObject);
+			LookingAt = InteractableObject;
+		}
+		
+	}
+
+
+		/*if (InteractableObject != null) {
 			EmitSignal(SignalName.InteractableSeen, InteractableObject);
 			GD.Print("Emitting Seen Signal");
 		}
 
 		else if (InteractableObject == null) {
 			EmitSignal(SignalName.InteractableLost);
-		}
+		}*/
 	}
-}
+

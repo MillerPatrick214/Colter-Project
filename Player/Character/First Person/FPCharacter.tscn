@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn5ecyco6dg4n"]
+[gd_scene load_steps=18 format=3 uid="uid://bn5ecyco6dg4n"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
 [ext_resource type="PackedScene" uid="uid://b6pnk5x7c6mob" path="res://Items/TestDoubleBarrel.tscn" id="5_1ovhw"]
@@ -8,13 +8,14 @@
 [ext_resource type="Script" path="res://Player/States/Idle.cs" id="9_g3auy"]
 [ext_resource type="Script" path="res://Player/Character/First Person/ItemMarker.cs" id="9_gmr6g"]
 [ext_resource type="Script" path="res://Player/States/Walk.cs" id="10_k5338"]
-[ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="11_lphyh"]
+[ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="11_aqddq"]
 [ext_resource type="Script" path="res://UI/pause_menu.cs" id="11_oylvg"]
 [ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
 [ext_resource type="Script" path="res://Player/Character/Interact.cs" id="12_1d8mr"]
 [ext_resource type="Script" path="res://UI/InteractText.cs" id="12_4rlr8"]
 [ext_resource type="Script" path="res://UI/FPS.cs" id="13_jux0p"]
 [ext_resource type="Script" path="res://UI/InteractEvent.cs" id="14_5hj41"]
+[ext_resource type="PackedScene" uid="uid://c78npbxacgl6f" path="res://Skinning/AnimalSkinningSetup.tscn" id="16_urvq7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s8qte"]
 radius = 0.2
@@ -72,6 +73,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_aqddq")
 
 [node name="Pause Menu" type="Control" parent="UI"]
 layout_mode = 2
@@ -113,6 +116,7 @@ anchor_bottom = 1.0
 offset_top = 587.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("12_4rlr8")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/InteractText"]
@@ -136,12 +140,13 @@ text = "Me Britches
 "
 
 [node name="FPS" type="Control" parent="UI"]
-layout_mode = 3
+layout_mode = 2
 anchors_preset = 0
 offset_left = 879.0
 offset_top = 4.0
-offset_right = 1147.0
-offset_bottom = 93.0
+offset_right = 1179.0
+offset_bottom = 304.0
+mouse_filter = 2
 script = ExtResource("13_jux0p")
 
 [node name="Label" type="Label" parent="UI/FPS"]
@@ -158,23 +163,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
 script = ExtResource("14_5hj41")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/InteractEvent"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+[node name="AnimalSkinning" parent="UI/InteractEvent" instance=ExtResource("16_urvq7")]
 
-[node name="SubViewport" type="SubViewport" parent="UI/InteractEvent/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="BaseLayerSprite1" type="Sprite2D" parent="UI/InteractEvent/SubViewportContainer/SubViewport"]
-position = Vector2(158, 157)
-texture = ExtResource("11_lphyh")
+[node name="Reload" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

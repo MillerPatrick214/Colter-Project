@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw0mtrrkpq73g"]
+
+[ext_resource type="Texture2D" uid="uid://c4i222w3oia72" path="res://Skinning/DeerTemp.png" id="1_ihf7i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqyi8"]
+size = Vector2(64.7334, 127.231)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awhua"]
+size = Vector2(6.8709, 125.912)
+
+[node name="DeerSkinningTEST" type="Sprite2D"]
+position = Vector2(378, 334)
+scale = Vector2(5.11328, 4.55078)
+texture = ExtResource("1_ihf7i")
+
+[node name="RightArea" type="Area2D" parent="."]
+
+[node name="WrongArea" type="Area2D" parent="RightArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea/WrongArea"]
+position = Vector2(-0.880058, 0.109863)
+shape = SubResource("RectangleShape2D_uqyi8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea"]
+position = Vector2(-3.32467, 2.19742)
+shape = SubResource("RectangleShape2D_awhua")

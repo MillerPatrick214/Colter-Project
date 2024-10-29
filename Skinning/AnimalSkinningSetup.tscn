@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://c78npbxacgl6f"]
+
+[ext_resource type="Script" path="res://Skinning/AnimalSkinning.cs" id="1_cilnm"]
+[ext_resource type="Texture2D" uid="uid://d84rngvmanbb" path="res://Items/TestDirectionalSprite/Bowie Knife No Blur.png" id="3_4l43u"]
+[ext_resource type="Script" path="res://Skinning/KnifeArea.cs" id="3_o2gkm"]
+[ext_resource type="Texture2D" uid="uid://bw3sin7wfwywv" path="res://Items/TestDirectionalSprite/Sheathe.png" id="4_b5b1d"]
+[ext_resource type="PackedScene" uid="uid://cw0mtrrkpq73g" path="res://DeerSkinTEST.tscn" id="5_lmh62"]
+
+[node name="AnimalSkinning" type="Node2D"]
+script = ExtResource("1_cilnm")
+
+[node name="BowieKnife" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(1110, 589)
+scale = Vector2(3, 3)
+texture = ExtResource("3_4l43u")
+offset = Vector2(-64.03, -3.595)
+
+[node name="Knife Area" type="Area2D" parent="BowieKnife"]
+z_index = 1
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+script = ExtResource("3_o2gkm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BowieKnife/Knife Area"]
+position = Vector2(-64, -3.66667)
+polygon = PackedVector2Array(-9.33333, -4.66667, 39.6667, -5, 71.6667, 4.66666, 48, 9.33333, -14, 9.66667, -17, 13, -22.3333, 13, -64, 11, -64.3333, -7, -14.3333, -7, -14, -5)
+
+[node name="Sheathe" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(928, 574)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("4_b5b1d")
+
+[node name="Skinnable Item" type="Node2D" parent="."]
+position = Vector2(378, 334)
+scale = Vector2(5.11328, 4.55078)
+
+[node name="DeerSkinningTEST" parent="Skinnable Item" instance=ExtResource("5_lmh62")]
+position = Vector2(0, 0)
+scale = Vector2(1, 1)

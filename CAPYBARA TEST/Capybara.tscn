@@ -26,6 +26,7 @@ shape = SubResource("CapsuleShape3D_km4gq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+layers = 2
 mesh = ExtResource("1_w7y1m")
 surface_material_override/0 = SubResource("StandardMaterial3D_odud5")
 surface_material_override/1 = SubResource("StandardMaterial3D_wkug5")

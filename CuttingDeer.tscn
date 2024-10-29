@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://xsntcgnrcg80"]
+
+[ext_resource type="Texture2D" uid="uid://c4i222w3oia72" path="res://Skinning/DeerTemp.png" id="1_8xk2f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0vxll"]
+radius = 3.32722
+height = 124.439
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v832k"]
+radius = 33.0765
+height = 144.42
+
+[node name="CuttingDeer" type="Sprite2D"]
+position = Vector2(598, 325.5)
+rotation = 3.14159
+scale = Vector2(5.10938, 5.05469)
+texture = ExtResource("1_8xk2f")
+
+[node name="CorrectCut Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorrectCut Area"]
+position = Vector2(-2.93578, 0.890263)
+shape = SubResource("CapsuleShape2D_0vxll")
+
+[node name="IncorrectCut Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IncorrectCut Area"]
+position = Vector2(-2.54434, -1.0881)
+shape = SubResource("CapsuleShape2D_v832k")
