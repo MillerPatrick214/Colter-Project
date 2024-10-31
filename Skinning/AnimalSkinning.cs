@@ -45,7 +45,6 @@ public partial class AnimalSkinning : Node2D
 
 		if (isKnifeHeld) {
 			BowieKnife.Position = mousePos; 
-
 			float targetAngle = rotationAngle.Angle();
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, targetAngle, 0.1f);
 		}
@@ -77,34 +76,24 @@ public partial class AnimalSkinning : Node2D
 
 
 	public void BeginSkinning() { 
+
+		
 	}
 
 
-}
-	// If knife is not on body, no cut no change
-	// If knife is on start pos: 
-	//	if cut																	cut should be a toggle - once you start you're in. 
-	// 		If knife is on wrong area
-	//  		detract from quality * time spent cutting on on wrong area
+
+
+}	//
+	// 	I think the simplest way to imagine this as laying down rope from the starting position, after a certain length of travel while laying it down, we look at the y position for the "quality" only the straighest line directly down from start will have the greatest y position. 
+	//	Everything else/every twist and turn will take somthing off of the y pos.
+	//
+	//	We can have a total length value supplied by the deerskintest node. This would likely have to scale with the viewport though. Anothe way to measure it might be by looking at the y length of the sprite currently * .75
+	//
 	// 
-	//		if knife is on right area
-	// 			draw cutline
-	//		if knife is !on right || !on wrong
-	//			pass
-	//
-	//		if in end box
-	//			end s
-	// maybe have a start and end box on ends 
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	// if knife on body and click
+	//		lerp to start position
+	//		change sprite to cut
+	//		
 	//
 	//
 	//

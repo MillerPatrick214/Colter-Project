@@ -3,6 +3,8 @@ using System;
 
 
 //FIXME -- BASCIALLY EVERYTHING IN HERE RIGHT NOW IS FOR DEBUG.
+//I think it's pretty dumb for us to be processing input events in this node
+
 public partial class InteractEvent : Control
 {
 
