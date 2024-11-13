@@ -12,7 +12,7 @@ script = ExtResource("1_cilnm")
 
 [node name="BowieKnife" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(1110, 589)
+position = Vector2(1868, 971)
 scale = Vector2(3, 3)
 texture = ExtResource("3_4l43u")
 offset = Vector2(-64.03, -3.595)
@@ -24,20 +24,24 @@ gravity_direction = Vector2(0, -1)
 script = ExtResource("3_o2gkm")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BowieKnife/Knife Area"]
-position = Vector2(-64, -3.66667)
+position = Vector2(-64, -3.66669)
 polygon = PackedVector2Array(-9.33333, -4.66667, 39.6667, -5, 71.6667, 4.66666, 48, 9.33333, -14, 9.66667, -17, 13, -22.3333, 13, -64, 11, -64.3333, -7, -14.3333, -7, -14, -5)
 
 [node name="Sheathe" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(928, 574)
+position = Vector2(1868, 971)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("4_b5b1d")
+offset = Vector2(-52.2857, -4.28574)
 
 [node name="Skinning Factory" type="Node2D" parent="."]
-position = Vector2(378, 334)
 scale = Vector2(5.11328, 4.55078)
 script = ExtResource("5_slx31")
 
 [node name="DeerSkinningTEST" parent="Skinning Factory" instance=ExtResource("6_gck65")]
-position = Vector2(0, 0)
+position = Vector2(113.235, 120.858)
 scale = Vector2(1, 1)
+
+[node name="CutLine" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(1, 0.0862745, 0, 1)

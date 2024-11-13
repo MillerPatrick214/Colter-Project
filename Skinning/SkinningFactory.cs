@@ -22,8 +22,10 @@ public partial class SkinningFactory : Node2D
 		var scene = GD.Load<PackedScene>(filePath); // load scene
 		var instance = scene.Instantiate();			//instantiate scene
 		AddChild(instance);							//add as a child
-		EmitSignal(SignalName.SkinningInstance, instance);	// emit signal w/ instance  
+		EmitSignal(SignalName.SkinningInstance, instance);	// emit signal w/ instance 
+		
 
 	}
 
+	
 }

@@ -396,7 +396,7 @@ libraries = {
 }
 
 [node name="Bang" type="AnimatedSprite3D" parent="Barrel End"]
-transform = Transform3D(-3, 0, 4.52988e-07, 0, 3, 0, -4.52988e-07, 0, -3, 0, 0, -0.050121)
+transform = Transform3D(-3, 0, 4.76837e-07, 0, 3, 0, -4.76837e-07, 0, -3, 1.49012e-08, 0, -0.0501209)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_danbj")
 animation = &"Bang"

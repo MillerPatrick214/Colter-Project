@@ -79,7 +79,7 @@ public partial class Character : CharacterBody3D
 		//else if (Input.IsActionPressed("LeanRight") && Input.IsActionPressed("LeanRight")) { IsLeaning = LeanDirection.None;}
 		else {Leaning = LeanDirection.None;}
 		
-		GD.Print(Leaning);
+		//GD.Print(Leaning);
 		Lean(Leaning);
 		Crouch(isCrouching);
 	}
@@ -126,33 +126,39 @@ public partial class Character : CharacterBody3D
 
 				RotationDegrees = new Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z);
 				CamPivNode.RotationDegrees = new Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
-				GD.Print(mouseRotY);
 			}
 	}
 	
 	public void Lean(LeanDirection Leaning) { //This feels very calculation heavy for something that is called each delta
 		
+		// Once I clean up the cam pivot node, weapon, etc then I will implement the camera spinning the other way to eliminate disoriantation
+		// If cam node and player node share a piv point it just lessens the overall lean subtractivly & disconnects player model & camera
+
 		float currentRotation = RotationDegrees.Z;
 		float targetRotation = (float)Leaning * LeanDeg;
 
-		float currCamPivRot = CamPivNode.RotationDegrees.Z;
-		float targetCamPivRot = -(float)Leaning * (LeanDeg * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
+		//float currCamPivRot = CamPivNode.RotationDegrees.Z;
+		//float targetCamPivRot = -(float)Leaning * (LeanDeg * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
 
 		float newRotation = Mathf.Wrap(Mathf.Lerp(currentRotation, targetRotation, (float)GetProcessDeltaTime() * LeanSpeed), -LeanDeg-1, LeanDeg+1);	// -+ 1 degree of tolerance
 		
-		float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
+		//float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
 	
 		RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, newRotation);
-		CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
+		//CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
 
 		if (Math.Abs(targetRotation - currentRotation) < .05f && !(currentRotation == targetRotation)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
 			RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, targetRotation);
 			//having a snap for the CamPivot breaks it, so for the time being we won't have one.
-
 		}
 
-		GD.Print($"CAM PIVOT: Current Rotation: {currCamPivRot}, Target Rotation: {targetCamPivRot}, New Rotation: {newCamPivRot}");
-		GD.Print($"Current Rotation: {currentRotation}, Target Rotation: {targetRotation}, New Rotation: {newRotation}");
+		/* if (Math.Abs(targetCamPivRot - currCamPivRot) < .05f && !(currCamPivRot == targetCamPivRot)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
+			CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, targetCamPivRot);
+			//having a snap for the CamPivot breaks it, so for the time being we won't have one.
+		} */
+
+		//GD.Print($"CAM PIVOT: Current Rotation: {currCamPivRot}, Target Rotation: {targetCamPivRot}, New Rotation: {newCamPivRot}");
+		//GD.Print($"Current Rotation: {currentRotation}, Target Rotation: {targetRotation}, New Rotation: {newRotation}");
 		//A different way of implementing this that might work better w/ game play is Leaning char body more heavily, then rotating cam pivot inversely to a lesser degree. We maintain a small tilt while still exposing hitbox sufficiently
 
 	}

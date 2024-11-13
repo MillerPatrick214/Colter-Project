@@ -52,28 +52,25 @@ public partial class DirectionalController : Node
 	public double GetTheta(){										//Linear Algebra classes coming in clutch
 		ForwardForPlayer = VectorToCharacter(); 					// cos theta = (dotproduct uv)/(magnitude of U  x  mag of V)
 		ForwardForSelf = ParentNode.Transform.Basis.X;
-		
-		////***NOTE*** THIS IS A FUCKING HACKJOB. Applying negative to Z vector for Player. Can't get it right. Kill me. Consult with Jarred and Me if confused -- PM
-		Godot.Vector2 TwoDPlayerVector = new Godot.Vector2(ForwardForPlayer.X, -ForwardForPlayer.Z); //Using Z not Y as Z and X represent the Horizontal/"Floor" plane 
+
+		Godot.Vector2 TwoDPlayerVector = new Godot.Vector2(ForwardForPlayer.X, ForwardForPlayer.Z); //Using Z not Y as Z and X represent the Horizontal/"Floor" plane 
 		Godot.Vector2 TwoDForwardVector = new Godot.Vector2(ForwardForSelf.X, ForwardForSelf.Z);	// We don't care about the difference between Y coords from the player to the 
 
 		double DotProduct = TwoDPlayerVector.Dot(TwoDForwardVector);	// I think we need to convert these vectors into vector2 -- no reason to use a 3d vector when we're only calculating on a 2d plane; just fucks it up
-		double MagnitudeU = CalculateMagnitude(TwoDPlayerVector); 
+		double MagnitudeU = CalculateMagnitude(TwoDPlayerVector);
 		double MagntitudeV = CalculateMagnitude(TwoDForwardVector);
 		double MagnitudeProduct = MagnitudeU * MagntitudeV;
 
 		double theta = Mathf.Acos(DotProduct/MagnitudeProduct);
 
-		if (TwoDPlayerVector[1] <= 0) {
-			theta  =  (2 * Mathf.Pi) - theta;
+		if (ForwardForPlayer[1] >= 0) {
+			theta =  (2 * Mathf.Pi) - theta;
 		}
 		//theta *= 100; //converts into readible decimal
 		
 
-		/* GD.Print("Theta: " + theta);
-		GD.Print(TwoDPlayerVector); */
+		GD.Print("Theta: " + theta);
 
-		theta = Mathf.RadToDeg(theta);
 
 		return theta;
 	}
@@ -90,9 +87,9 @@ public partial class DirectionalController : Node
 
 	public Godot.Vector3 VectorToCharacter() {
 		Godot.Vector3 VectorToCharacter = CharacterNode.GlobalPosition - ParentNode.GlobalPosition; // I think this needs to be the negative vector of the item vector - the player posiion vector  -- basically need to invert the vector we draw to represent the player perspective I think. 
+		GD.Print(VectorToCharacter);
 		return VectorToCharacter;
 	}
-
 	public void SetTexture(double theta){
 		
 		if ((theta >= 337.5 && theta <= 360) || (theta >= 0 && theta < 22.5)) { //FRONT FACING PLAYER (PROBABLY SHOULD BE REVERSED BUT THIS IS A TEST)

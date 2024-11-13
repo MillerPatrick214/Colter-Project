@@ -30,7 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
 shape = SubResource("CapsuleShape3D_s8qte")
 
 [node name="CamPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00747143, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.308886, 0)
 script = ExtResource("5_kks8j")
 AimFOV = 50.0
 
@@ -40,11 +40,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 script = ExtResource("7_g3eq3")
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000433564, 0.447344, 0.000761075)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000433564, 0.279909, 0.000761075)
 near = 0.013
 
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, -3.99292e-09, 0.159194, -0.0456737)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, -0.045)
 script = ExtResource("9_gmr6g")
 
 [node name="TestShotGun" parent="CamPivot/ItemMarker" instance=ExtResource("5_1ovhw")]

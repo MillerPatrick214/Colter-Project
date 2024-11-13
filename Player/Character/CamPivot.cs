@@ -6,13 +6,11 @@ public partial class CamPivot : Marker3D
 	[Signal]
 	public delegate void AimSignalEventHandler(bool isAiming);
 
-
 	SpringArm3D springArm;
 	float DefaultFOV = 70;
 
 	[Export]
 	float AimFOV = 30;
-
 
 	Vector3 CurrentArmPos;
 
