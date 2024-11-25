@@ -32,7 +32,6 @@ public partial class lead_ball : RigidBody3D
 			GD.Print($"Hit {npcHit}");
 			npcHit.DamageHealth(Damage);
 		}
-
 	}
 }
 	

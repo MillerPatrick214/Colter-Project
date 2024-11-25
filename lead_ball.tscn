@@ -24,12 +24,11 @@ albedo = Color(1, 0.184314, 1, 1)
 emission = Color(1, 0, 0, 1)
 
 [node name="Lead Ball" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142056, -0.120901, 0.601847)
 collision_mask = 2
 mass = 0.04
 continuous_cd = true
-max_contacts_reported = 2
 contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_gtt60")
 Damage = 7.0
 
@@ -45,4 +44,3 @@ skeleton = NodePath("../..")
 material = SubResource("FogMaterial_dj22w")
 geometry_nodepath = NodePath("..")
 size = 0.1
-visible = false

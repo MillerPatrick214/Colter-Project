@@ -6,12 +6,21 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	float Health = 100.0f;
 	[Export]
-	public const float Speed = 5.0f;
+	public float Speed = 5.0f;
 	[Export]
-	public const float JumpVelocity = 4.5f;
+	public float JumpVelocity = 4.5f;
+	[Export]
+	public bool isDead = false;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+
+	[Export]
+	public bool IsInteractable = false;	
+
+	public string InteractSceneString = "";
+	
+	
 	public override void _Ready() {
 
 	}
@@ -57,10 +66,11 @@ public partial class NPCBase : CharacterBody3D
 		Health -= Damage; 
 	}
 
-	public void Death() {
-		QueueFree();
+	virtual public void Death() {
+		isDead = true;
 	}
 
+	virtual public void Interact() {
 
-
+	}
 }

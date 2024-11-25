@@ -69,7 +69,7 @@ public partial class DirectionalController : Node
 		//theta *= 100; //converts into readible decimal
 		
 
-		GD.Print("Theta: " + theta);
+		//GD.Print("Theta: " + theta);
 
 
 		return theta;
@@ -87,7 +87,7 @@ public partial class DirectionalController : Node
 
 	public Godot.Vector3 VectorToCharacter() {
 		Godot.Vector3 VectorToCharacter = CharacterNode.GlobalPosition - ParentNode.GlobalPosition; // I think this needs to be the negative vector of the item vector - the player posiion vector  -- basically need to invert the vector we draw to represent the player perspective I think. 
-		GD.Print(VectorToCharacter);
+		//GD.Print(VectorToCharacter);
 		return VectorToCharacter;
 	}
 	public void SetTexture(double theta){

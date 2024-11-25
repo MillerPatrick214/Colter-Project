@@ -28,10 +28,8 @@ public partial class Character : CharacterBody3D
 	float yRotMin = -70f;
 	float yRotMax = 70f;
 
-	InteractEvent InteractionEventNode;
 	CamPivot CamPivNode;
 	TestDoubleBarrel ShotGun;
-	InteractRayCast InteractRay;
 	CollisionShape3D CollisionShapeNode;
 
 	bool isCrouching;
@@ -43,6 +41,7 @@ public partial class Character : CharacterBody3D
 	GodotObject ObjectSeen; 
 
 	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here 
+
 	public enum LeanDirection {
 		Left = 1,
 		None = 0,
@@ -56,18 +55,15 @@ public partial class Character : CharacterBody3D
     {
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
+		Events.Instance.ChangeIsInteracting += (isActive) => isInteracting = isActive;
 
-		InteractRay = GetNodeOrNull<InteractRayCast>("CamPivot/InteractRayCast");
 		ShotGun = GetNodeOrNull<TestDoubleBarrel>("CamPivot/ItemMarker/TestShotGun");	//FIXME -- WARNING: THIS SHOULD LIKELY BE CHANGED TO THE ITEM MARKER IN THE FUTURE. PASS INTERACTION THERE AND THEN TO THE INDIVIDUAL WEAPON;
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
-		InteractionEventNode = GetNodeOrNull<InteractEvent>("UI/InteractEvent");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
 
-		InteractionEventNode.PauseMouseInput += InteractionPause; //signal from Interaction Event node -- processes interact controls. This is a control node and should probably be changed.
-		InteractRay.InteractableScan += LookingAtInteract; //signal from raycast that tells what we are looking at
     }
 
 	public override void _Process(double delta) {
@@ -84,17 +80,10 @@ public partial class Character : CharacterBody3D
 		Crouch(isCrouching);
 	}
 
-	public void InteractionPause(bool isActive) { 
+	public void InteractionPauseChange(bool isActive) { 
 		isInteracting = isActive;
-		ShotGun.ChangeIsInteracting(isActive);			//FIXME -- this needs to be changed to the node holding the shotgun -- NOT direct to the shotgun as the weapon will change and it will break! 
 	}
 
-	public void LookingAtInteract(GodotObject seenObject) {
-		GD.Print($"Looking at {seenObject}");
-		ObjectSeen = seenObject; 
-		UINode.SetInteractable(seenObject);
-
-	}
 
 	public void Crouch(bool isCrouching) {
 		float currentHeight = CapsuleShape.Height;
@@ -137,30 +126,28 @@ public partial class Character : CharacterBody3D
 		float currentRotation = RotationDegrees.Z;
 		float targetRotation = (float)Leaning * LeanDeg;
 
-		//float currCamPivRot = CamPivNode.RotationDegrees.Z;
-		//float targetCamPivRot = -(float)Leaning * (LeanDeg * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
+		float currCamPivRot = CamPivNode.RotationDegrees.Z;
+		float targetCamPivRot = -(float)Leaning * (LeanDeg * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
 
 		float newRotation = Mathf.Wrap(Mathf.Lerp(currentRotation, targetRotation, (float)GetProcessDeltaTime() * LeanSpeed), -LeanDeg-1, LeanDeg+1);	// -+ 1 degree of tolerance
 		
-		//float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
+		float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
 	
 		RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, newRotation);
-		//CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
+		CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
 
 		if (Math.Abs(targetRotation - currentRotation) < .05f && !(currentRotation == targetRotation)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
 			RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, targetRotation);
-			//having a snap for the CamPivot breaks it, so for the time being we won't have one.
 		}
 
-		/* if (Math.Abs(targetCamPivRot - currCamPivRot) < .05f && !(currCamPivRot == targetCamPivRot)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
+		if (Math.Abs(targetCamPivRot - currCamPivRot) < .05f && !(currCamPivRot == targetCamPivRot)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
 			CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, targetCamPivRot);
 			//having a snap for the CamPivot breaks it, so for the time being we won't have one.
-		} */
+		} 
 
 		//GD.Print($"CAM PIVOT: Current Rotation: {currCamPivRot}, Target Rotation: {targetCamPivRot}, New Rotation: {newCamPivRot}");
 		//GD.Print($"Current Rotation: {currentRotation}, Target Rotation: {targetRotation}, New Rotation: {newRotation}");
 		//A different way of implementing this that might work better w/ game play is Leaning char body more heavily, then rotating cam pivot inversely to a lesser degree. We maintain a small tilt while still exposing hitbox sufficiently
-
 	}
 }
 

@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvbycffn14mpg"]
+[gd_scene load_steps=4 format=3 uid="uid://dvbycffn14mpg"]
 
 [ext_resource type="PackedScene" uid="uid://nibj0rjwjcr3" path="res://Items/Models/TestShotgun/TestShotgun.tscn" id="1_btb0w"]
+[ext_resource type="Script" path="res://Items/Models/TestShotgun/TestShotgunRigidBody.cs" id="1_s328f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y2aew"]
 radius = 0.15
 height = 1.0
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="Shotgun" type="RigidBody3D"]
 transform = Transform3D(0.94282, -0.3174, -0.101727, -0.154001, -0.685515, 0.711585, -0.295592, -0.65523, -0.695196, 0, 0, -0.174176)
 collision_layer = 3
 collision_mask = 3
+script = ExtResource("1_s328f")
 
 [node name="TestShotgunScene" parent="." instance=ExtResource("1_btb0w")]
 

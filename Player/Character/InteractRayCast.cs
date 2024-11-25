@@ -3,10 +3,7 @@ using System;
 
 public partial class InteractRayCast : RayCast3D
 {
-	[Signal]
-	public delegate void InteractableScanEventHandler(GodotObject InteractableObject);
-
-	GodotObject LookingAt;
+	Node LastSeen = null;
 
 	public override void _Ready()
 	{
@@ -17,23 +14,30 @@ public partial class InteractRayCast : RayCast3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{	
-		GodotObject InteractableObject = GetCollider();
-
-		if (InteractableObject != LookingAt) {
-			EmitSignal(SignalName.InteractableScan, InteractableObject);
-			LookingAt = InteractableObject;
-		}
 		
-	}
+		Node InteractableObject = (Node)GetCollider();
+		
+		GD.Print($"InteractableObject Type: {InteractableObject?.GetType()}");
 
+		if ((InteractableObject is NPCBase|| InteractableObject is WorldItem || InteractableObject is null ) && InteractableObject != LastSeen) { 
 
-		/*if (InteractableObject != null) {
-			EmitSignal(SignalName.InteractableSeen, InteractableObject);
-			GD.Print("Emitting Seen Signal");
+			Events.Instance.EmitSignal(Events.SignalName.PlayerRayCast, InteractableObject)
+
+			}
+
+		LastSeen = InteractableObject;
+
+		if (Input.IsActionJustPressed("InteractWorld") && InteractableObject != null) {
+			if (InteractableObject is WorldItem worldItem && worldItem.IsInteractable) {
+				GD.Print("Recognized Object as WorldItem");
+				worldItem.Interact();
+			}
+			
+			else if (InteractableObject is NPCBase NPC && NPC.IsInteractable) {
+				GD.Print("Recognized Object as NPCBase");
+				NPC.Interact();
+			}
 		}
-
-		else if (InteractableObject == null) {
-			EmitSignal(SignalName.InteractableLost);
-		}*/
 	}
+}
 

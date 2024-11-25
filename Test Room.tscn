@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8frf2nj2nwe"]
+[gd_scene load_steps=15 format=3 uid="uid://b8frf2nj2nwe"]
 
 [ext_resource type="Script" path="res://UI/TestRoom.cs" id="1_6mrhv"]
 [ext_resource type="PackedScene" uid="uid://dvbycffn14mpg" path="res://Items/Models/TestShotgun/TestShotgunRigidBody.tscn" id="2_ljit8"]
 [ext_resource type="PackedScene" uid="uid://bn5ecyco6dg4n" path="res://Player/Character/First Person/FPCharacter.tscn" id="3_vyv3u"]
+[ext_resource type="PackedScene" uid="uid://c4x77krwgrmgr" path="res://UI/UI.tscn" id="4_2avhr"]
 [ext_resource type="PackedScene" uid="uid://bnyxac75sfnna" path="res://Items/TestDirectionalSprite/Anvil.tscn" id="4_g7mm6"]
 [ext_resource type="PackedScene" uid="uid://d1tywn615fc2s" path="res://CAPYBARA TEST/Capybara.tscn" id="5_an760"]
 [ext_resource type="PackedScene" uid="uid://cq5hc8s21orhv" path="res://MapAssets/trees/PineTreeFixed.tscn" id="6_64grs"]
@@ -57,6 +58,8 @@ transform = Transform3D(-0.0337308, -0.999431, 0, 0.999431, -0.0337308, 0, 0, 0,
 [node name="Character" parent="." instance=ExtResource("3_vyv3u")]
 unique_name_in_owner = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
+
+[node name="UI" parent="Character" instance=ExtResource("4_2avhr")]
 
 [node name="Anvil" parent="." instance=ExtResource("4_g7mm6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232792, 0.714764, -0.0126286)

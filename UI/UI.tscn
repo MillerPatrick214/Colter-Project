@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=7 format=3 uid="uid://c4x77krwgrmgr"]
 
-[ext_resource type="PackedScene" uid="uid://dyok68xwis166" path="res://UI/pause_menu.tscn" id="1_3dg4j"]
-[ext_resource type="PackedScene" uid="uid://bqfdsm3jx7vpv" path="res://UI/InteractText.tscn" id="2_dowrc"]
-[ext_resource type="PackedScene" uid="uid://cay8lyk26nkop" path="res://fpscounter.tscn" id="3_q381y"]
-[ext_resource type="Script" path="res://UI/InteractEvent.cs" id="4_777am"]
-[ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="4_ybldy"]
+[ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
+[ext_resource type="Script" path="res://UI/pause_menu.cs" id="2_ymhem"]
+[ext_resource type="Script" path="res://UI/InteractText.cs" id="3_wqbe1"]
+[ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
+[ext_resource type="Script" path="res://UI/InteractEvent.cs" id="5_vodea"]
+[ext_resource type="PackedScene" uid="uid://c78npbxacgl6f" path="res://Skinning/AnimalSkinningSetup.tscn" id="6_bderw"]
 
 [node name="UI" type="Control"]
 top_level = true
@@ -14,22 +15,88 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7heha")
 
-[node name="Pause Menu" parent="." instance=ExtResource("1_3dg4j")]
+[node name="Pause Menu" type="Control" parent="."]
 layout_mode = 2
 anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 9.0
 offset_top = 11.0
 offset_right = 9.0
 offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("2_ymhem")
 
-[node name="InteractText" parent="." instance=ExtResource("2_dowrc")]
+[node name="MarginContainer" type="MarginContainer" parent="Pause Menu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Pause Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Pause Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Pause Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="InteractText" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = 587.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_wqbe1")
 
-[node name="FPS" parent="." instance=ExtResource("3_q381y")]
+[node name="MarginContainer" type="MarginContainer" parent="InteractText"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_right = 299.5
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractWith" type="RichTextLabel" parent="InteractText/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Me Britches
+"
+
+[node name="FPS" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 879.0
+offset_top = 4.0
+offset_right = 1179.0
+offset_bottom = 304.0
+mouse_filter = 2
+script = ExtResource("4_n6vgp")
+
+[node name="Label" type="Label" parent="FPS"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 15.0
+offset_right = 231.0
+offset_bottom = 57.0
 
 [node name="InteractEvent" type="Control" parent="."]
 layout_mode = 1
@@ -38,23 +105,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_777am")
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+script = ExtResource("5_vodea")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="InteractEvent"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+[node name="AnimalSkinning" parent="InteractEvent" instance=ExtResource("6_bderw")]
 
-[node name="SubViewport" type="SubViewport" parent="InteractEvent/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="BaseLayerSprite1" type="Sprite2D" parent="InteractEvent/SubViewportContainer/SubViewport"]
-position = Vector2(158, 157)
-texture = ExtResource("4_ybldy")
+[node name="Reload" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

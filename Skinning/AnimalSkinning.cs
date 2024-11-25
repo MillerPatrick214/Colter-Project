@@ -46,8 +46,6 @@ public partial class AnimalSkinning : Node2D
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
 		skinningfact.SkinningInstance += (instance) => setSkinnable(instance); //connects signal from skinnable object to recieve skinnable function.
-
-		setSkinnable(GetNodeOrNull<Skinnable>("Skinning Factory/DeerSkinningTEST"));	//FIXME this is just a test as I am starting w/ this instantiated;
 		
 		LineIndex = 0;
 	}
@@ -151,7 +149,7 @@ public partial class AnimalSkinning : Node2D
 			SegmentLength = totalLength/100;						// so assuming 100 segements will make up our line
 
 			BowieKnife.Position = startPos;
-			GetViewport().WarpMouse(startPos);						//FIX ME -- Love this visually. Just need to fix the line drawing during the warp
+			GetViewport().WarpMouse(startPos);						//FIX ME -- Love this visually. Just need to fix the line drawing during the warp FIXED but I forget how lmao
 			isSkinning = true;
 			CutLine.AddPoint(startPos);
 		}

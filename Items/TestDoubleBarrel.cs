@@ -20,14 +20,14 @@ public partial class TestDoubleBarrel : Node3D
 	bool AimingState;
 	PackedScene LeadBall;
 	AudioStreamPlayer GunEffect;
-	bool isInteracting; 
+	bool isInteracting;
 
 	public override void _Ready()
 	
 	{		
 		GD.Randomize();	//called to randomize seed for shotgun pattern
 
-		isInteracting = false;
+		Events.Instance.ChangeIsInteracting += (InteractBoolean) => isInteracting = InteractBoolean;
 
 
 		LeadBall = ResourceLoader.Load<PackedScene>("res://lead_ball.tscn");
@@ -77,7 +77,6 @@ public partial class TestDoubleBarrel : Node3D
 			if (AimingState && CanFire) {
 				if (Input.IsActionJustPressed("UseItem")) {
 					Bang();
-
 				}
 			}
 		}

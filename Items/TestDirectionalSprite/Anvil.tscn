@@ -21,5 +21,5 @@ shape = SubResource("BoxShape3D_etttk")
 script = ExtResource("1_p0o32")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(0.999998, -0.00169048, 0.000581136, 0.00168993, 0.999998, 0.000951011, -0.000582724, -0.000950039, 0.999999, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(1, 0, 0)

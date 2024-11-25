@@ -3,9 +3,27 @@ using System;
 
 public partial class Events : Node
 {
-[Signal]
+	public static Events Instance;
 
-public delegate void TestEventHandler(string chucha); 
+	[Signal]
+	public delegate void PlayerRayCastEventHandler(GodotObject InteractableObject);
 
+	[Signal]
+	public delegate void ChangeIsInteractingEventHandler(bool isInteracting);
+
+//	[Signal]
+//	public delegate void NPCInteractEventHandler(NPCBase NPC);
+
+	[Signal]
+	public delegate void ItemInteractEventHandler(WorldItem Item);
+
+	[Signal]
+	public delegate void BeginSkinningEventHandler(PackedScene SkinningScene);
+
+
+	public override void _Ready() 
+	{
+		Instance = this;
+	}
 
 }

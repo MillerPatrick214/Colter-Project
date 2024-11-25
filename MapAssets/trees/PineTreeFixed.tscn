@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq5hc8s21orhv"]
+[gd_scene load_steps=6 format=4 uid="uid://cq5hc8s21orhv"]
 
 [ext_resource type="PackedScene" uid="uid://iqs1ygahdihk" path="res://MapAssets/trees/pine_tree.glb" id="1_81b38"]
 [ext_resource type="Texture2D" uid="uid://b28cpqn7oxm12" path="res://MapAssets/trees/pine_tree_pine_lowres.png" id="2_83dfi"]
@@ -18,12 +18,12 @@ _surfaces = [{
 "aabb": AABB(-1.33788, 0, -1.41664, 2.83328, 4.9811, 2.83329),
 "format": 34896613377,
 "index_count": 42,
-"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 4, 0, 6, 0, 5, 0, 4, 0, 7, 0, 6, 0, 8, 0, 7, 0, 9, 0, 8, 0, 5, 0, 10, 0, 8, 0, 4, 0, 5, 0, 7, 0, 4, 0, 9, 0, 11, 0, 13, 0, 12, 0, 11, 0, 14, 0, 13, 0, 7, 0, 10, 0, 6, 0, 7, 0, 8, 0, 10, 0, 4, 0, 8, 0, 9, 0, 10, 0, 5, 0, 6, 0),
+"index_data": PackedByteArray("AAACAAEAAAADAAIABAAGAAUABAAHAAYACAAHAAkACAAFAAoACAAEAAUABwAEAAkACwANAAwACwAOAA0ABwAKAAYABwAIAAoABAAIAAkACgAFAAYA"),
 "name": "pine_tree",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 15,
-"vertex_data": PackedByteArray(255, 127, 254, 255, 254, 255, 0, 0, 255, 127, 175, 26, 254, 255, 0, 0, 255, 127, 175, 26, 0, 0, 0, 0, 255, 127, 254, 255, 0, 0, 0, 0, 168, 119, 99, 78, 249, 129, 0, 0, 137, 112, 0, 0, 208, 132, 0, 0, 58, 129, 0, 0, 208, 132, 0, 0, 175, 130, 99, 78, 249, 129, 0, 0, 43, 125, 99, 78, 109, 120, 0, 0, 168, 124, 198, 156, 255, 127, 0, 0, 225, 120, 0, 0, 92, 118, 0, 0, 0, 0, 254, 255, 255, 127, 0, 0, 0, 0, 175, 26, 255, 127, 0, 0, 255, 255, 175, 26, 255, 127, 0, 0, 255, 255, 254, 255, 255, 127, 0, 0)
+"vertex_data": PackedByteArray("/3/+//7/AAD/f68a/v8AAP9/rxoAAAAA/3/+/wAAAACod2NO+YEAAIlwAADQhAAAOoEAANCEAACvgmNO+YEAACt9Y05teAAAqHzGnP9/AADheAAAXHYAAAAA/v//fwAAAACvGv9/AAD//68a/38AAP///v//fwAA")
 }]
 blend_shape_mode = 0
 
@@ -31,16 +31,16 @@ blend_shape_mode = 0
 resource_name = "pine_tree_Cube_001"
 _surfaces = [{
 "aabb": AABB(-1.33788, 0, -1.41664, 2.83328, 4.9811, 2.83329),
-"attribute_data": PackedByteArray(241, 2, 142, 0, 241, 2, 160, 225, 13, 253, 160, 225, 13, 253, 142, 0, 186, 115, 126, 182, 141, 113, 124, 255, 9, 129, 24, 255, 142, 125, 234, 182, 92, 116, 160, 182, 53, 122, 123, 109, 153, 126, 160, 182, 70, 116, 58, 182, 29, 113, 40, 255, 154, 128, 124, 255, 128, 126, 113, 182, 142, 125, 234, 182, 227, 121, 176, 110, 186, 115, 126, 182, 181, 2, 204, 0, 181, 2, 73, 226, 73, 253, 73, 226, 73, 253, 204, 0, 153, 126, 160, 182, 52, 128, 191, 255, 181, 112, 191, 255, 92, 116, 160, 182, 128, 126, 113, 182, 37, 122, 187, 109, 70, 116, 58, 182, 119, 125, 97, 255, 119, 125, 134, 246, 11, 112, 243, 250),
+"attribute_data": PackedByteArray("8QKOAPECoOEN/aDhDf2OALpzfraNcXz/CYEY/4596rZcdKC2NXp7bZl+oLZGdDq2HXEo/5qAfP+AfnG2jn3qtuN5sG66c362tQLMALUCSeJJ/UniSf3MAJl+oLY0gL//tXC//1x0oLaAfnG2JXq7bUZ0OrZ3fWH/d32G9gtw8/o="),
 "format": 34896613399,
 "index_count": 42,
-"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 4, 0, 6, 0, 5, 0, 4, 0, 7, 0, 6, 0, 8, 0, 10, 0, 9, 0, 11, 0, 13, 0, 12, 0, 11, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 18, 0, 21, 0, 20, 0, 22, 0, 24, 0, 23, 0, 22, 0, 25, 0, 24, 0, 26, 0, 28, 0, 27, 0, 29, 0, 31, 0, 30, 0),
+"index_data": PackedByteArray("AAACAAEAAAADAAIABAAGAAUABAAHAAYACAAKAAkACwANAAwACwAOAA0ADwARABAAEgAUABMAEgAVABQAFgAYABcAFgAZABgAGgAcABsAHQAfAB4A"),
 "material": SubResource("StandardMaterial3D_gy18n"),
 "name": "pine_tree",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 32,
-"vertex_data": PackedByteArray(255, 127, 254, 255, 254, 255, 255, 191, 255, 127, 175, 26, 254, 255, 255, 191, 255, 127, 175, 26, 0, 0, 255, 191, 255, 127, 254, 255, 0, 0, 255, 191, 168, 119, 99, 78, 249, 129, 192, 130, 137, 112, 0, 0, 208, 132, 251, 129, 58, 129, 0, 0, 208, 132, 195, 129, 175, 130, 99, 78, 249, 129, 24, 131, 43, 125, 99, 78, 109, 120, 21, 1, 168, 124, 198, 156, 255, 127, 21, 1, 175, 130, 99, 78, 249, 129, 21, 1, 43, 125, 99, 78, 109, 120, 81, 213, 225, 120, 0, 0, 92, 118, 81, 213, 137, 112, 0, 0, 208, 132, 81, 213, 168, 119, 99, 78, 249, 129, 81, 213, 175, 130, 99, 78, 249, 129, 11, 131, 168, 124, 198, 156, 255, 127, 11, 131, 168, 119, 99, 78, 249, 129, 11, 131, 0, 0, 254, 255, 255, 127, 255, 127, 0, 0, 175, 26, 255, 127, 255, 127, 255, 255, 175, 26, 255, 127, 255, 127, 255, 255, 254, 255, 255, 127, 255, 127, 175, 130, 99, 78, 249, 129, 175, 0, 58, 129, 0, 0, 208, 132, 175, 0, 225, 120, 0, 0, 92, 118, 175, 0, 43, 125, 99, 78, 109, 120, 175, 0, 168, 119, 99, 78, 249, 129, 82, 213, 168, 124, 198, 156, 255, 127, 82, 213, 43, 125, 99, 78, 109, 120, 82, 213, 225, 120, 0, 0, 92, 118, 186, 194, 58, 129, 0, 0, 208, 132, 186, 194, 137, 112, 0, 0, 208, 132, 186, 194, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 1, 255, 200, 30, 126, 168, 228, 128, 148, 172, 217, 128, 249, 254, 232, 27, 177, 208, 182, 128, 177, 208, 182, 128, 177, 208, 182, 128, 135, 131, 169, 251, 135, 131, 169, 251, 135, 131, 169, 251, 135, 131, 169, 251, 59, 255, 206, 20, 59, 255, 206, 20, 59, 255, 206, 20, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 116, 0, 34, 175, 116, 0, 34, 175, 116, 0, 34, 175, 116, 0, 34, 175, 50, 131, 161, 252, 50, 131, 161, 252, 50, 131, 161, 252, 169, 44, 170, 105, 169, 44, 170, 105, 169, 44, 170, 105)
+"vertex_data": PackedByteArray("/3/+//7//7//f68a/v//v/9/rxoAAP+//3/+/wAA/7+od2NO+YHAgolwAADQhPuBOoEAANCEw4GvgmNO+YEYgyt9Y05teBUBqHzGnP9/FQGvgmNO+YEVASt9Y05teFHV4XgAAFx2UdWJcAAA0IRR1ah3Y075gVHVr4JjTvmBC4OofMac/38Lg6h3Y075gQuDAAD+//9//38AAK8a/3//f///rxr/f/9////+//9//3+vgmNO+YGvADqBAADQhK8A4XgAAFx2rwArfWNObXivAKh3Y075gVLVqHzGnP9/UtUrfWNObXhS1eF4AABcdrrCOoEAANCEusKJcAAA0IS6wv9/AAD/fwAA/38AAP9/AAAB/8gefqjkgJSs2YD5/ugbsdC2gLHQtoCx0LaAh4Op+4eDqfuHg6n7h4Op+zv/zhQ7/84UO//OFP9/////f////3////9///90ACKvdAAir3QAIq90ACKvMoOh/DKDofwyg6H8qSyqaaksqmmpLKpp")
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_gi6hu")

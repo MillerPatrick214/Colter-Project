@@ -10,6 +10,7 @@ public partial class InteractEvent : Control
 
 	[Signal]
 	public delegate void PauseMouseInputEventHandler(bool isActive);
+
 	bool isActive;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,15 +29,14 @@ public partial class InteractEvent : Control
 	}
 
 	public void inactive() {
-		EmitSignal(SignalName.PauseMouseInput, false);
+		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, false);
 		Input.MouseMode = Input.MouseModeEnum.Captured; 
 		Hide();
 	}
 
 	public void Active() {
-		EmitSignal(SignalName.PauseMouseInput, true);
+		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, true);
 		Input.MouseMode = Input.MouseModeEnum.Confined;
 		Show();
-
 	}
 }

@@ -7,7 +7,7 @@ public partial class State : Node
     [Signal]
     public delegate void FinishedEventHandler(String targetStatePath);
 
-    public virtual void Enter(string previousStatePath) { 
+    public virtual void Enter(string previousStatePath) { //do I need this still?
 
     }
     public virtual void Exit() { 

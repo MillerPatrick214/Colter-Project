@@ -11,6 +11,7 @@ public partial class SkinningFactory : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Events.Instance.BeginSkinning += (SkinningScene) => SkinningInstantiate(SkinningScene);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,13 +19,10 @@ public partial class SkinningFactory : Node2D
 	{
 	}
 
-	public void SkinningInstantiate(string filePath) { // here the parent (character) will invoke the function with the appropriate string.
-		var scene = GD.Load<PackedScene>(filePath); // load scene
+	public void SkinningInstantiate(PackedScene scene) { // here the parent (character) will invoke the function with the appropriate string.
 		var instance = scene.Instantiate();			//instantiate scene
 		AddChild(instance);							//add as a child
 		EmitSignal(SignalName.SkinningInstance, instance);	// emit signal w/ instance 
-		
-
 	}
 
 	
