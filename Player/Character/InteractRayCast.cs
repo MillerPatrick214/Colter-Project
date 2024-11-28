@@ -21,7 +21,7 @@ public partial class InteractRayCast : RayCast3D
 
 		if ((InteractableObject is NPCBase|| InteractableObject is WorldItem || InteractableObject is null ) && InteractableObject != LastSeen) { 
 
-			Events.Instance.EmitSignal(Events.SignalName.PlayerRayCast, InteractableObject)
+			Events.Instance.EmitSignal(Events.SignalName.PlayerRayCast, InteractableObject);
 
 			}
 

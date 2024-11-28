@@ -4,6 +4,7 @@ using System;
 public partial class WorldItem : RigidBody3D //base for all items and tools visible in the game world
 {
 
+	[Export]
 	public bool IsInteractable = false;
 
 	public override void _Ready()
@@ -16,7 +17,7 @@ public partial class WorldItem : RigidBody3D //base for all items and tools visi
 	{
 	}
 
-	public void Interact() {
+	virtual public void Interact() {
 		
 	}
 }

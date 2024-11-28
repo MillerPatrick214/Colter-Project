@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://b8frf2nj2nwe"]
 
 [ext_resource type="Script" path="res://UI/TestRoom.cs" id="1_6mrhv"]
-[ext_resource type="PackedScene" uid="uid://dvbycffn14mpg" path="res://Items/Models/TestShotgun/TestShotgunRigidBody.tscn" id="2_ljit8"]
 [ext_resource type="PackedScene" uid="uid://bn5ecyco6dg4n" path="res://Player/Character/First Person/FPCharacter.tscn" id="3_vyv3u"]
 [ext_resource type="PackedScene" uid="uid://c4x77krwgrmgr" path="res://UI/UI.tscn" id="4_2avhr"]
 [ext_resource type="PackedScene" uid="uid://bnyxac75sfnna" path="res://Items/TestDirectionalSprite/Anvil.tscn" id="4_g7mm6"]
 [ext_resource type="PackedScene" uid="uid://d1tywn615fc2s" path="res://CAPYBARA TEST/Capybara.tscn" id="5_an760"]
 [ext_resource type="PackedScene" uid="uid://cq5hc8s21orhv" path="res://MapAssets/trees/PineTreeFixed.tscn" id="6_64grs"]
 [ext_resource type="Texture2D" uid="uid://bh3o637omhutn" path="res://overcast_soil_puresky_4k.exr" id="7_630sx"]
+[ext_resource type="PackedScene" uid="uid://m1nht11rq28f" path="res://WorldItemTestShotgun.tscn" id="8_6lwo2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ve3rs"]
 size = Vector3(40, 0.25, 40)
@@ -52,9 +52,6 @@ skeleton = NodePath("../StaticBody3D")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.638338, 0.199599, -0.743428, 0.181186, 0.8997, 0.39713, 0.748128, -0.388202, 0.538148, -15.0019, 10.572, 16.0011)
 
-[node name="TestShotgunRigidBody" parent="." instance=ExtResource("2_ljit8")]
-transform = Transform3D(-0.0337308, -0.999431, 0, 0.999431, -0.0337308, 0, 0, 0, 1, 0, 1.6554, 1.51495)
-
 [node name="Character" parent="." instance=ExtResource("3_vyv3u")]
 unique_name_in_owner = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
@@ -64,8 +61,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
 [node name="Anvil" parent="." instance=ExtResource("4_g7mm6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232792, 0.714764, -0.0126286)
 
-[node name="Capy Boy!!!" parent="Anvil" instance=ExtResource("5_an760")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03161, -0.556048, -2.21413)
+[node name="Capy Boy!!!" parent="." instance=ExtResource("5_an760")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03394, 0.158716, -2.22676)
 
 [node name="pine_tree" parent="." instance=ExtResource("6_64grs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -2)
@@ -75,6 +72,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08136, -0.27757, 7.03191)
 
 [node name="pine_tree2" parent="." instance=ExtResource("6_64grs")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -7, 0, -7)
+
+[node name="WorldItemShotgun" parent="." instance=ExtResource("8_6lwo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+collision_layer = 3
 
 [node name="pine_tree3" parent="." instance=ExtResource("6_64grs")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 5, 0, 4)

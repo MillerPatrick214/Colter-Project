@@ -15,7 +15,7 @@ public partial class Events : Node
 //	public delegate void NPCInteractEventHandler(NPCBase NPC);
 
 	[Signal]
-	public delegate void ItemInteractEventHandler(WorldItem Item);
+	public delegate void PickUpEventHandler(PackedScene ItemUsable);
 
 	[Signal]
 	public delegate void BeginSkinningEventHandler(PackedScene SkinningScene);

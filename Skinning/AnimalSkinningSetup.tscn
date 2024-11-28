@@ -37,6 +37,20 @@ offset = Vector2(-52.2857, -4.28574)
 scale = Vector2(5.11328, 4.55078)
 script = ExtResource("5_slx31")
 
+[node name="RatioSkinContainer" type="AspectRatioContainer" parent="Skinning Factory"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 46.1543
+offset_top = 202.383
+offset_right = 56.1543
+offset_bottom = 212.383
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
 [node name="CutLine" type="Line2D" parent="."]
+position = Vector2(12, 3)
+scale = Vector2(1.00248, 0.995311)
 width = 3.0
 default_color = Color(1, 0.0862745, 0, 1)

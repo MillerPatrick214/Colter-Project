@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn5ecyco6dg4n"]
+[gd_scene load_steps=10 format=3 uid="uid://bn5ecyco6dg4n"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
-[ext_resource type="PackedScene" uid="uid://b6pnk5x7c6mob" path="res://Items/TestDoubleBarrel.tscn" id="5_1ovhw"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
@@ -29,20 +28,18 @@ AimFOV = 50.0
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000433564, 0.0401806, 0.000761075)
+current = true
 near = 0.013
-
-[node name="InteractRayCast" type="RayCast3D" parent="CamPivot/Camera3D"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0139031, 6.07725e-10)
-target_position = Vector3(0, 1.5, 0)
-script = ExtResource("7_g3eq3")
 
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, -0.045)
 script = ExtResource("9_gmr6g")
 
-[node name="TestShotGun" parent="CamPivot/ItemMarker" instance=ExtResource("5_1ovhw")]
-transform = Transform3D(0.866025, 0.291771, 0.406042, 0, 0.812083, -0.583542, -0.5, 0.505362, 0.703285, 0.073, 0.204, -0.092)
+[node name="InteractRayCast" type="RayCast3D" parent="CamPivot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.000433564, 0.0262775, 0.000761076)
+target_position = Vector3(0, 1.5, 0)
+script = ExtResource("7_g3eq3")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("8_rpjm1")

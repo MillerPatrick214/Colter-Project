@@ -7,6 +7,8 @@ public partial class ItemMarker : Marker3D
 
 	public override void _Ready()
 	{
+		Events.Instance.PickUp += (ItemUsable) => PickUp(ItemUsable);
+
 
 	}
 
@@ -15,5 +17,10 @@ public partial class ItemMarker : Marker3D
 	{
 
 
+	}
+
+	public void PickUp(PackedScene item) {
+		var instance = item.Instantiate();
+		AddChild(instance);
 	}
 }

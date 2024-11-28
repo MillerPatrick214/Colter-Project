@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 
 Events="*res://Events.cs"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/viewport_width=1920
@@ -31,6 +35,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Colter"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 [input]
 

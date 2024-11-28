@@ -46,7 +46,6 @@ public partial class Character : CharacterBody3D
 		Left = 1,
 		None = 0,
 		Right = -1,
-
 	}
 
 	LeanDirection Leaning;
@@ -56,7 +55,6 @@ public partial class Character : CharacterBody3D
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
 		Events.Instance.ChangeIsInteracting += (isActive) => isInteracting = isActive;
-
 		ShotGun = GetNodeOrNull<TestDoubleBarrel>("CamPivot/ItemMarker/TestShotGun");	//FIXME -- WARNING: THIS SHOULD LIKELY BE CHANGED TO THE ITEM MARKER IN THE FUTURE. PASS INTERACTION THERE AND THEN TO THE INDIVIDUAL WEAPON;
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
@@ -83,6 +81,8 @@ public partial class Character : CharacterBody3D
 	public void InteractionPauseChange(bool isActive) { 
 		isInteracting = isActive;
 	}
+
+
 
 
 	public void Crouch(bool isCrouching) {

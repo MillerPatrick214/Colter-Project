@@ -40,6 +40,10 @@ public partial class AnimalSkinning : Node2D
 		sheathe = GetNodeOrNull<Sprite2D>("Sheathe");
 		CutLine = GetNodeOrNull<Line2D>("CutLine");
 
+		if (CutLine == null) {
+			GD.Print("Animal Skinning Node: Unable to connect to cutline node");
+		}
+
 		if (KnifeAreaNode == null) {
 			GD.Print("Animal Skinning Node: Knife Area child node returned null");
 		}
@@ -110,13 +114,11 @@ public partial class AnimalSkinning : Node2D
 		currSkinnable = instance;
 		if (currSkinnable != null) {
 			currSkinnable.MouseOnSkin += (isTrue) => isKnifeOnSkin = isTrue;
-		
 		}
 	}
 
 	public void Skinning() {			// need to lock bowie knife to skin here too
-		 	// so here I'm saying the total length of the cut line will be 75% of the size of the total collision shape. RectSize.Y is greater(but further down visually) than the location of Y. The difference is the length overall in pixels I beleive.					
-
+		 								// so here I'm saying the total length of the cut line will be 75% of the size of the total collision shape. RectSize.Y is greater(but further down visually) than the location of Y. The difference is the length overall in pixels I beleive.					
 
 		float currLength = (float)Math.Sqrt(Math.Pow(mousePos.X - CutLine.GetPointPosition(LineIndex).X, 2) + Math.Pow(mousePos.Y - CutLine.GetPointPosition(LineIndex).Y, 2)); //cur length from the previous point to the mouse pointer.
 		
