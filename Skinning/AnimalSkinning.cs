@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
-public partial class AnimalSkinning : Node2D
+public partial class AnimalSkinning : Control
 { 
 
 	KnifeArea KnifeAreaNode;
@@ -20,7 +20,7 @@ public partial class AnimalSkinning : Node2D
 
 	SkinningFactory skinningfact;
 	Skinnable currSkinnable;
-	Sprite2D sheathe;
+	Sprite2D Sheathe;
 
 	Line2D CutLine;
 
@@ -30,14 +30,13 @@ public partial class AnimalSkinning : Node2D
 
 	int LineIndex;
 
-
 	public override void _Ready()
 	{
 		BowieKnife = GetNodeOrNull<Sprite2D>("BowieKnife");
 		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		Skinnable currSkinnable = null;
-		sheathe = GetNodeOrNull<Sprite2D>("Sheathe");
+		Sheathe = GetNodeOrNull<Sprite2D>("Sheathe");
 		CutLine = GetNodeOrNull<Line2D>("CutLine");
 
 		if (CutLine == null) {
@@ -50,7 +49,8 @@ public partial class AnimalSkinning : Node2D
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
 		skinningfact.SkinningInstance += (instance) => setSkinnable(instance); //connects signal from skinnable object to recieve skinnable function.
-		
+		GetViewport().SizeChanged += setBowieSheathePosition;
+		GetViewport().Ready += setBowieSheathePosition;
 		LineIndex = 0;
 	}
 
@@ -84,7 +84,7 @@ public partial class AnimalSkinning : Node2D
 			}
 		}
 
-		else if (!isKnifeHeld && BowieKnife.Position != sheathe.Position && !isSkinning) {
+		else if (!isKnifeHeld && BowieKnife.Position != Sheathe.Position && !isSkinning) {
 			SheatheKnife();
 		}
 	}
@@ -98,7 +98,7 @@ public partial class AnimalSkinning : Node2D
 	}
 
 	public void SheatheKnife() {
-		Godot.Vector2 DefaultPosition = sheathe.Position;
+		Godot.Vector2 DefaultPosition = Sheathe.Position;
 
 			float lerpFactor = .05f;
 			
@@ -157,33 +157,10 @@ public partial class AnimalSkinning : Node2D
 		}
 	}
 
+	public void setBowieSheathePosition() {
+		Godot.Vector2 newSize = GetViewport().GetVisibleRect().Size;
+		newSize.Y = newSize.Y *.90f;	//moves knife up screen a bit
+		BowieKnife.Position = newSize;
+		Sheathe.Position = newSize;
+	}
 }
-	// 	I think the simplest way to imagine this as laying down rope from the starting position, after a certain length of travel while laying it down, we look at the y position for the "quality" only the straighest line directly down from start will have the greatest y position. 
-	//	Everything else/every twist and turn will take somthing off of the y pos.
-	//
-	//	We can have a total length value supplied by the deerskintest node. This would likely have to scale with the viewport though. Anothe way to measure it might be by looking at the y length of the sprite currently * .75
-	//
-	// 
-	// if knife on body and click
-	//		lerp to start position
-	//		change sprite to cut
-	//		
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=9 format=3 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://CAPYBARA TEST/Capybara.cs" id="1_7dout"]
 [ext_resource type="ArrayMesh" uid="uid://bsiygemfadkw2" path="res://CAPYBARA TEST/capybara.obj" id="1_w7y1m"]
@@ -15,6 +15,10 @@ albedo_texture = ExtResource("2_k5l7n")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkug5"]
 albedo_texture = ExtResource("3_byfrn")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hbreq"]
+height = 1.305
+radius = 9.023
+
 [node name="Capybara" type="CharacterBody3D"]
 collision_layer = 3
 collision_mask = 3
@@ -30,3 +34,13 @@ layers = 2
 mesh = ExtResource("1_w7y1m")
 surface_material_override/0 = SubResource("StandardMaterial3D_odud5")
 surface_material_override/1 = SubResource("StandardMaterial3D_wkug5")
+
+[node name="HearingArea" type="Area3D" parent="."]
+
+[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
+shape = SubResource("CylinderShape3D_hbreq")
+
+[node name="SightArea" type="Area3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="SightArea"]
+target_position = Vector3(0, 0, 1)

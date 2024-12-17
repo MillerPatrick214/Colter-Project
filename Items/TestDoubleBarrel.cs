@@ -145,8 +145,7 @@ public partial class TestDoubleBarrel : Node3D
 		float randZ = (float)GD.Randfn(0, .03);
 
 		basedist.Z += new Godot.Vector3(randX, randY, randZ);
-
-
+		
 		/* float randRot = (float)GD.Randfn(0, .15);
 		GD.Print($"Debug: {randRot}");
 		basedist.X = basedist.X.Rotated(new Godot.Vector3(1, 0, 0), randRot);

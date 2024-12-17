@@ -9,12 +9,14 @@ size = Vector2(65, 127)
 [node name="DeerSkinningTEST" type="Sprite2D"]
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("1_7uxsy")
+centered = false
 script = ExtResource("2_x1lt2")
 
 [node name="SkinArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SkinArea"]
+position = Vector2(61.1429, 64)
 shape = SubResource("RectangleShape2D_uqyi8")
 
 [node name="StartMarker" type="Marker2D" parent="."]
-position = Vector2(0, -57.3528)
+position = Vector2(63.4286, 13.7143)

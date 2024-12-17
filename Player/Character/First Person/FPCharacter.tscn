@@ -31,15 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000433564, 0.0401806, 0.000
 current = true
 near = 0.013
 
+[node name="InteractRayCast" type="RayCast3D" parent="CamPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0139031, 9.8953e-10)
+target_position = Vector3(0, 1.5, 0)
+script = ExtResource("7_g3eq3")
+
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, -0.045)
 script = ExtResource("9_gmr6g")
-
-[node name="InteractRayCast" type="RayCast3D" parent="CamPivot"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.000433564, 0.0262775, 0.000761076)
-target_position = Vector3(0, 1.5, 0)
-script = ExtResource("7_g3eq3")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("8_rpjm1")

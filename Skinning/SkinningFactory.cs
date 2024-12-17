@@ -3,7 +3,7 @@ using System;
 // This factory node is where we will be instantiating, as a child, the correct skinning scene
 
 
-public partial class SkinningFactory : Node2D
+public partial class SkinningFactory : Control
 { 
 	AspectRatioContainer SkinContainer;
 

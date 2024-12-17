@@ -19,8 +19,8 @@ public partial class StateMachine : Node
 		state.Enter("");
 	}
 
-	public void TransitionToNextState(String targetStatePath) {		//O1 example has a dict but idk type yet so leaving out. 
-		if (!HasNode(targetStatePath)) {											//Also using isMove is kinda a cheesy way to get 2 State machines out of 1. Probably will need to change in the future. Will work for now to avoid dividing this script up too much for just a demo. 
+	public void TransitionToNextState(String targetStatePath) {								//O1 example has a dict but idk type yet so leaving out. 
+		if (!HasNode(targetStatePath)) {													//Also using isMove is kinda a cheesy way to get 2 State machines out of 1. Probably will need to change in the future. Will work for now to avoid dividing this script up too much for just a demo. 
 			GD.Print($"{Owner.Name}: Trying to transition to state {targetStatePath} but it does not exist.");
 			return;
 		}

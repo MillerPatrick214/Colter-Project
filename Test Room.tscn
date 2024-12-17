@@ -57,6 +57,10 @@ unique_name_in_owner = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
 
 [node name="UI" parent="Character" instance=ExtResource("4_2avhr")]
+offset_left = -4.0
+offset_top = 2.0
+offset_right = -4.0
+offset_bottom = 2.0
 
 [node name="Anvil" parent="." instance=ExtResource("4_g7mm6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232792, 0.714764, -0.0126286)
