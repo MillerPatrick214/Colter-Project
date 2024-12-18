@@ -401,7 +401,7 @@ visible = false
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_danbj")
 animation = &"Bang"
-frame = 5
+frame = 7
 
 [node name="AnimationTree" type="AnimationTree" parent="Barrel End"]
 deterministic = false

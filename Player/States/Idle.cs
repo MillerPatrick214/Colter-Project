@@ -20,6 +20,10 @@ public partial class Idle : PlayerState
 		if (Input.IsActionPressed("Forward") || Input.IsActionPressed("Left") || Input.IsActionPressed("Right") || Input.IsActionPressed("Back") ) {
 			EmitSignal(SignalName.Finished, WALK);
 		}
+
+		if (Input.IsActionJustPressed("Jump")) {
+			EmitSignal(SignalName.Finished, JUMPING);
+		}
 		
 		player.MoveAndSlide();
 	}

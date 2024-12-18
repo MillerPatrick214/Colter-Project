@@ -8,9 +8,7 @@ public partial class StateMachine : Node
 	public override void _Ready()
 	{
 		state = GetNodeOrNull<State> ("Idle");
-		if (state == null) {
-			GD.Print("Oh my fucking God, just kill me. Idle node init as Null.");
-		}
+		
 		foreach (Node childNode in GetChildren()) {
 				if (childNode is State stateNode)
 				stateNode.Finished += TransitionToNextState;
@@ -29,6 +27,8 @@ public partial class StateMachine : Node
 		state.Exit();
 		state = GetNode<State>(targetStatePath);
 		state.Enter(previousStatePath);
+		GD.Print($"Entering {state.Name}"); 
+
 		
 	}
 

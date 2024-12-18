@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://UI/InteractText.cs" id="3_wqbe1"]
 [ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
 [ext_resource type="Script" path="res://UI/InteractEvent.cs" id="5_vodea"]
-[ext_resource type="PackedScene" uid="uid://c78npbxacgl6f" path="res://Skinning/AnimalSkinningSetup.tscn" id="6_bderw"]
+[ext_resource type="PackedScene" uid="uid://t0fd544v45ma" path="res://Skinning/AnimalSkinningSetup.tscn" id="6_bderw"]
 
 [node name="UI" type="Control"]
 top_level = true

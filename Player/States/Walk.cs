@@ -5,6 +5,10 @@ public partial class Walk : PlayerState
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void Enter(String previousState) {
+		if (player == null)
+		{
+   	 		GD.PrintErr("player is null in walking state. Check your state machine.");
+		}
 
 	}
 
@@ -13,10 +17,14 @@ public partial class Walk : PlayerState
 	{
 		
 		Vector3 direction = Vector3.Zero;
-		Vector3 targetVelocity = Vector3.Zero;
+		Vector3 velocity = player.Velocity;
 		Vector3 forward = player.GlobalTransform.Basis.Z.Normalized(); //foward direction? This shit is confusing me honestly. The reason we need to do this is so we're always moving relative to the camera 
-		Vector3 right = player.GlobalTransform.Basis.X.Normalized(); //Right? 
-		
+		Vector3 right = player.GlobalTransform.Basis.X.Normalized(); //Right?
+
+		if (Input.IsActionJustPressed("Jump")) {
+       	 	EmitSignal(SignalName.Finished, JUMPING);
+    	}
+				
 		if (Input.IsActionPressed("Left")) {
 			direction -= right;
 		}
@@ -32,28 +40,33 @@ public partial class Walk : PlayerState
 			direction += forward;
 			//animation.Play("Front Camera");
 		}
-		
+
+
 		if (direction != Vector3.Zero) {
 			direction = direction.Normalized();
 		}
 		
+
 		if (Input.IsActionPressed("Sprint")) { 
-			targetVelocity = direction * player.SprintSpeed;
+			velocity.X = direction.X * player.SprintSpeed;
+        	velocity.Z = direction.Z * player.SprintSpeed;
 		}
 		else {
-			targetVelocity = direction * player.Speed;
+			velocity.X = direction.X * player.Speed;
+        	velocity.Z = direction.Z * player.Speed;
 		}
-		player.Velocity = targetVelocity;
+		velocity.Y = player.Velocity.Y;
+		
+
+		player.Velocity = velocity;
 		player.MoveAndSlide();	
-	
 
 		if (!player.IsOnFloor()) {
-		EmitSignal(SignalName.Finished, FALL);
+			EmitSignal(SignalName.Finished, FALL);
 		}
 
 		if(direction == Vector3.Zero) {
 			EmitSignal(SignalName.Finished, IDLE);
 		}
-
 	}
 }

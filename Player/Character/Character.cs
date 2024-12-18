@@ -9,7 +9,9 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float SprintSpeed = 7f;
 	[Export]
-	public float JumpImpulse = 100f;
+	public float JumpImpulse = 20f;
+	[Export]
+	public float JumpManueverSpeed = 15;
 
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
@@ -24,7 +26,7 @@ public partial class Character : CharacterBody3D
 	float mouseRotY = 0f;
 	float lookAroundSpeed = .5f;
 
-	
+
 	float yRotMin = -70f;
 	float yRotMax = 70f;
 
@@ -61,7 +63,6 @@ public partial class Character : CharacterBody3D
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
-
     }
 
 	public override void _Process(double delta) {
@@ -72,7 +73,7 @@ public partial class Character : CharacterBody3D
 		else if(Input.IsActionPressed("LeanRight")) { Leaning = LeanDirection.Right;}
 		//else if (Input.IsActionPressed("LeanRight") && Input.IsActionPressed("LeanRight")) { IsLeaning = LeanDirection.None;}
 		else {Leaning = LeanDirection.None;}
-		
+
 		//GD.Print(Leaning);
 		Lean(Leaning);
 		Crouch(isCrouching);
@@ -81,9 +82,6 @@ public partial class Character : CharacterBody3D
 	public void InteractionPauseChange(bool isActive) { 
 		isInteracting = isActive;
 	}
-
-
-
 
 	public void Crouch(bool isCrouching) {
 		float currentHeight = CapsuleShape.Height;
@@ -99,13 +97,12 @@ public partial class Character : CharacterBody3D
 			if (Math.Abs(targetHeight - currentHeight) < 0.01f) {
 				CapsuleShape.Height = targetHeight;
 				CamPivNode.Position = new Vector3(0, targetCamPos, 0);
-
 			}
 		}
 	}
 
 	public override void _Input(InputEvent @event) {
-		if (!isInteracting)
+		if (!isInteracting) {
 			if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
 				// modify accumulated mouse rotation
 				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
@@ -116,6 +113,7 @@ public partial class Character : CharacterBody3D
 				RotationDegrees = new Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z);
 				CamPivNode.RotationDegrees = new Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
 			}
+		}
 	}
 	
 	public void Lean(LeanDirection Leaning) { //This feels very calculation heavy for something that is called each delta

@@ -55,6 +55,7 @@ transform = Transform3D(0.638338, 0.199599, -0.743428, 0.181186, 0.8997, 0.39713
 [node name="Character" parent="." instance=ExtResource("3_vyv3u")]
 unique_name_in_owner = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116836, 1.49695, 2.52394)
+JumpImpulse = 15.0
 
 [node name="UI" parent="Character" instance=ExtResource("4_2avhr")]
 offset_left = -4.0
@@ -66,7 +67,7 @@ offset_bottom = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232792, 0.714764, -0.0126286)
 
 [node name="Capy Boy!!!" parent="." instance=ExtResource("5_an760")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03394, 0.158716, -2.22676)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03394, 0.158716, -6.22676)
 
 [node name="pine_tree" parent="." instance=ExtResource("6_64grs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -2)

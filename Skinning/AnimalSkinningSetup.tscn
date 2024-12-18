@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c78npbxacgl6f"]
+[gd_scene load_steps=6 format=3 uid="uid://t0fd544v45ma"]
 
 [ext_resource type="Script" path="res://Skinning/AnimalSkinning.cs" id="1_cilnm"]
 [ext_resource type="Texture2D" uid="uid://d84rngvmanbb" path="res://Items/TestDirectionalSprite/Bowie Knife No Blur.png" id="3_4l43u"]
