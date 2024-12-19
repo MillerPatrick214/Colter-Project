@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1tywn615fc2s" path="res://CAPYBARA TEST/Capybara.tscn" id="5_an760"]
 [ext_resource type="PackedScene" uid="uid://cq5hc8s21orhv" path="res://MapAssets/trees/PineTreeFixed.tscn" id="6_64grs"]
 [ext_resource type="Texture2D" uid="uid://bh3o637omhutn" path="res://overcast_soil_puresky_4k.exr" id="7_630sx"]
-[ext_resource type="PackedScene" uid="uid://m1nht11rq28f" path="res://WorldItemTestShotgun.tscn" id="8_6lwo2"]
+[ext_resource type="PackedScene" uid="uid://m1nht11rq28f" path="res://Items/Weapons/TestDoubleBarrel/World Item/WorldItemTestShotgun.tscn" id="8_6lwo2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ve3rs"]
 size = Vector3(40, 0.25, 40)
@@ -82,8 +82,8 @@ transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -7, 0, -7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
 collision_layer = 3
 
-[node name="pine_tree3" parent="." instance=ExtResource("6_64grs")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 5, 0, 4)
+[node name="pine_tree3" parent="WorldItemShotgun" instance=ExtResource("6_64grs")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 3, -1, 4)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xm0lo")

@@ -11,12 +11,15 @@
 [ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s8qte"]
+custom_solver_bias = 0.1
+margin = 0.08
 radius = 0.2
 height = 1.7
 
 [node name="Character" type="CharacterBody3D" groups=["PlayerCharacter"]]
 unique_name_in_owner = true
 script = ExtResource("1_815m1")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)

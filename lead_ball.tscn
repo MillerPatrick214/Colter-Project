@@ -20,8 +20,6 @@ height = 0.05
 
 [sub_resource type="FogMaterial" id="FogMaterial_dj22w"]
 density = 0.5
-albedo = Color(1, 0.184314, 1, 1)
-emission = Color(1, 0, 0, 1)
 
 [node name="Lead Ball" type="RigidBody3D"]
 collision_mask = 2

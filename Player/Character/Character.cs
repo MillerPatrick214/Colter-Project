@@ -11,7 +11,7 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float JumpImpulse = 20f;
 	[Export]
-	public float JumpManueverSpeed = 15;
+	public float JumpManueverSpeed = 15f;
 
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
@@ -77,10 +77,6 @@ public partial class Character : CharacterBody3D
 		//GD.Print(Leaning);
 		Lean(Leaning);
 		Crouch(isCrouching);
-	}
-
-	public void InteractionPauseChange(bool isActive) { 
-		isInteracting = isActive;
 	}
 
 	public void Crouch(bool isCrouching) {

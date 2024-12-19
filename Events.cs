@@ -11,8 +11,8 @@ public partial class Events : Node
 	[Signal]
 	public delegate void ChangeIsInteractingEventHandler(bool isInteracting);
 
-//	[Signal]
-//	public delegate void NPCInteractEventHandler(NPCBase NPC);
+	[Signal]
+	public delegate void ChangeIsAimingEventHandler(bool isAiming);
 
 	[Signal]
 	public delegate void PickUpEventHandler(PackedScene ItemUsable);

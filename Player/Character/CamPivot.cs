@@ -3,8 +3,7 @@ using System;
 
 public partial class CamPivot : Marker3D
 {
-	[Signal]
-	public delegate void AimSignalEventHandler(bool isAiming);
+
 
 	SpringArm3D springArm;
 	float DefaultFOV = 70;
@@ -35,14 +34,14 @@ public partial class CamPivot : Marker3D
 
 			if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
 				isAiming = true;
-				EmitSignal(SignalName.AimSignal, isAiming);
+				Events.Instance.EmitSignal(Events.SignalName.ChangeIsAiming, isAiming);
 				//GD.Print("Aiming activated");
 			}
 				
 			else if (Input.IsActionJustReleased("Aim")) {
 				//GD.Print("Aiming deactivated");
 				isAiming = false;
-				EmitSignal(SignalName.AimSignal, isAiming);
+				Events.Instance.EmitSignal(Events.SignalName.ChangeIsAiming, isAiming);
 		}
 		}
 	}
