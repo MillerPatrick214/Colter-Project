@@ -125,7 +125,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Recoil marker/OmniLight3D:visible")
+tracks/3/path = NodePath("OmniLight3D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -215,7 +215,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Recoil marker/OmniLight3D:visible")
+tracks/4/path = NodePath("OmniLight3D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -378,14 +378,6 @@ transform = Transform3D(1, -4.76837e-08, 3.4106e-15, 4.76837e-08, 1, -2.38419e-0
 [node name="Root Scene" parent="Recoil marker" instance=ExtResource("3_6jtb3")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Recoil marker"]
-transform = Transform3D(1, 2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, 0, 0, 1, 2.98023e-08, 0.0282603, 0.703109)
-light_color = Color(1, 0.658824, 0.494118, 1)
-light_energy = 2.0
-light_size = 0.1
-shadow_enabled = true
-omni_range = 10.0
-
 [node name="Barrel End" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, 0, -2.98023e-08, 1, -2.26498e-08, 0.0460162, 0.7)
 
@@ -401,7 +393,6 @@ visible = false
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_danbj")
 animation = &"Bang"
-frame = 7
 
 [node name="AnimationTree" type="AnimationTree" parent="Barrel End"]
 deterministic = false
@@ -421,3 +412,11 @@ wait_time = 5.0
 stream = ExtResource("5_xauwn")
 volume_db = 15.0
 pitch_scale = 0.9
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, -2.98023e-08, 2.98023e-08, -2.98023e-08, 1, 1.49012e-07, -2.98023e-08, -5.96046e-08, 1, 2.98023e-08, 0.0282603, 0.703109)
+light_color = Color(1, 0.658824, 0.494118, 1)
+light_energy = 2.0
+light_size = 0.1
+shadow_enabled = true
+omni_range = 10.0

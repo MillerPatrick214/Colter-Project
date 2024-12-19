@@ -4,6 +4,8 @@ using System;
 public partial class MeleeWeapon : Weapon
 {
 	// Called when the node enters the scene tree for the first time.
+	[Export]
+	float StrikeDamage = 0f;
 	public override void _Ready()
 	{
 	}

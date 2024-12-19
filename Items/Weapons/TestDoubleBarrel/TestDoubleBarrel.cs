@@ -114,7 +114,7 @@ public partial class TestDoubleBarrel : Node3D
 		for ( int i = 0; i < 50; i++) {			//note this is particular to the shotgun as it will be firing 8 bullets.
 			RigidBody3D BallInstance = LeadBall.Instantiate<RigidBody3D>(); //moved this inside the loop, need to instantiate each time -- duh.
 			GetTree().Root.AddChild(BallInstance);
-
+			
 			BallInstance.GlobalPosition = BarrelMarker.GlobalPosition;
 		//BallInstance.GlobalTransform = BarrelMarker.GlobalTransform; I don't think we need this line? I might for arrows as they have to be lined up with the front of the weapon.
 
@@ -134,10 +134,6 @@ public partial class TestDoubleBarrel : Node3D
 
 		return basedist;
 		
-	}
-
-	public void ChangeIsInteracting(bool isActive) {
-		isInteracting = isActive;
 	}
 
 }

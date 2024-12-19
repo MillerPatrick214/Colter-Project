@@ -58,7 +58,6 @@ public partial class pause_menu : Control
 
 	public void OnResumePressed() {
 		Unpause();
-
 	}
 
 

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhmbnv7bs6cb8"]
+
+[ext_resource type="PackedScene" uid="uid://dtmn4rip44s50" path="res://Items/Weapons/1813ArmyPistol/1813ArmyPistol.glb" id="1_h7riw"]
+[ext_resource type="Script" path="res://Items/Weapons/1813ArmyPistol/eighteenthirteenArmyPistol.cs" id="1_odid1"]
+
+[node name="1813ArmyPistol" type="Node3D"]
+script = ExtResource("1_odid1")
+
+[node name="1813ArmyPistolTempmodel" parent="." instance=ExtResource("1_h7riw")]
