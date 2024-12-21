@@ -11,24 +11,27 @@ public partial class RangedWeapon : Weapon
 	bool CanFire;
 	bool IsAiming;		//Player is aiming
 	bool IsInteracting; //Player is interacting
-	PackedScene AmmoScene;
 
+	PackedScene AmmoScene;
+	AnimationPlayer AniPlayer;
+	AnimationTree AniTree;
 	Marker3D WeaponEnd;
-	AudioStreamPlayer SoundEffect;
+	AudioStreamPlayer3D SoundEffect;
 	Timer timer;
+
 	public override void _Ready()
 	{
 		CanFire = true;
 		IsAiming = false;
 		IsInteracting = false;
-		
+
 		AmmoScene = ResourceLoader.Load<PackedScene>(AmmoPath);
 		WeaponEnd = GetNodeOrNull<Marker3D>("WeaponEnd");
 		SoundEffect = GetNodeOrNull<AudioStreamPlayer3D>("AudioEffect");
 		timer = GetNodeOrNull<Timer>("Timer");
 
-		timer.Timeout += CanFire = true;
-		AniTree.AnimationFinished += hideBangSprite;
+		timer.Timeout += CanFireReset;
+		//AniTree.AnimationFinished += hideBangSprite;
 		Events.Instance.ChangeIsInteracting += (interactbool) => IsInteracting = interactbool;
 	}
 
@@ -36,11 +39,11 @@ public partial class RangedWeapon : Weapon
 	{
 		if (!IsInteracting) {
 			if (Input.IsActionPressed("Aim")) {
-				Aiming(true);
+				Aim(true);
 			}
 
 			else {
-				Aiming(false);
+				Aim(false);
 			}
 
 			if(IsAiming && Input.IsActionJustPressed("UseItem")) {
@@ -50,8 +53,12 @@ public partial class RangedWeapon : Weapon
 
 	}
 
-	public void Aim(bool IsAiming){					//This will almost definitely need to be re-worked as animation improves
-		this->IsAiming = IsAiming;
+	public void CanFireReset() {
+		CanFire = true;
+	}
+
+	public void Aim(bool aimBool){					//Tis will almost definitely need to be re-worked as animation improves
+		IsAiming = aimBool;
 		if (IsAiming) {
 			AniTree.Set("parameters/TimeScale/scale", 4);
 		}
@@ -86,6 +93,6 @@ public partial class RangedWeapon : Weapon
 		RigidBody3D ProjectileInstance = AmmoScene.Instantiate<RigidBody3D>();
 		GetTree().Root.AddChild(ProjectileInstance);
 		ProjectileInstance.GlobalPosition = WeaponEnd.GlobalPosition;
-		BallInstance.LinearVelocity = WeaponEnd.GlobalTransform.Basis * ProjectileVelocity;
+		ProjectileInstance.LinearVelocity = WeaponEnd.GlobalTransform.Basis.Z * ProjectileVelocity;
 	}
 }
