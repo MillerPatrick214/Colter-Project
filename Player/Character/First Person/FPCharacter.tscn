@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn5ecyco6dg4n"]
+[gd_scene load_steps=12 format=3 uid="uid://bn5ecyco6dg4n"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Player/States/Idle.cs" id="9_g3auy"]
 [ext_resource type="Script" path="res://Player/Character/First Person/ItemMarker.cs" id="9_gmr6g"]
 [ext_resource type="Script" path="res://Player/Character/First Person/Jumping.cs" id="9_hi04n"]
+[ext_resource type="PackedScene" uid="uid://c4x77krwgrmgr" path="res://UI/UI.tscn" id="10_5jbsu"]
 [ext_resource type="Script" path="res://Player/States/Walk.cs" id="10_k5338"]
 [ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
 
@@ -37,8 +38,9 @@ near = 0.013
 
 [node name="InteractRayCast" type="RayCast3D" parent="CamPivot/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0139031, 9.8953e-10)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, 1.5, 0)
+collision_mask = 3
 script = ExtResource("7_g3eq3")
 
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
@@ -59,3 +61,5 @@ script = ExtResource("11_q68kc")
 
 [node name="Jumping" type="Node" parent="StateMachine"]
 script = ExtResource("9_hi04n")
+
+[node name="UI" parent="." instance=ExtResource("10_5jbsu")]

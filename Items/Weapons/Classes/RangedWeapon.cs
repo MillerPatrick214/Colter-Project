@@ -76,7 +76,6 @@ public partial class RangedWeapon : Weapon
 		GunEffect.Play();
 		timer.Start(5);
 		CanFire = false;
-		Smoke.Emitting = true;
 		Smoke.Restart();
 		*/
 		
@@ -84,6 +83,19 @@ public partial class RangedWeapon : Weapon
 	}
 
 	public void EmitParticles() {
+		WeaponEnd.Show(); 
+		//Smoke.Emitting = true;
+		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+		LaunchProjectile();
+		SoundEffect.Play();
+
+		// all the following needs to be replaced w/ reloading
+		timer.Start(5);
+
+		//flash
+		//sparks
+		//smoke
+		//etc
 	//FixMe
 	}
 

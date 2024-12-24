@@ -17,7 +17,9 @@ public partial class InteractRayCast : RayCast3D
 		
 		Node InteractableObject = (Node)GetCollider();
 		
-		GD.Print($"InteractableObject Type: {InteractableObject?.GetType()}");
+		if (InteractableObject != null) {
+			GD.Print($"InteractableObject Type: {InteractableObject?.GetType()}");
+		}
 
 		if ((InteractableObject is NPCBase|| InteractableObject is WorldItem || InteractableObject is null ) && InteractableObject != LastSeen) { 
 

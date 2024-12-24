@@ -9,15 +9,16 @@ public partial class TestDoubleBarrel : Node3D
 	Timer timer;
 	GpuParticles3D Smoke;
 	Marker3D  BarrelMarker;
-	AnimationPlayer AniPlayer;
 	bool CanFire;
 	bool AimingState;
 	PackedScene LeadBall;
 	AudioStreamPlayer GunEffect;
 	bool isInteracting;
 
+	OmniLight3D Flash;
+
 	public override void _Ready()
-	
+
 	{		
 		GD.Randomize();	//called to randomize seed for shotgun pattern
 
@@ -27,16 +28,13 @@ public partial class TestDoubleBarrel : Node3D
 		
 		CanFire = true;
 
-
 		Smoke = GetNodeOrNull<GpuParticles3D>("Smoke");
 		Smoke.Emitting = false;
-		Smoke.Restart();
 
 		GunEffect = GetNodeOrNull<AudioStreamPlayer>("Gunshot");
 
 		AniTree = GetNodeOrNull<AnimationTree>("Barrel End/AnimationTree");
-
-		//AniPlayer = GetNodeOrNull<AnimationPlayer>("Barrel End/AnimationPlayer");
+		Flash = GetNodeOrNull<OmniLight3D>("Flash");
 
 		timer = GetNodeOrNull<Timer>("Timer");
 		timer.Timeout += ReloadTimerReset;
@@ -49,9 +47,8 @@ public partial class TestDoubleBarrel : Node3D
 			GD.Print(AniTree != null ? "AniTree Found" : "AniTree null");
 			GD.Print(BarrelMarker != null ? "BarrelMarker found" : "BarrelMarker null");
 			GD.Print(timer != null ? "timer found" : "timer null");
-			GD.Print(AniPlayer != null ? "AniPlayer found" : "AniPlayer null");
 		}
-
+		Flash.Hide();
 		BarrelMarker.Hide();
 		Events.Instance.ChangeIsAiming += (isAiming) => Aiming(isAiming);		
 	}
