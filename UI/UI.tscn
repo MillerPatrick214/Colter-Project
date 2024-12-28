@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=8 format=3 uid="uid://c4x77krwgrmgr"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
 [ext_resource type="Script" path="res://UI/pause_menu.cs" id="2_ymhem"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
 [ext_resource type="Script" path="res://UI/InteractEvent.cs" id="5_vodea"]
 [ext_resource type="PackedScene" uid="uid://t0fd544v45ma" path="res://Skinning/AnimalSkinningSetup.tscn" id="6_bderw"]
+[ext_resource type="PackedScene" uid="uid://oe5kwyao0abj" path="res://reload.tscn" id="6_hx0r0"]
 
 [node name="UI" type="Control"]
 top_level = true
@@ -81,10 +82,7 @@ script = ExtResource("5_vodea")
 [node name="AnimalSkinning" parent="InteractEvent" instance=ExtResource("6_bderw")]
 layout_mode = 1
 
-[node name="Reload" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Reload" parent="." instance=ExtResource("6_hx0r0")]
 
 [node name="Pause Menu" type="Control" parent="."]
 z_index = 5
@@ -118,3 +116,8 @@ text = "Settings"
 [node name="Quit" type="Button" parent="Pause Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="Dialogue" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

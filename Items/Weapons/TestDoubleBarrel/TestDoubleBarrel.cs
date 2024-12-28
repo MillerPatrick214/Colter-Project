@@ -28,17 +28,16 @@ public partial class TestDoubleBarrel : Node3D
 		
 		CanFire = true;
 
-		Smoke = GetNodeOrNull<GpuParticles3D>("Smoke");
+		Smoke = GetNodeOrNull<GpuParticles3D>("Barrel End/Smoke");
 		Smoke.Emitting = false;
 
 		GunEffect = GetNodeOrNull<AudioStreamPlayer>("Gunshot");
 
 		AniTree = GetNodeOrNull<AnimationTree>("Barrel End/AnimationTree");
-		Flash = GetNodeOrNull<OmniLight3D>("Flash");
+		Flash = GetNodeOrNull<OmniLight3D>("Barrel End/Flash");
 
 		timer = GetNodeOrNull<Timer>("Timer");
 		timer.Timeout += ReloadTimerReset;
-		AniTree.AnimationFinished += hideBangSprite;
 		
 		BarrelMarker = GetNodeOrNull<Marker3D>("Barrel End");				// SO for some reason I can't access the AnimatedSprite3D "bang" node at all. I'll be hiding the marker instead.
 		
@@ -49,7 +48,7 @@ public partial class TestDoubleBarrel : Node3D
 			GD.Print(timer != null ? "timer found" : "timer null");
 		}
 		Flash.Hide();
-		BarrelMarker.Hide();
+		//BarrelMarker.Hide();
 		Events.Instance.ChangeIsAiming += (isAiming) => Aiming(isAiming);		
 	}
 
@@ -80,18 +79,9 @@ public partial class TestDoubleBarrel : Node3D
 		}
 	}
 
-	public void hideBangSprite(StringName Name) {
-		Name = Name.ToString();
-		GD.Print(Name);
-		if (Name == "Bang") {
-			BarrelMarker.Hide();
-		}
-	}
 
 	public void Fire() {
-		BarrelMarker.Show(); 
 		Smoke.Emitting = true;
-		//AniTree.Set("parameters/conditions/isFire/On", true);
 		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
 		ShootBall();
 		GunEffect.Play();

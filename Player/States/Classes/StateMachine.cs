@@ -28,8 +28,6 @@ public partial class StateMachine : Node
 		state = GetNode<State>(targetStatePath);
 		state.Enter(previousStatePath);
 		GD.Print($"Entering {state.Name}"); 
-
-		
 	}
 
 	public void UnhandledInput(InputEvent @event) {

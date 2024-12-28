@@ -54,16 +54,6 @@ size = Vector2(2, 2)
 
 [node name="WEAPONNAME" type="Node3D"]
 
-[node name="Smoke" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, -0.000559382, 0.0263525, 0.697477)
-emitting = false
-amount = 10
-lifetime = 4.0
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_7hdsl")
-draw_pass_1 = SubResource("QuadMesh_vi880")
-
 [node name="RecoilMarker" type="Marker3D" parent="."]
 
 [node name="3DMODELSCENE" type="Node3D" parent="RecoilMarker"]
@@ -76,8 +66,20 @@ draw_pass_1 = SubResource("QuadMesh_vi880")
 
 [node name="AnimationTree" type="AnimationTree" parent="WeaponEnd"]
 
-[node name="AudioEffect" type="AudioStreamPlayer3D" parent="."]
+[node name="Smoke" type="GPUParticles3D" parent="WeaponEnd"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
+emitting = false
+amount = 10
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7hdsl")
+draw_pass_1 = SubResource("QuadMesh_vi880")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="WeaponEnd/Smoke"]
+transform = Transform3D(1, -8.88177e-16, -2.98023e-08, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0.000559403, -0.0263525, -0.697477)
+omni_range = 5.06471
+
+[node name="AudioEffect" type="AudioStreamPlayer3D" parent="."]
 
 [node name="TEMPTimer" type="Timer" parent="."]

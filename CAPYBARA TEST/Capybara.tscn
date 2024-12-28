@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://CAPYBARA TEST/Capybara.cs" id="1_7dout"]
 [ext_resource type="ArrayMesh" uid="uid://bsiygemfadkw2" path="res://CAPYBARA TEST/capybara.obj" id="1_w7y1m"]
 [ext_resource type="Texture2D" uid="uid://rx70mxj28vnj" path="res://CAPYBARA TEST/capybara1_texture.png" id="2_k5l7n"]
-[ext_resource type="PackedScene" uid="uid://ovw1xdsuq4o5" path="res://HerbivoreStateMachine.tscn" id="2_lnjvx"]
+[ext_resource type="PackedScene" uid="uid://ovw1xdsuq4o5" path="res://NPC/Animal/HerbivoreStateMachine.tscn" id="2_lnjvx"]
 [ext_resource type="Texture2D" uid="uid://dve3nqwi1kkcc" path="res://CAPYBARA TEST/capybara2_texture.png" id="3_byfrn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]

@@ -18,8 +18,7 @@ height = 0.05
 
 [sub_resource type="Skin" id="Skin_gv7j0"]
 
-[sub_resource type="FogMaterial" id="FogMaterial_dj22w"]
-density = 0.5
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vq4qh"]
 
 [node name="Lead Ball" type="RigidBody3D"]
 collision_mask = 2
@@ -39,6 +38,6 @@ skin = SubResource("Skin_gv7j0")
 skeleton = NodePath("../..")
 
 [node name="TrailEmitter" type="TrailEmitter" parent="."]
-material = SubResource("FogMaterial_dj22w")
+material = SubResource("ParticleProcessMaterial_vq4qh")
 geometry_nodepath = NodePath("..")
 size = 0.1

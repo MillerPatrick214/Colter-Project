@@ -14,8 +14,7 @@ public partial class Fall : PlayerState
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void PhysicsUpdate(double delta)
 	{
-
-
+		
 		FallVelocity.Y -= (float)(gravity * delta); //casting var as a float
 		
 		if (player.IsOnFloor()){

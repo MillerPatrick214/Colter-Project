@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba566boay68n2"]
+
+[ext_resource type="ArrayMesh" uid="uid://b23gd3hr00p1f" path="res://UI/Scenes/MainMenu3d/GrassMesh.res" id="1_t3pqe"]
+[ext_resource type="Shader" path="res://UI/Scenes/GrassAtttempt.gdshader" id="1_y5yob"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eme81"]
+noise_type = 3
+frequency = 0.0023
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n0yat"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_eme81")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_guiwg"]
+render_priority = 0
+shader = ExtResource("1_y5yob")
+shader_parameter/top_color = Color(0.156863, 0.243137, 0, 1)
+shader_parameter/bottom_color = Color(0.407843, 0.403922, 0, 1)
+shader_parameter/ambient_occlusion_factor = 0.3
+shader_parameter/specular_strength = 0.4
+shader_parameter/wind_direction = Vector3(1, 0, 0)
+shader_parameter/wind_strength = 0.11
+shader_parameter/wind_noise_size = 0.05
+shader_parameter/wind_noise_speed = 0.1
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_n0yat")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Grass Scene" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_guiwg")
+mesh = ExtResource("1_t3pqe")

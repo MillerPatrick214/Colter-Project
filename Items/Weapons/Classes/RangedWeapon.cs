@@ -19,19 +19,23 @@ public partial class RangedWeapon : Weapon
 	AudioStreamPlayer3D SoundEffect;
 	Timer timer;
 
+	/*						//Not including as this is base class
+	GpuParticles3D Smoke;
+	OmniLight3D Flash;
+	*/
+
 	public override void _Ready()
 	{
 		CanFire = true;
 		IsAiming = false;
 		IsInteracting = false;
 
-		AmmoScene = ResourceLoader.Load<PackedScene>(AmmoPath);
+		AmmoScene = ResourceLoader.Load<PackedScene>(AmmoPath);	//AmmoPath NEEDS to be specificed in each child instance;
 		WeaponEnd = GetNodeOrNull<Marker3D>("WeaponEnd");
 		SoundEffect = GetNodeOrNull<AudioStreamPlayer3D>("AudioEffect");
 		timer = GetNodeOrNull<Timer>("Timer");
 
 		timer.Timeout += CanFireReset;
-		//AniTree.AnimationFinished += hideBangSprite;
 		Events.Instance.ChangeIsInteracting += (interactbool) => IsInteracting = interactbool;
 	}
 
@@ -53,7 +57,7 @@ public partial class RangedWeapon : Weapon
 
 	}
 
-	public void CanFireReset() {
+	public void CanFireReset() {	//will be removed after reloading is completed
 		CanFire = true;
 	}
 
@@ -96,7 +100,7 @@ public partial class RangedWeapon : Weapon
 		//sparks
 		//smoke
 		//etc
-	//FixMe
+		//FixMe
 	}
 
 
