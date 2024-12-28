@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Walk : HerbivoreState
+public partial class NPCWalk : CapyState
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
