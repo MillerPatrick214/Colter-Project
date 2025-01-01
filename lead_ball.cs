@@ -17,7 +17,7 @@ public partial class lead_ball : RigidBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+		
 	}
 
 	public void Delete() {		// Deletes self after Timer runs out. 

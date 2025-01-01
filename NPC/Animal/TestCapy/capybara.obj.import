@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bsiygemfadkw2"
+path="res://.godot/imported/capybara.obj-3922e97d23707b1dc1bc5d1609798048.mesh"
+
+[deps]
+
+files=["res://.godot/imported/capybara.obj-3922e97d23707b1dc1bc5d1609798048.mesh"]
+
+source_file="res://NPC/Animal/TestCapy/capybara.obj"
+dest_files=["res://.godot/imported/capybara.obj-3922e97d23707b1dc1bc5d1609798048.mesh", "res://.godot/imported/capybara.obj-3922e97d23707b1dc1bc5d1609798048.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

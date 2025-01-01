@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1tywn615fc2s"]
+
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
+[ext_resource type="PackedScene" uid="uid://dty8m7ut74vu8" path="res://NPC/Animal/TestCapy/capybara test walking EXPORT.glb" id="2_khw1j"]
+[ext_resource type="Texture2D" uid="uid://rx70mxj28vnj" path="res://NPC/Animal/TestCapy/capybara1_texture.png" id="3_q6ukg"]
+[ext_resource type="Texture2D" uid="uid://dve3nqwi1kkcc" path="res://NPC/Animal/TestCapy/capybara2_texture.png" id="4_5of0q"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFall.cs" id="4_yhbp3"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyWalk.cs" id="5_geobw"]
+[ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="5_iqgn2"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyIdle.cs" id="6_34blc"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyAlert.cs" id="7_7tdts"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
+radius = 0.3
+height = 1.012
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1litu"]
+albedo_texture = ExtResource("3_q6ukg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kednt"]
+albedo_texture = ExtResource("4_5of0q")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
+radius = 7.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h0vrs"]
+points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 5, -5, 0, 5, 5, 5, 5, -5, 5, 5)
+
+[node name="Capybara" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+safe_margin = 0.01
+script = ExtResource("1_7dout")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.384162, 0)
+shape = SubResource("CapsuleShape3D_km4gq")
+
+[node name="capybara test walking EXPORT" parent="." instance=ExtResource("2_khw1j")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Skeleton3D" parent="capybara test walking EXPORT/Armature" index="0"]
+bones/1/position = Vector3(-2.35922e-16, 1.06973, -0.00194297)
+bones/2/rotation = Quaternion(-0.0696346, 2.60077e-17, 2.60077e-17, 0.997573)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/position = Vector3(0.521562, 2.51634, 0.746557)
+bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
+bones/4/position = Vector3(0.521562, 2.66411, 1.37708)
+bones/4/rotation = Quaternion(0.552405, 1.19244e-06, 7.90221e-07, 0.833576)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/position = Vector3(0.521562, 0.229447, 0.820321)
+bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
+bones/5/scale = Vector3(1, 1, 0.999997)
+bones/6/position = Vector3(0.521562, 0.0831631, 1.40116)
+bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(-0.526884, 2.53763, 0.746518)
+bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
+bones/8/position = Vector3(-0.526884, 2.66774, 1.37266)
+bones/8/rotation = Quaternion(0.572104, 1.17328e-06, 8.184e-07, 0.820181)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-0.526884, 0.250735, 0.820282)
+bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
+bones/10/position = Vector3(-0.526884, 0.104451, 1.40113)
+bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
+bones/10/scale = Vector3(1, 1, 1)
+
+[node name="capybara_Cube_001" parent="capybara test walking EXPORT/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1litu")
+surface_material_override/1 = SubResource("StandardMaterial3D_kednt")
+
+[node name="AnimationPlayer" parent="capybara test walking EXPORT" index="1"]
+speed_scale = 5.0
+
+[node name="HearingArea" type="Area3D" parent="."]
+
+[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
+shape = SubResource("SphereShape3D_pkh7y")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_iqgn2")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("4_yhbp3")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_geobw")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_34blc")
+
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource("7_7tdts")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 6.0
+
+[node name="VisionCone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
+shape = SubResource("ConvexPolygonShape3D_h0vrs")
+
+[node name="VisionRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, 0, 8)
+
+[editable path="capybara test walking EXPORT"]

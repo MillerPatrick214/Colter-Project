@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf4v47vd3pywb"]
 
-[ext_resource type="PackedScene" uid="uid://xokitd1w5aok" path="res://CAPYBARA TEST/CapyBoy.glb" id="1_dcyln"]
+[ext_resource type="PackedScene" uid="uid://xokitd1w5aok" path="res://NPC/Animal/TestCapy/CapyBoy.glb" id="1_dcyln"]
 
 [sub_resource type="Animation" id="Animation_jdb2c"]
 resource_name = "Walk"

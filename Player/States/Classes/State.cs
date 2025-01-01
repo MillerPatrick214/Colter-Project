@@ -22,4 +22,6 @@ public partial class State : Node
     public virtual void PhysicsUpdate(double delta) { 
 
     }
+
+    public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 }

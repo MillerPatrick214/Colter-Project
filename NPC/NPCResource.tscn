@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxsji6pa8guj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ynr3w"]
+radius = 2.375
+
+[node name="NPCResource" type="Node3D"]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_ynr3w")
+disabled = true

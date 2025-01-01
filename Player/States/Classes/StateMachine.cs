@@ -27,7 +27,7 @@ public partial class StateMachine : Node
 		state.Exit();
 		state = GetNode<State>(targetStatePath);
 		state.Enter(previousStatePath);
-		GD.Print($"Entering {state.Name}"); 
+		GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
 	}
 
 	public void UnhandledInput(InputEvent @event) {

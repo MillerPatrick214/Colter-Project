@@ -4,8 +4,6 @@ using System;
 public partial class CamPivot : Marker3D
 {
 
-
-	SpringArm3D springArm;
 	float DefaultFOV = 70;
 
 	[Export]

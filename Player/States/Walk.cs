@@ -46,7 +46,6 @@ public partial class Walk : PlayerState
 			direction = direction.Normalized();
 		}
 		
-
 		if (Input.IsActionPressed("Sprint")) { 
 			velocity.X = direction.X * player.SprintSpeed;
         	velocity.Z = direction.Z * player.SprintSpeed;
@@ -55,6 +54,7 @@ public partial class Walk : PlayerState
 			velocity.X = direction.X * player.Speed;
         	velocity.Z = direction.Z * player.Speed;
 		}
+		
 		velocity.Y = player.Velocity.Y;
 		
 
