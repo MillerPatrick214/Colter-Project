@@ -17,7 +17,7 @@ margin = 0.08
 radius = 0.2
 height = 1.7
 
-[node name="Character" type="CharacterBody3D" groups=["PlayerCharacter"]]
+[node name="Character" type="CharacterBody3D" groups=["Human", "PlayerCharacter"]]
 unique_name_in_owner = true
 script = ExtResource("1_815m1")
 metadata/_edit_lock_ = true

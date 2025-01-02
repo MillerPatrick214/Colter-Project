@@ -42,6 +42,10 @@ enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 import/blender/enabled=false
 
+[global_group]
+
+Human="Any and all entities considered human"
+
 [gui]
 
 common/sdfgi/frames_to_converge=5

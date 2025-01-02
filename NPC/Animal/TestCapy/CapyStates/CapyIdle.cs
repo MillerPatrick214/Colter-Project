@@ -16,20 +16,23 @@ public partial class CapyIdle : NPCState<Capybara>
 		if (!NPC.IsOnFloor()) {
 			EmitSignal(SignalName.Finished, FALL);
 		}
-		
 	}
 
     public override void Enter(string previousStatePath)
     {
-		SceneTreeTimer timer = GetTree().CreateTimer(5.0f);
+		
+		SceneTreeTimer timer = GetTree().CreateTimer(6.0f);
 		timer.Timeout += Test;
+		if (NPC.AniPlayer != null) {			//this feels like a very clumsy way of doing this.
+			NPC.setAnimation("CapybaraAnimations/CapyHeadDown");
+			NPC.setNextAnimation("CapybaraAnimations/CapyHeadDown", "CapybaraAnimations/CapyGraze");
+		}
     }
-	
+
+	public override void Exit() {
+	}
+
 	public void Test() {
 		EmitSignal(SignalName.Finished, WALK);
 	}
-
-	
-
-
 }

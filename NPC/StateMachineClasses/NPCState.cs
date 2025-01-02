@@ -10,6 +10,7 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 	public const string WALK = "Walk";
 	public const string IDLE = "Idle";
 	public const string ALERT = "Alert";
+	public const string FLEE = "Flee";
 	
 	
 	//so here we will continue to add string defs for different states as needed
@@ -24,8 +25,6 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 		if (NPC == null)
         {
             GD.PrintErr($"NPCState: Owner is not of type {typeof(T).Name}.");
-        }
-		
+        }	
 	}
-
 }

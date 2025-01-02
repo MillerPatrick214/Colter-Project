@@ -18,16 +18,18 @@ public partial class StateMachine : Node
 	}
 
 	public void TransitionToNextState(String targetStatePath) {								//O1 example has a dict but idk type yet so leaving out. 
-		if (!HasNode(targetStatePath)) {													//Also using isMove is kinda a cheesy way to get 2 State machines out of 1. Probably will need to change in the future. Will work for now to avoid dividing this script up too much for just a demo. 
-			GD.Print($"{Owner.Name}: Trying to transition to state {targetStatePath} but it does not exist.");
-			return;
+		if (state.Name != "Alert") {//FIXME -- This is currently in place so that the timer from idle to walk (which is temp) doesn't fuck us out of ALERT state testing
+			if (!HasNode(targetStatePath)) {													//Also using isMove is kinda a cheesy way to get 2 State machines out of 1. Probably will need to change in the future. Will work for now to avoid dividing this script up too much for just a demo. 
+				GD.Print($"{Owner.Name}: Trying to transition to state {targetStatePath} but it does not exist.");
+				return;
+			}
+			
+			string previousStatePath = state.Name;
+			state.Exit();
+			state = GetNode<State>(targetStatePath);
+			state.Enter(previousStatePath);
+			GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
 		}
-		
-		string previousStatePath = state.Name;
-		state.Exit();
-		state = GetNode<State>(targetStatePath);
-		state.Enter(previousStatePath);
-		GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
 	}
 
 	public void UnhandledInput(InputEvent @event) {

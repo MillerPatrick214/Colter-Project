@@ -11,14 +11,13 @@ public partial class Capybara : NPCBase
 
 	// Called when the node enters the scene tree for the first time.
 	PackedScene SkinningScene;
-
+	string currState = ""; 
 	Node3D FocusedBody = null;
 	//List<Node3D> SensedBodies;
 	Area3D HearingArea;
 	Area3D VisionCone;
 	RayCast3D VisionRay; 
-
-	AnimationPlayer AniPlayer; 
+	public AnimationPlayer AniPlayer;	//Idk if this should be public. This class and the state machine have broken the convention "Signal Up & Set Children Down". I could write another function to set Animation which might be smarter. 
 
 	//so flow is
 	//	1. Added to sensed
@@ -40,27 +39,26 @@ public partial class Capybara : NPCBase
 		HearingArea = GetNodeOrNull<Area3D>("HearingArea"); 
 		VisionCone = GetNodeOrNull<Area3D>("VisionCone");
 		VisionRay = GetNodeOrNull<RayCast3D>("VisionRay");
-		AniPlayer = GetNodeOrNull<AnimationPlayer>("capybara test walking EXPORT/AnimationPlayer");
+		AniPlayer = GetNodeOrNull<AnimationPlayer>("capybara test walking EXPORT/Armature/Skeleton3D/AnimationPlayer");
+
+		if (AniPlayer == null) {GD.Print("Capybara: Fuck Aniplayer is Null");}
+
+		if (HearingArea == null || VisionCone == null || VisionRay == null) {
+			 GD.Print((HearingArea == null) ? "Capybara: HearingArea came back as null" : "");
+			 GD.Print((VisionCone == null) ? "Capybara: VisionCone came back as null" : "");
+			 GD.Print((VisionRay == null) ? "Capybara: VisionRay came back as null" : "");
+		}
 
 		HearingArea.BodyEntered += (Node3D body) => SensedAdd(body);		
 		HearingArea.BodyExited += (Node3D body) => SensedRemove(body);
 
 		VisionCone.BodyEntered += (Node3D body) => SensedAdd(body);
 		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
-		
-		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Velocity != Godot.Vector3.Zero) {
-			AniPlayer.Play("ArmatureAction_001");
-		}
-
-		else {
-			AniPlayer.Stop();
-		}
 
 	}
 
@@ -87,8 +85,25 @@ public partial class Capybara : NPCBase
 		return VisionCone.OverlapsBody(FocusedBody);
 	}
 
+	public void setAnimation(String animationName, bool backwards = false) {		//making these functions as directly accessing them thru the states doesn't chill and wait for the higher lvl nodes to load the actual animation player resulting in a null instance for them. 
+		if (!backwards) 
+			{
+				AniPlayer.Play(animationName);
+			} 
+		else 
+			{
+				AniPlayer.PlayBackwards(animationName);
+			}
+	}
+
+	public void setNextAnimation(String prevAnimation, String nextAnimation) {
+		AniPlayer.AnimationSetNext(prevAnimation, nextAnimation);
+	
+	}
+
 	public void setRayCast(Godot.Vector3 direction) {
-		VisionRay.TargetPosition = direction;
+		Godot.Vector3 localDir = VisionRay.ToLocal(GlobalPosition + direction);
+		VisionRay.TargetPosition = localDir;
 	}
 
 	public GodotObject GetRayCollision() 
@@ -97,15 +112,16 @@ public partial class Capybara : NPCBase
 		return collObj;
 		}
 	
-	
 	public void SensedAdd(Node3D body) {
+		
 		//if (!SensedBodies.Any()) {					//This should catch any body that enters despite which state we're in and change the mode to Alert\
-			GD.Print($"Body that was detected is of {body.GetType()}");
-			if (body.IsClass("Character")) { 
-				GD.Print("Successfully Detected Character");
-				EmitSignal(SignalName.Sensed);
-				FocusedBody = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
-			}
+		GD.Print($"Body that was detected is of {body.GetClass()}");
+		if (body.IsClass("CharacterBody3D") && body.IsInGroup("Human")) 
+		{ 
+			GD.Print("Successfully Detected Character");
+			EmitSignal(SignalName.Sensed);
+			FocusedBody = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
+		}
 		//}
 
 		/*
@@ -125,7 +141,10 @@ public partial class Capybara : NPCBase
 		}
 		*/
 
-		FocusedBody = null;
+		if (!HearingArea.OverlapsBody(FocusedBody) && !VisionCone.OverlapsBody(FocusedBody)) 
+		{
+			FocusedBody = null;
+		}
 	}
 }
 
