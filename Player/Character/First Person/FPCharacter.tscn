@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn5ecyco6dg4n"]
+[gd_scene load_steps=13 format=3 uid="uid://bn5ecyco6dg4n"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_815m1"]
+[ext_resource type="PackedScene" uid="uid://mkhbyhetuydg" path="res://Items/Weapons/1795 Musket/1795Musket.tscn" id="4_domdo"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
@@ -20,7 +21,6 @@ height = 1.7
 [node name="Character" type="CharacterBody3D" groups=["Human", "PlayerCharacter"]]
 unique_name_in_owner = true
 script = ExtResource("1_815m1")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
@@ -32,8 +32,10 @@ script = ExtResource("5_kks8j")
 AimFOV = 50.0
 
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, -0.045)
 script = ExtResource("9_gmr6g")
+
+[node name="1795 musket" parent="CamPivot/ItemMarker" instance=ExtResource("4_domdo")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.0129902, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)

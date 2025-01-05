@@ -2,9 +2,9 @@ using Godot;
 using System;
 
 public partial class StateMachine : Node
-{	
+{
 	State state; 		
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		state = GetNodeOrNull<State> ("Idle");
@@ -18,7 +18,7 @@ public partial class StateMachine : Node
 	}
 
 	public void TransitionToNextState(String targetStatePath) {								//O1 example has a dict but idk type yet so leaving out. 
-		if (state.Name != "Alert") {//FIXME -- This is currently in place so that the timer from idle to walk (which is temp) doesn't fuck us out of ALERT state testing
+		if (state.Name != "Alert") {	//FIXME -- This is currently in place so that the timer from idle to walk (which is temp) doesn't fuck us out of ALERT state testing
 			if (!HasNode(targetStatePath)) {													//Also using isMove is kinda a cheesy way to get 2 State machines out of 1. Probably will need to change in the future. Will work for now to avoid dividing this script up too much for just a demo. 
 				GD.Print($"{Owner.Name}: Trying to transition to state {targetStatePath} but it does not exist.");
 				return;
@@ -42,7 +42,7 @@ public partial class StateMachine : Node
 
 	public override void _PhysicsProcess(double delta) {
 		state.PhysicsUpdate(delta);
-		}
+	}
 }
 
 

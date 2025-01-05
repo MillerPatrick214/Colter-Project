@@ -7,6 +7,9 @@ public partial class State : Node
     [Signal]
     public delegate void FinishedEventHandler(String targetStatePath);
 
+    [Signal]
+    public delegate void AniStateEventHandler(String Ani);
+
     public virtual void Enter(string previousStatePath) {
 
     }

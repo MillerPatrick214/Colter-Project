@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dys1xjrboxexd"
+uid="uid://cwshnyum8mle4"
 path="res://.godot/imported/capybara test idle animation.glb-b7d4828050fb30f62776bfe0e6d7d273.scn"
 
 [deps]
@@ -36,7 +36,7 @@ _subresources={
 "ArmatureAction": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://NPC/Animal/TestCapy/ExtractedCapyu/AnimationIdle.res",
+"save_to_file/path": "res://NPC/Animal/TestCapy/CapyAnimations/ArmatureAction.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

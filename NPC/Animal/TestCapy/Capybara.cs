@@ -17,8 +17,7 @@ public partial class Capybara : NPCBase
 	Area3D HearingArea;
 	Area3D VisionCone;
 	RayCast3D VisionRay; 
-	public AnimationPlayer AniPlayer;	//Idk if this should be public. This class and the state machine have broken the convention "Signal Up & Set Children Down". I could write another function to set Animation which might be smarter. 
-
+	public AnimationTree AniTree;
 	//so flow is
 	//	1. Added to sensed
 	//	2. Rotate VisualArea to include body
@@ -39,9 +38,9 @@ public partial class Capybara : NPCBase
 		HearingArea = GetNodeOrNull<Area3D>("HearingArea"); 
 		VisionCone = GetNodeOrNull<Area3D>("VisionCone");
 		VisionRay = GetNodeOrNull<RayCast3D>("VisionRay");
-		AniPlayer = GetNodeOrNull<AnimationPlayer>("capybara test walking EXPORT/Armature/Skeleton3D/AnimationPlayer");
+		AniTree = GetNodeOrNull<AnimationTree>("AnimationTree");
 
-		if (AniPlayer == null) {GD.Print("Capybara: Fuck Aniplayer is Null");}
+		if (AniTree == null) {GD.Print("Capybara: Fuck AniTree is Null");}
 
 		if (HearingArea == null || VisionCone == null || VisionRay == null) {
 			 GD.Print((HearingArea == null) ? "Capybara: HearingArea came back as null" : "");
@@ -54,6 +53,8 @@ public partial class Capybara : NPCBase
 
 		VisionCone.BodyEntered += (Node3D body) => SensedAdd(body);
 		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
+
+		AniTree.AnimationFinished += (ree) => GD.Print("Reee ");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,6 +86,7 @@ public partial class Capybara : NPCBase
 		return VisionCone.OverlapsBody(FocusedBody);
 	}
 
+	/*
 	public void setAnimation(String animationName, bool backwards = false) {		//making these functions as directly accessing them thru the states doesn't chill and wait for the higher lvl nodes to load the actual animation player resulting in a null instance for them. 
 		if (!backwards) 
 			{
@@ -95,11 +97,11 @@ public partial class Capybara : NPCBase
 				AniPlayer.PlayBackwards(animationName);
 			}
 	}
-
+	
 	public void setNextAnimation(String prevAnimation, String nextAnimation) {
 		AniPlayer.AnimationSetNext(prevAnimation, nextAnimation);
-	
 	}
+	*/
 
 	public void setRayCast(Godot.Vector3 direction) {
 		Godot.Vector3 localDir = VisionRay.ToLocal(GlobalPosition + direction);

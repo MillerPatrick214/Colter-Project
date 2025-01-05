@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b65hdibn2v4sj"
-path="res://.godot/imported/MusketShot.wav-876affd33296d50bf850679ed2b5068b.sample"
+path="res://.godot/imported/MusketShot.wav-b5b3b3f7977c6cfd396b2cbfa874ffe2.sample"
 
 [deps]
 
-source_file="res://Placeholder Sound design/Royalty Free/MusketShot.wav"
-dest_files=["res://.godot/imported/MusketShot.wav-876affd33296d50bf850679ed2b5068b.sample"]
+source_file="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav"
+dest_files=["res://.godot/imported/MusketShot.wav-b5b3b3f7977c6cfd396b2cbfa874ffe2.sample"]
 
 [params]
 

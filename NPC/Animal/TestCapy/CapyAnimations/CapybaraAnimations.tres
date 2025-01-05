@@ -1,12 +1,14 @@
-[gd_resource type="AnimationLibrary" load_steps=4 format=3 uid="uid://cjl2q2vwxjni"]
+[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://cjl2q2vwxjni"]
 
 [ext_resource type="Animation" uid="uid://d4lnwmgtysmhf" path="res://NPC/Animal/TestCapy/CapyAnimations/CapyGraze.res" id="1_p8oom"]
 [ext_resource type="Animation" uid="uid://fqh3swx3lweu" path="res://NPC/Animal/TestCapy/CapyAnimations/Walk.res" id="2_mrdoo"]
 [ext_resource type="Animation" uid="uid://brbrwuprk5wr5" path="res://NPC/Animal/TestCapy/CapyAnimations/CapyHeadDown.Res" id="3_dpctn"]
+[ext_resource type="Animation" uid="uid://r1dw846bn2wa" path="res://NPC/Animal/TestCapy/CapyAnimations/ArmatureAction.res" id="4_lwjv4"]
 
 [resource]
 _data = {
 "CapyGraze": ExtResource("1_p8oom"),
 "CapyHeadDown": ExtResource("3_dpctn"),
+"CapyHeadUp": ExtResource("4_lwjv4"),
 "CapyWalk": ExtResource("2_mrdoo")
 }
