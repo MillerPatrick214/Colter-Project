@@ -4,7 +4,6 @@ using System;
 public partial class RangedWeapon : Weapon
 {
 	//goal is to not need to override hardly anything for children classes
-	[Export]
 	public virtual float ProjectileVelocity { get; set; }  = 0f;
 	
 	public virtual string AmmoPath { get; set;} = ""; 
@@ -78,6 +77,9 @@ public partial class RangedWeapon : Weapon
 		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
 		LaunchProjectile();
 
+	}
+
+	public virtual void ResetEmitters() {
 	}
 
 

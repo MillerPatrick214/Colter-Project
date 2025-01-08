@@ -86,22 +86,6 @@ public partial class Capybara : NPCBase
 		return VisionCone.OverlapsBody(FocusedBody);
 	}
 
-	/*
-	public void setAnimation(String animationName, bool backwards = false) {		//making these functions as directly accessing them thru the states doesn't chill and wait for the higher lvl nodes to load the actual animation player resulting in a null instance for them. 
-		if (!backwards) 
-			{
-				AniPlayer.Play(animationName);
-			} 
-		else 
-			{
-				AniPlayer.PlayBackwards(animationName);
-			}
-	}
-	
-	public void setNextAnimation(String prevAnimation, String nextAnimation) {
-		AniPlayer.AnimationSetNext(prevAnimation, nextAnimation);
-	}
-	*/
 
 	public void setRayCast(Godot.Vector3 direction) {
 		Godot.Vector3 localDir = VisionRay.ToLocal(GlobalPosition + direction);
@@ -143,7 +127,8 @@ public partial class Capybara : NPCBase
 		}
 		*/
 
-		if (!HearingArea.OverlapsBody(FocusedBody) && !VisionCone.OverlapsBody(FocusedBody)) 
+		
+		if ( FocusedBody != null && !HearingArea.OverlapsBody(FocusedBody) && !VisionCone.OverlapsBody(FocusedBody)) //should this be focuedbody? Or body? Too burnt out for a refactor currently. 
 		{
 			FocusedBody = null;
 		}
