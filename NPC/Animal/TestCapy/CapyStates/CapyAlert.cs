@@ -18,18 +18,24 @@ public partial class CapyAlert : NPCState<Capybara>
     public override void PhysicsUpdate(double delta)
 	{
 		NPC.Velocity = Godot.Vector3.Zero;		//I hate doing this and would much rather fix the fucking Walk state than constantly set velocity to zero in these states in the future
-		if (NPC.GetFocused() != null)
+		if (NPC.GetThreat() != null)
 		{
-			GD.Print($"Current Focus = {NPC.GetFocused().Name}");
+			GD.Print($"Current Focus = {NPC.GetThreat().Name}");
 			
 			AssessThreat();
 		}
 
 		
 
-		if (Susometer == 100) {
+		if (Susometer >= 100) {
 			EmitSignal(SignalName.Finished, FLEE);
 		}
+
+		if (!NPC.IsOnFloor()) 
+		{
+			EmitSignal(SignalName.Finished, FALL);
+		}
+		
 	}
 
 	public void AssessThreat()
@@ -40,7 +46,7 @@ public partial class CapyAlert : NPCState<Capybara>
 			return;
 		}
 
-		var focused = NPC.GetFocused();
+		var focused = NPC.GetThreat();
 		if (focused == null)
 		{
 			GD.PrintErr("GetFocused() returned null!");
@@ -65,22 +71,32 @@ public partial class CapyAlert : NPCState<Capybara>
 		direction = direction.Normalized();
 		
 		NPC.Rotate(direction);
+		GD.Print($"VisionConeCheck: {NPC.isInVisionCone()}");
 		
 		if (NPC.isInVisionCone())
 		{
 
-			if (collObj != null)			
+			if (collObj != null && collObj.IsClass("CharacterBody3D"))			
 			{
-				if (collObj.IsClass("Character"))
-				{
+				CharacterBody3D CharacterNode = collObj as CharacterBody3D;
+				
+				if (CharacterNode.IsInGroup("ThreatLevel3")) {
 					GD.Print("Detected you bobber kurwva!!!!!!!!");
-					Susometer += 1;
+					Susometer += 2;
 				}
+
 				else
 				{
 					GD.Print("Attempting to locate cause of noise");
 				}
 			}
+			
 		}
 	}
+
+    public override void Exit()
+    {
+        base.Exit();
+		Susometer = 0;
+    }
 }

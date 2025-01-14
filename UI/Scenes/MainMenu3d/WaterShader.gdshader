@@ -37,7 +37,6 @@ void fragment() {
 
 	//transparency apply
 	ALPHA = 1.0 - transparency;
-
 }
 
 //void light() {

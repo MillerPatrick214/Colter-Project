@@ -4,6 +4,8 @@ using System;
 public partial class RangedWeapon : Weapon
 {
 	//goal is to not need to override hardly anything for children classes
+
+	//will need to add scene info for reloading stuff
 	public virtual float ProjectileVelocity { get; set; }  = 0f;
 	
 	public virtual string AmmoPath { get; set;} = ""; 
@@ -80,6 +82,7 @@ public partial class RangedWeapon : Weapon
 	}
 
 	public virtual void ResetEmitters() {
+		
 	}
 
 

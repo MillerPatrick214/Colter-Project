@@ -12,12 +12,19 @@ public partial class Capybara : NPCBase
 	// Called when the node enters the scene tree for the first time.
 	PackedScene SkinningScene;
 	string currState = ""; 
-	Node3D FocusedBody = null;
+	Node3D Threat = null;		// Holds whatever is curr threat for the NPC. 
+	
+	//
+	//I think we will likely want a curr List of sensed bodies and a body for the "Threat" that is set by the alert mode once "proof" of that threat is visually confirmed or susometer reaches max?
+	//
+
 	//List<Node3D> SensedBodies;
 	Area3D HearingArea;
 	Area3D VisionCone;
 	RayCast3D VisionRay; 
 	public AnimationTree AniTree;
+
+	public NavigationAgent3D NavAgent;
 	//so flow is
 	//	1. Added to sensed
 	//	2. Rotate VisualArea to include body
@@ -28,7 +35,7 @@ public partial class Capybara : NPCBase
 	[Export]
 	float WalkSpeed = 5f;
 	[Export]
-	float FleeSpeed = 15f;
+	float FleeSpeed = 7.5f;
 
 	public override void _Ready()
 	{
@@ -40,6 +47,11 @@ public partial class Capybara : NPCBase
 		VisionRay = GetNodeOrNull<RayCast3D>("VisionRay");
 		AniTree = GetNodeOrNull<AnimationTree>("AnimationTree");
 
+		NavAgent= GetNodeOrNull<NavigationAgent3D>("NavigationAgent3D"); 
+
+		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");}
+		else {GD.Print("We're Chuned! NavAgent found successfully");} 
+
 		if (AniTree == null) {GD.Print("Capybara: Fuck AniTree is Null");}
 
 		if (HearingArea == null || VisionCone == null || VisionRay == null) {
@@ -49,10 +61,10 @@ public partial class Capybara : NPCBase
 		}
 
 		HearingArea.BodyEntered += (Node3D body) => SensedAdd(body);		
-		HearingArea.BodyExited += (Node3D body) => SensedRemove(body);
+		//HearingArea.BodyExited += (Node3D body) => SensedRemove(body);
 
 		VisionCone.BodyEntered += (Node3D body) => SensedAdd(body);
-		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
+		//VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
 
 		AniTree.AnimationFinished += (ree) => GD.Print("Reee ");
 	}
@@ -78,12 +90,16 @@ public partial class Capybara : NPCBase
 		return WalkSpeed;
 	}
 
-	public Node3D GetFocused() {
-		return FocusedBody;
+	public float GetFleeSpeed() {
+		return FleeSpeed;
+	}
+
+	public Node3D GetThreat() {
+		return Threat;
 	}
 
 	public bool isInVisionCone() {
-		return VisionCone.OverlapsBody(FocusedBody);
+		return VisionCone.OverlapsBody(Threat);
 	}
 
 
@@ -106,7 +122,7 @@ public partial class Capybara : NPCBase
 		{ 
 			GD.Print("Successfully Detected Character");
 			EmitSignal(SignalName.Sensed);
-			FocusedBody = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
+			Threat = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
 		}
 		//}
 
@@ -128,9 +144,9 @@ public partial class Capybara : NPCBase
 		*/
 
 		
-		if ( FocusedBody != null && !HearingArea.OverlapsBody(FocusedBody) && !VisionCone.OverlapsBody(FocusedBody)) //should this be focuedbody? Or body? Too burnt out for a refactor currently. 
+		if ( Threat != null && !HearingArea.OverlapsBody(Threat) && !VisionCone.OverlapsBody(Threat)) //This needs to be totally changed. 
 		{
-			FocusedBody = null;
+			Threat = null;
 		}
 	}
 }

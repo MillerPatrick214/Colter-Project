@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=32 format=4 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
 [ext_resource type="Texture2D" uid="uid://rx70mxj28vnj" path="res://NPC/Animal/TestCapy/capybara1_texture.png" id="3_q6ukg"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="5_iqgn2"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyIdle.cs" id="6_34blc"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyAlert.cs" id="7_7tdts"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFlee.cs" id="10_g5a2g"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyDeath.cs" id="11_gtlnt"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jog57"]
 animation = &"CapybaraAnimations/CapyGraze"
@@ -196,8 +198,8 @@ bones/2/name = "Bone.002"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
-bones/2/position = Vector3(1.00005e-09, 2.13948, 0.335118)
-bones/2/rotation = Quaternion(0.273859, -0.00294986, 0.00212996, 0.961763)
+bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
+bones/2/rotation = Quaternion(0.276482, -0.00297093, 0.00216268, 0.961012)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -289,7 +291,14 @@ script = ExtResource("6_34blc")
 [node name="Alert" type="Node" parent="StateMachine"]
 script = ExtResource("7_7tdts")
 
+[node name="Flee" type="Node" parent="StateMachine"]
+script = ExtResource("10_g5a2g")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("11_gtlnt")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 6.0

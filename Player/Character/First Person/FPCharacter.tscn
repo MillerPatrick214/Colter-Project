@@ -18,7 +18,7 @@ margin = 0.08
 radius = 0.2
 height = 1.7
 
-[node name="Character" type="CharacterBody3D" groups=["Human", "PlayerCharacter"]]
+[node name="Character" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
 script = ExtResource("1_815m1")
 

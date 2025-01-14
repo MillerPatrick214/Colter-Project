@@ -1,11 +1,11 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class NPCState<T> : State where T : NPCBase //using template to allow for greater flexibility
 {
 
 	protected T NPC;
-	protected NavigationAgent3D NavAgent;
 	public const string FALL = "Fall";
 	public const string WALK = "Walk";
 	public const string IDLE = "Idle";
@@ -15,16 +15,20 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 	
 	//so here we will continue to add string defs for different states as needed
 	
-	public override void _Ready()
+	public override async void _Ready()
 	{
 
 		NPC = Owner as T;
+		//GD.Print("Awaiting NPC Owner to be Ready");
 
-		NavAgent = NPC.GetNodeOrNull<NavigationAgent3D>("NavigationAgent3D"); 
+		await ToSignal(NPC, SignalName.Ready);
+		
+		//GD.Print("NPC Ready!!!");
 
 		if (NPC == null)
         {
             GD.PrintErr($"NPCState: Owner is not of type {typeof(T).Name}.");
-        }	
+
+        }
 	}
 }

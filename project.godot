@@ -45,6 +45,7 @@ import/blender/enabled=false
 [global_group]
 
 Human="Any and all entities considered human"
+ThreatLevel3="Describes relative intimidation factor of the entity"
 
 [gui]
 

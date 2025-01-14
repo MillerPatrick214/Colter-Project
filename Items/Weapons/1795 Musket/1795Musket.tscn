@@ -515,6 +515,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector3(0.360646, -3.14159, 3.14159)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponEnd/Smoke:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vr1u2"]
 _data = {
@@ -636,6 +648,18 @@ tracks/7/keys = {
 "args": [],
 "method": &"restart"
 }]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WeaponEnd/Smoke:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.86),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ibx18"]
@@ -890,7 +914,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, 5.68434e-14, 1.19209e-06, 1.16328e-06, 0.218538, -0.975829, -2.60518e-07, 0.975829, 0.218538, -9.64506e-16, 2.57276, 0.125786)
 bones/3/enabled = true
 bones/3/position = Vector3(-9.64506e-16, 2.57276, 0.125786)
-bones/3/rotation = Quaternion(0.982943, 1.0962e-07, 5.8588e-07, 0.183911)
+bones/3/rotation = Quaternion(0.625085, 4.65249e-07, 3.7258e-07, 0.780557)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Cube"
 bones/4/parent = 3
@@ -904,7 +928,7 @@ bones/5/parent = 0
 bones/5/rest = Transform3D(1, -2.16563e-16, -2.4211e-17, -2.42109e-17, -0.220833, 0.975312, -2.16563e-16, -0.975312, -0.220833, -1.48839e-15, 0.714868, -0.567939)
 bones/5/enabled = true
 bones/5/position = Vector3(-1.48839e-15, 0.714868, -0.567939)
-bones/5/rotation = Quaternion(-0.781291, 7.70435e-17, 7.70435e-17, 0.624166)
+bones/5/rotation = Quaternion(-0.781292, 7.70435e-17, 7.70436e-17, 0.624166)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "trigger"
 bones/6/parent = 5
@@ -978,7 +1002,7 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Armature_002/Skeleton3D"]
-transform = Transform3D(0.095485, 5.34295e-14, -2.66454e-14, -7.10543e-14, 0.0518365, -0.0504982, -2.4869e-14, 0.0726584, 0.0360268, 0.352067, 1.51624, 0.518492)
+transform = Transform3D(0.095485, 1.76525e-14, -3.55271e-15, -1.77636e-14, 0.0518366, -0.0504982, -1.06581e-14, 0.0726584, 0.0360269, 0.352067, 1.51624, 0.518492)
 bone_name = "hammer.001"
 bone_idx = 2
 
@@ -987,7 +1011,7 @@ mesh = SubResource("ArrayMesh_7xwlx")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="Armature_002/Skeleton3D"]
-transform = Transform3D(0.20404, 6.99815e-07, -4.83999e-07, 4.84001e-07, -0.190914, -0.072001, -6.99815e-07, 0.0720014, -0.190913, 9.78941e-10, 2.64293, 0.204985)
+transform = Transform3D(0.20404, 6.99815e-07, -4.83999e-07, 4.84001e-07, -0.190914, -0.072001, -6.99815e-07, 0.0720014, -0.190913, 9.7887e-10, 2.66153, 0.0682098)
 bone_name = "Cube"
 bone_idx = 4
 
@@ -996,7 +1020,7 @@ mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Armature_002/Skeleton3D"]
-transform = Transform3D(6.38473, 1.38624e-15, -1.12073e-15, -1.38624e-15, 1.33742, -6.24308, -1.12073e-15, 6.24308, 1.33742, 1.28955, 9.18679, -2.56121)
+transform = Transform3D(6.38473, 1.38624e-15, -1.12073e-15, -1.38624e-15, 1.33742, -6.24308, -1.12073e-15, 6.24308, 1.33742, 1.28955, 9.18679, -2.56122)
 bone_name = "trigger"
 bone_idx = 6
 
