@@ -7,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 
 
 
-public partial class Skinnable : Sprite2D
+public partial class Skinnable : TextureRect 
 {
 	[Signal]
 	public delegate void MouseOnSkinEventHandler(bool isTrue);
@@ -37,11 +37,13 @@ public partial class Skinnable : Sprite2D
 		return rectObj.Position;
 	}
 
+	/*
 	public Godot.Vector2 GetSize() {
 		Rect2 rectObj = PullRectangle();
 		GD.Print($"Skinnable Rect Size: {rectObj.Size}");
 		return rectObj.Size;
 	}
+	*/
 
 	public Rect2 PullRectangle() {
 		RectangleShape2D Rect = CollShape.Shape as RectangleShape2D;

@@ -3,7 +3,8 @@ using System;
 
 public partial class NPCBase : CharacterBody3D
 {	
-
+	[Signal]
+	public delegate void DeathSignalEventHandler();
 	[Export]
 	float Health = 100.0f;
 	[Export]
@@ -19,10 +20,11 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	public bool IsInteractable = false;	
 
-	public string InteractSceneString = "";
+	public virtual string InteractSceneString {get; set;} = "";			//Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 	
-	public override void _Ready() {
-
+	public override void _Ready() 
+	{
+		
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -30,20 +32,24 @@ public partial class NPCBase : CharacterBody3D
 		
 		MoveAndSlide();
 
-		if (Health <= 0) {
+		if (Health <= 0 && !isDead) {
 			Death();
 		}
 	}
 
-	public void DamageHealth(float Damage) {
+	public void DamageHealth(float Damage) 
+	{
 		Health -= Damage; 
 	}
 
-	virtual public void Death() {
+	virtual public void Death() //Note this is called Death but signal is DeathSignal
+	{
 		isDead = true;
+		EmitSignal(SignalName.DeathSignal);
 	}
 
-	virtual public void Interact() {
+	virtual public void Interact() 
+	{
 
 	}
 

@@ -1,22 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://cw0mtrrkpq73g"]
 
-[ext_resource type="Texture2D" uid="uid://c4i222w3oia72" path="res://Skinning/DeerTemp.png" id="1_7uxsy"]
-[ext_resource type="Script" path="res://Skinning/DeerSkinTEST.cs" id="2_x1lt2"]
+[ext_resource type="Texture2D" uid="uid://c4i222w3oia72" path="res://Skinning/DeerTemp.png" id="1_k7dbq"]
+[ext_resource type="Script" path="res://Skinning/DeerSkinTest.cs" id="2_xcra8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqyi8"]
 size = Vector2(65, 127)
 
-[node name="DeerSkinningTEST" type="Sprite2D"]
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("1_7uxsy")
-centered = false
-script = ExtResource("2_x1lt2")
+[node name="DeerSkinningTest" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.089
+offset_bottom = -0.160004
+texture = ExtResource("1_k7dbq")
+script = ExtResource("2_xcra8")
 
 [node name="SkinArea" type="Area2D" parent="."]
+position = Vector2(64, 63.84)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SkinArea"]
-position = Vector2(61.1429, 64)
 shape = SubResource("RectangleShape2D_uqyi8")
 
 [node name="StartMarker" type="Marker2D" parent="."]
-position = Vector2(63.4286, 13.7143)
+position = Vector2(64, 23.84)
+scale = Vector2(1, 1)

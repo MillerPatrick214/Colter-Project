@@ -30,11 +30,6 @@ public partial class StateMachine : Node
 			state.Enter(previousStatePath);
 			GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
 		}	
-	
-
-	public void UnhandledInput(InputEvent @event) {
-		state.HandleInput(@event);
-	}
 
 	public override void _Process(double delta) {
 		state.Update(delta);

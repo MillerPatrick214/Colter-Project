@@ -34,7 +34,7 @@ AimFOV = 50.0
 [node name="ItemMarker" type="Marker3D" parent="CamPivot"]
 script = ExtResource("9_gmr6g")
 
-[node name="1795 musket" parent="CamPivot/ItemMarker" instance=ExtResource("4_domdo")]
+[node name="1795 musket" parent="CamPivot" instance=ExtResource("4_domdo")]
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)

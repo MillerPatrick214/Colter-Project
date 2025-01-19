@@ -867,6 +867,7 @@ animation = &"Chune?/FIRE"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_msc4f"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tvldy"]
+graph_offset = Vector2(-795.811, -111.734)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wlxnp")
 nodes/Animation/position = Vector2(-140, 340)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0l2f1")

@@ -79,7 +79,7 @@ public partial class CapyAlert : NPCState<Capybara>
 			{
 				CharacterBody3D CharacterNode = collObj as CharacterBody3D;
 				
-				if (CharacterNode.IsInGroup("ThreatLevel3")) {
+				if (CharacterNode.IsInGroup("ThreatLevel3")) {	//ThreatLevel3 bs needs revision. 
 					GD.Print("Detected you bobber kurwva!!!!!!!!");
 					Susometer += 2;
 				}

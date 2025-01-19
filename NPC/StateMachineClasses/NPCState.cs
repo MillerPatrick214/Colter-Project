@@ -11,6 +11,7 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 	public const string IDLE = "Idle";
 	public const string ALERT = "Alert";
 	public const string FLEE = "Flee";
+	public const string DEATH = "Death"; 
 	
 	
 	//so here we will continue to add string defs for different states as needed

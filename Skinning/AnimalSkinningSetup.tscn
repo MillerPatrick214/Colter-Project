@@ -20,13 +20,37 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_cilnm")
 
+[node name="Skinning Factory" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_slx31")
+metadata/_edit_use_anchors_ = true
+
+[node name="RatioSkinContainer" type="AspectRatioContainer" parent="Skinning Factory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.4
+anchor_bottom = 1.0
+offset_right = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="BowieKnife" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.9
+anchor_left = 0.85
+anchor_top = 0.806
 anchor_right = 1.0
-anchor_bottom = 0.9
+anchor_bottom = 0.939
+offset_left = 256.0
+offset_top = 71.3599
+offset_bottom = -56.1602
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(3, 3)
@@ -44,25 +68,6 @@ script = ExtResource("3_o2gkm")
 position = Vector2(-64, -3.66669)
 polygon = PackedVector2Array(-9.33333, -4.66667, 39.6667, -5, 71.6667, 4.66666, 48, 9.33333, -14, 9.66667, -17, 13, -22.3333, 13, -64, 11, -64.3333, -7, -14.3333, -7, -14, -5)
 
-[node name="Skinning Factory" type="Control" parent="."]
-layout_mode = 2
-anchors_preset = 0
-mouse_filter = 1
-script = ExtResource("5_slx31")
-metadata/_edit_use_anchors_ = true
-
-[node name="RatioSkinContainer" type="AspectRatioContainer" parent="Skinning Factory"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
 [node name="CutLine" type="Line2D" parent="."]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(1.00248, 0.995311)
@@ -72,14 +77,14 @@ default_color = Color(1, 0.0862745, 0, 1)
 [node name="Sheathe" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.9
-anchor_right = 1.0
-anchor_bottom = 0.9
-offset_left = -100.0
-offset_top = -60.0
-offset_right = 28.0
-offset_bottom = 4.0
+anchor_left = 0.842
+anchor_top = 0.798
+anchor_right = 1.017
+anchor_bottom = 0.954
+offset_left = 304.48
+offset_top = 86.88
+offset_right = -15.5203
+offset_bottom = -73.7601
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(3.5, 3.5)

@@ -23,9 +23,9 @@ public partial class Capybara : NPCBase
 	Area3D VisionCone;
 	RayCast3D VisionRay; 
 	public AnimationTree AniTree;
-
 	public NavigationAgent3D NavAgent;
-	//so flow is
+
+	//so current flow is
 	//	1. Added to sensed
 	//	2. Rotate VisualArea to include body
 	//	3. Adjust RayCast to attempt to find body
@@ -40,7 +40,7 @@ public partial class Capybara : NPCBase
 	public override void _Ready()
 	{
 		base._Ready();
-		SkinningScene = GD.Load<PackedScene>("res://Skinning/DeerSkinTEST.tscn"); // load scene
+		SkinningScene = GD.Load<PackedScene>("res://Skinning/DeerSkinTest.tscn"); // load scene
 
 		HearingArea = GetNodeOrNull<Area3D>("HearingArea"); 
 		VisionCone = GetNodeOrNull<Area3D>("VisionCone");
@@ -65,8 +65,6 @@ public partial class Capybara : NPCBase
 
 		VisionCone.BodyEntered += (Node3D body) => SensedAdd(body);
 		//VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
-
-		AniTree.AnimationFinished += (ree) => GD.Print("Reee ");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,6 +74,7 @@ public partial class Capybara : NPCBase
 	}
 
 	public override void Death() {
+		base.Death(); 
 		IsInteractable = true;
 	}
 
@@ -121,9 +120,13 @@ public partial class Capybara : NPCBase
 		if (body.IsClass("CharacterBody3D") && body.IsInGroup("Human")) 
 		{ 
 			GD.Print("Successfully Detected Character");
-			EmitSignal(SignalName.Sensed);
-			Threat = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
+			if (!isDead)						//Temp work around to avoid entering alert from death
+			{						
+				EmitSignal(SignalName.Sensed);
+				Threat = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
+			}
 		}
+		
 		//}
 
 		/*
@@ -135,7 +138,8 @@ public partial class Capybara : NPCBase
 
 	}
 
-	public void SensedRemove(Node3D body) {
+	public void SensedRemove(Node3D body) 
+	{
 		/*
 		if (SensedBodies.Contains(body)) {
 			SensedBodies.Remove(body);
@@ -143,7 +147,6 @@ public partial class Capybara : NPCBase
 		}
 		*/
 
-		
 		if ( Threat != null && !HearingArea.OverlapsBody(Threat) && !VisionCone.OverlapsBody(Threat)) //This needs to be totally changed. 
 		{
 			Threat = null;

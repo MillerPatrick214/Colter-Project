@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=38 format=4 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
 [ext_resource type="Texture2D" uid="uid://rx70mxj28vnj" path="res://NPC/Animal/TestCapy/capybara1_texture.png" id="3_q6ukg"]
@@ -24,6 +24,9 @@ animation = &"CapybaraAnimations/CapyHeadUp"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixsny"]
 animation = &"CapybaraAnimations/CapyWalk"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utnee"]
+animation = &"CapybaraAnimations/Death"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aps64"]
 switch_mode = 2
 advance_mode = 2
@@ -43,6 +46,22 @@ advance_condition = &"isIdle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgpan"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3vc1g"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ambk0"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f25uj"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0ubc"]
+advance_mode = 2
+advance_condition = &"isDead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ei2tt"]
 states/CapybaraAnimations_CapyGraze/node = SubResource("AnimationNodeAnimation_jog57")
 states/CapybaraAnimations_CapyGraze/position = Vector2(639, 34)
@@ -52,10 +71,12 @@ states/CapybaraAnimations_CapyHeadUp/node = SubResource("AnimationNodeAnimation_
 states/CapybaraAnimations_CapyHeadUp/position = Vector2(639, 190)
 states/CapybaraAnimations_CapyWalk/node = SubResource("AnimationNodeAnimation_ixsny")
 states/CapybaraAnimations_CapyWalk/position = Vector2(263, 190)
+states/CapybaraAnimations_Death/node = SubResource("AnimationNodeAnimation_utnee")
+states/CapybaraAnimations_Death/position = Vector2(447.292, 420)
 states/End/position = Vector2(904, 105)
 states/Start/position = Vector2(39, 105)
-transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan")]
-graph_offset = Vector2(-303.708, -18)
+transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan"), "CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_3vc1g"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_ambk0"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_f25uj"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_o0ubc")]
+graph_offset = Vector2(-399.708, -48)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
 radius = 0.305
@@ -147,7 +168,13 @@ albedo_texture = ExtResource("3_q6ukg")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qcmm"]
 albedo_texture = ExtResource("4_5of0q")
 
+[sub_resource type="Animation" id="Animation_2shjp"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aq1vd"]
+_data = {
+"RESET": SubResource("Animation_2shjp")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
 radius = 7.0
@@ -156,9 +183,8 @@ radius = 7.0
 points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 5, -5, 0, 5, 5, 5, 5, -5, 5, 5)
 
 [node name="Capybara" type="CharacterBody3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 collision_layer = 3
-collision_mask = 3
 safe_margin = 0.01
 script = ExtResource("1_7dout")
 
@@ -166,6 +192,7 @@ script = ExtResource("1_7dout")
 root_node = NodePath("../capybara test walking EXPORT")
 tree_root = SubResource("AnimationNodeStateMachine_ei2tt")
 anim_player = NodePath("../capybara test walking EXPORT/Armature/Skeleton3D/AnimationPlayer")
+parameters/conditions/isDead = false
 parameters/conditions/isIdle = true
 parameters/conditions/isWalking = false
 
@@ -184,77 +211,77 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.32831e-10, 1.14786e-07, -1.25729e-08)
 bones/0/enabled = true
-bones/0/position = Vector3(8.32667e-17, 0.000688345, 0.378978)
+bones/0/position = Vector3(2.32831e-10, 1.14786e-07, -1.25729e-08)
 bones/0/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.3283e-10, 1.06973, -0.00194299)
 bones/1/enabled = true
-bones/1/position = Vector3(-1.52656e-16, 1.07042, 0.377035)
+bones/1/position = Vector3(2.3283e-10, 1.06973, -0.00194299)
 bones/1/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
-bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.275917, -0.00296966, 0.00216442, 0.961175)
+bones/2/position = Vector3(2.3283e-10, 2.1388, -0.0408518)
+bones/2/rotation = Quaternion(-0.0696345, 2.60077e-17, 2.60077e-17, 0.997573)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
 bones/3/rest = Transform3D(1, 7.95808e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, 0.521562, 2.51634, 0.746557)
 bones/3/enabled = true
-bones/3/position = Vector3(0.521562, 2.61156, 0.97996)
-bones/3/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
+bones/3/position = Vector3(0.521562, 2.51634, 0.746557)
+bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/3/scale = Vector3(1, 1, 1.00001)
 bones/4/name = "LowerBone.004.R"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, 0.521562, 2.62876, 1.35067)
 bones/4/enabled = true
-bones/4/position = Vector3(0.521562, 2.56679, 1.39368)
+bones/4/position = Vector3(0.521562, 2.62876, 1.35067)
 bones/4/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "UpperBone.005.R"
 bones/5/parent = -1
 bones/5/rest = Transform3D(1, 4.54747e-13, 2.861e-06, 2.7712e-06, -0.248596, -0.968604, 7.11237e-07, 0.968607, -0.248596, 0.521562, 0.229447, 0.820321)
 bones/5/enabled = true
-bones/5/position = Vector3(0.521562, 0.30712, 0.883757)
+bones/5/position = Vector3(0.521562, 0.229447, 0.820321)
 bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
 bones/5/scale = Vector3(1, 1, 0.999997)
 bones/6/name = "LowerBone.006.R"
 bones/6/parent = -1
 bones/6/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, 0.521562, 0.0831632, 1.40116)
 bones/6/enabled = true
-bones/6/position = Vector3(0.521562, 0.160836, 1.4646)
+bones/6/position = Vector3(0.521562, 0.0831632, 1.40116)
 bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "UpperBone.007.R"
 bones/7/parent = -1
 bones/7/rest = Transform3D(1, 3.41061e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, -0.526884, 2.53763, 0.746518)
 bones/7/enabled = true
-bones/7/position = Vector3(-0.526884, 2.62943, 0.991525)
-bones/7/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
+bones/7/position = Vector3(-0.526884, 2.53763, 0.746518)
+bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerBone.008.R"
 bones/8/parent = -1
 bones/8/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, -0.526884, 2.65005, 1.35063)
 bones/8/enabled = true
-bones/8/position = Vector3(-0.526884, 2.58808, 1.39364)
+bones/8/position = Vector3(-0.526884, 2.65005, 1.35063)
 bones/8/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperBone.009.R"
 bones/9/parent = -1
 bones/9/rest = Transform3D(1, 4.54747e-13, 3.33783e-06, 3.23306e-06, -0.248596, -0.968603, 8.29776e-07, 0.968607, -0.248595, -0.526884, 0.250735, 0.820282)
 bones/9/enabled = true
-bones/9/position = Vector3(-0.526884, 0.328409, 0.883718)
+bones/9/position = Vector3(-0.526884, 0.250735, 0.820282)
 bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
 bones/9/scale = Vector3(1, 1, 0.999996)
 bones/10/name = "LowerBone.010.R"
 bones/10/parent = -1
 bones/10/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, -0.526884, 0.104451, 1.40113)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.526884, 0.182125, 1.46456)
+bones/10/position = Vector3(-0.526884, 0.104451, 1.40113)
 bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/10/scale = Vector3(1, 1, 1)
 
