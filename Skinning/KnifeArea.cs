@@ -15,6 +15,7 @@ public partial class KnifeArea : Area2D
 		};
 		MouseExited += () => {
 			GD.Print("Mouse exited KnifeArea");
+			EmitSignal(SignalName.MouseOnKnife, false);
 		};
 
 	}

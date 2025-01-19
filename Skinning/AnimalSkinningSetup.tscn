@@ -1,10 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://t0fd544v45ma"]
 
 [ext_resource type="Script" path="res://Skinning/AnimalSkinning.cs" id="1_cilnm"]
-[ext_resource type="Texture2D" uid="uid://d84rngvmanbb" path="res://Items/TestDirectionalSprite/Bowie Knife No Blur.png" id="3_4l43u"]
 [ext_resource type="Script" path="res://Skinning/KnifeArea.cs" id="3_o2gkm"]
-[ext_resource type="Texture2D" uid="uid://bw3sin7wfwywv" path="res://Items/TestDirectionalSprite/Sheathe.png" id="4_b5b1d"]
 [ext_resource type="Script" path="res://Skinning/SkinningFactory.cs" id="5_slx31"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ayat0"]
+load_path = "res://.godot/imported/Bowie Knife No Blur.png-2767f3fee8705d9dfbdd016b3b588a34.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c5umo"]
+load_path = "res://.godot/imported/Sheathe.png-032c06175edf3dc160da8c01ee0cfe9d.ctex"
 
 [node name="AnimalSkinning" type="Control"]
 layout_mode = 3
@@ -16,11 +20,36 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_cilnm")
 
+[node name="BowieKnife" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.9
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(3, 3)
+pivot_offset = Vector2(128, 35.71)
+texture = SubResource("CompressedTexture2D_ayat0")
+
+[node name="Knife Area" type="Area2D" parent="BowieKnife"]
+z_index = 1
+position = Vector2(127.68, 35.18)
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+script = ExtResource("3_o2gkm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BowieKnife/Knife Area"]
+position = Vector2(-64, -3.66669)
+polygon = PackedVector2Array(-9.33333, -4.66667, 39.6667, -5, 71.6667, 4.66666, 48, 9.33333, -14, 9.66667, -17, 13, -22.3333, 13, -64, 11, -64.3333, -7, -14.3333, -7, -14, -5)
+
 [node name="Skinning Factory" type="Control" parent="."]
 layout_mode = 2
 anchors_preset = 0
 mouse_filter = 1
 script = ExtResource("5_slx31")
+metadata/_edit_use_anchors_ = true
 
 [node name="RatioSkinContainer" type="AspectRatioContainer" parent="Skinning Factory"]
 layout_mode = 1
@@ -40,24 +69,19 @@ scale = Vector2(1.00248, 0.995311)
 width = 3.0
 default_color = Color(1, 0.0862745, 0, 1)
 
-[node name="BowieKnife" type="Sprite2D" parent="."]
-z_index = 1
-scale = Vector2(3, 3)
-texture = ExtResource("3_4l43u")
-offset = Vector2(-64.095, -3.47)
-
-[node name="Knife Area" type="Area2D" parent="BowieKnife"]
-z_index = 1
-gravity_point_center = Vector2(0, -1)
-gravity_direction = Vector2(0, -1)
-script = ExtResource("3_o2gkm")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BowieKnife/Knife Area"]
-position = Vector2(-64, -3.66669)
-polygon = PackedVector2Array(-9.33333, -4.66667, 39.6667, -5, 71.6667, 4.66666, 48, 9.33333, -14, 9.66667, -17, 13, -22.3333, 13, -64, 11, -64.3333, -7, -14.3333, -7, -14, -5)
-
-[node name="Sheathe" type="Sprite2D" parent="."]
-z_index = 2
+[node name="Sheathe" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.9
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 28.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(3.5, 3.5)
-texture = ExtResource("4_b5b1d")
-offset = Vector2(-52.906, -2.415)
+pivot_offset = Vector2(121.81, 34.62)
+texture = SubResource("CompressedTexture2D_c5umo")

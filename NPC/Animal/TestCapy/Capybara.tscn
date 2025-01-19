@@ -58,7 +58,7 @@ transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze"
 graph_offset = Vector2(-303.708, -18)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
-radius = 0.3
+radius = 0.305
 height = 1.012
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ojh"]
@@ -170,7 +170,7 @@ parameters/conditions/isIdle = true
 parameters/conditions/isWalking = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.384162, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.32349e-23, 0.289208, 0.0657219)
 shape = SubResource("CapsuleShape3D_km4gq")
 
 [node name="capybara test walking EXPORT" type="Node3D" parent="."]
@@ -199,7 +199,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.276482, -0.00297093, 0.00216268, 0.961012)
+bones/2/rotation = Quaternion(0.275917, -0.00296966, 0.00216442, 0.961175)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1

@@ -31,10 +31,9 @@ public partial class CapyAlert : NPCState<Capybara>
 			EmitSignal(SignalName.Finished, FLEE);
 		}
 
-		if (!NPC.IsOnFloor()) 
-		{
-			EmitSignal(SignalName.Finished, FALL);
-		}
+		if (!NPC.IsOnFloor()) {
+				EmitSignal(SignalName.Finished, FALL);
+			}
 		
 	}
 

@@ -82,7 +82,7 @@ script = ExtResource("5_vodea")
 [node name="AnimalSkinning" parent="InteractEvent" instance=ExtResource("6_bderw")]
 layout_mode = 1
 
-[node name="Reload" parent="." instance=ExtResource("6_hx0r0")]
+[node name="Reload" parent="InteractEvent" instance=ExtResource("6_hx0r0")]
 
 [node name="Pause Menu" type="Control" parent="."]
 z_index = 5

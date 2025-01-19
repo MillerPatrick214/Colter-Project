@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://boifni6fgy100"]
+
+[ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Projectile/SeventeenNinetyFiveLeadBall.cs" id="1_kgwvu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_76n2g"]
+radius = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4qbi"]
+albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
+metallic = 0.7
+metallic_specular = 1.0
+roughness = 0.65
+
+[sub_resource type="SphereMesh" id="SphereMesh_25ans"]
+material = SubResource("StandardMaterial3D_p4qbi")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="Skin" id="Skin_gv7j0"]
+
+[node name="Lead Ball" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000418991, 0.00056766, -0.000582278)
+collision_mask = 2
+mass = 0.04
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_kgwvu")
+Damage = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_76n2g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_25ans")
+skin = SubResource("Skin_gv7j0")
+skeleton = NodePath("../..")
+
+[node name="TrailEmitter" type="TrailEmitter" parent="."]

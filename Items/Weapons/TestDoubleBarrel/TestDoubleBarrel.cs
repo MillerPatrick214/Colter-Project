@@ -24,7 +24,7 @@ public partial class TestDoubleBarrel : Node3D
 
 		Events.Instance.ChangeIsInteracting += (InteractBoolean) => isInteracting = InteractBoolean;
 
-		LeadBall = ResourceLoader.Load<PackedScene>("res://lead_ball.tscn");
+		LeadBall = ResourceLoader.Load<PackedScene>("res://Items/Weapons/LeadBall Base Class/LeadBall.tscn");
 		
 		CanFire = true;
 

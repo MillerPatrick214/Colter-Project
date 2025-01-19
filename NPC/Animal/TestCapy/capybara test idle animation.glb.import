@@ -1832,6 +1832,14 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 }
+},
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"rest_pose/external_animation_library": null,
+"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":Object(SkeletonProfile,"resource_local_to_scene":false,"resource_name":"","root_bone":&"","scale_base_bone":&"","group_size":0,"bone_size":0,"script":null)
+,"bonemap":null,"script":null)
+
+}
 }
 }
 gltf/naming_version=1

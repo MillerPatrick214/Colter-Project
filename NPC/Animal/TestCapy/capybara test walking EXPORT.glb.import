@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dty8m7ut74vu8"
-path="res://.godot/imported/capybara test walking EXPORT.glb-7b61dfaf0ee59f3824e7caca3c0d4e16.scn"
+valid=false
 
 [deps]
 
 source_file="res://NPC/Animal/TestCapy/capybara test walking EXPORT.glb"
-dest_files=["res://.godot/imported/capybara test walking EXPORT.glb-7b61dfaf0ee59f3824e7caca3c0d4e16.scn"]
 
 [params]
 
@@ -1834,8 +1833,20 @@ _subresources={
 }
 },
 "nodes": {
+"PATH:AnimationPlayer": {
+"import/skip_import": true
+},
+"PATH:Armature": {
+"import/skip_import": true
+},
 "PATH:Armature/Skeleton3D": {
-"rest_pose/external_animation_library": null
+"rest_pose/external_animation_library": null,
+"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":Object(SkeletonProfile,"resource_local_to_scene":false,"resource_name":"","root_bone":&"","scale_base_bone":&"","group_size":0,"bone_size":0,"script":null)
+,"bonemap":null,"script":null)
+
+},
+"PATH:Armature/Skeleton3D/capybara_Cube_001": {
+"import/skip_import": true
 }
 }
 }

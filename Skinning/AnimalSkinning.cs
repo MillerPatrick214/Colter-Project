@@ -14,29 +14,30 @@ public partial class AnimalSkinning : Control
 
 	bool isSkinning;
 
-	Sprite2D BowieKnife;
+	TextureRect BowieKnife;
  	Godot.Vector2 mousePos;
 	Godot.Vector2 rotationAngle;
 
 	SkinningFactory skinningfact;
 	Skinnable currSkinnable;
-	Sprite2D Sheathe;
+	TextureRect Sheathe;
 
 	Line2D CutLine;
-
+	
 	float totalLength;
-
 	float SegmentLength; 
 
 	int LineIndex;
+	Godot.Vector2 DefaultBowiePosition;
+	Godot.Vector2 DefaultSheathePosition;
 
 	public override void _Ready()
 	{
-		BowieKnife = GetNodeOrNull<Sprite2D>("BowieKnife");
+		BowieKnife = GetNodeOrNull<TextureRect>("BowieKnife");
 		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		Skinnable currSkinnable = null;
-		Sheathe = GetNodeOrNull<Sprite2D>("Sheathe");
+		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
 		CutLine = GetNodeOrNull<Line2D>("CutLine");
 
 		if (CutLine == null) {
@@ -49,9 +50,12 @@ public partial class AnimalSkinning : Control
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
 		skinningfact.SkinningInstance += (instance) => setSkinnable(instance); //connects signal from skinnable object to recieve skinnable function.
-		GetViewport().SizeChanged += setBowieSheathePosition;
-		GetViewport().Ready += setBowieSheathePosition;
+		//GetViewport().SizeChanged += setBowieSheathePosition;	 FIXME implement me (pull from old github) I got deleted cause PM fucked up
+		//GetViewport().Ready += setBowieSheathePosition;
 		LineIndex = 0;
+
+		DefaultBowiePosition = BowieKnife.Position;
+		DefaultSheathePosition = Sheathe.Position;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,21 +67,43 @@ public partial class AnimalSkinning : Control
 			Skinning();
 		 }
 
-		if (isMouseOnKnife) {
-			if (Input.IsActionJustPressed("UseItem")) {
-				GD.Print("UseItem Pressed on Knife");
-				isKnifeHeld = true;
+		if (!isKnifeHeld) {
+			if (isMouseOnKnife) {
+				double offsetXPosition = DefaultBowiePosition.X - 200.0;
+
+				if (BowieKnife.Position.X != offsetXPosition) {
+					Godot.Vector2 position = BowieKnife.Position;
+					
+					BowieKnife.Position = new Godot.Vector2((float)Mathf.Lerp(position.X, offsetXPosition, 5 * delta), DefaultBowiePosition.Y);
+
+					if (BowieKnife.Position.X - offsetXPosition < 0.1f) {
+						BowieKnife.Position = new Godot.Vector2((float)offsetXPosition, DefaultBowiePosition.Y);
+					}
+				}
+
+				if (Input.IsActionJustPressed("UseItem") && !isKnifeHeld) {
+					GD.Print("UseItem Pressed on Knife");
+					isKnifeHeld = true;
+				}
 			}
-			if(Input.IsActionJustPressed("Aim")){
-				GD.Print("Dropped Knife");
-				isKnifeHeld = false;
+
+			else if (!isMouseOnKnife && BowieKnife.Position != DefaultBowiePosition) {
+				Godot.Vector2 position = BowieKnife.Position; 
+				BowieKnife.Position = new Godot.Vector2((float)Mathf.Lerp(position.X, DefaultBowiePosition.X , 5 * delta), DefaultBowiePosition.Y);
+				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.1f) {
+						BowieKnife.Position = DefaultBowiePosition;
+					}
 			}
 		}
 
 		if (isKnifeHeld) {
-			BowieKnife.Position = mousePos; 
+			BowieKnife.Position = mousePos - BowieKnife.PivotOffset; 
 			float targetAngle = rotationAngle.Angle();
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, targetAngle, 0.1f);
+			if(Input.IsActionJustPressed("Aim")){
+				GD.Print("Dropped Knife");
+				isKnifeHeld = false;
+			}
 
 			if (Input.IsActionJustPressed("UseItem") && currSkinnable != null && isKnifeOnSkin) {
 				BeginSkinning();
@@ -88,7 +114,6 @@ public partial class AnimalSkinning : Control
 			SheatheKnife();
 		}
 	}
-
 
 	public override void _Input(InputEvent @event)  {
 		if (isKnifeHeld && @event is InputEventMouseMotion mouseMotion) {
@@ -155,12 +180,5 @@ public partial class AnimalSkinning : Control
 			isSkinning = true;
 			CutLine.AddPoint(startPos);
 		}
-	}
-
-	public void setBowieSheathePosition() {
-		Godot.Vector2 newSize = GetViewport().GetVisibleRect().Size;
-		newSize.Y = newSize.Y *.90f;	//moves knife up screen a bit
-		BowieKnife.Position = newSize;
-		Sheathe.Position = newSize;
 	}
 }
