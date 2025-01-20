@@ -22,4 +22,3 @@ shape = SubResource("RectangleShape2D_uqyi8")
 
 [node name="StartMarker" type="Marker2D" parent="."]
 position = Vector2(64, 23.84)
-scale = Vector2(1, 1)

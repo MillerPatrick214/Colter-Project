@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Big Daddy Patrick\\Desktop\\GameDesign\\Colter\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|c:\\users\\big daddy patrick\\desktop\\gamedesign\\colter\\npc\\animal\\testcapy\\capystates\\capyalert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|solutionrelative:npc\\animal\\testcapy\\capystates\\capyalert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|c:\\users\\big daddy patrick\\desktop\\gamedesign\\colter\\npc\\animal\\testcapy\\capybara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|solutionrelative:npc\\animal\\testcapy\\capybara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|c:\\users\\big daddy patrick\\desktop\\gamedesign\\colter\\npc\\animal\\testcapy\\capystates\\capyalert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|solutionrelative:npc\\animal\\testcapy\\capystates\\capyalert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FF3F3EF1-C6F1-473C-AE00-4949D1ABDFE3}|Colter.csproj|c:\\users\\big daddy patrick\\desktop\\gamedesign\\colter\\items\\weapons\\1795 musket\\seventeen_ninety_five_musket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 311,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +34,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CapyAlert.cs",
               "DocumentMoniker": "C:\\Users\\Big Daddy Patrick\\Desktop\\GameDesign\\Colter\\NPC\\Animal\\TestCapy\\CapyStates\\CapyAlert.cs",
               "RelativeDocumentMoniker": "NPC\\Animal\\TestCapy\\CapyStates\\CapyAlert.cs",
@@ -59,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Capybara.cs",
               "DocumentMoniker": "C:\\Users\\Big Daddy Patrick\\Desktop\\GameDesign\\Colter\\NPC\\Animal\\TestCapy\\Capybara.cs",
               "RelativeDocumentMoniker": "NPC\\Animal\\TestCapy\\Capybara.cs",
@@ -67,7 +67,8 @@
               "RelativeToolTip": "NPC\\Animal\\TestCapy\\Capybara.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T03:22:25.09Z"
+              "WhenOpened": "2025-01-18T03:22:25.09Z",
+              "EditorCaption": ""
             }
           ]
         },
