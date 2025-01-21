@@ -98,6 +98,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SheatheContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -119,3 +120,4 @@ text = "
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true

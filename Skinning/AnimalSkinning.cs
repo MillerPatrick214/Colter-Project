@@ -1,7 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
 
 public partial class AnimalSkinning : Control
 { 
@@ -32,6 +30,8 @@ public partial class AnimalSkinning : Control
 
 	int LineIndex;
 	float devAccum;
+	float offsetXPosition;
+	Godot.Vector2 offsetPosition;
 
 	Godot.Vector2 DefaultBowiePosition;
 	Godot.Vector2 DefaultSheathePosition;
@@ -52,10 +52,11 @@ public partial class AnimalSkinning : Control
 		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		timer = GetNodeOrNull<Timer>("Timer");
+		
 		if (timer == null) {
 			GD.PrintErr("Timer Returned null in Animal Skinning");
 		}
-
+		
 		Skinnable currSkinnable = null;
 		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
 		CutLine = GetNodeOrNull<Line2D>("CutLine");
@@ -74,10 +75,15 @@ public partial class AnimalSkinning : Control
 		LineIndex = 0;
 		devAccum = 0;
 
-		timer.Timeout +=  ResetSkinning;
+		timer.WaitTime = 2.0f;
+		timer.Timeout += () => ResetSkinning();
 
 		DefaultBowiePosition = BowieKnife.Position;
 		DefaultSheathePosition = Sheathe.Position;
+
+		offsetXPosition = DefaultBowiePosition.X - 200.0f;
+		offsetPosition = new Vector2(offsetXPosition, DefaultBowiePosition.Y);
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -90,11 +96,10 @@ public partial class AnimalSkinning : Control
 		 }
 
 		if (!isKnifeHeld) {
-			if (isMouseOnKnife) {
-				double offsetXPosition = DefaultBowiePosition.X - 200.0;
+			if (isMouseOnKnife && BowieKnife.Position <= DefaultBowiePosition && BowieKnife.Position >= offsetPosition) {
 
 				if (BowieKnife.Position.X != offsetXPosition) {
-					Vector2 position = BowieKnife.Position;
+					Godot.Vector2 position = BowieKnife.Position;
 					
 					BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, offsetXPosition, 5 * delta), DefaultBowiePosition.Y);
 
@@ -104,7 +109,7 @@ public partial class AnimalSkinning : Control
 				}
 
 				if (Input.IsActionJustPressed("UseItem") && !isKnifeHeld) {
-					GD.Print("UseItem Pressed on Knife");
+					//GD.Print("UseItem Pressed on Knife");
 					isKnifeHeld = true;
 				}
 			}
@@ -112,7 +117,7 @@ public partial class AnimalSkinning : Control
 			else if (!isMouseOnKnife && BowieKnife.Position != DefaultBowiePosition) {
 				Vector2 position = BowieKnife.Position; 
 				BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, DefaultBowiePosition.X , 5 * delta), DefaultBowiePosition.Y);
-				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.1f) {
+				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.5f) {
 						BowieKnife.Position = DefaultBowiePosition;
 					}
 			}
@@ -123,7 +128,7 @@ public partial class AnimalSkinning : Control
 			float targetAngle = rotationAngle.Angle();
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, targetAngle, 0.1f);
 			if(Input.IsActionJustPressed("Aim")){
-				GD.Print("Dropped Knife");
+				//GD.Print("Dropped Knife");
 				isKnifeHeld = false;
 			}
 
@@ -132,8 +137,8 @@ public partial class AnimalSkinning : Control
 			}
 		}	
 
-		else if (!isKnifeHeld && BowieKnife.Position != Sheathe.Position && !isSkinning) {
-			SheatheKnife();
+		else if (!isKnifeHeld && (BowieKnife.Position != DefaultBowiePosition || BowieKnife.Rotation != 0.0f)) {
+			SheatheKnife(delta);
 		}
 	}
 
@@ -144,16 +149,21 @@ public partial class AnimalSkinning : Control
 		}
 	}
 
-	public void SheatheKnife() {
+	public void SheatheKnife(double delta)
+	{
 		Godot.Vector2 DefaultPosition = Sheathe.Position;
-
-			float lerpFactor = .01f;
+			float lerpFactor = (float)delta * 2.0f;
 			
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, 0, lerpFactor);
-			BowieKnife.Position = BowieKnife.Position.Lerp(DefaultPosition, lerpFactor);
+			BowieKnife.Position = BowieKnife.Position.Lerp(DefaultBowiePosition, lerpFactor);
 
-			if (BowieKnife.Position.DistanceTo(DefaultPosition) < .5f) {
-        		BowieKnife.Position = DefaultPosition; 					// Snap to position to avoid overshooting
+			if (BowieKnife.Position.DistanceTo(DefaultBowiePosition) < 2.0f) 
+			{
+        		BowieKnife.Position = DefaultBowiePosition; 					// Snap to position to avoid overshooting
+			}
+
+			if (Godot.Mathf.Abs(BowieKnife.Rotation) < .1f) {
+				BowieKnife.Rotation = 0;
 			}
 	}
 
@@ -178,12 +188,15 @@ public partial class AnimalSkinning : Control
 				if (CutLine.GetPointPosition(0).DistanceTo(newPoint) >= MaxLength || LineIndex >= 99) {
 					CutLine.AddPoint(new Godot.Vector2(newPoint.X, CutLine.GetPointPosition(0).Y + MaxLength));
 					RateSkinning(devAccum);
+					//GD.PrintErr("Reached termination of cut line. Attempting to start timer.");
+					timer.Start();
+					isSkinning = false;
 					return;
 				}
 
 				CutLine.AddPoint(newPoint);
 				devAccum += Mathf.Abs(newPoint.X - currSkinnable.StartMaker.GlobalPosition.X);
-				GD.PrintErr($"AnimalSkinning -- devAccum showing {devAccum}");
+				//GD.PrintErr($"AnimalSkinning -- devAccum showing {devAccum}");
 				LineIndex += 1; 
 			}
 
@@ -197,20 +210,18 @@ public partial class AnimalSkinning : Control
 		foreach (KeyValuePair<int, string> kvp in DictRating) {
 			if (devAccum < kvp.Key) {
 				SkinComment.Text  = kvp.Value;
-				timer.Start(2);	//starts timer that once finished will clear skinning node and text.
 				return;
 			}
 		}
-		
 		SkinComment.Text  = "Completely Ruined";
 		timer.Start(2);
 	}
 
 	public void ResetSkinning() 
 	{
+		//GD.PrintErr("Timer timed out and ResetSkinning was called.");
 		SkinComment.Text = "";
 		CutLine.ClearPoints();
-		isSkinning = false;
 		LineIndex = 0;
 		devAccum = 0;
 		currSkinnable.QueueFree();

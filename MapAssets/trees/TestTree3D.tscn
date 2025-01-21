@@ -1,6 +1,5 @@
 [gd_scene load_steps=12 format=4 uid="uid://ch6vwhdxwd8rr"]
 
-[ext_resource type="Shader" path="res://MapAssets/trees/TestTree3D.gdshader" id="2_dabgr"]
 [ext_resource type="Texture2D" uid="uid://bnb4k41w6p4sr" path="res://MapAssets/trees/3DTestTree_pine-1884335_640.jpg" id="3_bw2i8"]
 [ext_resource type="Texture2D" uid="uid://jdjoiurtkaj7" path="res://MapAssets/trees/3DTestTree_bark-7384291_640.jpg" id="4_tekcl"]
 
@@ -45,6 +44,47 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ljpci")
 
+[sub_resource type="Shader" id="Shader_rvp4j"]
+code = "shader_type spatial;
+render_mode cull_disabled;
+
+uniform vec3 wind_direction; // Wind direction
+uniform float wind_strength : hint_range(0.0, 1.0, 0.01) = 0.3;
+uniform sampler2D wind_noise; // Perlin FBM Noise for wind effects
+uniform float wind_noise_size : hint_range(0.0, 1.0, 0.001) = 0.05; // Wind noise size
+uniform float wind_noise_speed : hint_range(0.0, 1.0, 0.001) = 0.1; // Wind noise speed
+uniform float bend_strength : hint_range(0.0,0.1, 0.001) = 0.0; // Bend strength for the tree
+
+uniform sampler2D texture : source_color;
+
+void vertex() {
+    // Get wind texture from the noise texture
+    vec3 wind_texture = texture(wind_noise, wind_noise_size + normalize(-wind_direction.xz) * (TIME/ 2.5) * wind_noise_speed).rgb;
+    vec3 wind_vector = (vec4(wind_texture * normalize(wind_direction) * wind_strength, 0.0) * MODEL_MATRIX).xyz;
+
+    // Calculate the distance to the top in local space
+    float topY = 10.0; // This value should be dynamically calculated in C# or set based on your tree size
+    float distance_to_top = (17.0 - (topY - VERTEX.y));
+
+    // Apply bending effect to Y based on distance from the top of the tree
+    float bend_factor = bend_strength * pow(distance_to_top, 2);
+
+    // Apply wind displacement effect to X and Z
+    VERTEX += wind_vector * (1.0 - VERTEX.y);
+	
+	VERTEX.y -= (bend_factor) * sqrt(dot(VERTEX.xz, VERTEX.xz));		//magnitude of vector in both height and distance from center.
+
+
+
+}
+
+void fragment() {
+    vec4 texColor = texture(texture, UV);
+    ALBEDO = texColor.rgb;
+}
+
+"
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_lf06t"]
 noise_type = 2
 seed = 92745
@@ -56,11 +96,12 @@ noise = SubResource("FastNoiseLite_lf06t")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q2cyw"]
 render_priority = 0
-shader = ExtResource("2_dabgr")
-shader_parameter/wind_direction = Vector3(5, 0, 5)
-shader_parameter/wind_strength = 0.35
-shader_parameter/wind_noise_size = 0.0
-shader_parameter/wind_noise_speed = 0.047
+shader = SubResource("Shader_rvp4j")
+shader_parameter/wind_direction = Vector3(-5, 0, -5)
+shader_parameter/wind_strength = 0.2
+shader_parameter/wind_noise_size = 0.05
+shader_parameter/wind_noise_speed = 0.5
+shader_parameter/bend_strength = 0.002
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_ygbc1")
 shader_parameter/texture = ExtResource("3_bw2i8")
 
@@ -79,7 +120,6 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_oaojm"]
-resource_local_to_scene = true
 resource_name = "3DTestTree_Cone"
 _surfaces = [{
 "aabb": AABB(-3.40335, -1.17356, -3.45684, 6.87484, 18.1559, 6.89865),
@@ -105,6 +145,10 @@ mesh = SubResource("ArrayMesh_0t5r3")
 skeleton = NodePath("")
 
 [node name="Cone" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8576, 0, 0, 0, 0.999997, 0, 0, 0, 0.843584, 0, 4.23447, 0)
+transform = Transform3D(0.8576, 0, 0, 0, 0.999997, 0, 0, 0, 0.843584, 0, 2.77661, 0)
 mesh = SubResource("ArrayMesh_oaojm")
 skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00453186, 7.70788, 19.2045)
+fov = 78.7

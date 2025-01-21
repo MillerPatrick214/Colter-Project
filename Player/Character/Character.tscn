@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://d1oxdw30nm0ub"]
+[gd_scene load_steps=46 format=3 uid="uid://wxfxt4o85j5k"]
 
 [ext_resource type="Script" path="res://Player/Character/Character.cs" id="1_dwt3v"]
 [ext_resource type="Texture2D" uid="uid://b41i2t84nct81" path="res://Base Layer Back Sprite-Sheet-Sheet.png" id="2_5ytmq"]
