@@ -5,10 +5,8 @@ public partial class Cone : MeshInstance3D
 {
     [Export]
     public float BendStrength = 0.3f;
-
     [Export]
     public float WindStrength = 0.3f;
-
     [Export]
     public Vector3 WindDirection = new Vector3(1, 0, 0);
 
@@ -25,8 +23,6 @@ public partial class Cone : MeshInstance3D
         Set("shader_param/bend_strength", BendStrength);
         Set("shader_param/wind_strength", WindStrength);
         Set("shader_param/wind_direction", WindDirection);
-
-
 	}
 
     private void CalculateTopY()

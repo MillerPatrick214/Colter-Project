@@ -8,7 +8,6 @@ public partial class InteractRayCast : RayCast3D
 	public override void _Ready()
 	{
 		CollisionMask = 2;
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,17 +20,17 @@ public partial class InteractRayCast : RayCast3D
 			GD.Print($"InteractableObject Type: {InteractableObject?.GetType()}");
 		}
 
-		if ((InteractableObject is NPCBase|| InteractableObject is WorldItem || InteractableObject is null ) && InteractableObject != LastSeen) { 
-
+		if ((InteractableObject is NPCBase|| InteractableObject is Item3D || InteractableObject is null ) && InteractableObject != LastSeen) 
+		{ 
 			Events.Instance.EmitSignal(Events.SignalName.PlayerRayCast, InteractableObject);
-
-			}
+		}
 
 		LastSeen = InteractableObject;
 
-		if (Input.IsActionJustPressed("InteractWorld") && InteractableObject != null) {
-			if (InteractableObject is WorldItem worldItem && worldItem.IsInteractable) {
-				GD.Print("Recognized Object as WorldItem");
+		if (Input.IsActionJustPressed("InteractWorld") && InteractableObject != null) 
+		{
+			if (InteractableObject is Item3D worldItem && worldItem.IsInteractable) {
+				GD.Print("Recognized Object as Item3D");
 				worldItem.Interact();
 			}
 			

@@ -12,75 +12,13 @@
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFlee.cs" id="10_g5a2g"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyDeath.cs" id="11_gtlnt"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jog57"]
-animation = &"CapybaraAnimations/CapyGraze"
+[sub_resource type="Animation" id="Animation_2shjp"]
+length = 0.001
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jaoeg"]
-animation = &"CapybaraAnimations/CapyHeadDown"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ptiv"]
-animation = &"CapybaraAnimations/CapyHeadUp"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixsny"]
-animation = &"CapybaraAnimations/CapyWalk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utnee"]
-animation = &"CapybaraAnimations/Death"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aps64"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6rhox"]
-advance_mode = 2
-advance_condition = &"isWalking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_phmi5"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8j4u7"]
-advance_mode = 2
-advance_condition = &"isIdle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgpan"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3vc1g"]
-advance_mode = 2
-advance_condition = &"isDead"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ambk0"]
-advance_mode = 2
-advance_condition = &"isDead"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f25uj"]
-advance_mode = 2
-advance_condition = &"isDead"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0ubc"]
-advance_mode = 2
-advance_condition = &"isDead"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ei2tt"]
-states/CapybaraAnimations_CapyGraze/node = SubResource("AnimationNodeAnimation_jog57")
-states/CapybaraAnimations_CapyGraze/position = Vector2(639, 34)
-states/CapybaraAnimations_CapyHeadDown/node = SubResource("AnimationNodeAnimation_jaoeg")
-states/CapybaraAnimations_CapyHeadDown/position = Vector2(263, 34)
-states/CapybaraAnimations_CapyHeadUp/node = SubResource("AnimationNodeAnimation_1ptiv")
-states/CapybaraAnimations_CapyHeadUp/position = Vector2(639, 190)
-states/CapybaraAnimations_CapyWalk/node = SubResource("AnimationNodeAnimation_ixsny")
-states/CapybaraAnimations_CapyWalk/position = Vector2(263, 190)
-states/CapybaraAnimations_Death/node = SubResource("AnimationNodeAnimation_utnee")
-states/CapybaraAnimations_Death/position = Vector2(447.292, 420)
-states/End/position = Vector2(904, 105)
-states/Start/position = Vector2(39, 105)
-transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan"), "CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_3vc1g"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_ambk0"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_f25uj"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_o0ubc")]
-graph_offset = Vector2(-399.708, -48)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
-radius = 0.305
-height = 1.012
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aq1vd"]
+_data = {
+"RESET": SubResource("Animation_2shjp")
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ojh"]
 resource_name = "capybara1"
@@ -168,13 +106,75 @@ albedo_texture = ExtResource("3_q6ukg")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qcmm"]
 albedo_texture = ExtResource("4_5of0q")
 
-[sub_resource type="Animation" id="Animation_2shjp"]
-length = 0.001
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jog57"]
+animation = &"CapybaraAnimations/CapyGraze"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aq1vd"]
-_data = {
-"RESET": SubResource("Animation_2shjp")
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jaoeg"]
+animation = &"CapybaraAnimations/CapyHeadDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ptiv"]
+animation = &"CapybaraAnimations/CapyHeadUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixsny"]
+animation = &"CapybaraAnimations/CapyWalk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utnee"]
+animation = &"CapybaraAnimations/Death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aps64"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6rhox"]
+advance_mode = 2
+advance_condition = &"isWalking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_phmi5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8j4u7"]
+advance_mode = 2
+advance_condition = &"isIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgpan"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3vc1g"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ambk0"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f25uj"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0ubc"]
+advance_mode = 2
+advance_condition = &"isDead"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ei2tt"]
+states/CapybaraAnimations_CapyGraze/node = SubResource("AnimationNodeAnimation_jog57")
+states/CapybaraAnimations_CapyGraze/position = Vector2(639, 34)
+states/CapybaraAnimations_CapyHeadDown/node = SubResource("AnimationNodeAnimation_jaoeg")
+states/CapybaraAnimations_CapyHeadDown/position = Vector2(263, 34)
+states/CapybaraAnimations_CapyHeadUp/node = SubResource("AnimationNodeAnimation_1ptiv")
+states/CapybaraAnimations_CapyHeadUp/position = Vector2(639, 190)
+states/CapybaraAnimations_CapyWalk/node = SubResource("AnimationNodeAnimation_ixsny")
+states/CapybaraAnimations_CapyWalk/position = Vector2(263, 190)
+states/CapybaraAnimations_Death/node = SubResource("AnimationNodeAnimation_utnee")
+states/CapybaraAnimations_Death/position = Vector2(447.292, 420)
+states/End/position = Vector2(904, 105)
+states/Start/position = Vector2(39, 105)
+transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan"), "CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_3vc1g"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_ambk0"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_f25uj"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_o0ubc")]
+graph_offset = Vector2(-399.708, -48)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
+radius = 0.305
+height = 1.012
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
 radius = 7.0
@@ -187,25 +187,14 @@ collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_7dout")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../capybara test walking EXPORT")
-tree_root = SubResource("AnimationNodeStateMachine_ei2tt")
-anim_player = NodePath("../capybara test walking EXPORT/Armature/Skeleton3D/AnimationPlayer")
-parameters/conditions/isDead = false
-parameters/conditions/isIdle = true
-parameters/conditions/isWalking = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aq1vd"),
+"CapybaraAnimations": ExtResource("4_xeeau")
+}
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.32349e-23, 0.289208, 0.0657219)
-shape = SubResource("CapsuleShape3D_km4gq")
-
-[node name="capybara test walking EXPORT" type="Node3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-
-[node name="Armature" type="Node3D" parent="capybara test walking EXPORT"]
-transform = Transform3D(1, 0, 0, 0, -0.00181627, -0.999998, 0, 0.999998, -0.00181627, -0.00210904, 1.75554, -1.23828)
-
-[node name="Skeleton3D" type="Skeleton3D" parent="capybara test walking EXPORT/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -0.000454068, -0.249999, 0, 0.249999, -0.000454068, -0.00052726, 0.438885, -0.30957)
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.32831e-10, 1.14786e-07, -1.25729e-08)
@@ -225,7 +214,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.276482, -0.00297093, 0.00216268, 0.961012)
+bones/2/rotation = Quaternion(0.245027, -0.0028989, 0.00225831, 0.969509)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -284,18 +273,22 @@ bones/10/position = Vector3(-0.526884, 0.182125, 1.46456)
 bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/10/scale = Vector3(1, 1, 1)
 
-[node name="capybara_Cube_001" type="MeshInstance3D" parent="capybara test walking EXPORT/Armature/Skeleton3D"]
+[node name="capybara_Cube_001" type="MeshInstance3D" parent="Skeleton3D"]
 mesh = SubResource("ArrayMesh_r5y7y")
 skin = SubResource("Skin_8rn15")
 surface_material_override/0 = SubResource("StandardMaterial3D_h8sys")
 surface_material_override/1 = SubResource("StandardMaterial3D_5qcmm")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="capybara test walking EXPORT/Armature/Skeleton3D"]
-root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_aq1vd"),
-"CapybaraAnimations": ExtResource("4_xeeau")
-}
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ei2tt")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/isDead = false
+parameters/conditions/isIdle = true
+parameters/conditions/isWalking = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.32349e-23, 0.289208, 0.0657219)
+shape = SubResource("CapsuleShape3D_km4gq")
 
 [node name="HearingArea" type="Area3D" parent="."]
 

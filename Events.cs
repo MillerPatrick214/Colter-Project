@@ -15,7 +15,7 @@ public partial class Events : Node
 	public delegate void ChangeIsAimingEventHandler(bool isAiming);
 
 	[Signal]
-	public delegate void PickUpEventHandler(PackedScene ItemUsable);
+	public delegate void PickUpEventHandler(InventoryItem ItemUsable);
 
 	[Signal]
 	public delegate void BeginSkinningEventHandler(PackedScene SkinningScene);

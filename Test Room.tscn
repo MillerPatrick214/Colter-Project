@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b8frf2nj2nwe"]
 
 [ext_resource type="Script" path="res://UI/TestRoom.cs" id="1_6mrhv"]
-[ext_resource type="PackedScene" uid="uid://bn5ecyco6dg4n" path="res://Player/Character/First Person/FPCharacter.tscn" id="3_vyv3u"]
+[ext_resource type="PackedScene" uid="uid://bn5ecyco6dg4n" path="res://Player/Character/First Person/Character.tscn" id="3_vyv3u"]
 [ext_resource type="PackedScene" uid="uid://bnyxac75sfnna" path="res://Items/TestDirectionalSprite/Anvil.tscn" id="4_g7mm6"]
 [ext_resource type="PackedScene" uid="uid://d1tywn615fc2s" path="res://NPC/Animal/TestCapy/Capybara.tscn" id="5_an760"]
 [ext_resource type="PackedScene" uid="uid://cq5hc8s21orhv" path="res://MapAssets/trees/PineTreeFixed.tscn" id="6_64grs"]

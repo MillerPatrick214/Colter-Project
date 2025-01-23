@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Wieldable" load_steps=2 format=3 uid="uid://brh6or0x4bks5"]
+
+[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Wieldable.cs" id="1_hpd2a"]
+
+[resource]
+script = ExtResource("1_hpd2a")
+Name = "1795 Musket"
+Description = "An outdated musket. Neither particularly powerful nor accurate "
+Quantity = 1
+IsStackable = false
+Value = 5
+ScenePath = "res://Items/Weapons/1795 Musket/1795Musket.tscn"

@@ -11,27 +11,8 @@ uniform float bend_strength : hint_range(0.0,0.1, 0.001) = 0.0; // Bend strength
 uniform sampler2D texture : source_color;
 
 void vertex() {
-    // Get wind texture from the noise texture
-    vec3 wind_texture = texture(wind_noise, wind_noise_size + normalize(-wind_direction.xz) * (TIME + UV / 2.5) * wind_noise_speed).rgb;
-    vec3 wind_vector = (vec4(wind_texture * normalize(wind_direction) * wind_strength, 0.0) * MODEL_MATRIX).xyz;
-
-    // Calculate the distance to the top in local space
-    float topY = 10.0; // This value should be dynamically calculated in C# or set based on your tree size
-    float distance_to_top = (17.0 - (topY - VERTEX.y));
-
-    // Apply bending effect to Y based on distance from the top of the tree
-    float bend_factor = bend_strength * pow(distance_to_top, 2);
-
-    // Apply wind displacement effect to X and Z
-    VERTEX += wind_vector * (1.0 - VERTEX.y) * 2;
-
-	VERTEX.y -= (bend_factor) * sqrt(dot(VERTEX.xz, VERTEX.xz));		//magnitude of vector in both height and distance from center.
-
-
 
 }
 
 void fragment() {
-    vec4 texColor = texture(texture, UV);
-    ALBEDO = texColor.rgb;
 }

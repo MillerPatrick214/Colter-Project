@@ -1,14 +1,14 @@
 using Godot;
 using System;
 
-public partial class RangedWeapon : Weapon
+public abstract partial class RangedWeapon : Weapon
 {
 	//goal is to not need to override hardly anything for children classes
 
 	//will need to add scene info for reloading stuff
-	public virtual float ProjectileVelocity { get; set; }  = 0f;
+	public abstract float ProjectileVelocity { get; set; }
 	
-	public virtual string AmmoPath { get; set;} = ""; 
+	public abstract string AmmoPath { get; set;}
 	bool CanFire;
 	bool IsAiming;		//Player is aiming
 	bool IsInteracting; //Player is interacting
@@ -26,15 +26,31 @@ public partial class RangedWeapon : Weapon
 
 	public override void _Ready()
 	{
+		base._Ready();
 		CanFire = true;
 		IsAiming = false;
 		IsInteracting = false;
 
 
 		AniTree = GetNodeOrNull<AnimationTree>("AnimationTree");
+
+		if (AniTree == null) {
+			GD.PrintErr("RangedWeapon: Unable to find AniTree");
+		}
+
 		AmmoScene = ResourceLoader.Load<PackedScene>(AmmoPath);	//AmmoPath NEEDS to be specificed in each child instance;
+		if (AmmoScene == null) {
+			GD.PrintErr("RangedWeapon: Unable to find AmmoScene");
+		}
 		WeaponEnd = GetNodeOrNull<Marker3D>("WeaponEnd");
+		if (WeaponEnd == null) {
+			GD.PrintErr("RangedWeapon: Unable to find WeaponEnd");
+		}
+
 		timer = GetNodeOrNull<Timer>("Timer");
+		if (timer == null) {
+			GD.PrintErr("RangedWeapon: Unable to find timer");
+		}
 
 		timer.Timeout += CanFireReset;
 		Events.Instance.ChangeIsInteracting += (interactbool) => IsInteracting = interactbool;

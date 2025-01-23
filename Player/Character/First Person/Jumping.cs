@@ -4,7 +4,6 @@ using System;
 public partial class Jumping : PlayerState
 {
 	// Called when the node enters the scene tree for the first time.
-
 	Vector3 up;
 
 	public override void Enter(String previousState) { 

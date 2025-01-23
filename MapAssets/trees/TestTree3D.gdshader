@@ -24,7 +24,7 @@ void vertex() {
 
     // Apply wind displacement effect to X and Z
     VERTEX += wind_vector * (1.0 - VERTEX.y);
-	
+
 	VERTEX.y -= (bend_factor) * sqrt(dot(VERTEX.xz, VERTEX.xz));		//magnitude of vector in both height and distance from center.
 
 
@@ -35,4 +35,3 @@ void fragment() {
     vec4 texColor = texture(texture, UV);
     ALBEDO = texColor.rgb;
 }
-

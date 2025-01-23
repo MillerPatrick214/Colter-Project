@@ -5,7 +5,9 @@ public partial class WorldItem : RigidBody3D //base for all items and tools visi
 {
 
 	[Export]
-	public bool IsInteractable = false;
+	public bool IsInteractable = true;
+	[Export]
+	public Resource ItemResource {get; set;}
 
 	public override void _Ready()
 	{
@@ -15,6 +17,7 @@ public partial class WorldItem : RigidBody3D //base for all items and tools visi
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
 	virtual public void Interact() {
