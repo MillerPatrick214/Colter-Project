@@ -16,11 +16,7 @@ public partial class ItemMarker : Marker3D
 
 	}
 
-	public void PickUp(InventoryItem item) {
-		var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
-		AddChild(instance);
-		var child = GetNodeOrNull<Item3D>(instance.GetPath());
-		if (child == null) {GD.PrintErr("ItemMarker -- child returned null on pickup. Can't set as held. ");}
-		child.SetHeld(true);
+	public void PickUp(InventoryItem item) 
+	{
 	}
 }

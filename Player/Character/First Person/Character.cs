@@ -14,9 +14,7 @@ public partial class Character : CharacterBody3D
 	public float JumpManueverSpeed = 15f;
 	
 	[Export]
-	public Resource PlayerInventory;
-
-	Inventory inventory;
+	public Inventory PlayerInventory;
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
 
@@ -30,19 +28,22 @@ public partial class Character : CharacterBody3D
 	float mouseRotY = 0f;
 	float lookAroundSpeed = .5f;
 
-
 	float yRotMin = -70f;
 	float yRotMax = 70f;
 
 	CamPivot CamPivNode;
 	CollisionShape3D CollisionShapeNode;
+	Marker3D ItemMarker;
+
 
 	bool isCrouching;
 
 	bool isInteracting;
-
+	int SlotIndex = 0;
+	Item3D Held;
+	
 	UI UINode;
-
+	
 	GodotObject ObjectSeen; 
 
 	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here 
@@ -57,25 +58,17 @@ public partial class Character : CharacterBody3D
 	
     public override void _Ready()
     {
-		if (PlayerInventory == null)
-    	{
-        	GD.PrintErr("Player inventory is not assigned!");
-    	}
-    	else
-    	{
-        	Inventory inventory = (Inventory)PlayerInventory;
-        	GD.Print($"Inventory Loaded: {inventory.InventorySpace.Count}");
-    	}
-
+		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
 		Events.Instance.ChangeIsInteracting += (isActive) => isInteracting = isActive;
+		
+		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/ItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
-		
     }
 
 	public override void _Process(double delta) {
@@ -91,39 +84,61 @@ public partial class Character : CharacterBody3D
 		Lean(Leaning);
 		Crouch(isCrouching);
 
-
+		Wieldable item = null;
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
-
+			item = PlayerInventory.SelectFromSlot(0);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
-
+			item = PlayerInventory.SelectFromSlot(1);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
-
+			item = PlayerInventory.SelectFromSlot(2);
+		}
+		if (Input.IsActionJustPressed("SecondaryWeapon2"))
+		{
+			item = PlayerInventory.SelectFromSlot(3);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
 
+			item = PlayerInventory.SelectFromSlot(4);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
-
+			item = PlayerInventory.SelectFromSlot(5);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
-
+			item = PlayerInventory.SelectFromSlot(6);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
-
+			SlotIndex += 1;
+			item = PlayerInventory.SelectFromSlot(SlotIndex);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
-
+			SlotIndex -= 1;
+			item = PlayerInventory.SelectFromSlot(SlotIndex);
 		}
+		if (item != null)
+		{
+			SetEquipped(item);
+		}
+	}
+
+	public void SetEquipped(Wieldable item) {
+		if (Held != null) 
+		{
+			Held.QueueFree();
+		}
+		var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
+		ItemMarker.AddChild(instance);
+		Held = GetNodeOrNull<Item3D>(instance.GetPath());
+
 	}
 
 	public void Crouch(bool isCrouching) {

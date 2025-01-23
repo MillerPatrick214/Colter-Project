@@ -16,7 +16,25 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public override void _Ready()
 	{
 		SetFreezeEnabled(true);
+		if (Owner.IsClass("CharacterBody3D")) {
+			isHeld = true;
+		}
+		else
+		{
+			isHeld = false;
+		}
 		SetHeld(isHeld);
+	}
+	public Item3D() 
+	{
+		if (Owner.IsClass("CharacterBody3D")) {
+			isHeld = true;
+		}
+		else
+		{
+			isHeld = false;
+		}
+
 	}
 
 	public void SetHeld(bool held) {
