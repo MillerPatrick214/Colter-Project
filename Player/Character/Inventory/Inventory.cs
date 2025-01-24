@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 
 public partial class Inventory : Resource 
 {
@@ -17,13 +16,13 @@ public partial class Inventory : Resource
         new WieldInvSlot(null, Wieldable.WieldSlot.Utility)
     };
 
-    public List<List<InventoryItem>> InventorySpace = new List<List<InventoryItem>> //This represents physical space in inventory, not weapon slots etc. 
+    [Export]
+    public Godot.Collections.Array<Godot.Collections.Array<InventoryItem>> InventorySpace = new Godot.Collections.Array<Godot.Collections.Array<InventoryItem>> //This represents physical space in inventory, not weapon slots etc. 
     {
-        new List<InventoryItem>{null,null,null,null},
-        new List<InventoryItem>{null,null,null,null},
-        new List<InventoryItem>{null,null,null,null}
+        new Godot.Collections.Array<InventoryItem>{null,null,null,null},
+        new Godot.Collections.Array<InventoryItem>{null,null,null,null},
+        new Godot.Collections.Array<InventoryItem>{null,null,null,null}
     };
-    
 
     public void SetWieldSlot(Wieldable item, int i)  //i for index
     { 
@@ -41,18 +40,21 @@ public partial class Inventory : Resource
     {
         for (int i = 0; i < InventorySpace.Count; i++) 
         {
-            List<InventoryItem> list = InventorySpace[i];
-            for (int j = 0; j < list.Count; j++) 
+            Godot.Collections.Array<InventoryItem> array = InventorySpace[i];
+            for (int j = 0; j < array.Count; j++) 
             {
-                if (list[j] == null) 
+                if (array[j] == null) 
                 {
-                    list[j] = item; // Assign the item to the empty slot
+                    array[j] = item; // Assign the item to the empty slot
                     GD.Print($"Success! Item put in slot # {j}");
+
+                    Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
                     return;         // Exit after placing the item
                 }
                 else {continue;}
             }
         }
+
         GD.PrintErr("Inventory Error: No space found for item in inventory.");
     }
 
@@ -71,6 +73,7 @@ public partial class Inventory : Resource
         {
             return item; 
         }
+    
 
     }
     public void DropItem(InventoryItem item) 
@@ -82,6 +85,7 @@ public partial class Inventory : Resource
     {
         
     }
+    
     /*
     public void SetClothingSlot(Wieldable item, int i) { //i for index
         if (item.EquipSlot != WieldSlotList[i].WieldSlotType) {

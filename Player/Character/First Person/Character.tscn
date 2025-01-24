@@ -63,3 +63,4 @@ script = ExtResource("11_q68kc")
 script = ExtResource("9_hi04n")
 
 [node name="UI" parent="." instance=ExtResource("10_5jbsu")]
+script = null

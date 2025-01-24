@@ -45,7 +45,7 @@ public partial class pause_menu : Control
 		GetTree().Paused = true;
 		Show();
 		Opened = true;
-		Input.MouseMode = Input.MouseModeEnum.Confined;
+		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, true);
 
 	}
 
@@ -53,7 +53,7 @@ public partial class pause_menu : Control
 		GetTree().Paused = false;
 		Hide();
 		Opened = false;
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, false);
 	}
 
 	public void OnResumePressed() {

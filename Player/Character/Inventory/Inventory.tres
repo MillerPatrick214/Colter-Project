@@ -27,3 +27,4 @@ script = ExtResource("1_p35ua")
 [resource]
 script = ExtResource("1_1xcip")
 WieldSlotList = [SubResource("Resource_r445i"), SubResource("Resource_c34lk"), SubResource("Resource_fwtar"), SubResource("Resource_eaxi2"), SubResource("Resource_6je3r"), SubResource("Resource_lhscr"), SubResource("Resource_sbpsd")]
+InventorySpace = [[null, null, null, null], [null, null, null, null], [null, null, null, null]]

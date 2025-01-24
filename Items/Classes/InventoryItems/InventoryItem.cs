@@ -10,7 +10,7 @@ public partial class InventoryItem : Resource
     [Export]
     public virtual string Description {get; set;} = "No Description";
     [Export]
-    public virtual ImageTexture Texture {get; set;}
+    public virtual Texture2D Texture {get; set;} = GD.Load<CompressedTexture2D>("res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png");
     [Export]
     public virtual int Quantity {get; set;} = 1;
     [Export]

@@ -3,7 +3,7 @@ using System;
 
 public partial class CamPivot : Marker3D
 {
-
+	[Export]	
 	float DefaultFOV = 70;
 
 	[Export]
@@ -21,7 +21,6 @@ public partial class CamPivot : Marker3D
 	{	
 		isInteracting = false;
 		isAiming = false;		
-		Input.MouseMode = Input.MouseModeEnum.Captured; 
 		Camera = GetNodeOrNull<Camera3D>("Camera3D");
 	}
 

@@ -48,10 +48,22 @@ public partial class AnimalSkinning : Control
 	
 	public override void _Ready()
 	{
+		GD.PrintErr("AnimalSkinning Node Path: ", GetPath());
+
 		BowieKnife = GetNodeOrNull<TextureRect>("BowieKnife");
+
 		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
+		
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		timer = GetNodeOrNull<Timer>("Timer");
+		if (BowieKnife == null || KnifeAreaNode == null || skinningfact == null || timer == null)
+		{
+			GD.PrintErr("Error in AnimalSkinning: One of the Nodes returned null");
+			GD.PrintErr(BowieKnife == null ? "BowieKnife is null" : "");
+			GD.PrintErr(KnifeAreaNode == null ? "KnifeAreaNode is null" : "");
+			GD.PrintErr(skinningfact == null ? "skinningfact is null" : "");
+			GD.PrintErr(timer == null ? "timer is null" : "");
+		}
 		
 		if (timer == null) {
 			GD.PrintErr("Timer Returned null in Animal Skinning");
@@ -69,6 +81,7 @@ public partial class AnimalSkinning : Control
 		if (KnifeAreaNode == null) {
 			GD.Print("Animal Skinning Node: Knife Area child node returned null");
 		}
+		isMouseOnKnife = false;
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
 		skinningfact.SkinningInstance += (instance) => setSkinnable(instance); //connects signal from skinnable object to recieve skinnable function.

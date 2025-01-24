@@ -20,6 +20,9 @@ public partial class Events : Node
 	[Signal]
 	public delegate void BeginSkinningEventHandler(PackedScene SkinningScene);
 
+    [Signal]
+    public delegate void InventoryChangedEventHandler();
+
 
 	public override void _Ready() 
 	{

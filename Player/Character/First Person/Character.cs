@@ -35,7 +35,6 @@ public partial class Character : CharacterBody3D
 	CollisionShape3D CollisionShapeNode;
 	Marker3D ItemMarker;
 
-
 	bool isCrouching;
 
 	bool isInteracting;
@@ -61,14 +60,27 @@ public partial class Character : CharacterBody3D
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
-		Events.Instance.ChangeIsInteracting += (isActive) => isInteracting = isActive;
+		Events.Instance.ChangeIsInteracting += (isActive) => InteractMouseMode(isActive);
+		InteractMouseMode(false);
 		
 		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/ItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
+		InventoryUI inventoryUI = GetNodeOrNull<InventoryUI>("UI/InventoryUI");
+		if (inventoryUI == null)
+		{
+			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect inventory information");
+		}
+		if (PlayerInventory == null) {
+			GD.PrintErr("Error in Character.cs: PlayerInventory returned null");
+		}
+		inventoryUI.SetInventory(PlayerInventory);
+
+		Events.Instance.PickUp += (item) => PlayerInventory.PickUpItem(item);
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
+		
     }
 
 	public override void _Process(double delta) {
@@ -171,6 +183,19 @@ public partial class Character : CharacterBody3D
 				RotationDegrees = new Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z);
 				CamPivNode.RotationDegrees = new Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
 			}
+		}
+	}
+
+	public void InteractMouseMode(bool isInteracting)
+	{
+		this.isInteracting = isInteracting;
+		if (isInteracting)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Confined;
+		}
+		else
+		{
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}
 	
