@@ -38,20 +38,24 @@ public partial class Inventory : Resource
 
     public void PickUpItem(InventoryItem item) // Doesn't take space into account
     {
+        GD.PrintErr("Pickup successfully called");
+
         for (int i = 0; i < InventorySpace.Count; i++) 
         {
+            GD.PrintErr($"Entered For loop i{i}");
             Godot.Collections.Array<InventoryItem> array = InventorySpace[i];
             for (int j = 0; j < array.Count; j++) 
             {
+                GD.PrintErr($"Entered For loop j{j}");
+                GD.PrintErr("At Array J = ", array[j]);
                 if (array[j] == null) 
                 {
                     array[j] = item; // Assign the item to the empty slot
-                    GD.Print($"Success! Item put in slot # {j}");
+                    GD.PrintErr($"Success! Item put in slot # {j}");
 
                     Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
                     return;         // Exit after placing the item
                 }
-                else {continue;}
             }
         }
 

@@ -68,9 +68,10 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		SetCollisionMaskValue(2, collBool);
 	}
 	
-	virtual public void Interact() 
+	public void Interact() 
 	{
 		Events.Instance.EmitSignal(Events.SignalName.PickUp, ItemResource);
 		QueueFree();
 	}
+	
 }

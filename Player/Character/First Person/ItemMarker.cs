@@ -7,7 +7,6 @@ public partial class ItemMarker : Marker3D
 
 	public override void _Ready()
 	{
-		Events.Instance.PickUp += (item) => PickUp(item);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

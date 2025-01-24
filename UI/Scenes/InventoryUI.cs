@@ -9,7 +9,7 @@ public partial class InventoryUI : Control
 	public override void _Ready()
 	{
 		Events.Instance.InventoryChanged += UpdateInventory;
-		InventoryGrid = GetNodeOrNull<GridContainer>("HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory");
+		InventoryGrid = GetNodeOrNull<GridContainer>("HBoxContainer/VBoxContainer2/MarginContainer/InvGrid");
 		Visible = false;
 		GD.PrintErr("InventoryUI instance path: ", GetPath());
 	}
@@ -31,10 +31,6 @@ public partial class InventoryUI : Control
 			}
 		}
 
-		if(Visible) 
-		{
-			QueueRedraw();
-		}
 	}
 
 	public void SetInventory(Inventory inventory) {
@@ -45,7 +41,7 @@ public partial class InventoryUI : Control
 	}
 
 	public void UpdateInventory() 
-	{	
+	{
 		GD.PrintErr("Debug InventoryUI -- UpdateInventory Called");
 		if (inventory == null)
 		{
@@ -54,29 +50,45 @@ public partial class InventoryUI : Control
 
 		for (int i = 0; i < inventory.InventorySpace.Count ; i++) 
 		{
+			GD.PrintErr($"For i loop, inventory.InventorySpace.Count returned: {inventory.InventorySpace.Count}");
 			Godot.Collections.Array<InventoryItem> array = inventory.InventorySpace[i];
-
+			GD.PrintErr($"InventoryUI!: Entered For loop i{i}!");
+			LogInventoryGridChildren();
 			for (int j = 0; j < array.Count; j++)
 			{
+				GD.PrintErr($"For i loop, array.Count returned: {array.Count}");
+				GD.PrintErr($"InventoryUI!: Entered For loop j{j}!");
 				InventoryItem inv_item = array[j];
 
-				Node ratio_cont = InventoryGrid.GetChild(j*i+j);
-				TextureRect texture_rect= ratio_cont.GetNodeOrNull<TextureRect>("TextureRect");
+				Node inv_rect = InventoryGrid.GetChild(j*i+j);
 
-				
-				if(inv_item != null)
+
+				if (inv_rect == null)
+				{
+					GD.PrintErr("InventoryUI: InvRect Returned null");
+				}
+
+				if(inv_item != null && inv_rect.GetClass() == "TextureRect"  )
 				{
 					GD.PrintErr("Debug InventoryUI: Assigning Texture of item");
-					texture_rect.Texture = inv_item.Texture;
-					texture_rect.DrawTexture(texture_rect.Texture, Vector2.Zero);
-					GD.PrintErr(texture_rect.Texture.ToString());
+					TextureRect texture_rect = (TextureRect)inv_rect; 
+					texture_rect.Texture  = inv_item.Texture;
+					GD.PrintErr($"Debug InventoryUI: A texture is Null. InvRect {texture_rect.Texture} --- inv_item {inv_item.Texture} ");
 					GD.PrintErr($"Debug: InventoryGrid Visible: {InventoryGrid.Visible}");
-				}
-				else
-				{
-					texture_rect.Texture = null;	//if there are problem, this is probably it. I am unfamilar with this method. 
+					
 				}
 			}
+		}
+	}
+	public void LogInventoryGridChildren()
+	{
+		int childCount = InventoryGrid.GetChildCount(); // Get the total number of children
+		GD.PrintErr("Total children in InventoryGrid: " + childCount);
+
+		for (int i = 0; i < childCount; i++)
+		{
+			Node child = InventoryGrid.GetChild(i); // Get the child node at index i
+			GD.PrintErr("Child at index " + i + ": " + child.Name); // Log the name or other properties of the child
 		}
 	}
 }

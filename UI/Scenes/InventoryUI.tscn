@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgrey8ixgno8a"]
 
 [ext_resource type="Script" path="res://UI/Scenes/InventoryUI.cs" id="1_p674b"]
-[ext_resource type="Script" path="res://UI/Scenes/TextureRect.cs" id="3_e0nqh"]
 [ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="3_g2yt5"]
+[ext_resource type="Script" path="res://UI/Scenes/InvGrid.cs" id="3_ypt80"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -334,249 +334,101 @@ border_width = 5.0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-current_tab = 0
-clip_tabs = false
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/TabContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 10
-metadata/_tab_index = 0
 
-[node name="Inventory" type="GridContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer"]
+[node name="InvGrid" type="GridContainer" parent="HBoxContainer/VBoxContainer2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/v_separation = 10
 columns = 4
+script = ExtResource("3_ypt80")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-editor_only = false
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer"]
+[node name="InventoryTextRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
 custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
-script = ExtResource("3_e0nqh")
+expand_mode = 2
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer2"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect2" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer3"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect3" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer4"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect4" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer5" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer5"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect5" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer6" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer6"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer6"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect6" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer7" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer7"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer7"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect7" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer8" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer8"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer8"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect8" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer9" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer9"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer9"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect9" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer10" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer10"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer10"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect10" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer11" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer11"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer11"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect11" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
+expand_mode = 2
 
-[node name="AspectRatioContainer12" type="AspectRatioContainer" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ReferenceRect9" type="ReferenceRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer12"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-border_color = Color(0.19051, 0.635662, 0.244504, 1)
-border_width = 5.0
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/TabContainer/MarginContainer/Inventory/AspectRatioContainer12"]
-custom_minimum_size = Vector2(0, 197)
+[node name="InventoryTextRect12" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/InvGrid"]
+custom_minimum_size = Vector2(197, 197)
 layout_direction = 2
 layout_mode = 2
 mouse_default_cursor_shape = 2
-
-[node name="GridContainer2" type="GridContainer" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 5
+expand_mode = 2

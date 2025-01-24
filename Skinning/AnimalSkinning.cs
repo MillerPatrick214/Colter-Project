@@ -13,8 +13,8 @@ public partial class AnimalSkinning : Control
 	bool isSkinning;
 
 	TextureRect BowieKnife;
- 	Godot.Vector2 mousePos;
-	Godot.Vector2 rotationAngle;
+ 	Vector2 mousePos;
+	Vector2 rotationAngle;
 
 	SkinningFactory skinningfact;
 	Skinnable currSkinnable;
@@ -31,10 +31,10 @@ public partial class AnimalSkinning : Control
 	int LineIndex;
 	float devAccum;
 	float offsetXPosition;
-	Godot.Vector2 offsetPosition;
+	Vector2 offsetPosition;
 
-	Godot.Vector2 DefaultBowiePosition;
-	Godot.Vector2 DefaultSheathePosition;
+	Vector2 DefaultBowiePosition;
+	Vector2 DefaultSheathePosition;
 
 	Dictionary<int, string> DictRating = new Dictionary<int, string> 
 	{
@@ -49,13 +49,15 @@ public partial class AnimalSkinning : Control
 	public override void _Ready()
 	{
 		GD.PrintErr("AnimalSkinning Node Path: ", GetPath());
-
-		BowieKnife = GetNodeOrNull<TextureRect>("BowieKnife");
-
-		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
 		
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		timer = GetNodeOrNull<Timer>("Timer");
+		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
+		CutLine = GetNodeOrNull<Line2D>("CutLine");
+		SkinComment = GetNodeOrNull<RichTextLabel>("SkinCommentBox/SkinComment");
+		BowieKnife = GetNodeOrNull<TextureRect>("BowieKnife");
+		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
+		
 		if (BowieKnife == null || KnifeAreaNode == null || skinningfact == null || timer == null)
 		{
 			GD.PrintErr("Error in AnimalSkinning: One of the Nodes returned null");
@@ -63,6 +65,7 @@ public partial class AnimalSkinning : Control
 			GD.PrintErr(KnifeAreaNode == null ? "KnifeAreaNode is null" : "");
 			GD.PrintErr(skinningfact == null ? "skinningfact is null" : "");
 			GD.PrintErr(timer == null ? "timer is null" : "");
+			GD.PrintErr(Sheathe == null ? "Sheate is null" : "");
 		}
 		
 		if (timer == null) {
@@ -70,9 +73,7 @@ public partial class AnimalSkinning : Control
 		}
 		
 		Skinnable currSkinnable = null;
-		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
-		CutLine = GetNodeOrNull<Line2D>("CutLine");
-		SkinComment = GetNodeOrNull<RichTextLabel>("SkinCommentBox/SkinComment");
+
 
 		if (CutLine == null) {
 			GD.Print("Animal Skinning Node: Unable to connect to cutline node");
@@ -112,7 +113,7 @@ public partial class AnimalSkinning : Control
 			if (isMouseOnKnife && BowieKnife.Position <= DefaultBowiePosition && BowieKnife.Position >= offsetPosition) {
 
 				if (BowieKnife.Position.X != offsetXPosition) {
-					Godot.Vector2 position = BowieKnife.Position;
+					Vector2 position = BowieKnife.Position;
 					
 					BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, offsetXPosition, 5 * delta), DefaultBowiePosition.Y);
 
@@ -164,7 +165,7 @@ public partial class AnimalSkinning : Control
 
 	public void SheatheKnife(double delta)
 	{
-		Godot.Vector2 DefaultPosition = Sheathe.Position;
+		Vector2 DefaultPosition = Sheathe.Position;
 			float lerpFactor = (float)delta * 2.0f;
 			
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, 0, lerpFactor);
@@ -175,7 +176,7 @@ public partial class AnimalSkinning : Control
         		BowieKnife.Position = DefaultBowiePosition; 					// Snap to position to avoid overshooting
 			}
 
-			if (Godot.Mathf.Abs(BowieKnife.Rotation) < .1f) {
+			if (Mathf.Abs(BowieKnife.Rotation) < .1f) {
 				BowieKnife.Rotation = 0;
 			}
 	}
@@ -189,17 +190,17 @@ public partial class AnimalSkinning : Control
 
 	public void Skinning() {
 												//Accumulates deviation on the x axis relative to the starting point x
-		Godot.Vector2 lastPoint = CutLine.GetPointPosition(LineIndex);
+		Vector2 lastPoint = CutLine.GetPointPosition(LineIndex);
 		float distance = lastPoint.DistanceTo(mousePos);
 
 		while (distance >= SegmentLength) {						//while the distance between the last point and the mouse is cucked, we split up the line into iterations of proper segment length.
 			float segments = distance / SegmentLength;			//Calculate number of segments we need
 
 			for (int i = 1; i <= segments; i++ ) {				//For each segment we go i/segment length of the way before placing a new point. 							
-				Godot.Vector2 newPoint = lastPoint.Lerp(mousePos, i / segments);
+				Vector2 newPoint = lastPoint.Lerp(mousePos, i / segments);
 
 				if (CutLine.GetPointPosition(0).DistanceTo(newPoint) >= MaxLength || LineIndex >= 99) {
-					CutLine.AddPoint(new Godot.Vector2(newPoint.X, CutLine.GetPointPosition(0).Y + MaxLength));
+					CutLine.AddPoint(new Vector2(newPoint.X, CutLine.GetPointPosition(0).Y + MaxLength));
 					RateSkinning(devAccum);
 					//GD.PrintErr("Reached termination of cut line. Attempting to start timer.");
 					timer.Start();
