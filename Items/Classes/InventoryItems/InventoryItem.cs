@@ -18,7 +18,13 @@ public partial class InventoryItem : Resource
     [Export]
     public virtual int Value {get; set;} = 0;
     [Export]
-    public virtual string ScenePath {get; set;} = "";
+    public virtual string ScenePath {get; set;} = null;
+    [Export]
+    public virtual int row {get; set;} = -1;
+    [Export]
+    public virtual int column {get; set;} = -1;
+    [Export]
+    public virtual int slot {get; set;} = -1;
     
     public virtual List<List<int>> ItemSpace {get; set;} = new List<List<int>>
     {
@@ -33,14 +39,29 @@ public partial class InventoryItem : Resource
     
     public InventoryItem() : this("", "", null, 1, false, 0, new List<List<int>>{new List<int>{1}}){}
 
-    public InventoryItem(string name, string description, ImageTexture texturePath, int quantity, bool isStackable, int value, List<List<int>> itemspace) {
+    public InventoryItem(string name, string description, ImageTexture texture, int quantity, bool isStackable, int value, List<List<int>> itemspace) {
         Name = name;
         Description = description;
-        Texture = Texture;
+        Texture = texture;
         Quantity = quantity;
         IsStackable = isStackable;
         Value = value;
-        ItemSpace = ItemSpace;
+        ItemSpace = itemspace;
 
-    } 
+    }
+
+    public void SetPosition(int row, int column)
+    {
+        this.row = row;
+        this.column = column;
+        slot = -1;
+    }
+
+    public void SetPosition(int slot_index)
+    {
+        slot = slot_index;
+        row = -1;
+        column = -1;
+
+    }
 }

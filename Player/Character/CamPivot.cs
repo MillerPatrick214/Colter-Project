@@ -28,7 +28,6 @@ public partial class CamPivot : Marker3D
 		if (!isInteracting) {
 			Aiming(isAiming, delta);
 
-
 			if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
 				isAiming = true;
 				Events.Instance.EmitSignal(Events.SignalName.ChangeIsAiming, isAiming);
@@ -54,7 +53,6 @@ public partial class CamPivot : Marker3D
 
 		if (!(isAiming)) {
 			Camera.Fov = currentFOV + (DefaultFOV - currentFOV) * 4 * (float)delta;
-
 		} 
 	}
 }

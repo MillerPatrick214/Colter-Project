@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://y3ldabdae6xn"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/Character.cs" id="1_fdc88"]
-[ext_resource type="Resource" uid="uid://nfj3dg70jmrm" path="res://Player/Character/Inventory/Inventory.tres" id="2_255mb"]
+[ext_resource type="Resource" uid="uid://c7bd7cxh5se8o" path="res://Player/Character/Inventory/Inventory.tres" id="2_255mb"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]

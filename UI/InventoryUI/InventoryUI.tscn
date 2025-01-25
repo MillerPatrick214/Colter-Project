@@ -1,0 +1,607 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgrey8ixgno8a"]
+
+[ext_resource type="Script" path="res://UI/InventoryUI/InventoryUI.cs" id="1_p674b"]
+[ext_resource type="Script" path="res://UI/InventoryUI/EquipSlotUI.cs" id="3_cpqf1"]
+[ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="3_g2yt5"]
+[ext_resource type="Texture2D" uid="uid://dnmtut1sqjpwu" path="res://UI/9Rect.png" id="4_qlu7x"]
+[ext_resource type="Script" path="res://UI/InventoryUI/InvSlotUI.cs" id="4_t40oi"]
+
+[node name="InventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 3
+script = ExtResource("1_p674b")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.431373)
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0166523
+anchor_right = 1.0
+anchor_bottom = 0.983348
+offset_top = 22.6472
+offset_bottom = 22.6472
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="WeaponsBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PrimaryWepMargin" type="MarginContainer" parent="HBoxContainer/WeaponsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PimaryWepGrid" type="GridContainer" parent="HBoxContainer/WeaponsBox/PrimaryWepMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/WeaponsBox/PrimaryWepMargin/PimaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/PrimaryWepMargin/PimaryWepGrid/TextureRect"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 2
+SlotID = 0
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/WeaponsBox/PrimaryWepMargin/PimaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/PrimaryWepMargin/PimaryWepGrid/TextureRect2"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 2
+SlotID = 1
+
+[node name="SecondaryWepMargin" type="MarginContainer" parent="HBoxContainer/WeaponsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="SecondaryWepGrid" type="GridContainer" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid/TextureRect"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 3
+SlotID = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid/TextureRect2"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 3
+SlotID = 3
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid/TextureRect3"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 3
+SlotID = 4
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid/TextureRect4"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 4
+SlotID = 5
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/WeaponsBox/SecondaryWepMargin/SecondaryWepGrid/TextureRect5"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 1
+SlotID = 6
+
+[node name="ClothingBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ClothingBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/ClothingBox/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ClothingBox/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+texture = ExtResource("3_g2yt5")
+stretch_mode = 5
+
+[node name="ClothingMargin" type="MarginContainer" parent="HBoxContainer/ClothingBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ClothingGrid" type="GridContainer" parent="HBoxContainer/ClothingBox/ClothingMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 5
+SlotID = 7
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect2"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 8
+SlotID = 8
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect3"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 6
+SlotID = 9
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect4"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 7
+SlotID = 10
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect5"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 10
+SlotID = 11
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_qlu7x")
+expand_mode = 2
+
+[node name="Slot" type="Control" parent="HBoxContainer/ClothingBox/ClothingMargin/ClothingGrid/TextureRect6"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+script = ExtResource("3_cpqf1")
+slot_type = 9
+SlotID = 12
+
+[node name="InvBox" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InvMargin" type="MarginContainer" parent="HBoxContainer/InvBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="InvGrid" type="GridContainer" parent="HBoxContainer/InvBox/InvMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+columns = 3
+
+[node name="InventoryTextRect1" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect1"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 0
+
+[node name="InventoryTextRect2" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect2"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 1
+
+[node name="InventoryTextRect3" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect3"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 2
+
+[node name="InventoryTextRect4" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect4"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 3
+
+[node name="InventoryTextRect5" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect5"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 4
+
+[node name="InventoryTextRect6" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect6"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 5
+
+[node name="InventoryTextRect7" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect7"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 6
+
+[node name="InventoryTextRect8" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect8"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 7
+
+[node name="InventoryTextRect9" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect9"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 8
+
+[node name="InventoryTextRect10" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect10"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 9
+
+[node name="InventoryTextRect11" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect11"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 10
+
+[node name="InventoryTextRect12" type="TextureRect" parent="HBoxContainer/InvBox/InvMargin/InvGrid"]
+custom_minimum_size = Vector2(150, 150)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_qlu7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Slot" type="Control" parent="HBoxContainer/InvBox/InvMargin/InvGrid/InventoryTextRect12"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+mouse_filter = 1
+script = ExtResource("4_t40oi")
+SlotID = 11

@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Wieldable" load_steps=3 format=3 uid="uid://brh6or0x4bks5"]
+[gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://brh6or0x4bks5"]
 
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="1_d0xts"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Wieldable.cs" id="1_hpd2a"]
+[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="1_hpd2a"]
 
 [resource]
 script = ExtResource("1_hpd2a")
-EquipSlot = 2
+SlotType = 2
 Name = "1795 Musket"
 Description = "An outdated musket. Neither particularly powerful nor accurate "
 Texture = ExtResource("1_d0xts")
@@ -13,3 +13,6 @@ Quantity = 1
 IsStackable = false
 Value = 5
 ScenePath = "res://Items/Weapons/1795 Musket/1795Musket.tscn"
+row = -1
+column = -1
+slot = -1

@@ -46,6 +46,7 @@ public partial class Character : CharacterBody3D
 	GodotObject ObjectSeen; 
 
 	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here 
+	
 
 	public enum LeanDirection {
 		Left = 1,
@@ -75,7 +76,7 @@ public partial class Character : CharacterBody3D
 		if (PlayerInventory == null) {
 			GD.PrintErr("Error in Character.cs: PlayerInventory returned null");
 		}
-		inventoryUI.SetInventory(PlayerInventory);
+		inventoryUI.SetInventory(ref PlayerInventory);
 
 		Events.Instance.PickUp += (item) => PlayerInventory.PickUpItem(item);
 
@@ -96,45 +97,44 @@ public partial class Character : CharacterBody3D
 		Lean(Leaning);
 		Crouch(isCrouching);
 
-		Wieldable item = null;
+		Equippable item = null;
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
-			item = PlayerInventory.SelectFromSlot(0);
+			item = PlayerInventory.EquipFromSlot(0);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
-			item = PlayerInventory.SelectFromSlot(1);
+			item = PlayerInventory.EquipFromSlot(1);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
-			item = PlayerInventory.SelectFromSlot(2);
+			item = PlayerInventory.EquipFromSlot(2);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon2"))
 		{
-			item = PlayerInventory.SelectFromSlot(3);
+			item = PlayerInventory.EquipFromSlot(3);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
-
-			item = PlayerInventory.SelectFromSlot(4);
+			item = PlayerInventory.EquipFromSlot(4);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
-			item = PlayerInventory.SelectFromSlot(5);
+			item = PlayerInventory.EquipFromSlot(5);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
-			item = PlayerInventory.SelectFromSlot(6);
+			item = PlayerInventory.EquipFromSlot(6);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex += 1;
-			item = PlayerInventory.SelectFromSlot(SlotIndex);
+			item = PlayerInventory.EquipFromSlot(SlotIndex);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex -= 1;
-			item = PlayerInventory.SelectFromSlot(SlotIndex);
+			item = PlayerInventory.EquipFromSlot(SlotIndex);
 		}
 		if (item != null)
 		{
@@ -142,14 +142,16 @@ public partial class Character : CharacterBody3D
 		}
 	}
 
-	public void SetEquipped(Wieldable item) {
+	public void SetEquipped(Equippable item) {
 		if (Held != null) 
 		{
 			Held.QueueFree();
 		}
+		
 		var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
 		ItemMarker.AddChild(instance);
 		Held = GetNodeOrNull<Item3D>(instance.GetPath());
+		Held.SetHeld(true);
 
 	}
 

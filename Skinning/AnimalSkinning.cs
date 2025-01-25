@@ -85,7 +85,7 @@ public partial class AnimalSkinning : Control
 		isMouseOnKnife = false;
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
-		skinningfact.SkinningInstance += (instance) => setSkinnable(instance); //connects signal from skinnable object to recieve skinnable function.
+		skinningfact.SkinningInstance += (instance) => setSkinnable(ref instance); //connects signal from skinnable object to recieve skinnable function.
 		LineIndex = 0;
 		devAccum = 0;
 
@@ -181,7 +181,7 @@ public partial class AnimalSkinning : Control
 			}
 	}
 
-	public void setSkinnable(Skinnable instance) {
+	public void setSkinnable(ref Skinnable instance) {
 		currSkinnable = instance;
 		if (currSkinnable != null) {
 			currSkinnable.MouseOnSkin += (isTrue) => isKnifeOnSkin = isTrue;
@@ -239,6 +239,7 @@ public partial class AnimalSkinning : Control
 		LineIndex = 0;
 		devAccum = 0;
 		currSkinnable.QueueFree();
+		currSkinnable = null;
 	}
 
 	public void BeginSkinning() {

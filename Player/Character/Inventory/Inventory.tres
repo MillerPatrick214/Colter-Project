@@ -1,30 +1,7 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://nfj3dg70jmrm"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7bd7cxh5se8o"]
 
 [ext_resource type="Script" path="res://Player/Character/Inventory/Inventory.cs" id="1_1xcip"]
-[ext_resource type="Script" path="res://Player/Character/Inventory/WieldInvSlot.cs" id="1_p35ua"]
-
-[sub_resource type="Resource" id="Resource_r445i"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_c34lk"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_fwtar"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_eaxi2"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_6je3r"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_lhscr"]
-script = ExtResource("1_p35ua")
-
-[sub_resource type="Resource" id="Resource_sbpsd"]
-script = ExtResource("1_p35ua")
 
 [resource]
 script = ExtResource("1_1xcip")
-WieldSlotList = [SubResource("Resource_r445i"), SubResource("Resource_c34lk"), SubResource("Resource_fwtar"), SubResource("Resource_eaxi2"), SubResource("Resource_6je3r"), SubResource("Resource_lhscr"), SubResource("Resource_sbpsd")]
 InventorySpace = [[null, null, null, null], [null, null, null, null], [null, null, null, null]]

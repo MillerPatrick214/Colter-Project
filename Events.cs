@@ -4,7 +4,7 @@ using System;
 public partial class Events : Node
 {
 	public static Events Instance;
-
+	
 	[Signal]
 	public delegate void PlayerRayCastEventHandler(GodotObject InteractableObject);
 
@@ -22,7 +22,8 @@ public partial class Events : Node
 
     [Signal]
     public delegate void InventoryChangedEventHandler();
-
+	[Signal]
+	public delegate void MouseHoldingEventHandler(InventoryItemUI instance);
 
 	public override void _Ready() 
 	{

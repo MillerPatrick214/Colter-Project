@@ -15,16 +15,26 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 
 	public override void _Ready()
 	{
-		SetFreezeEnabled(true);
+		if(IsInsideTree())
+		{
+			SetFreezeEnabled(true);
 
-		if (Owner.IsClass("CharacterBody3D")) {
-			isHeld = true;
+			// Now it's safe to check the Owner
+			if (Owner != null && Owner.IsClass("CharacterBody3D")) 
+			{
+				isHeld = true;
+			}
+			else
+			{
+				isHeld = false;
+			}
+
+			SetHeld(isHeld);
 		}
 		else
 		{
-			isHeld = false;
+			GD.Print("Node is not yet inside the scene tree.");
 		}
-		SetHeld(isHeld);
 	}
 
 	public void SetHeld(bool held) {
