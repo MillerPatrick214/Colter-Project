@@ -53,19 +53,29 @@ public partial class NPCBase : CharacterBody3D
 
 	}
 
-	public void Rotate(Godot.Vector3 direction) //this has been copied over from CapyWalk -- need to figure out the inheritance on this function and others 
+	public void Rotate(Godot.Vector3 direction) //GAME-BREAKING GLITCH: This no longer adjusts 
 	{
+		//GD.PrintErr("----------------------------------------------------------------------------------------");
+		//GD.PrintErr("Rotating gay ass lil bitch");
+		//GD.PrintErr($"Direction Passed in: {direction}");
 		Transform3D transform = Transform;
+		Basis a = Transform.Basis;			
 
-		Basis a = Transform.Basis;
-		Basis b = Basis.LookingAt(-direction);
+		//GD.PrintErr($"a -- my basis: {a}");
+
+		Basis b =  Basis.LookingAt(-direction);
+
+		//GD.PrintErr($"b -- basis I wanna look at : {b}");
+
 
 		Godot.Quaternion aQuat = a.GetRotationQuaternion();
 		Godot.Quaternion bQuat = b.GetRotationQuaternion();
 		aQuat = aQuat.Normalized();
 		bQuat = bQuat.Normalized();
 
-		Godot.Quaternion interpolatedQuat = aQuat.Slerp(bQuat, .1f);
+		Godot.Quaternion interpolatedQuat = aQuat.Slerp(bQuat, .5f);
+
+		//GD.PrintErr($"interpolatedQuat -- {interpolatedQuat}");
 
 		//snapping after total distance <.01. Can adjust later. Not sure if this is the best way to handle this -- what if turnRate doesn't allow for a sufficiently close margin. Might be able to check if last interpolatedQuat is = current interpolatedQuat. Meaning that the slerp has hit max change. 
 		
@@ -74,9 +84,12 @@ public partial class NPCBase : CharacterBody3D
 			Transform = transform;
 			return;
 		}
+		GD.PrintErr($"My Old Transform.Basis -- {Transform.Basis}");
 
 		transform.Basis = new Basis(interpolatedQuat);
 		Transform  = transform;
+		//GD.PrintErr($"My New Transform.Basis -- {Transform.Basis}");
+		///GD.PrintErr($"Delta between this basis and where I want to be: Delta X: {b.X - Transform.Basis.X} Delta Y: {b.Y - Transform.Basis.Y} Delta Z: {b.Z - Transform.Basis.Z}"); 
 	}
 	
 

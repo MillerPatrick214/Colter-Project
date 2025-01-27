@@ -13,7 +13,7 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
 
 	[Export]
-	public Resource ItemResource {get; set;}
+	public InventoryItem ItemResource {get; set;}
 
 	[Export]
 	public virtual bool isHeld {get; set;} = false;

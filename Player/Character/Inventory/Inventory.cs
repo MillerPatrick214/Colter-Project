@@ -76,7 +76,6 @@ public partial class Inventory : Resource
 
         if (item == null) 
         {
-            GD.PrintErr("Inventory Error: No Item in slot!");
             return null;
         }
 

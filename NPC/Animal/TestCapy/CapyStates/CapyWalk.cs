@@ -25,7 +25,7 @@ public partial class CapyWalk : NPCState<Capybara>
 	public override void Enter(string previousStatePath)
     {
 		NPC.NavAgent.NavigationFinished += NavFinished;
-		GD.Print("Entering ENTER in CapyWalk now... See if I'm Before or After ");
+		GD.Print("Entering enter function in CapyWalk now... See if I'm Before or After ");
 		NPC.AniTree.Set("parameters/conditions/isWalking", true);
 		//GD.Print ("Anitree isWalking set to TRUE");
 
@@ -56,11 +56,10 @@ public partial class CapyWalk : NPCState<Capybara>
 			Godot.Vector3 direction = LocalDestination.Normalized();
 
 			direction.Y = 0;
+			GD.PrintErr(direction);
 			
 			NPC.Rotate(direction);
 		
-
-			
 			NPC.Velocity = direction * NPC.GetWalkSpeed();
 
 			NPC.MoveAndSlide();

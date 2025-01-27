@@ -39,14 +39,15 @@ public partial class Character : CharacterBody3D
 
 	bool isInteracting;
 	int SlotIndex = 0;
+	
 	Item3D Held;
 	
 	UI UINode;
 	
 	GodotObject ObjectSeen; 
 
-	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here 
-	
+	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here
+
 
 	public enum LeanDirection {
 		Left = 1,
@@ -85,6 +86,7 @@ public partial class Character : CharacterBody3D
     }
 
 	public override void _Process(double delta) {
+		int curr_slot = SlotIndex;
 		isCrouching = Input.IsActionPressed("Crouch") ? true : false;
 		//IsLeaning = LeanDirection.None
 		
@@ -101,58 +103,79 @@ public partial class Character : CharacterBody3D
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
 			item = PlayerInventory.EquipFromSlot(0);
+			SlotIndex = 0;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
 			item = PlayerInventory.EquipFromSlot(1);
+			SlotIndex = 1;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
 			item = PlayerInventory.EquipFromSlot(2);
+			SlotIndex = 2;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon2"))
 		{
 			item = PlayerInventory.EquipFromSlot(3);
+			SlotIndex = 3;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
 			item = PlayerInventory.EquipFromSlot(4);
+			SlotIndex = 4;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
 			item = PlayerInventory.EquipFromSlot(5);
+			SlotIndex = 5;
+			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
 			item = PlayerInventory.EquipFromSlot(6);
+			SlotIndex = 6;
+			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex += 1;
 			item = PlayerInventory.EquipFromSlot(SlotIndex);
+			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex -= 1;
 			item = PlayerInventory.EquipFromSlot(SlotIndex);
-		}
-		if (item != null)
-		{
 			SetEquipped(item);
 		}
 	}
 
-	public void SetEquipped(Equippable item) {
-		if (Held != null) 
+	public void SetEquipped(Equippable item) 
+	{
+		if (Held != null)
 		{
+			if (item == null)
+			{
+				Held.QueueFree();
+				Held = null;
+				return;
+			}
 			Held.QueueFree();
+			Held = null;
 		}
-		
-		var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
-		ItemMarker.AddChild(instance);
-		Held = GetNodeOrNull<Item3D>(instance.GetPath());
-		Held.SetHeld(true);
-
+		else if (item != null)
+		{
+			var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
+			ItemMarker.AddChild(instance);
+			Held = GetNodeOrNull<Item3D>(instance.GetPath());
+			Held.SetHeld(true);
+		}
 	}
 
 	public void Crouch(bool isCrouching) {

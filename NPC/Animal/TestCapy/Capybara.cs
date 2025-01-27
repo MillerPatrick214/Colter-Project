@@ -122,8 +122,8 @@ public partial class Capybara : NPCBase
 			GD.Print("Successfully Detected Character");
 			if (!isDead)						//Temp work around to avoid entering alert from death
 			{						
-				EmitSignal(SignalName.Sensed);
 				Threat = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
+				EmitSignal(SignalName.Sensed);
 			}
 		}
 		

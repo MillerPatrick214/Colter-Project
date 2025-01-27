@@ -959,7 +959,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 5.68434e-14, 4.76837e-07, 3.90198e-07, 0.574785, -0.818305, -2.74079e-07, 0.818305, 0.574785, -1.27676e-15, 1.27325, -0.0417947)
 bones/1/enabled = true
 bones/1/position = Vector3(-1.27676e-15, 1.27325, -0.0417947)
-bones/1/rotation = Quaternion(0.230562, 2.31995e-07, 5.49702e-08, 0.973058)
+bones/1/rotation = Quaternion(0.461094, 2.11561e-07, 1.09933e-07, 0.887351)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "hammer.001"
 bones/2/parent = 1
@@ -973,7 +973,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, 5.68434e-14, 1.19209e-06, 1.16328e-06, 0.218538, -0.975829, -2.60518e-07, 0.975829, 0.218538, -9.64506e-16, 2.57276, 0.125786)
 bones/3/enabled = true
 bones/3/position = Vector3(-9.64506e-16, 2.57276, 0.125786)
-bones/3/rotation = Quaternion(0.61269, 4.7107e-07, 3.65192e-07, 0.790323)
+bones/3/rotation = Quaternion(0.982943, 1.0962e-07, 5.8588e-07, 0.183911)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Cube"
 bones/4/parent = 3
@@ -987,7 +987,7 @@ bones/5/parent = 0
 bones/5/rest = Transform3D(1, -2.16563e-16, -2.4211e-17, -2.42109e-17, -0.220833, 0.975312, -2.16563e-16, -0.975312, -0.220833, -1.48839e-15, 0.714868, -0.567939)
 bones/5/enabled = true
 bones/5/position = Vector3(-1.48839e-15, 0.714868, -0.567939)
-bones/5/rotation = Quaternion(-0.783145, 7.67562e-17, 7.72263e-17, 0.621839)
+bones/5/rotation = Quaternion(-0.781291, 7.70435e-17, 7.70435e-17, 0.624166)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "trigger"
 bones/6/parent = 5
@@ -1061,7 +1061,7 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.095485, 1.11022e-16, -2.4869e-14, -1.77636e-14, 0.0800565, -0.0274262, 3.90799e-14, 0.0394617, 0.05564, 0.352067, 1.75253, 0.336701)
+transform = Transform3D(0.095485, 5.7232e-14, -2.66454e-14, -7.10543e-14, 0.0518365, -0.0504982, -2.4869e-14, 0.0726584, 0.0360268, 0.352067, 1.51624, 0.518492)
 bone_name = "hammer.001"
 bone_idx = 2
 
@@ -1071,7 +1071,7 @@ mesh = SubResource("ArrayMesh_7xwlx")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.20404, 4.52971e-14, -1.42109e-13, -1.13687e-13, 0.049015, -0.198064, -1.42109e-14, 0.198065, 0.0490148, 9.78877e-10, 2.65967, 0.0654372)
+transform = Transform3D(0.20404, 1.24789e-13, -3.12639e-13, 2.13163e-14, -0.190914, -0.0720011, -2.84217e-13, 0.0720014, -0.190913, 9.78941e-10, 2.64293, 0.204985)
 bone_name = "Cube"
 bone_idx = 4
 
@@ -1081,7 +1081,7 @@ mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11249e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
+transform = Transform3D(6.38473, 1.38624e-15, -1.12073e-15, -1.38624e-15, 1.33742, -6.24308, -1.12073e-15, 6.24308, 1.33742, 1.28955, 9.18679, -2.56122)
 bone_name = "trigger"
 bone_idx = 6
 

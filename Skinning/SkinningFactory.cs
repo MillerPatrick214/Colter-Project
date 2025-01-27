@@ -26,12 +26,14 @@ public partial class SkinningFactory : Control
 		
 	}
 
-	public void SkinningInstantiate(PackedScene scene) { // here the parent (character) will invoke the function with the appropriate string.
-		if (SkinContainer.GetChild(0) == null)	             // this is kinda cheesy. We really should have a more robust system than this.
+	public void SkinningInstantiate(PackedScene scene) { 		// here the parent (character) will invoke the function with the appropriate string.
+	
+		if (SkinContainer.GetChildren().Count  == 0)	             	// this is kinda cheesy. We really should have a more robust system than this.
 		{
-			var instance = scene.Instantiate();			 //instantiate scene
-			SkinContainer.AddChild(instance);							//add as a child
-			EmitSignal(SignalName.SkinningInstance, instance);	// emit signal w/ instance 
+			var instance = scene.Instantiate();			 		//instantiate scene
+			SkinContainer.AddChild(instance);					//add as a child
+			EmitSignal(SignalName.SkinningInstance, instance);	// emit signal w/ instance
+			
 		}
 	}
 

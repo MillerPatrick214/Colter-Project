@@ -34,7 +34,6 @@ public partial class CapyAlert : NPCState<Capybara>
 		if (!NPC.IsOnFloor()) {
 				EmitSignal(SignalName.Finished, FALL);
 			}
-		
 	}
 
 	public void AssessThreat()

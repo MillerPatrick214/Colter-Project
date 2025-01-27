@@ -42,6 +42,7 @@ render_target_update_mode = 4
 [node name="GunCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 cull_mask = 2
+current = true
 near = 0.005
 script = ExtResource("13_rdepe")
 CameraPath = NodePath("../../../CamPivot/Camera3D")
