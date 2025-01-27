@@ -192,6 +192,11 @@ CycleDown={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_1="World"
+3d_render/layer_2="Equipped"
+
 [physics]
 
 3d/physics_engine="GodotPhysics3D"

@@ -1,29 +1,34 @@
 using Godot;
 using System;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 
 public abstract partial class RangedWeapon : Weapon
 {
 	//goal is to not need to override hardly anything for children classes
 
 	//will need to add scene info for reloading stuff
+
+	[Export]
+	public virtual Vector3 ADSPosition {get; set;} = Vector3.Zero;
+	[Export]
+	public virtual Vector3 ADSRotation {get; set;} = Vector3.Zero;
+	[Export]
+	public virtual Vector3 DefaultPosition {get; set;} = Vector3.Zero;
+	[Export]
+	public virtual Vector3 DefaultRotation{get; set;} = Vector3.Zero;
 	public abstract float ProjectileVelocity { get; set; }
 	
 	public abstract string AmmoPath { get; set;}
 	bool CanFire;
 	bool IsAiming;		//Player is aiming
 	bool IsInteracting; //Player is interacting
-
+	float ADS_Speed;
 	PackedScene AmmoScene;
 	AnimationPlayer AniPlayer;
 	AnimationTree AniTree;
 	Marker3D WeaponEnd;
 	Timer timer;
-
-	/*						//Not including as this is base class as we will likely have bows etc that this class should inherit form
-	GpuParticles3D Smoke;
-	OmniLight3D Flash;
-	*/
-
 	public override void _Ready()
 	{
 		base._Ready();
@@ -31,11 +36,16 @@ public abstract partial class RangedWeapon : Weapon
 		IsAiming = false;
 		IsInteracting = false;
 
-
 		AniTree = GetNodeOrNull<AnimationTree>("AnimationTree");
 
 		if (AniTree == null) {
 			GD.PrintErr("RangedWeapon: Unable to find AniTree");
+		}
+
+		AniPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+
+		if (AniPlayer == null) {
+			GD.PrintErr("RangedWeapon: Unable to find AniPlayer");
 		}
 
 		AmmoScene = ResourceLoader.Load<PackedScene>(AmmoPath);	//AmmoPath NEEDS to be specificed in each child instance;
@@ -106,6 +116,6 @@ public abstract partial class RangedWeapon : Weapon
 		RigidBody3D ProjectileInstance = AmmoScene.Instantiate<RigidBody3D>();
 		GetTree().Root.AddChild(ProjectileInstance);
 		ProjectileInstance.GlobalPosition = WeaponEnd.GlobalPosition;
-		ProjectileInstance.LinearVelocity = WeaponEnd.GlobalTransform.Basis.Z.Normalized() * ProjectileVelocity;
+		ProjectileInstance.ApplyCentralImpulse(WeaponEnd.GlobalTransform.Basis.Z.Normalized() * ProjectileVelocity);
 	}
 }

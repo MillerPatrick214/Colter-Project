@@ -39,8 +39,19 @@ public partial class EquipSlotUI : SlotUI
 				InventoryItemUI itemUI = MouseHolding;
 				if (Input.IsActionJustReleased("UseItem"))
 				{
-					InventoryUI.inventory.MoveItem(itemUI.item, SlotID);
 					MouseHolding = null;
+
+					try
+					{
+						InventoryUI.inventory.MoveItem(itemUI.item, SlotID);
+					}
+
+					catch (ArgumentException e)
+					{
+						GD.PrintErr($"Inventory.MoveItem: {e}");
+						return;
+					}
+
 					itemUI.QueueFree();
 					Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
 				}
@@ -51,9 +62,11 @@ public partial class EquipSlotUI : SlotUI
 	public override void UpdateSlot()
 	{
 		InventoryItem newItem = InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot;
+		/*
 		GD.PrintErr($"{SlotID} -- New Item: {newItem}");
 		GD.PrintErr($"{SlotID} -- InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot: {InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot}");
 		GD.PrintErr("----------------------------------------------------------------------------------------------------");
+		*/
 
 		if (currItem != newItem)
 		{

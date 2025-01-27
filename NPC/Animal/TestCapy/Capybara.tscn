@@ -170,7 +170,7 @@ states/CapybaraAnimations_Death/position = Vector2(447.292, 420)
 states/End/position = Vector2(904, 105)
 states/Start/position = Vector2(39, 105)
 transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan"), "CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_3vc1g"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_ambk0"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_f25uj"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_o0ubc")]
-graph_offset = Vector2(-151.708, -170)
+graph_offset = Vector2(-191.708, -325)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
 radius = 0.305
@@ -214,7 +214,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.246771, -0.00290296, 0.0022531, 0.969067)
+bones/2/rotation = Quaternion(0.253748, -0.00291912, 0.00223212, 0.967263)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -273,9 +273,11 @@ bones/10/position = Vector3(-0.526884, 0.182125, 1.46456)
 bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/10/scale = Vector3(1, 1, 1)
 
-[node name="capybara_Cube_001" type="MeshInstance3D" parent="Skeleton3D"]
+[node name="capybara_Cube_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -0.000454068, -0.249999, 0, 0.249999, -0.000454068, -0.00052726, 0.438885, -0.30957)
 mesh = SubResource("ArrayMesh_r5y7y")
 skin = SubResource("Skin_8rn15")
+skeleton = NodePath("../Skeleton3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_h8sys")
 surface_material_override/1 = SubResource("StandardMaterial3D_5qcmm")
 

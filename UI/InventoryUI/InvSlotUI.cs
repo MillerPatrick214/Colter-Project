@@ -29,8 +29,18 @@ public partial class InvSlotUI : SlotUI
 				InventoryItemUI itemUI = MouseHolding;
 				if (Input.IsActionJustReleased("UseItem"))
 				{
-					InventoryUI.inventory.MoveItem(itemUI.item, row, column);
 					MouseHolding = null;
+					try
+					{
+						InventoryUI.inventory.MoveItem(itemUI.item, row, column);
+					}
+
+					catch (ArgumentException e)
+					{
+						GD.PrintErr($"Inventory.MoveItem: {e}");
+						return;
+					}
+
 					itemUI.QueueFree();
 					Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
 				}

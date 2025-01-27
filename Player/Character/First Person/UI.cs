@@ -5,6 +5,15 @@ public partial class UI : Control
 {
 	// Called when the node enters the scene tree for the first time.
 
+	public enum UIState		//instead of setting show/hide manually we'll do it here.
+	{
+		Skinning,
+		Reloading,
+		Dialogue,
+		Pause,
+		Inventory,
+	}
+
 	public override void _Ready()
 	{
 
@@ -14,6 +23,7 @@ public partial class UI : Control
 	
 	public override void _Process(double delta)
 	{
+
 	}
 
 }

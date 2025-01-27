@@ -7,7 +7,6 @@ public partial class InventoryUI : Control
 	public static Inventory inventory; //This resource should be shared with character
 	public override void _Ready()
 	{
-
 		Visible = false;
 	}
 
@@ -22,8 +21,8 @@ public partial class InventoryUI : Control
 				Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, true);
 				Show();
 			}
-			else {
 
+			else {
 				Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, false);
 				Hide();
 			}

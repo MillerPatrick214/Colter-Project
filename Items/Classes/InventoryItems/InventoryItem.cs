@@ -16,6 +16,10 @@ public partial class InventoryItem : Resource
     [Export]
     public virtual bool IsStackable {get; set;} = false;
     [Export]
+    public virtual int CurrentStack {get; set;} = 1;
+    [Export]
+    public virtual int MaxStack {get; set;} = 1;
+    [Export]
     public virtual int Value {get; set;} = 0;
     [Export]
     public virtual string ScenePath {get; set;} = null;
@@ -25,6 +29,7 @@ public partial class InventoryItem : Resource
     public virtual int column {get; set;} = -1;
     [Export]
     public virtual int slot {get; set;} = -1;
+
     
     public virtual List<List<int>> ItemSpace {get; set;} = new List<List<int>>
     {
@@ -37,14 +42,16 @@ public partial class InventoryItem : Resource
         }
     }
     
-    public InventoryItem() : this("", "", null, 1, false, 0, new List<List<int>>{new List<int>{1}}){}
+    public InventoryItem() : this("", "", null, 1, false, 1, 1, 0, new List<List<int>>{new List<int>{1}}){}
 
-    public InventoryItem(string name, string description, ImageTexture texture, int quantity, bool isStackable, int value, List<List<int>> itemspace) {
+    public InventoryItem(string name, string description, ImageTexture texture, int quantity, bool isStackable, int currentstack, int maxstack,  int value, List<List<int>> itemspace) {
         Name = name;
         Description = description;
         Texture = texture;
         Quantity = quantity;
         IsStackable = isStackable;
+        CurrentStack = currentstack;
+        MaxStack = maxstack;
         Value = value;
         ItemSpace = itemspace;
 
@@ -63,5 +70,15 @@ public partial class InventoryItem : Resource
         row = -1;
         column = -1;
 
+    }
+
+    public void SetStack(int i) //probably want an add sub stack w/ error handling etc.
+    {
+        CurrentStack = i;
+    }
+
+    public void SetMaxStack(int i)
+    {
+        MaxStack = i;
     }
 }

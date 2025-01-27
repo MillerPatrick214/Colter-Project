@@ -48,8 +48,6 @@ public partial class AnimalSkinning : Control
 	
 	public override void _Ready()
 	{
-		GD.PrintErr("AnimalSkinning Node Path: ", GetPath());
-		
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		timer = GetNodeOrNull<Timer>("Timer");
 		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
@@ -182,10 +180,11 @@ public partial class AnimalSkinning : Control
 	}
 
 	public void setSkinnable(ref Skinnable instance) {
-		currSkinnable = instance;
+			currSkinnable = instance;
 		if (currSkinnable != null) {
 			currSkinnable.MouseOnSkin += (isTrue) => isKnifeOnSkin = isTrue;
 		}
+		
 	}
 
 	public void Skinning() {

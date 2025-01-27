@@ -5,6 +5,7 @@ public partial class LeadBall : RigidBody3D
 {	
 	[Export]
 	public virtual float Damage {get; set;} = 0.0f;
+	float CurrentVelocity = 0.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -12,7 +13,6 @@ public partial class LeadBall : RigidBody3D
 		SceneTreeTimer timer = GetTree().CreateTimer(3.0f);		//one shot timer. No node. 
 		timer.Timeout += Delete;  
 		BodyEntered += DamageNPC;
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -569,6 +569,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector3(0.352067, 1.51624, 0.518492)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vr1u2"]
 _data = {
@@ -706,7 +718,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_ibx18"]
 resource_name = "UP"
-step = 0.01
+step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -714,10 +726,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.41),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.0129902, 0)]
+"values": [Vector3(0, 0, 0.045)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -726,7 +738,7 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
@@ -927,9 +939,10 @@ radius = 0.2
 height = 1.4
 
 [node name="1795Musket" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0129902, 0)
 collision_layer = 3
 script = ExtResource("1_h0wpl")
+ADSPosition = Vector3(0, -0.013, 0)
+MeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodePath("Skeleton3D/Cube/Cube"), NodePath("Skeleton3D/trigger/trigger"), NodePath("Skeleton3D/Barrel/Barrel"), NodePath("Skeleton3D/Cylinder_002/Cylinder_002"), NodePath("Skeleton3D/Cylinder_003/Cylinder_003"), NodePath("Skeleton3D/Cylinder_005/Cylinder_005"), NodePath("Skeleton3D/plate/plate"), NodePath("Skeleton3D/tipcowel_005/tipcowel_005"), NodePath("Skeleton3D/tray/tray"), NodePath("Skeleton3D/triiger guard/triiger guard"), NodePath("Skeleton3D/wood/wood"), NodePath("Skeleton3D/Sphere")])
 ItemResource = ExtResource("2_ceery")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
@@ -946,7 +959,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 5.68434e-14, 4.76837e-07, 3.90198e-07, 0.574785, -0.818305, -2.74079e-07, 0.818305, 0.574785, -1.27676e-15, 1.27325, -0.0417947)
 bones/1/enabled = true
 bones/1/position = Vector3(-1.27676e-15, 1.27325, -0.0417947)
-bones/1/rotation = Quaternion(0.461094, 2.11561e-07, 1.09933e-07, 0.887351)
+bones/1/rotation = Quaternion(0.230562, 2.31995e-07, 5.49702e-08, 0.973058)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "hammer.001"
 bones/2/parent = 1
@@ -960,7 +973,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, 5.68434e-14, 1.19209e-06, 1.16328e-06, 0.218538, -0.975829, -2.60518e-07, 0.975829, 0.218538, -9.64506e-16, 2.57276, 0.125786)
 bones/3/enabled = true
 bones/3/position = Vector3(-9.64506e-16, 2.57276, 0.125786)
-bones/3/rotation = Quaternion(0.625085, 4.65249e-07, 3.7258e-07, 0.780557)
+bones/3/rotation = Quaternion(0.61269, 4.7107e-07, 3.65192e-07, 0.790323)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Cube"
 bones/4/parent = 3
@@ -974,7 +987,7 @@ bones/5/parent = 0
 bones/5/rest = Transform3D(1, -2.16563e-16, -2.4211e-17, -2.42109e-17, -0.220833, 0.975312, -2.16563e-16, -0.975312, -0.220833, -1.48839e-15, 0.714868, -0.567939)
 bones/5/enabled = true
 bones/5/position = Vector3(-1.48839e-15, 0.714868, -0.567939)
-bones/5/rotation = Quaternion(-0.781292, 7.70435e-17, 7.70436e-17, 0.624166)
+bones/5/rotation = Quaternion(-0.783145, 7.67562e-17, 7.72263e-17, 0.621839)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "trigger"
 bones/6/parent = 5
@@ -1048,29 +1061,32 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.095485, 5.7232e-14, -2.66454e-14, -7.10543e-14, 0.0518365, -0.0504982, -2.4869e-14, 0.0726584, 0.0360268, 0.352067, 1.51624, 0.518492)
+transform = Transform3D(0.095485, 1.36002e-15, -2.13163e-14, -1.95399e-14, 0.0800565, -0.0274262, 3.55271e-14, 0.0394617, 0.05564, 0.352067, 1.75253, 0.336701)
 bone_name = "hammer.001"
 bone_idx = 2
 
 [node name="hammer_001" type="MeshInstance3D" parent="Skeleton3D/hammer_001"]
+layers = 3
 mesh = SubResource("ArrayMesh_7xwlx")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.20404, 5.68434e-14, -1.42109e-13, -1.13687e-13, 0.0427406, -0.199512, -2.4869e-14, 0.199513, 0.0427404, 9.78877e-10, 2.66153, 0.0682098)
+transform = Transform3D(0.20404, 5.68434e-14, -1.42109e-13, -1.42109e-13, 0.049015, -0.198064, -3.55271e-14, 0.198065, 0.0490148, 9.78877e-10, 2.65967, 0.0654372)
 bone_name = "Cube"
 bone_idx = 4
 
 [node name="Cube" type="MeshInstance3D" parent="Skeleton3D/Cube"]
+layers = 3
 mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.38473, 1.38624e-15, -1.12073e-15, -1.38624e-15, 1.33742, -6.24308, -1.12073e-15, 6.24308, 1.33742, 1.28955, 9.18678, -2.56122)
+transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11248e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
 bone_name = "trigger"
 bone_idx = 6
 
 [node name="trigger" type="MeshInstance3D" parent="Skeleton3D/trigger"]
+layers = 3
 mesh = SubResource("ArrayMesh_cweek")
 skeleton = NodePath("")
 
@@ -1080,6 +1096,7 @@ bone_name = "Barrel"
 bone_idx = 7
 
 [node name="Barrel" type="MeshInstance3D" parent="Skeleton3D/Barrel"]
+layers = 3
 mesh = SubResource("ArrayMesh_x7efy")
 skeleton = NodePath("")
 
@@ -1089,6 +1106,7 @@ bone_name = "Cylinder.002"
 bone_idx = 8
 
 [node name="Cylinder_002" type="MeshInstance3D" parent="Skeleton3D/Cylinder_002"]
+layers = 3
 mesh = SubResource("ArrayMesh_64quy")
 skeleton = NodePath("")
 
@@ -1098,6 +1116,7 @@ bone_name = "Cylinder.003"
 bone_idx = 9
 
 [node name="Cylinder_003" type="MeshInstance3D" parent="Skeleton3D/Cylinder_003"]
+layers = 3
 mesh = SubResource("ArrayMesh_m61of")
 skeleton = NodePath("")
 
@@ -1107,6 +1126,7 @@ bone_name = "Cylinder.005"
 bone_idx = 10
 
 [node name="Cylinder_005" type="MeshInstance3D" parent="Skeleton3D/Cylinder_005"]
+layers = 3
 mesh = SubResource("ArrayMesh_khwsi")
 skeleton = NodePath("")
 
@@ -1116,6 +1136,7 @@ bone_name = "plate"
 bone_idx = 11
 
 [node name="plate" type="MeshInstance3D" parent="Skeleton3D/plate"]
+layers = 3
 mesh = SubResource("ArrayMesh_5vosj")
 skeleton = NodePath("")
 
@@ -1125,6 +1146,7 @@ bone_name = "tipcowel.005"
 bone_idx = 12
 
 [node name="tipcowel_005" type="MeshInstance3D" parent="Skeleton3D/tipcowel_005"]
+layers = 3
 mesh = SubResource("ArrayMesh_wxvqy")
 skeleton = NodePath("")
 
@@ -1134,6 +1156,7 @@ bone_name = "tray"
 bone_idx = 13
 
 [node name="tray" type="MeshInstance3D" parent="Skeleton3D/tray"]
+layers = 3
 mesh = SubResource("ArrayMesh_ttl35")
 skeleton = NodePath("")
 
@@ -1143,6 +1166,7 @@ bone_name = "triiger guard"
 bone_idx = 14
 
 [node name="triiger guard" type="MeshInstance3D" parent="Skeleton3D/triiger guard"]
+layers = 3
 mesh = SubResource("ArrayMesh_h35ha")
 skeleton = NodePath("")
 
@@ -1152,11 +1176,13 @@ bone_name = "wood"
 bone_idx = 15
 
 [node name="wood" type="MeshInstance3D" parent="Skeleton3D/wood"]
+layers = 3
 mesh = SubResource("ArrayMesh_p4oer")
 skeleton = NodePath("")
 
 [node name="Sphere" type="MeshInstance3D" parent="Skeleton3D"]
 transform = Transform3D(0.03, 0, 0, 0, 0.0104735, -0.0488907, 0, 0.0488907, 0.0104735, 0, 24.7943, -4.3861)
+layers = 3
 mesh = SubResource("ArrayMesh_qcsa8")
 skeleton = NodePath("")
 

@@ -21,6 +21,7 @@ height = 0.05
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vq4qh"]
 
 [node name="Lead Ball" type="RigidBody3D"]
+collision_layer = 2
 collision_mask = 2
 mass = 0.04
 continuous_cd = true

@@ -3,11 +3,6 @@ using System;
 
 public partial class Inventory : Resource 
 {
-    public Inventory()
-    {
-        GD.PrintErr("Inventory!");
-    }
-
     //[Export] 
     public Godot.Collections.Array<EquipInvSlot> EquippedSlotList = new()
     {
@@ -41,28 +36,10 @@ public partial class Inventory : Resource
     public int GetColumns()
     {
         return  InventorySpace[0].Count;
-
     } 
 
-    public void CheckEquipSlot(Equippable item, int i)  //i for index. Index will be held by the EquipSlotUI object making the call and passed down.
-    { 
-        if (item.SlotType != EquippedSlotList[i].EquipSlotType) 
-        {
-            throw(new ArgumentException("Player Inventory: Cannot hold weapon in incorrect slot type!"));
-            return;
-        }
-        else if (EquippedSlotList[i] == null)
-        {
-            throw(new ArgumentException("Player Inventory: Slot is full!"));
-            return;
-        }
-        else
-        {
-            EquippedSlotList[i].ItemInSlot = item;
-        }
-    }
 
-    public void PickUpItem(InventoryItem item) // Doesn't take space into account
+    public void PickUpItem(InventoryItem item) // Doesn't take space into account. This will also have to throw an exception not just print an err 
     {
         //GD.PrintErr("Pickup successfully called");
 
@@ -81,7 +58,7 @@ public partial class Inventory : Resource
                     item.row = i;
                     item.column = j;
 
-                    GD.PrintErr($"Success! Item put in slot # {j}");
+                    GD.Print($"Success! Item put in slot # {j}");
 
                     Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
                     return;         // Exit after placing the item
@@ -115,20 +92,70 @@ public partial class Inventory : Resource
     
     public void MoveItem(InventoryItem item, int row, int column)   //To Inv slot
     {
-        if (item.slot == -1)
-        {
-            InventorySpace[item.row][item.column] = null;
+        InventoryItem item_at_dest = InventorySpace[row][column];
+        if (InventorySpace[row][column] != null){                                     
+            if (item.Name == item_at_dest.Name)
+            {
+                if (!item.IsStackable)
+                {
+                    throw new ArgumentException("Inventory.MoveItem: Item not stackable");
+                }
+
+                if (!(item_at_dest.CurrentStack == item_at_dest.MaxStack) && !(item.CurrentStack == item.MaxStack))
+                {
+                    if (item_at_dest.CurrentStack + item.CurrentStack != item.MaxStack)
+                    {
+                        if (item.slot == -1)
+                        {
+                            InventorySpace[item.row][item.column] = null;
+                        }
+
+                        else
+                        {
+                            EquippedSlotList[item.slot].ItemInSlot = null;
+                        }
+
+                        item.SetStack(item.CurrentStack + item_at_dest.CurrentStack); 
+                        InventorySpace[row][column] = item;                              // this last part is kinda redundant since I could just let the loop ride out and hit the end naturally but I think it improves readability
+                        item.SetPosition(row, column);
+                        Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);  // this
+                        return;
+                    }
+
+                    else
+                    {
+                        throw new ArgumentException("Inventory.MoveItem: Item stack exceeds max stack");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Inventory.MoveItem: Items are not the same and cannot be stacked");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Iventory.MoveItem: Cannot attempt to stack items of different types");
+            }
         }
         else
         {
-            EquippedSlotList[item.slot].ItemInSlot = null;
+            if (item.slot == -1)
+            {
+                InventorySpace[item.row][item.column] = null;
+            }
+            else
+            {
+                EquippedSlotList[item.slot].ItemInSlot = null;
+            }
+
+            InventorySpace[row][column] = item;
+
+            item.SetPosition(row, column);
+
+            Events.Instance.EmitSignal(Events.SignalName.InventoryChanged); 
+            // PrintCurrInv();
+
         }
-        InventorySpace[row][column] = item;
-
-        item.SetPosition(row, column);
-
-        Events.Instance.EmitSignal(Events.SignalName.InventoryChanged); 
-       // PrintCurrInv();
     }
 
     public void MoveItem(InventoryItem item, int slot)  //To equip Slot. overload
@@ -136,16 +163,20 @@ public partial class Inventory : Resource
 
         if (item is Equippable converted_item)
         {
-            try
+ 
+            if (converted_item.SlotType != EquippedSlotList[slot].EquipSlotType) 
             {
-                CheckEquipSlot(converted_item, slot);
+                throw new ArgumentException("Player Inventory: Cannot hold weapon in incorrect slot type!");
             }
-            catch(ArgumentException e)
+            else if (EquippedSlotList[slot] == null)
             {
-                GD.PrintErr("Inventory.MoveItem: " + e.Message);
-                return;
+                throw new ArgumentException("Player Inventory: Slot is full!");
             }
-            
+            else
+            {
+                EquippedSlotList[slot].ItemInSlot = converted_item;
+            }
+
             if (item.row != -1)
             {
                 InventorySpace[item.row][item.column] = null;
@@ -162,7 +193,7 @@ public partial class Inventory : Resource
         }
         else
         {
-            GD.PrintErr("Inventory: Unable to convert Item into Equippable. Can this item be equipped?");
+            throw new ArgumentException("Inventory: Unable to convert Item into Equippable. Can this item be equipped?");
         }
     }
 
