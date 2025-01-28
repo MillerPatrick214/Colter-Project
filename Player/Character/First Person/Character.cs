@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-
 public partial class Character : CharacterBody3D
 {
 	[Export]
@@ -13,8 +12,7 @@ public partial class Character : CharacterBody3D
 	[Export]
 	public float JumpManueverSpeed = 15f;
 	
-	[Export]
-	public Inventory PlayerInventory;
+	Inventory inventory;
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
 
@@ -26,7 +24,7 @@ public partial class Character : CharacterBody3D
 
 	float mouseRotX = 0f;
 	float mouseRotY = 0f;
-	float lookAroundSpeed = .5f;
+	float lookAroundSpeed = .1f;
 
 	float yRotMin = -70f;
 	float yRotMax = 70f;
@@ -59,6 +57,7 @@ public partial class Character : CharacterBody3D
 	
     public override void _Ready()
     {
+		inventory = PlayerInventory.player_inv;	
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
@@ -74,12 +73,10 @@ public partial class Character : CharacterBody3D
 		{
 			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect inventory information");
 		}
-		if (PlayerInventory == null) {
-			GD.PrintErr("Error in Character.cs: PlayerInventory returned null");
+		if (inventory == null) {
+			GD.PrintErr("Error in Character.cs: inventory returned null");
 		}
-		inventoryUI.SetInventory(ref PlayerInventory);
-
-		Events.Instance.PickUp += (item) => PlayerInventory.PickUpItem(item);
+		Events.Instance.PickUp += (item) => inventory.PickUpItem(item);
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
 		
@@ -102,56 +99,56 @@ public partial class Character : CharacterBody3D
 		Equippable item = null;
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
-			item = PlayerInventory.EquipFromSlot(0);
+			item = inventory.EquipFromSlot(0);
 			SlotIndex = 0;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
-			item = PlayerInventory.EquipFromSlot(1);
+			item = inventory.EquipFromSlot(1);
 			SlotIndex = 1;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
-			item = PlayerInventory.EquipFromSlot(2);
+			item = inventory.EquipFromSlot(2);
 			SlotIndex = 2;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon2"))
 		{
-			item = PlayerInventory.EquipFromSlot(3);
+			item = inventory.EquipFromSlot(3);
 			SlotIndex = 3;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
-			item = PlayerInventory.EquipFromSlot(4);
+			item = inventory.EquipFromSlot(4);
 			SlotIndex = 4;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
-			item = PlayerInventory.EquipFromSlot(5);
+			item = inventory.EquipFromSlot(5);
 			SlotIndex = 5;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
-			item = PlayerInventory.EquipFromSlot(6);
+			item = inventory.EquipFromSlot(6);
 			SlotIndex = 6;
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex += 1;
-			item = PlayerInventory.EquipFromSlot(SlotIndex);
+			item = inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex -= 1;
-			item = PlayerInventory.EquipFromSlot(SlotIndex);
+			item = inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 	}
@@ -218,6 +215,7 @@ public partial class Character : CharacterBody3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Confined;
 		}
+		
 		else
 		{
 			Input.MouseMode = Input.MouseModeEnum.Captured;

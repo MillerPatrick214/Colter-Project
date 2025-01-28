@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://31f4gssyyxbt"]
+[gd_scene load_steps=9 format=3 uid="uid://31f4gssyyxbt"]
 
 [ext_resource type="Script" path="res://Items/Weapons/LeadBall Base Class/LeadBall.cs" id="1_k171d"]
 
@@ -20,6 +20,14 @@ height = 0.05
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vq4qh"]
 
+[sub_resource type="Curve" id="Curve_wsdu8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.351449, 0.816766), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vjysa"]
+offsets = PackedFloat32Array(0, 0.00403226, 0.475806, 1)
+colors = PackedColorArray(0.509286, 0.509286, 0.509286, 1, 0.0725806, 0.0725806, 0.0725806, 1, 0.475806, 0.475806, 0.475806, 1, 1, 1, 1, 0)
+
 [node name="Lead Ball" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 2
@@ -40,5 +48,7 @@ skeleton = NodePath("../..")
 
 [node name="TrailEmitter" type="TrailEmitter" parent="."]
 material = SubResource("ParticleProcessMaterial_vq4qh")
+curve = SubResource("Curve_wsdu8")
+gradient = SubResource("Gradient_vjysa")
 geometry_nodepath = NodePath("..")
-size = 0.1
+size = 0.01

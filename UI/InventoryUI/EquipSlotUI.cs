@@ -43,7 +43,7 @@ public partial class EquipSlotUI : SlotUI
 
 					try
 					{
-						InventoryUI.inventory.MoveItem(itemUI.item, SlotID);
+						PlayerInventory.player_inv.MoveItem(itemUI.item, SlotID);
 					}
 
 					catch (ArgumentException e)
@@ -61,10 +61,10 @@ public partial class EquipSlotUI : SlotUI
 
 	public override void UpdateSlot()
 	{
-		InventoryItem newItem = InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot;
+		InventoryItem newItem = PlayerInventory.player_inv.EquippedSlotList[SlotID].ItemInSlot;
 		/*
 		GD.PrintErr($"{SlotID} -- New Item: {newItem}");
-		GD.PrintErr($"{SlotID} -- InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot: {InventoryUI.inventory.EquippedSlotList[SlotID].ItemInSlot}");
+		GD.PrintErr($"{SlotID} -- PlayerInventory.player_inv.EquippedSlotList[SlotID].ItemInSlot: {PlayerInventory.player_inv.EquippedSlotList[SlotID].ItemInSlot}");
 		GD.PrintErr("----------------------------------------------------------------------------------------------------");
 		*/
 

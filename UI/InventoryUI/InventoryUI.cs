@@ -4,9 +4,10 @@ using System;
 
 public partial class InventoryUI : Control
 {
-	public static Inventory inventory; //This resource should be shared with character
+	Inventory inventory; //This resource should be shared with character
 	public override void _Ready()
 	{
+		inventory = PlayerInventory.player_inv;
 		Visible = false;
 	}
 
@@ -27,13 +28,5 @@ public partial class InventoryUI : Control
 				Hide();
 			}
 		}
-	}
-
-	public void SetInventory(ref Inventory inventory) {
-		//GD.PrintErr("Debug InventoryUI: Setting Inventory...");
-		InventoryUI.inventory = inventory;
-
-		//GD.PrintErr("Debug InventoryUI: Done setting Inventory...");
-		
 	}
 }

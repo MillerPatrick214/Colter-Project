@@ -27,12 +27,12 @@ public partial class LeadBall : RigidBody3D
 
 	public void DamageNPC(Node Body) {				//This mapy need to be changed to reflect location damage but that wil largely happen NPC-side
 
-		GD.Print(Body, Body.GetType());
+		GD.PrintErr(Body, Body.GetType());
 
 		if (Body is NPCBase npcHit) { //this casts to var npc hit directly
-			GD.Print($"Hit {npcHit}");
+			GD.PrintErr($"Hit {npcHit}");
 			npcHit.DamageHealth(Damage);
+			GD.PrintErr($"Damage {Damage}");
 		}
 	}
 }
-	

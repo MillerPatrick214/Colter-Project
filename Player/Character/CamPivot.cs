@@ -7,7 +7,7 @@ public partial class CamPivot : Marker3D
 	float DefaultFOV = 70;
 
 	[Export]
-	float AimFOV = 30;
+	float AimFOV = 50;
 
 	Vector3 CurrentArmPos;
 
@@ -45,15 +45,23 @@ public partial class CamPivot : Marker3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 
 	public void Aiming(bool isAiming, double delta) {
-		float currentFOV = Camera.Fov;
+	
+		float targetFOV  = isAiming ? AimFOV : DefaultFOV;
 
-		if (isAiming) {
-			Camera.Fov = currentFOV + (AimFOV - currentFOV) * 4 * (float)delta;
+		if (Camera.Fov == targetFOV)
+		{
+			return;
+		}		
+		float speed = 4.0f;
+		
+		Camera.Fov = Mathf.Lerp(Camera.Fov, targetFOV, speed * (float)delta);
+		if (Mathf.Abs(Camera.Fov - targetFOV) < .5f)
+		{
+			GD.PrintErr($"----------------------------------------------------------");
+			GD.PrintErr($"Current FOV: {Camera.Fov}, Target FOV: {targetFOV}");
+			Camera.Fov = targetFOV;
+			GD.PrintErr($"Current FOV: {Camera.Fov}, Target FOV: {targetFOV}");
 		}
-
-		if (!(isAiming)) {
-			Camera.Fov = currentFOV + (DefaultFOV - currentFOV) * 4 * (float)delta;
-		} 
 	}
 }
 

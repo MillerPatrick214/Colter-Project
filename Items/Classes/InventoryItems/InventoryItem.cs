@@ -16,13 +16,13 @@ public partial class InventoryItem : Resource
     [Export]
     public virtual bool IsStackable {get; set;} = false;
     [Export]
-    public virtual int CurrentStack {get; set;} = 1;
+    public virtual int CurrentStack {get; set;} = 1;        // change this to quantity? lil nigga
     [Export]
     public virtual int MaxStack {get; set;} = 1;
     [Export]
     public virtual int Value {get; set;} = 0;
     [Export]
-    public virtual string ScenePath {get; set;} = null;
+    public virtual string ScenePath {get; set;} = null;     //points to Item3D scene
     [Export]
     public virtual int row {get; set;} = -1;
     [Export]

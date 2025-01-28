@@ -22,5 +22,6 @@ public partial class GunCam : Camera3D
 	public override void _Process(double delta)
 	{
 		GlobalTransform = camera.GlobalTransform;
+		Fov = camera.Fov; 
 	}
 }

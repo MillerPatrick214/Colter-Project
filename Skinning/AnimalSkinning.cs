@@ -202,7 +202,6 @@ public partial class AnimalSkinning : Control
 					CutLine.AddPoint(new Vector2(newPoint.X, CutLine.GetPointPosition(0).Y + MaxLength));
 					RateSkinning(devAccum);
 					//GD.PrintErr("Reached termination of cut line. Attempting to start timer.");
-					timer.Start();
 					isSkinning = false;
 					return;
 				}
@@ -239,6 +238,7 @@ public partial class AnimalSkinning : Control
 		devAccum = 0;
 		currSkinnable.QueueFree();
 		currSkinnable = null;
+		
 	}
 
 	public void BeginSkinning() {

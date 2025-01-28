@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://boifni6fgy100"]
+[gd_scene load_steps=6 format=3 uid="uid://dii3es7qdxhn8"]
 
 [ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Projectile/SeventeenNinetyFiveLeadBall.cs" id="1_kgwvu"]
 
@@ -27,7 +27,7 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_kgwvu")
-Damage = 50.0
+Damage = 150.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_76n2g")
