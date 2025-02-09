@@ -36,7 +36,7 @@ public partial class Cone : MeshInstance3D
             _topY = Mathf.Max(_topY, vertex.Y);
         }
 
-		GD.PrintErr(_topY);
+		//GD.PrintErr(_topY);
     }
 }
 

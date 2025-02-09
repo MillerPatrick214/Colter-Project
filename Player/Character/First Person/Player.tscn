@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream:Player/Character/First Person/Player.tscn
 [gd_scene load_steps=13 format=3 uid="uid://vdbb6v2u0wk3"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
+=======
+[gd_scene load_steps=17 format=3 uid="uid://y3ldabdae6xn"]
+
+[ext_resource type="Script" path="res://Player/Character/First Person/Character.cs" id="1_fdc88"]
+[ext_resource type="Shader" path="res://Player/Character/First Person/UnderWater.gdshader" id="2_c45b1"]
+>>>>>>> Stashed changes:Player/Character/First Person/Character.tscn
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
@@ -11,6 +18,19 @@
 [ext_resource type="Script" path="res://Player/States/Walk.cs" id="10_k5338"]
 [ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
 [ext_resource type="Script" path="res://Player/Character/First Person/GunCam.cs" id="13_rdepe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4xyh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvr2w"]
+shader = ExtResource("2_c45b1")
+shader_parameter/base_color = Color(0.247576, 0.416787, 0.375348, 1)
+shader_parameter/min_transparency = 0.35
+shader_parameter/max_transparency = 0.6
+shader_parameter/wave_transparency = 0.1
+shader_parameter/wave_speed = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ltv5"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s8qte"]
 custom_solver_bias = 0.1
@@ -23,12 +43,14 @@ unique_name_in_owner = true
 script = ExtResource("1_fdc88")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_f4xyh")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
+stretch = true
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -37,13 +59,34 @@ handle_input_locally = false
 size = Vector2i(2560, 1440)
 render_target_update_mode = 4
 
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/CanvasLayer"]
+light_mask = 2
+visibility_layer = 2
+material = SubResource("ShaderMaterial_jvr2w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="GunCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585, 0)
 cull_mask = 2
 current = true
 near = 0.005
 script = ExtResource("13_rdepe")
 CameraPath = NodePath("../../../CamPivot/Camera3D")
+
+[node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/GunCam" groups=["PlayerCamera"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0159696, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/GunCam/Area3D"]
+shape = SubResource("BoxShape3D_1ltv5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
@@ -58,7 +101,6 @@ AimFOV = 30.0
 script = ExtResource("9_gmr6g")
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
 cull_mask = 1048573
 current = true
 near = 0.013

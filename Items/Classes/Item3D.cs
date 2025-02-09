@@ -18,7 +18,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	[Export]
 	public virtual bool isHeld {get; set;} = false;
 
-	MeshInstance3D VisibilityMesh;
 	public Item3D() {}
 	public Item3D(bool isHeld)
 	{

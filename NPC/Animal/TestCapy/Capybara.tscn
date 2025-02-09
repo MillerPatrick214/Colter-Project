@@ -1,8 +1,8 @@
-[gd_scene load_steps=38 format=4 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=44 format=4 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
-[ext_resource type="Texture2D" uid="uid://rx70mxj28vnj" path="res://NPC/Animal/TestCapy/capybara1_texture.png" id="3_q6ukg"]
-[ext_resource type="Texture2D" uid="uid://dve3nqwi1kkcc" path="res://NPC/Animal/TestCapy/capybara2_texture.png" id="4_5of0q"]
+[ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_7d45k"]
+[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_myvag"]
 [ext_resource type="AnimationLibrary" uid="uid://cjl2q2vwxjni" path="res://NPC/Animal/TestCapy/CapyAnimations/CapybaraAnimations.tres" id="4_xeeau"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFall.cs" id="4_yhbp3"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyWalk.cs" id="5_geobw"]
@@ -14,254 +14,25 @@
 
 [sub_resource type="Animation" id="Animation_2shjp"]
 length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton3D:Bone")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton3D:Bone")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 3.31518e-24, 6.62391e-24, 1)
-tracks/2/type = "scale_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton3D:Bone")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/3/type = "rotation_3d"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton3D:Bone.001")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(0, 1, 0, 3.31518e-24, 6.62391e-24, 1)
-tracks/4/type = "position_3d"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton3D:Bone.001")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, -2.35922e-16, 1.06973, -0.00194297)
-tracks/5/type = "scale_3d"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Skeleton3D:Bone.001")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/6/type = "position_3d"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Skeleton3D:Bone.002")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, 2.3283e-10, 2.1388, -0.0408518)
-tracks/7/type = "rotation_3d"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Skeleton3D:Bone.002")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = PackedFloat32Array(0, 1, -0.0696346, 2.60077e-17, 2.60077e-17, 0.997573)
-tracks/8/type = "scale_3d"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Skeleton3D:Bone.002")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/9/type = "position_3d"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Skeleton3D:UpperBone.003.R")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = PackedFloat32Array(0, 1, 0.521562, 2.51634, 0.746557)
-tracks/10/type = "rotation_3d"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Skeleton3D:UpperBone.003.R")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, 0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
-tracks/11/type = "scale_3d"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Skeleton3D:UpperBone.003.R")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = PackedFloat32Array(0, 1, 1, 1, 1.00001)
-tracks/12/type = "position_3d"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Skeleton3D:LowerBone.004.R")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = PackedFloat32Array(0, 1, 0.521562, 2.62876, 1.35067)
-tracks/13/type = "rotation_3d"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Skeleton3D:LowerBone.004.R")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = PackedFloat32Array(0, 1, 0.528569, 1.21435e-06, 7.56123e-07, 0.848891)
-tracks/14/type = "scale_3d"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Skeleton3D:LowerBone.004.R")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/15/type = "position_3d"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Skeleton3D:UpperBone.005.R")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = PackedFloat32Array(0, 1, 0.521562, 0.229447, 0.820321)
-tracks/16/type = "rotation_3d"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Skeleton3D:UpperBone.005.R")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = PackedFloat32Array(0, 1, 0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
-tracks/17/type = "scale_3d"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Skeleton3D:UpperBone.005.R")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = PackedFloat32Array(0, 1, 1, 1, 0.999997)
-tracks/18/type = "position_3d"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Skeleton3D:LowerBone.006.R")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = PackedFloat32Array(0, 1, 0.521562, 0.0831631, 1.40116)
-tracks/19/type = "rotation_3d"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Skeleton3D:LowerBone.006.R")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = PackedFloat32Array(0, 1, 0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
-tracks/20/type = "scale_3d"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("Skeleton3D:LowerBone.006.R")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/21/type = "position_3d"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("Skeleton3D:UpperBone.007.R")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = PackedFloat32Array(0, 1, -0.526884, 2.53763, 0.746518)
-tracks/22/type = "rotation_3d"
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/path = NodePath("Skeleton3D:UpperBone.007.R")
-tracks/22/interp = 1
-tracks/22/loop_wrap = true
-tracks/22/keys = PackedFloat32Array(0, 1, 0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
-tracks/23/type = "scale_3d"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath("Skeleton3D:UpperBone.007.R")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/24/type = "position_3d"
-tracks/24/imported = false
-tracks/24/enabled = true
-tracks/24/path = NodePath("Skeleton3D:LowerBone.008.R")
-tracks/24/interp = 1
-tracks/24/loop_wrap = true
-tracks/24/keys = PackedFloat32Array(0, 1, -0.526884, 2.65005, 1.35063)
-tracks/25/type = "rotation_3d"
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/path = NodePath("Skeleton3D:LowerBone.008.R")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/keys = PackedFloat32Array(0, 1, 0.528569, 1.21435e-06, 7.56123e-07, 0.848891)
-tracks/26/type = "scale_3d"
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/path = NodePath("Skeleton3D:LowerBone.008.R")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-tracks/27/type = "position_3d"
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/path = NodePath("Skeleton3D:UpperBone.009.R")
-tracks/27/interp = 1
-tracks/27/loop_wrap = true
-tracks/27/keys = PackedFloat32Array(0, 1, -0.526884, 0.250735, 0.820282)
-tracks/28/type = "rotation_3d"
-tracks/28/imported = false
-tracks/28/enabled = true
-tracks/28/path = NodePath("Skeleton3D:UpperBone.009.R")
-tracks/28/interp = 1
-tracks/28/loop_wrap = true
-tracks/28/keys = PackedFloat32Array(0, 1, 0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
-tracks/29/type = "scale_3d"
-tracks/29/imported = false
-tracks/29/enabled = true
-tracks/29/path = NodePath("Skeleton3D:UpperBone.009.R")
-tracks/29/interp = 1
-tracks/29/loop_wrap = true
-tracks/29/keys = PackedFloat32Array(0, 1, 1, 1, 0.999996)
-tracks/30/type = "position_3d"
-tracks/30/imported = false
-tracks/30/enabled = true
-tracks/30/path = NodePath("Skeleton3D:LowerBone.010.R")
-tracks/30/interp = 1
-tracks/30/loop_wrap = true
-tracks/30/keys = PackedFloat32Array(0, 1, -0.526884, 0.104451, 1.40113)
-tracks/31/type = "rotation_3d"
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/path = NodePath("Skeleton3D:LowerBone.010.R")
-tracks/31/interp = 1
-tracks/31/loop_wrap = true
-tracks/31/keys = PackedFloat32Array(0, 1, 0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
-tracks/32/type = "scale_3d"
-tracks/32/imported = false
-tracks/32/enabled = true
-tracks/32/path = NodePath("Skeleton3D:LowerBone.010.R")
-tracks/32/interp = 1
-tracks/32/loop_wrap = true
-tracks/32/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aq1vd"]
 _data = {
 "RESET": SubResource("Animation_2shjp")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ojh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkgfi"]
 resource_name = "capybara1"
 cull_mode = 2
+albedo_texture = ExtResource("3_7d45k")
 roughness = 0.43079
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52j7o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsfy6"]
 resource_name = "capybara2"
 cull_mode = 2
+albedo_texture = ExtResource("4_myvag")
 roughness = 0.43079
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_r5y7y"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ppla6"]
 resource_name = "capybara test walking EXPORT_capybara_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.842328, 0.318546, -1.70753, 1.68466, 2.28667, 4.39938),
@@ -270,7 +41,7 @@ _surfaces = [{
 "format": 34359745559,
 "index_count": 522,
 "index_data": PackedByteArray("PwBJAO8ASQBBAEYAPwBBAEkAwQBPAAcBwQAdAE8AIwACABoAVwAjAA8AAgAjAFcAcwAJAAUAcwCiAAkAPQAeABIAHgAGABgAHgA9AAYAAQAXAXgAAQBWABcBDABcAKgADABYAFwAFQB3AJsAFQAAAHcAGwBQAB8AUAADABcAUAAbAAMACwAvAC0ACwAxAC8ACgAZAAcAGQAsACIAGQAKACwAlgAcAMAAlgARABwAvAAnACEAvADMACcAKAAQACQAEAAmAFQAJgAoACkAEAAoACYA0wAgACsA0wC7ACAAKgA5ANEAOQAuADQAKgAuADkA0gA3AKEA0gA6ADcANgAIAKAACAAyADAACAA2ADIAOwAzADgAOwA1ADMA7AAEADwA7AByAAQAEwBAAD4AEwBCAEAA7gBLAJgA7gBIAEsATAAUAJkAFABEAEMAFABMAEQASgBFAE0ASgBHAEUATgCcAAYBTgAWAJwAUgDHABEBUgAlAMcAVQCpABYBVQANAKkAXgBxAGUAXgBuAHEApwBiAA8BpwBbAGIAUwBZAA4AUwBhAFkAEAFgAFEAEAFkAGAAZgBdAFoAXQBnAGwAXQBmAGcAbwBfAGMAXwBqAGkAXwBvAGoAbQBrAHAAbQBoAGsA8QD7APUA/gDxAOsA8QD+APsAxAAEAbMAxAAKAQQBfgC5ALAAuQAdAYsAuQB+AB0BowDtAHQA7QDCAJcAwgDUAL0A1ADtAKMA7QDUAMIAdgCFAKYAdgCBAIUAtADzAI8A8wCuAIIA8wC0AK4AfQAaARwBfQB7ABoBiAAjAR4BiACsACMBkQB6AHwAkQCeAHoABQGxALUAsQCTAH8AsQAFAZMAvQAIAcIACAF5AJ0AGAG9AKoAvQB5AAgBeQC9ABgBhwDdAN8AhwDbAN0ArwCGAIMAhgC4ANoAhgCvALgAmgCyAI4AmgDDALIAvwDKAM4AvwC3AMoAvQASAaoAEgHPAMgAzwC9AM0AEgG9AM8AjADLALoAywDGANAAxgCMAA4BywCMAMYA1wC2AL4A1wDZALYA2ADjANwA6ADYANUA2ADoAOMA1gDmAOkA1gClAOYAhADlAKQA5QDeAOEA5QCEAN4A5wDgAOIA5wDkAOAA8ACAAHUA8ADyAIAAkAD2APgAkAD0APYA6gAAAf0A6gCUAAABjQABAZUAAQH3APkAAQGNAPcA/wD6APwA/wACAfoAAwGfAJIAAwEJAZ8ADAHJAMUADAEVAckAGwGtAIkAGwEZAa0AIQE2ATMBIQEoATYBqwApASIBqwATASkBDQEfAScBDQGKAB8BFAEmASsBFAELASYBJAEsASABLAE0AS4BLAEkATQBJQE3ASoBNwEvATEBNwElAS8BMgEwAS0BMgE1ATAB"),
-"material": SubResource("StandardMaterial3D_u0ojh"),
+"material": SubResource("StandardMaterial3D_gkgfi"),
 "name": "capybara1",
 "primitive": 3,
 "skin_data": PackedByteArray("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AwAAAKDz7glvAgAAAgABAAMAAACg8+4JbwIAAAIAAQAHAAAAROweEJwDAAACAAEABwAAAETsHhCcAwAAAgABAAcAAABE7B4QnAMAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAA"),
@@ -284,7 +55,7 @@ _surfaces = [{
 "format": 34359745559,
 "index_count": 168,
 "index_data": PackedByteArray("AQA7AAMAAQA4ADsABQAWAAoABQAOABYAOgAAAAIAOgA1AAAAEQAVAA0AEQATABUACAAPAAYACAASAA8ACwAUAAkACwAXABQABwAMAAQABwAQAAwAGQAqAB4AGQAiACoAJwAhACUAJwApACEAHAAjABoAHAAmACMAHwAoAB0AHwArACgAGwAgABgAGwAkACAALwAzADAALwAyADMALQAuACwALQAxAC4ANwA9ADkANwA/AD0AQABSAEkAQABGAFIAPAA0ADYAPAA+ADQASwBRAE4ASwBIAFEARQBMAFAARQBCAEwARwBPAFMARwBEAE8AQwBKAE0AQwBBAEoAVABmAF0AVABaAGYAYgBcAGUAYgBfAFwAWQBgAGQAWQBWAGAAWwBjAGcAWwBYAGMAVwBeAGEAVwBVAF4AawBvAG4AawBsAG8AaQBqAG0AaQBoAGoA"),
-"material": SubResource("StandardMaterial3D_52j7o"),
+"material": SubResource("StandardMaterial3D_gsfy6"),
 "name": "capybara2",
 "primitive": 3,
 "skin_data": PackedByteArray("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"),
@@ -294,7 +65,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_8rn15"]
+[sub_resource type="Skin" id="Skin_kqok6"]
 resource_name = "Skin"
 bind_count = 11
 bind/0/name = &"Bone"
@@ -331,11 +102,32 @@ bind/10/name = &"LowerBone.010.R"
 bind/10/bone = -1
 bind/10/pose = Transform3D(1, 1.69393e-06, 2.30566e-06, 2.27374e-13, -0.805885, 0.592073, 2.86102e-06, -0.592073, -0.805885, 0.528995, 0.958282, -0.706058)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8sys"]
-albedo_texture = ExtResource("3_q6ukg")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wc7op"]
+points = PackedVector3Array(0.240067, 0.974207, -0.694963, -0.527982, 0.485444, -1.32343, -0.527982, 0.555295, -1.32343, -0.737555, 0.904309, -0.694963, 0.100352, 0.555295, -0.694963, 0.100352, 0.974207, -1.25349, -0.737555, 0.974207, -1.1139, -0.737555, 0.485444, -0.904556, 0.240067, 0.694948, -1.1139, -0.737555, 0.904309, -1.25349, -0.388363, 0.485444, -1.32343, 0.240067, 0.625097, -0.974379, -0.694788, 0.506825, -1.23211, 0.240067, 0.974207, -1.18373, -0.701896, 0.95638, -0.717886, -0.109124, 0.555295, -0.694963, 0.240067, 0.625097, -0.694963, 0.240067, 0.764655, -1.18373, -0.318505, 0.485444, -0.974379, 0.100352, 0.555295, -0.904556, -0.667697, 0.834506, -0.694963, -0.109124, 0.974207, -1.25349, 0.100352, 0.904309, -1.25349)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qcmm"]
-albedo_texture = ExtResource("4_5of0q")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xoxkv"]
+points = PackedVector3Array(-0.318622, 0.485396, -1.04418, -0.807385, -0.00341508, -1.04418, -0.528126, -0.00341508, -1.04418, -0.458275, 0.485396, -1.3932, -0.737486, 0.485396, -0.974365, -0.388472, -0.00341508, -0.764793, -0.388472, 0.0664424, -1.25351, -0.737486, 0.275824, -1.32332, -0.737486, -0.00341508, -0.764793, -0.388472, 0.136252, -0.764793, -0.737486, 0.485396, -1.32332, -0.318622, 0.275824, -1.18369, -0.807385, 0.0664424, -1.18369, -0.807385, 0.275824, -1.11388, -0.597833, 0.345729, -1.3932, -0.388472, 0.485396, -0.974365, -0.667684, 0.136252, -0.764793, -0.597833, 0.0664424, -1.25351, -0.318622, 0.20611, -0.974365, -0.807385, 0.136252, -0.974365, -0.318622, 0.485396, -1.18369, -0.458275, 0.345729, -1.3932, -0.388472, -0.00341508, -0.974365, -0.807385, 0.275824, -1.25351, -0.388472, 0.345729, -1.32332, -0.737486, 0.0664424, -0.764793)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pacl8"]
+points = PackedVector3Array(-0.248744, 0.694982, 1.05079, 0.170237, 1.11381, 1.53955, 0.170237, 1.11381, 1.05079, -0.667725, 1.11381, 1.05079, -0.667725, 0.555226, 1.53955, 0.10027, 0.625104, 1.19049, -0.667725, 1.11381, 1.4697, 0.170237, 0.764751, 1.53955, -0.59784, 0.555226, 1.19049, 0.170237, 0.694982, 1.05079, -0.248744, 0.555226, 1.53955, -0.458234, 0.974111, 1.53955, 0.10027, 0.625104, 1.05079, -0.59784, 0.904343, 1.05079, -0.318546, 0.555226, 1.19049, -0.667725, 0.555226, 1.3999, -0.179023, 1.11381, 1.53955, -0.667725, 0.764751, 1.53955, -0.667725, 1.04393, 1.05079, -0.10922, 0.625104, 1.05079)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7gtas"]
+points = PackedVector3Array(-0.667725, 0.555226, 1.53951, -0.667725, -0.00341505, 1.39998, -0.667725, 0.0664151, 1.33016, -0.318574, -0.00341505, 1.39998, -0.667725, -0.00341505, 1.81892, -0.318574, 0.555226, 1.53951, -0.318574, 0.555226, 1.19045, -0.388466, 0.136245, 1.81892, -0.597867, 0.555226, 1.19045, -0.318574, 0.275906, 1.19045, -0.318574, -0.00341505, 1.67921, -0.597867, 0.275906, 1.19045, -0.597867, 0.136245, 1.81892, -0.667725, 0.345736, 1.2604, -0.388466, -0.00341505, 1.81892, -0.318574, 0.136245, 1.2604, -0.667725, 0.555226, 1.39998)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_niim2"]
+points = PackedVector3Array(0.658953, 0.206253, -1.32341, 0.728776, 0.974207, -0.694963, 0.240122, 0.974207, -0.694963, 0.728776, -0.00341505, -0.76482, 0.728776, 0.904254, -1.25355, 0.379769, 0.0665382, -1.25355, 0.240122, 0.974207, -1.18376, 0.379769, -0.00341505, -0.76482, 0.798654, -0.00341505, -1.04411, 0.449592, 0.485396, -1.39326, 0.234939, 0.698663, -0.688482, 0.798654, 0.345872, -1.25355, 0.240122, 0.62492, -1.04411, 0.658953, 0.974207, -1.25355, 0.589129, 0.345872, -1.39326, 0.798654, 0.0665382, -0.904467, 0.798654, 0.0665382, -1.18376, 0.379769, -0.00341505, -0.974324, 0.240122, 0.764539, -1.18376, 0.589129, 0.485396, -1.39326, 0.728776, 0.974207, -1.18376, 0.728776, 0.555158, -1.32341, 0.449592, 0.345872, -1.39326, 0.519361, 0.764539, -1.32341, 0.309945, 0.276015, -1.1139, 0.728776, 0.276015, -1.32341, 0.589129, 0.0665382, -1.25355, 0.658953, 0.834396, -0.694963)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vl53y"]
+points = PackedVector3Array(0.240095, 0.694818, 1.05079, 0.659048, 0.13645, 1.81892, 0.379762, 0.13645, 1.81892, 0.156787, 1.14472, 1.47167, 0.659048, 1.11387, 1.05079, 0.659048, 0.0665722, 1.33019, 0.659048, 1.11387, 1.46974, 0.309904, -0.00319648, 1.39997, 0.170285, 1.11387, 1.05079, 0.170285, 0.764587, 1.53952, 0.170285, 0.694818, 1.05079, 0.659048, -0.00319648, 1.81892, 0.589143, 0.276097, 1.19057, 0.309904, -0.00319648, 1.60937, 0.309904, 0.13645, 1.26034, 0.379762, -0.00319648, 1.81892, 0.659048, -0.00319648, 1.39997, 0.449524, 0.974111, 1.53952, 0.589143, 0.904233, 1.05079, 0.659048, 0.345865, 1.19057, 0.309904, 0.276097, 1.19057, 0.240095, 0.974111, 1.53952, 0.170285, 0.904233, 1.53952)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fgndo"]
+points = PackedVector3Array(-0.667711, 1.60278, -1.53276, 0.0883029, 2.35693, -0.87863, 0.27739, 2.3024, -0.749009, 0.868539, 1.88183, -1.39313, -0.714556, 0.997087, -0.711405, 0.728756, 0.974207, -1.18388, 0.79825, 1.29009, -0.73723, -0.737432, 2.30097, -1.04425, -0.388144, 2.16131, -1.53276, -0.737432, 1.04411, -1.25349, 0.0780242, 1.62501, -1.63107, 0.728756, 2.30097, -1.04425, -0.67159, 2.18391, -0.742094, -0.877215, 1.81207, -1.39313, 0.589143, 2.16131, -1.46294, 0.675889, 2.19317, -0.732826, -0.0390277, 0.974207, -1.32331, 0.724758, 1.04168, -0.743248, 0.659035, 1.60278, -1.53276, -0.79375, 1.67601, -0.745135, -0.877215, 1.39321, -1.32331, 0.868539, 1.46326, -1.39313, 0.0813248, 1.79314, -1.64759, 0.0256183, 2.3375, -1.06879, -0.807324, 2.0914, -1.39313, 0.793536, 1.67567, -0.740058, -0.667711, 0.974207, -1.18388, 0.728756, 1.04411, -1.25349, -0.285227, 2.30095, -0.750154, -0.79969, 1.29385, -0.741572, 0.798647, 2.0914, -1.39313, 0.519251, 2.0215, -1.53276)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k8y1q"]
+points = PackedVector3Array(-0.606859, 1.18425, 1.12774, 0.728878, 1.74254, 1.05096, -0.45822, 2.64983, 1.60965, -0.108981, 1.53308, 2.51708, 0.658973, 1.11387, 1.47006, -0.388315, 2.16115, 2.65667, 0.239972, 2.37061, 1.05096, 0.379639, 2.30084, 2.58679, 0.449544, 2.64983, 1.81912, -0.667649, 1.11387, 1.47006, -0.737555, 1.74254, 1.05096, 0.633335, 1.14355, 1.08334, 0.379639, 1.74254, 2.51708, -0.248648, 2.37061, 1.05096, -0.45822, 2.64983, 1.81912, -0.737555, 1.60285, 1.40018, 0.589211, 2.44037, 1.60965, 0.728878, 1.39339, 1.40018, -0.597888, 2.44037, 1.53977, 0.100305, 1.11387, 1.60965, -0.388315, 1.88192, 2.58679, -0.0959501, 2.37082, 2.49988, 0.100305, 1.53308, 2.51708, 0.519306, 2.16115, 1.05096, -0.45822, 2.23092, 1.05096, 0.519306, 2.44037, 2.02826, -0.527982, 2.44037, 1.95838, 0.150533, 2.06776, 2.63226, -0.737555, 1.32362, 1.12083, -0.318553, 1.60285, 2.4472, 0.728878, 1.18394, 1.26059, -0.108981, 1.11387, 1.60965)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h31ao"]
+points = PackedVector3Array(0.780927, 1.45939, 0.209276, -0.795908, 1.14335, -0.233677, -0.787061, 1.14653, 0.146654, -0.608486, 2.22277, -0.617033, -0.226825, 2.28683, 0.9732, 0.0908157, 0.697636, 0.972107, 0.654043, 0.895189, -0.606005, 0.678505, 2.17589, -0.63513, -0.100538, 0.62413, -0.626323, 0.666186, 1.71529, 0.976291, -0.667536, 1.71215, 0.967568, 0.593241, 0.95657, 0.838299, -0.598841, 0.958997, 0.834899, -0.699773, 0.931548, -0.650124, 0.219337, 2.29082, 0.976889, 0.0273737, 0.570531, 0.400208, 0.281236, 2.28506, -0.615727, -0.804991, 1.58797, -0.622739, 0.800429, 1.2674, -0.626853, 0.722632, 0.890888, 0.0832332, -0.664042, 0.831346, -0.104728, -0.662001, 2.08557, 0.146641, 0.416693, 2.17284, 0.987638, 0.0276695, 0.562534, -0.431172, 0.653078, 1.14652, 0.960683, -0.607758, 1.07886, 0.971904, -0.42339, 2.16934, 0.983831, 0.656358, 2.15164, -0.0423177, -0.0988033, 0.701736, 0.967649, -0.289151, 2.28324, -0.614043, -0.733028, 1.45966, 0.779909, -0.159728, 0.587673, 0.0846804)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jog57"]
 animation = &"CapybaraAnimations/CapyGraze"
@@ -402,17 +194,13 @@ states/CapybaraAnimations_Death/position = Vector2(447.292, 420)
 states/End/position = Vector2(904, 105)
 states/Start/position = Vector2(39, 105)
 transitions = ["CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_CapyGraze", SubResource("AnimationNodeStateMachineTransition_aps64"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_CapyHeadUp", SubResource("AnimationNodeStateMachineTransition_6rhox"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_CapyWalk", SubResource("AnimationNodeStateMachineTransition_phmi5"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_8j4u7"), "Start", "CapybaraAnimations_CapyHeadDown", SubResource("AnimationNodeStateMachineTransition_jgpan"), "CapybaraAnimations_CapyHeadDown", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_3vc1g"), "CapybaraAnimations_CapyGraze", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_ambk0"), "CapybaraAnimations_CapyHeadUp", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_f25uj"), "CapybaraAnimations_CapyWalk", "CapybaraAnimations_Death", SubResource("AnimationNodeStateMachineTransition_o0ubc")]
-graph_offset = Vector2(-142.708, -21)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_km4gq"]
-radius = 0.305
-height = 1.012
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
-radius = 7.0
+graph_offset = Vector2(-142.708, -258)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h0vrs"]
 points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 5, -5, 0, 5, 5, 5, 5, -5, 5, 5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
+radius = 7.0
 
 [node name="Capybara" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
@@ -426,93 +214,127 @@ libraries = {
 "CapybaraAnimations": ExtResource("4_xeeau")
 }
 
+[node name="capybara_Cube_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, -1.05879e-22, 0.429749, -0.29343)
+mesh = SubResource("ArrayMesh_ppla6")
+skin = SubResource("Skin_kqok6")
+skeleton = NodePath("../Skeleton3D")
+
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_wc7op")
+
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_xoxkv")
+
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_pacl8")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_7gtas")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_niim2")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_vl53y")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_fgndo")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_k8y1q")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_h31ao")
+
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(-0.24999, 0, 0.00218165, 0, 0.249999, 0, -0.00218166, 0, -0.249989, -0.00052726, 0.438885, -0.30957)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.32831e-10, 1.14786e-07, -1.25729e-08)
 bones/0/enabled = true
-bones/0/position = Vector3(0, 0, 0)
+bones/0/position = Vector3(8.32667e-17, 0.000688345, 0.378978)
 bones/0/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.3283e-10, 1.06973, -0.00194299)
 bones/1/enabled = true
-bones/1/position = Vector3(-2.35922e-16, 1.06973, -0.00194297)
+bones/1/position = Vector3(-1.52656e-16, 1.07042, 0.377035)
 bones/1/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
-bones/2/position = Vector3(2.3283e-10, 2.1388, -0.0408518)
-bones/2/rotation = Quaternion(-0.0696346, 2.60077e-17, 2.60077e-17, 0.997573)
+bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
+bones/2/rotation = Quaternion(0.275715, -0.00296891, 0.00216924, 0.961232)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
 bones/3/rest = Transform3D(1, 7.95808e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, 0.521562, 2.51634, 0.746557)
 bones/3/enabled = true
-bones/3/position = Vector3(0.521562, 2.51634, 0.746557)
-bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
+bones/3/position = Vector3(0.521562, 2.61156, 0.97996)
+bones/3/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
 bones/3/scale = Vector3(1, 1, 1.00001)
 bones/4/name = "LowerBone.004.R"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, 0.521562, 2.62876, 1.35067)
 bones/4/enabled = true
-bones/4/position = Vector3(0.521562, 2.62876, 1.35067)
-bones/4/rotation = Quaternion(0.528569, 1.21435e-06, 7.56122e-07, 0.848891)
+bones/4/position = Vector3(0.521562, 2.56679, 1.39368)
+bones/4/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "UpperBone.005.R"
 bones/5/parent = -1
 bones/5/rest = Transform3D(1, 4.54747e-13, 2.861e-06, 2.7712e-06, -0.248596, -0.968604, 7.11237e-07, 0.968607, -0.248596, 0.521562, 0.229447, 0.820321)
 bones/5/enabled = true
-bones/5/position = Vector3(0.521562, 0.229447, 0.820321)
+bones/5/position = Vector3(0.521562, 0.30712, 0.883757)
 bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
 bones/5/scale = Vector3(1, 1, 0.999997)
 bones/6/name = "LowerBone.006.R"
 bones/6/parent = -1
 bones/6/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, 0.521562, 0.0831632, 1.40116)
 bones/6/enabled = true
-bones/6/position = Vector3(0.521562, 0.0831631, 1.40116)
-bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
+bones/6/position = Vector3(0.521562, 0.160836, 1.4646)
+bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "UpperBone.007.R"
 bones/7/parent = -1
 bones/7/rest = Transform3D(1, 3.41061e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, -0.526884, 2.53763, 0.746518)
 bones/7/enabled = true
-bones/7/position = Vector3(-0.526884, 2.53763, 0.746518)
-bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
+bones/7/position = Vector3(-0.526884, 2.62943, 0.991525)
+bones/7/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerBone.008.R"
 bones/8/parent = -1
 bones/8/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, -0.526884, 2.65005, 1.35063)
 bones/8/enabled = true
-bones/8/position = Vector3(-0.526884, 2.65005, 1.35063)
-bones/8/rotation = Quaternion(0.528569, 1.21435e-06, 7.56122e-07, 0.848891)
+bones/8/position = Vector3(-0.526884, 2.58808, 1.39364)
+bones/8/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperBone.009.R"
 bones/9/parent = -1
 bones/9/rest = Transform3D(1, 4.54747e-13, 3.33783e-06, 3.23306e-06, -0.248596, -0.968603, 8.29776e-07, 0.968607, -0.248595, -0.526884, 0.250735, 0.820282)
 bones/9/enabled = true
-bones/9/position = Vector3(-0.526884, 0.250735, 0.820282)
+bones/9/position = Vector3(-0.526884, 0.328409, 0.883718)
 bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
 bones/9/scale = Vector3(1, 1, 0.999996)
 bones/10/name = "LowerBone.010.R"
 bones/10/parent = -1
 bones/10/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, -0.526884, 0.104451, 1.40113)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.526884, 0.104451, 1.40113)
-bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44893e-07, 0.892618)
+bones/10/position = Vector3(-0.526884, 0.182125, 1.46456)
+bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/10/scale = Vector3(1, 1, 1)
-
-[node name="capybara_Cube_001" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, -0.000454068, -0.249999, 0, 0.249999, -0.000454068, -0.00052726, 0.438885, -0.30957)
-mesh = SubResource("ArrayMesh_r5y7y")
-skin = SubResource("Skin_8rn15")
-skeleton = NodePath("../Skeleton3D")
-surface_material_override/0 = SubResource("StandardMaterial3D_h8sys")
-surface_material_override/1 = SubResource("StandardMaterial3D_5qcmm")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ei2tt")
@@ -520,15 +342,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/isDead = false
 parameters/conditions/isIdle = true
 parameters/conditions/isWalking = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.32349e-23, 0.289208, 0.0657219)
-shape = SubResource("CapsuleShape3D_km4gq")
-
-[node name="HearingArea" type="Area3D" parent="."]
-
-[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
-shape = SubResource("SphereShape3D_pkh7y")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_iqgn2")
@@ -565,3 +378,8 @@ shape = SubResource("ConvexPolygonShape3D_h0vrs")
 [node name="VisionRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 target_position = Vector3(0, 0, 8)
+
+[node name="HearingArea" type="Area3D" parent="."]
+
+[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
+shape = SubResource("SphereShape3D_pkh7y")

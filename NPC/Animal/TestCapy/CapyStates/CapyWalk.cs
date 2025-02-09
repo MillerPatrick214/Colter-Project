@@ -56,7 +56,7 @@ public partial class CapyWalk : NPCState<Capybara>
 			Godot.Vector3 direction = LocalDestination.Normalized();
 
 			direction.Y = 0;
-			GD.PrintErr(direction);
+			//GD.PrintErr(direction);
 			
 			NPC.Rotate(direction);
 		

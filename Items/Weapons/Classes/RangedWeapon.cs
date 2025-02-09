@@ -102,7 +102,7 @@ public abstract partial class RangedWeapon : Weapon
 	}
 
 	public void Fire() {
-		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);	//this needs to be changed -- ALL guns fire if signal is sent out lmaooo
 		LaunchProjectile();
 
 	}
@@ -116,6 +116,6 @@ public abstract partial class RangedWeapon : Weapon
 		RigidBody3D ProjectileInstance = AmmoScene.Instantiate<RigidBody3D>();
 		GetTree().Root.AddChild(ProjectileInstance);
 		ProjectileInstance.GlobalPosition = WeaponEnd.GlobalPosition;
-		ProjectileInstance.ApplyCentralImpulse(WeaponEnd.GlobalTransform.Basis.Z.Normalized() * ProjectileVelocity);
+		ProjectileInstance.ApplyCentralImpulse(-WeaponEnd.GlobalTransform.Basis.Z.Normalized() * ProjectileVelocity);
 	}
 }

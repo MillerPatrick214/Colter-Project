@@ -1,0 +1,25 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://qh3hwhtm6hy5"]
+
+[sub_resource type="Gradient" id="Gradient_4hrul"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7k0ak"]
+gradient = SubResource("Gradient_4hrul")
+
+[resource]
+lifetime_randomness = 0.4
+particle_flag_rotate_y = true
+angle_min = -45.0
+angle_max = 45.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(2, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -20.0
+angular_velocity_max = 20.0
+gravity = Vector3(0, -4, 0)
+linear_accel_min = -1.0
+linear_accel_max = -1.0
+damping_min = 3.661
+damping_max = 3.661
+color_ramp = SubResource("GradientTexture1D_7k0ak")

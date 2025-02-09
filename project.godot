@@ -49,6 +49,7 @@ import/blender/enabled=false
 
 Human="Any and all entities considered human"
 ThreatLevel3="Describes relative intimidation factor of the entity"
+PlayerCamera="PlayerCameraGroup"
 
 [gui]
 
@@ -197,6 +198,7 @@ CycleDown={
 
 3d_render/layer_1="World"
 3d_render/layer_2="Equipped"
+3d_physics/layer_1="Player/Ground/Default"
 
 [physics]
 

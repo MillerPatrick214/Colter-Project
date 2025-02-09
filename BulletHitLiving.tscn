@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://ewsuiyyn4qb0"]
+
+[ext_resource type="Texture2D" uid="uid://hcsy7i38spn5" path="res://GunshotEntrance.png" id="1_dlap8"]
+[ext_resource type="Script" path="res://BulletHitLiving.cs" id="2_10o4s"]
+[ext_resource type="Texture2D" uid="uid://bfe3tnhtri20l" path="res://Particles/PNG (Transparent)/smoke_04.png" id="3_ldyu4"]
+[ext_resource type="AudioStream" uid="uid://cs76py1susxqi" path="res://522091__magnuswaker__pound-of-flesh-1.wav" id="4_a65yo"]
+
+[sub_resource type="Gradient" id="Gradient_gny63"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kmlqs"]
+gradient = SubResource("Gradient_gny63")
+
+[sub_resource type="Curve" id="Curve_kll34"]
+max_value = 5.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nyhm0"]
+curve = SubResource("Curve_kll34")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugxaj"]
+lifetime_randomness = 0.5
+angle_min = -25.0
+angle_max = 25.0
+inherit_velocity_ratio = 0.2
+direction = Vector3(0, 0, -1)
+spread = 20.0
+initial_velocity_min = 0.25
+initial_velocity_max = 0.75
+angular_velocity_min = -25.0
+angular_velocity_max = 25.0
+gravity = Vector3(0, -1, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_curve = SubResource("CurveTexture_nyhm0")
+color = Color(1, 0, 0, 0.768627)
+color_ramp = SubResource("GradientTexture1D_kmlqs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4hsp"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_ldyu4")
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_h2u62"]
+material = SubResource("StandardMaterial3D_y4hsp")
+size = Vector2(0.1, 0.1)
+
+[node name="Decal" type="Decal"]
+size = Vector3(0.05, 0.05, 0.05)
+texture_albedo = ExtResource("1_dlap8")
+script = ExtResource("2_10o4s")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_ugxaj")
+draw_pass_1 = SubResource("QuadMesh_h2u62")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_a65yo")
+attenuation_model = 1
+volume_db = -10.0
+unit_size = 2.0
+autoplay = true

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7q1statqscxf"]
+
+[ext_resource type="Shader" path="res://UI/Scenes/MainMenu3d/WaterShader.gdshader" id="1_r8tqh"]
+[ext_resource type="Script" path="res://Water.cs" id="2_7lcjm"]
+[ext_resource type="AudioStream" uid="uid://5jm8e6i6vwei" path="res://MapAssets/Audio/water-stream-108384.mp3" id="3_nr4dk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7ht0i"]
+size = Vector2(1000, 1000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tscrn"]
+noise_type = 3
+seed = 195
+fractal_type = 2
+fractal_octaves = 10
+fractal_lacunarity = 1.285
+fractal_gain = 0.925
+fractal_weighted_strength = 0.42
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7ffh"]
+width = 1000
+height = 1000
+seamless = true
+as_normal_map = true
+bump_strength = 10.0
+noise = SubResource("FastNoiseLite_tscrn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vu5fh"]
+noise_type = 3
+seed = 25
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oqeka"]
+width = 1000
+height = 1000
+seamless = true
+as_normal_map = true
+bump_strength = 10.0
+noise = SubResource("FastNoiseLite_vu5fh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_danek"]
+render_priority = 0
+shader = ExtResource("1_r8tqh")
+shader_parameter/albedo = Color(0.0823419, 0.252337, 0.369295, 1)
+shader_parameter/albedo2 = Color(6.257e-07, 0.275032, 0.549573, 1)
+shader_parameter/metallic = 0.266
+shader_parameter/roughness = 0.197
+shader_parameter/transparency = 0.1
+shader_parameter/wave_direction = Vector2(0, -2)
+shader_parameter/wave_direction2 = Vector2(0, -0.5)
+shader_parameter/time_scale = 0.02
+shader_parameter/wave_strength = 1.0
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_y7ffh")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_oqeka")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hu8o2"]
+size = Vector3(1000, 100, 1000)
+
+[node name="Water" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_7ht0i")
+surface_material_override/0 = SubResource("ShaderMaterial_danek")
+script = ExtResource("2_7lcjm")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 3
+gravity = 1.0
+audio_bus_override = true
+
+[node name="WaterCollision" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+shape = SubResource("BoxShape3D_hu8o2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_nr4dk")
+autoplay = true

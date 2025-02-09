@@ -1,7 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b4nq6ejfy8ym6"]
-
-[ext_resource type="Script" path="res://Player/Character/Inventory/Inventory.cs" id="1_1xcip"]
-
-[resource]
-script = ExtResource("1_1xcip")
-InventorySpace = [[null, null, null, null], [null, null, null, null], [null, null, null, null]]

@@ -55,13 +55,7 @@ public partial class CamPivot : Marker3D
 		float speed = 4.0f;
 		
 		Camera.Fov = Mathf.Lerp(Camera.Fov, targetFOV, speed * (float)delta);
-		if (Mathf.Abs(Camera.Fov - targetFOV) < .5f)
-		{
-			GD.PrintErr($"----------------------------------------------------------");
-			GD.PrintErr($"Current FOV: {Camera.Fov}, Target FOV: {targetFOV}");
-			Camera.Fov = targetFOV;
-			GD.PrintErr($"Current FOV: {Camera.Fov}, Target FOV: {targetFOV}");
-		}
+
 	}
 }
 

@@ -39,6 +39,18 @@ public partial class Capybara : NPCBase
 
 	public override void _Ready()
 	{
+		/*
+		Godot.Collections.Array<CollisionShape3D> coll_array;
+
+		foreach (Node node in GetChildren())
+		{
+			if (node is CollisionShape3D collNode)
+			{
+				
+			}
+		}
+		*/
+
 		base._Ready();
 		SkinningScene = GD.Load<PackedScene>("res://Skinning/DeerSkinTest.tscn"); // load scene
 

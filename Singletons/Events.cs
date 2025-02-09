@@ -24,7 +24,8 @@ public partial class Events : Node
     public delegate void InventoryChangedEventHandler();
 	[Signal]
 	public delegate void MouseHoldingEventHandler(InventoryItemUI instance);
-
+	[Signal]
+	public delegate void UnderwaterToggleEventHandler(bool isUnderwater);
 	public override void _Ready() 
 	{
 		Instance = this;
