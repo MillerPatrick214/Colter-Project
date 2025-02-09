@@ -22,11 +22,11 @@ public partial class Inventory : Resource
     };
 
     [Export]
-    public Godot.Collections.Array<Godot.Collections.Array<InventoryItem>> InventorySpace = new Godot.Collections.Array<Godot.Collections.Array<InventoryItem>> //This represents physical space in inventory, not weapon slots etc. 
+    public Godot.Collections.Array<Godot.Collections.Array<InventoryItem>> InventorySpace = new() //This represents physical space in inventory, not weapon slots etc. 
     {
-        new Godot.Collections.Array<InventoryItem>{null,null,null,null},
-        new Godot.Collections.Array<InventoryItem>{null,null,null,null},
-        new Godot.Collections.Array<InventoryItem>{null,null,null,null}
+        new() {null,null,null,null},
+        new() {null,null,null,null},
+        new() {null,null,null,null}
     };
 
     public int GetRows()

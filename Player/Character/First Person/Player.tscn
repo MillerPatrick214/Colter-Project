@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://vdbb6v2u0wk3"]
+
+[ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
+[ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
+[ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
+[ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
+[ext_resource type="Script" path="res://Player/States/Idle.cs" id="9_g3auy"]
+[ext_resource type="Script" path="res://Player/Character/First Person/ItemMarker.cs" id="9_gmr6g"]
+[ext_resource type="Script" path="res://Player/Character/First Person/Jumping.cs" id="9_hi04n"]
+[ext_resource type="PackedScene" uid="uid://c4x77krwgrmgr" path="res://UI/UI.tscn" id="10_5jbsu"]
+[ext_resource type="Script" path="res://Player/States/Walk.cs" id="10_k5338"]
+[ext_resource type="Script" path="res://Player/States/Fall.cs" id="11_q68kc"]
+[ext_resource type="Script" path="res://Player/Character/First Person/GunCam.cs" id="13_rdepe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s8qte"]
+custom_solver_bias = 0.1
+margin = 0.08
+radius = 0.2
+height = 1.7
+
+[node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
+unique_name_in_owner = true
+script = ExtResource("1_fdc88")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(2560, 1440)
+render_target_update_mode = 4
+
+[node name="GunCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+cull_mask = 2
+current = true
+near = 0.005
+script = ExtResource("13_rdepe")
+CameraPath = NodePath("../../../CamPivot/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
+shape = SubResource("CapsuleShape3D_s8qte")
+
+[node name="CamPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585, 0)
+script = ExtResource("5_kks8j")
+AimFOV = 30.0
+
+[node name="ItemMarker" type="Marker3D" parent="CamPivot"]
+script = ExtResource("9_gmr6g")
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+cull_mask = 1048573
+current = true
+near = 0.013
+
+[node name="InteractRayCast" type="RayCast3D" parent="CamPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, 1.5, 0)
+collision_mask = 3
+script = ExtResource("7_g3eq3")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("8_rpjm1")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("9_g3auy")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("10_k5338")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("11_q68kc")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("9_hi04n")
+
+[node name="UI" parent="." instance=ExtResource("10_5jbsu")]
+metadata/_edit_use_anchors_ = true

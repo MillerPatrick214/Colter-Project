@@ -1,5 +1,5 @@
 using Godot;
-using System.Collections.Generic;
+using static FurInvItem;
 
 public partial class AnimalSkinning : Control
 { 
@@ -36,16 +36,16 @@ public partial class AnimalSkinning : Control
 	Vector2 DefaultBowiePosition;
 	Vector2 DefaultSheathePosition;
 
-	Dictionary<int, string> DictRating = new Dictionary<int, string> 
+	Godot.Collections.Dictionary<int, int> DictAccumRating = new()
 	{
-		{800, "Perfect!"},
-		{1750, "Good!"},
-		{2500, "Decent"},
-		{3250, "Poor..."},
-		{4000, "Shite!"}
-	}; 
+		{(int)FurQuality.NOTSET, 0},
+		{(int)FurQuality.Perfect, 800},
+		{(int)FurQuality.Good, 1750},
+		{(int)FurQuality.Decent, 2500},
+		{(int)FurQuality.Poor, 3250},
+		{(int)FurQuality.Shite, 4000}
+	};
 
-	
 	public override void _Ready()
 	{
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
@@ -69,9 +69,6 @@ public partial class AnimalSkinning : Control
 		if (timer == null) {
 			GD.PrintErr("Timer Returned null in Animal Skinning");
 		}
-		
-		Skinnable currSkinnable = null;
-
 
 		if (CutLine == null) {
 			GD.Print("Animal Skinning Node: Unable to connect to cutline node");
@@ -83,7 +80,7 @@ public partial class AnimalSkinning : Control
 		isMouseOnKnife = false;
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
-		skinningfact.SkinningInstance += (instance) => setSkinnable(ref instance); //connects signal from skinnable object to recieve skinnable function.
+		skinningfact.SkinningInstance += (instance) => SetSkinnable(ref instance); //connects signal from skinnable object to recieve skinnable function.
 		LineIndex = 0;
 		devAccum = 0;
 
@@ -179,7 +176,7 @@ public partial class AnimalSkinning : Control
 			}
 	}
 
-	public void setSkinnable(ref Skinnable instance) {
+	public void SetSkinnable(ref Skinnable instance) {
 			currSkinnable = instance;
 		if (currSkinnable != null) {
 			currSkinnable.MouseOnSkin += (isTrue) => isKnifeOnSkin = isTrue;
@@ -219,14 +216,26 @@ public partial class AnimalSkinning : Control
 
 	public void RateSkinning(float devAccum) 
 	{
-		foreach (KeyValuePair<int, string> kvp in DictRating) {
-			if (devAccum < kvp.Key) {
-				SkinComment.Text  = kvp.Value;
+	Godot.Collections.Dictionary<int, string> DictRatingComment = new()
+	{
+		{(int)FurQuality.NOTSET, "Note to dev: You didn't set the fur quality dumbass!"},
+		{(int)FurQuality.Perfect, "Great skinnin' partner!"},
+		{(int)FurQuality.Good, "Ay, not so bad bucko."},
+		{(int)FurQuality.Decent, "Eh, could be better...could be worse."},
+		{(int)FurQuality.Poor, "Wow, that looks pretty rough."},
+		{(int)FurQuality.Shite, "Holy shite, that's the worst skinnin' I ever seen!"}
+	};
+
+		foreach (var (quality, accum) in DictAccumRating) {
+			if (devAccum <= accum) {
+				SkinComment.Text = DictRatingComment[quality];
 				return;
 			}
 		}
-		SkinComment.Text  = "Completely Ruined";
+		SkinComment.Text = DictRatingComment[(int)FurQuality.NOTSET];
+		Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
 		timer.Start(2);
+
 	}
 
 	public void ResetSkinning() 

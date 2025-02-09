@@ -1,20 +1,14 @@
 using Godot;
-using System;
-using System.Drawing;
-using System.Dynamic;
-using System.Numerics;
-using System.Reflection.Metadata.Ecma335;
-
-
 
 public partial class Skinnable : TextureRect 
 {
 	[Signal]
 	public delegate void MouseOnSkinEventHandler(bool isTrue);
 
-	
+	[Export]
+	public FurInvItem FurInvItem;
 
-	public Godot.Vector2 KnifeStartPosition;
+	public Vector2 KnifeStartPosition;
 	public Marker2D StartMaker;
 
 	CollisionShape2D CollShape;
@@ -31,7 +25,7 @@ public partial class Skinnable : TextureRect
 		
 	}
 
-	public Godot.Vector2 GetShapeLocation() {
+	public Vector2 GetShapeLocation() {
 		Rect2 rectObj = PullRectangle();
 		GD.Print($"Skinnable Rect Position: {rectObj.Position}");
 		return rectObj.Position;

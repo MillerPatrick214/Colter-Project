@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://Singletons/Events.cs"
-PlayerInventory="*res://Singletons/PlayerInventory.cs"
+Player="*res://Player/Character/First Person/Player.cs"
 
 [debug]
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 public partial class DeerSkinTest : Skinnable
 {
-
 	Area2D SkinArea; 
 	Marker2D StartMarker;
 	public override async void _Ready()

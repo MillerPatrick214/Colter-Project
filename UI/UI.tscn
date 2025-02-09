@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=8 format=3 uid="uid://c4x77krwgrmgr"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
 [ext_resource type="Script" path="res://UI/pause_menu.cs" id="2_ymhem"]
-[ext_resource type="Script" path="res://UI/InventoryUI/InventoryUI.cs" id="3_5vqs6"]
 [ext_resource type="Script" path="res://UI/InteractText.cs" id="3_wqbe1"]
 [ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
 [ext_resource type="Script" path="res://UI/InteractEvent.cs" id="5_vodea"]
@@ -23,7 +22,6 @@ script = ExtResource("1_7heha")
 
 [node name="InventoryUI" parent="." instance=ExtResource("8_tewgf")]
 layout_mode = 1
-script = ExtResource("3_5vqs6")
 
 [node name="InteractText" type="Control" parent="."]
 layout_mode = 1

@@ -32,7 +32,7 @@ public partial class InvSlotUI : SlotUI
 					MouseHolding = null;
 					try
 					{
-						PlayerInventory.player_inv.MoveItem(itemUI.item, row, column);
+						Player.Instance.Inventory.MoveItem(itemUI.item, row, column);
 					}
 
 					catch (ArgumentException e)
@@ -50,11 +50,11 @@ public partial class InvSlotUI : SlotUI
 
 	public override void UpdateSlot()
 	{
-		int inventory_columns = PlayerInventory.player_inv.GetColumns();
+		int inventory_columns = Player.Instance.Inventory.GetColumns();
 		row = SlotID / inventory_columns;
 		column = SlotID % inventory_columns;
 
-		InventoryItem newItem = PlayerInventory.player_inv.InventorySpace[row][column];
+		InventoryItem newItem = Player.Instance.Inventory.InventorySpace[row][column];
 
 		if (currItem != newItem)
 		{
