@@ -69,7 +69,6 @@ public partial class Player : CharacterBody3D
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
-<<<<<<< Updated upstream:Player/Character/First Person/Player.cs
 		InventoryUI inventoryUI = GetNodeOrNull<InventoryUI>("UI/InventoryUI");
 		if (inventoryUI == null)
 		{
@@ -80,15 +79,15 @@ public partial class Player : CharacterBody3D
 		}
 		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
 
-=======
+
 		UnderWaterCanvasLayer = GetNodeOrNull<CanvasLayer>("SubViewportContainer/SubViewport/CanvasLayer");
 
-		if (inventory == null) {
+		if (Inventory == null) {
 			GD.PrintErr("Error in Character.cs: inventory returned null");
 		}
-		Events.Instance.PickUp += (item) => inventory.PickUpItem(item);
+		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
 		Events.Instance.UnderwaterToggle += (tf) => ToggleUnderWater(tf);
->>>>>>> Stashed changes:Player/Character/First Person/Character.cs
+
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
 
 		

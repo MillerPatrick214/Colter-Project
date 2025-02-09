@@ -233,15 +233,12 @@ public partial class AnimalSkinning : Control
 				return;
 			}
 		}
-<<<<<<< Updated upstream
 		SkinComment.Text = DictRatingComment[(int)FurQuality.NOTSET];
 		Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
 		timer.Start(2);
 
-=======
 		SkinComment.Text  = "Completely Ruined";
 		
->>>>>>> Stashed changes
 	}
 
 	public void ResetSkinning() 

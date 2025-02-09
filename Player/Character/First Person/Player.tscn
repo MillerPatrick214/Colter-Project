@@ -1,13 +1,7 @@
-<<<<<<< Updated upstream:Player/Character/First Person/Player.tscn
-[gd_scene load_steps=13 format=3 uid="uid://vdbb6v2u0wk3"]
-
-[ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
-=======
 [gd_scene load_steps=17 format=3 uid="uid://y3ldabdae6xn"]
 
-[ext_resource type="Script" path="res://Player/Character/First Person/Character.cs" id="1_fdc88"]
+[ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
 [ext_resource type="Shader" path="res://Player/Character/First Person/UnderWater.gdshader" id="2_c45b1"]
->>>>>>> Stashed changes:Player/Character/First Person/Character.tscn
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="8_rpjm1"]
