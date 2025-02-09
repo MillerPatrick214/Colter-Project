@@ -198,6 +198,7 @@ public partial class AnimalSkinning : Control
 				if (CutLine.GetPointPosition(0).DistanceTo(newPoint) >= MaxLength || LineIndex >= 99) {
 					CutLine.AddPoint(new Vector2(newPoint.X, CutLine.GetPointPosition(0).Y + MaxLength));
 					RateSkinning(devAccum);
+					timer.Start();
 					//GD.PrintErr("Reached termination of cut line. Attempting to start timer.");
 					isSkinning = false;
 					return;
