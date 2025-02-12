@@ -1,0 +1,341 @@
+[1mdiff --git a/522091__magnuswaker__pound-of-flesh-1.wav b/522091__magnuswaker__pound-of-flesh-1.wav[m
+[1mnew file mode 100644[m
+[1mindex 0000000..68bec6a[m
+Binary files /dev/null and b/522091__magnuswaker__pound-of-flesh-1.wav differ
+[1mdiff --git a/522091__magnuswaker__pound-of-flesh-1.wav.import b/522091__magnuswaker__pound-of-flesh-1.wav.import[m
+[1mnew file mode 100644[m
+[1mindex 0000000..74f8bb5[m
+[1m--- /dev/null[m
+[1m+++ b/522091__magnuswaker__pound-of-flesh-1.wav.import[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32m[remap][m
+[32m+[m
+[32m+[m[32mimporter="wav"[m
+[32m+[m[32mtype="AudioStreamWAV"[m
+[32m+[m[32muid="uid://cs76py1susxqi"[m
+[32m+[m[32mpath="res://.godot/imported/522091__magnuswaker__pound-of-flesh-1.wav-60564690040988a57acec359d041e5f6.sample"[m
+[32m+[m
+[32m+[m[32m[deps][m
+[32m+[m
+[32m+[m[32msource_file="res://522091__magnuswaker__pound-of-flesh-1.wav"[m
+[32m+[m[32mdest_files=["res://.godot/imported/522091__magnuswaker__pound-of-flesh-1.wav-60564690040988a57acec359d041e5f6.sample"][m
+[32m+[m
+[32m+[m[32m[params][m
+[32m+[m
+[32m+[m[32mforce/8_bit=false[m
+[32m+[m[32mforce/mono=false[m
+[32m+[m[32mforce/max_rate=false[m
+[32m+[m[32mforce/max_rate_hz=44100[m
+[32m+[m[32medit/trim=false[m
+[32m+[m[32medit/normalize=false[m
+[32m+[m[32medit/loop_mode=0[m
+[32m+[m[32medit/loop_begin=0[m
+[32m+[m[32medit/loop_end=-1[m
+[32m+[m[32mcompress/mode=0[m
+[1mdiff --git a/BulletHitLiving.cs b/BulletHitLiving.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7e2752b[m
+[1m--- /dev/null[m
+[1m+++ b/BulletHitLiving.cs[m
+[36m@@ -0,0 +1,17 @@[m
+[32m+[m[32musing Godot;[m
+[32m+[m[32musing System;[m
+[32m+[m
+[32m+[m[32mpublic partial class BulletHitLiving : Decal[m
+[32m+[m[32m{[m
+[32m+[m	[32m// Called when the node enters the scene tree for the first time.[m
+[32m+[m	[32mpublic override void _Ready()[m
+[32m+[m	[32m{[m
+[32m+[m		[32mGpuParticles3D particles = GetNodeOrNull<GpuParticles3D>("GPUParticles3D");[m
+[32m+[m		[32mparticles.Emitting = true;[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32m// Called every frame. 'delta' is the elapsed time since the previous frame.[m
+[32m+[m	[32mpublic override void _Process(double delta)[m
+[32m+[m	[32m{[m
+[32m+[m	[32m}[m
+[32m+[m[32m}[m
+[1mdiff --git a/BulletHitLiving.tscn b/BulletHitLiving.tscn[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b4731f0[m
+[1m--- /dev/null[m
+[1m+++ b/BulletHitLiving.tscn[m
+[36m@@ -0,0 +1,71 @@[m
+[32m+[m[32m[gd_scene load_steps=12 format=3 uid="uid://ewsuiyyn4qb0"][m
+[32m+[m
+[32m+[m[32m[ext_resource type="Texture2D" uid="uid://hcsy7i38spn5" path="res://GunshotEntrance.png" id="1_dlap8"][m
+[32m+[m[32m[ext_resource type="Script" path="res://BulletHitLiving.cs" id="2_10o4s"][m
+[32m+[m[32m[ext_resource type="Texture2D" uid="uid://bfe3tnhtri20l" path="res://Particles/PNG (Transparent)/smoke_04.png" id="3_ldyu4"][m
+[32m+[m[32m[ext_resource type="AudioStream" uid="uid://cs76py1susxqi" path="res://522091__magnuswaker__pound-of-flesh-1.wav" id="4_a65yo"][m
+[32m+[m
+[32m+[m[32m[sub_resource type="Gradient" id="Gradient_gny63"][m
+[32m+[m[32mcolors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)[m
+[32m+[m
+[32m+[m[32m[sub_resource type="GradientTexture1D" id="GradientTexture1D_kmlqs"][m
+[32m+[m[32mgradient = SubResource("Gradient_gny63")[m
+[32m+[m
+[32m+[m[32m[sub_resource type="Curve" id="Curve_kll34"][m
+[32m+[m[32mmax_value = 5.0[m
+[32m+[m[32m_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0][m
+[32m+[m[32mpoint_count = 2[m
+[32m+[m
+[32m+[m[32m[sub_resource type="CurveTexture" id="CurveTexture_nyhm0"][m
+[32m+[m[32mcurve = SubResource("Curve_kll34")[m
+[32m+[m
+[32m+[m[32m[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugxaj"][m
+[32m+[m[32mlifetime_randomness = 0.5[m
+[32m+[m[32mangle_min = -25.0[m
+[32m+[m[32mangle_max = 25.0[m
+[32m+[m[32minherit_velocity_ratio = 0.2[m
+[32m+[m[32mdirection = Vector3(0, 0, -1)[m
+[32m+[m[32mspread = 20.0[m
+[32m+[m[32minitial_velocity_min = 0.25[m
+[32m+[m[32minitial_velocity_max = 0.75[m
+[32m+[m[32mangular_velocity_min = -25.0[m
+[32m+[m[32mangular_velocity_max = 25.0[m
+[32m+[m[32mgravity = Vector3(0, -1, 0)[m
+[32m+[m[32mdamping_min = 1.0[m
+[32m+[m[32mdamping_max = 1.0[m
+[32m+[m[32mscale_curve = SubResource("CurveTexture_nyhm0")[m
+[32m+[m[32mcolor = Color(1, 0, 0, 0.768627)[m
+[32m+[m[32mcolor_ramp = SubResource("GradientTexture1D_kmlqs")[m
+[32m+[m
+[32m+[m[32m[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4hsp"][m
+[32m+[m[32mtransparency = 1[m
+[32m+[m[32mvertex_color_use_as_albedo = true[m
+[32m+[m[32malbedo_texture = ExtResource("3_ldyu4")[m
+[32m+[m[32mbillboard_mode = 2[m
+[32m+[m[32mbillboard_keep_scale = true[m
+[32m+[m
+[32m+[m[32m[sub_resource type="QuadMesh" id="QuadMesh_h2u62"][m
+[32m+[m[32mmaterial = SubResource("StandardMaterial3D_y4hsp")[m
+[32m+[m[32msize = Vector2(0.1, 0.1)[m
+[32m+[m
+[32m+[m[32m[node name="Decal" type="Decal"][m
+[32m+[m[32msize = Vector3(0.05, 0.05, 0.05)[m
+[32m+[m[32mtexture_albedo = ExtResource("1_dlap8")[m
+[32m+[m[32mscript = ExtResource("2_10o4s")[m
+[32m+[m
+[32m+[m[32m[node name="GPUParticles3D" type="GPUParticles3D" parent="."][m
+[32m+[m[32memitting = false[m
+[32m+[m[32mamount = 10[m
+[32m+[m[32mlifetime = 0.5[m
+[32m+[m[32mone_shot = true[m
+[32m+[m[32mexplosiveness = 1.0[m
+[32m+[m[32mtransform_align = 2[m
+[32m+[m[32mprocess_material = SubResource("ParticleProcessMaterial_ugxaj")[m
+[32m+[m[32mdraw_pass_1 = SubResource("QuadMesh_h2u62")[m
+[32m+[m
+[32m+[m[32m[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."][m
+[32m+[m[32mstream = ExtResource("4_a65yo")[m
+[32m+[m[32mattenuation_model = 1[m
+[32m+[m[32mvolume_db = -10.0[m
+[32m+[m[32munit_size = 2.0[m
+[32m+[m[32mautoplay = true[m
+[1mdiff --git a/GunshotEntrance.aseprite b/GunshotEntrance.aseprite[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4935277[m
+Binary files /dev/null and b/GunshotEntrance.aseprite differ
+[1mdiff --git a/GunshotEntrance.png b/GunshotEntrance.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..64a31b1[m
+Binary files /dev/null and b/GunshotEntrance.png differ
+[1mdiff --git a/GunshotEntrance.png.import b/GunshotEntrance.png.import[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c051d58[m
+[1m--- /dev/null[m
+[1m+++ b/GunshotEntrance.png.import[m
+[36m@@ -0,0 +1,35 @@[m
+[32m+[m[32m[remap][m
+[32m+[m
+[32m+[m[32mimporter="texture"[m
+[32m+[m[32mtype="CompressedTexture2D"[m
+[32m+[m[32muid="uid://hcsy7i38spn5"[m
+[32m+[m[32mpath.s3tc="res://.godot/imported/GunshotEntrance.png-e4609f5f953beebd706f90c854bcb001.s3tc.ctex"[m
+[32m+[m[32mmetadata={[m
+[32m+[m[32m"imported_formats": ["s3tc_bptc"],[m
+[32m+[m[32m"vram_texture": true[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m[deps][m
+[32m+[m
+[32m+[m[32msource_file="res://GunshotEntrance.png"[m
+[32m+[m[32mdest_files=["res://.godot/imported/GunshotEntrance.png-e4609f5f953beebd706f90c854bcb001.s3tc.ctex"][m
+[32m+[m
+[32m+[m[32m[params][m
+[32m+[m
+[32m+[m[32mcompress/mode=2[m
+[32m+[m[32mcompress/high_quality=false[m
+[32m+[m[32mcompress/lossy_quality=0.7[m
+[32m+[m[32mcompress/hdr_compression=1[m
+[32m+[m[32mcompress/normal_map=0[m
+[32m+[m[32mcompress/channel_pack=0[m
+[32m+[m[32mmipmaps/generate=true[m
+[32m+[m[32mmipmaps/limit=-1[m
+[32m+[m[32mroughness/mode=0[m
+[32m+[m[32mroughness/src_normal=""[m
+[32m+[m[32mprocess/fix_alpha_border=true[m
+[32m+[m[32mprocess/premult_alpha=false[m
+[32m+[m[32mprocess/normal_map_invert_y=false[m
+[32m+[m[32mprocess/hdr_as_srgb=false[m
+[32m+[m[32mprocess/hdr_clamp_exposure=false[m
+[32m+[m[32mprocess/size_limit=0[m
+[32m+[m[32mdetect_3d/compress_to=0[m
+[1mdiff --git a/Items/Classes/Item3D.cs b/Items/Classes/Item3D.cs[m
+[1mindex 00f3d14..65caba2 100644[m
+[1m--- a/Items/Classes/Item3D.cs[m
+[1m+++ b/Items/Classes/Item3D.cs[m
+[36m@@ -18,7 +18,6 @@[m [mpublic partial class Item3D : RigidBody3D //base for all items and tools visible[m
+ 	[Export][m
+ 	public virtual bool isHeld {get; set;} = false;[m
+ [m
+[31m-	MeshInstance3D VisibilityMesh;[m
+ 	public Item3D() {}[m
+ 	public Item3D(bool isHeld)[m
+ 	{[m
+[1mdiff --git a/Items/Weapons/1795 Musket/1795Musket.tscn b/Items/Weapons/1795 Musket/1795Musket.tscn[m
+[1mindex 075a047..3aa3ed2 100644[m
+[1m--- a/Items/Weapons/1795 Musket/1795Musket.tscn[m	
+[1m+++ b/Items/Weapons/1795 Musket/1795Musket.tscn[m	
+[36m@@ -1,10 +1,11 @@[m
+[31m-[gd_scene load_steps=74 format=4 uid="uid://mkhbyhetuydg"][m
+[32m+[m[32m[gd_scene load_steps=70 format=4 uid="uid://mkhbyhetuydg"][m
+ [m
+ [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="1_1b3rr"][m
+ [ext_resource type="Texture2D" uid="uid://rlyy8ni5fgsp" path="res://Items/Weapons/1795 Musket/1795 musketREAL_gunmetal Base Color.png" id="1_dwws7"][m
+ [ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Seventeen_Ninety_Five_Musket.cs" id="1_h0wpl"][m
+ [ext_resource type="Resource" uid="uid://brh6or0x4bks5" path="res://Items/Weapons/1795 Musket/InventoryItem/SeventeenNinetyFiveInventoryItem.tres" id="2_ceery"][m
+ [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="4_3o0bd"][m
+[32m+[m[32m[ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/Particle Materials/Smoke.tres" id="4_711rt"][m
+ [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"][m
+ [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"][m
+ [ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Smoke.cs" id="4_yf7fh"][m
+[36m@@ -751,38 +752,6 @@[m [m_data = {[m
+ "UP": SubResource("Animation_ibx18")[m
+ }[m
+ [m
+[31m-[sub_resource type="Gradient" id="Gradient_oncw0"][m
+[31m-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)[m
+[31m-[m
+[31m-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sru2f"][m
+[31m-gradient = SubResource("Gradient_oncw0")[m
+[31m-[m
+[31m-[sub_resource type="Curve" id="Curve_v4pfe"][m
+[31m-min_value = 0.5[m
+[31m-max_value = 3.0[m
+[31m-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0][m
+[31m-point_count = 2[m
+[31m-[m
+[31m-[sub_resource type="CurveTexture" id="CurveTexture_4306r"][m
+[31m-curve = SubResource("Curve_v4pfe")[m
+[31m-[m
+[31m-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dfena"][m
+[31m-lifetime_randomness = 0.5[m
+[31m-particle_flag_rotate_y = true[m
+[31m-angle_min = -45.0[m
+[31m-angle_max = 45.0[m
+[31m-direction = Vector3(0, 0, 1)[m
+[31m-initial_velocity_min = 14.54[m
+[31m-initial_velocity_max = 14.75[m
+[31m-angular_velocity_min = -25.0[m
+[31m-angular_velocity_max = 25.0[m
+[31m-gravity = Vector3(0, 0, 0)[m
+[31m-damping_min = 0.75[m
+[31m-damping_max = 1.0[m
+[31m-scale_curve = SubResource("CurveTexture_4306r")[m
+[31m-color_ramp = SubResource("GradientTexture1D_sru2f")[m
+[31m-turbulence_noise_scale = 3.0[m
+[31m-[m
+ [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley4k"][m
+ transparency = 1[m
+ vertex_color_use_as_albedo = true[m
+[36m@@ -873,7 +842,7 @@[m [mcolors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)[m
+ [sub_resource type="GradientTexture1D" id="GradientTexture1D_7k0ak"][m
+ gradient = SubResource("Gradient_4hrul")[m
+ [m
+[31m-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7d88"][m
+[32m+[m[32m[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2lhdf"][m
+ lifetime_randomness = 0.4[m
+ particle_flag_rotate_y = true[m
+ angle_min = -45.0[m
+[36m@@ -939,6 +908,7 @@[m [mradius = 0.2[m
+ height = 1.4[m
+ [m
+ [node name="1795Musket" type="RigidBody3D"][m
+[32m+[m[32mtransform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.045)[m
+ collision_layer = 3[m
+ script = ExtResource("1_h0wpl")[m
+ ADSPosition = Vector3(0, -0.013, 0)[m
+[36m@@ -946,7 +916,7 @@[m [mMeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodeP[m
+ ItemResource = ExtResource("2_ceery")[m
+ [m
+ [node name="Skeleton3D" type="Skeleton3D" parent="."][m
+[31m-transform = Transform3D(0.05, 0, 0, 0, 0.0104736, 0.0488908, 0, -0.0488908, 0.0104736, 0, -0.0129902, 0)[m
+[32m+[m[32mtransform = Transform3D(0.05, 0, 0, 0, 0.0102436, 0.0489395, 0, -0.0489395, 0.0102436, -0.000933349, -0.0461051, 8.49813e-05)[m
+ bones/0/name = "Bone_master"[m
+ bones/0/parent = -1[m
+ bones/0/rest = Transform3D(1, -4.96308e-24, -1.65436e-24, 4.96308e-24, 1, 0, 1.65436e-24, 0, 1, -1.54737e-15, 8.41916e-07, 0)[m
+[36m@@ -1195,19 +1165,20 @@[m [mlibraries = {[m
+ movie_quit_on_finish = true[m
+ [m
+ [node name="WeaponEnd" type="Marker3D" parent="."][m
+[31m-transform = Transform3D(-0.05, 0, 4.37114e-09, 0, 0.05, 0, -4.37114e-09, 0, -0.05, 1.12514e-07, 0.0215187, -1.28701)[m
+[32m+[m[32mtransform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -1.273)[m
+ [m
+ [node name="Smoke" type="GPUParticles3D" parent="WeaponEnd"][m
+ transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)[m
+ emitting = false[m
+ lifetime = 4.0[m
+ explosiveness = 1.0[m
+[31m-process_material = SubResource("ParticleProcessMaterial_dfena")[m
+[32m+[m[32mprocess_material = ExtResource("4_711rt")[m
+ draw_pass_1 = SubResource("QuadMesh_r5cbn")[m
+ script = ExtResource("4_yf7fh")[m
+ [m
+ [node name="OmniLight3D" type="OmniLight3D" parent="WeaponEnd"][m
+[31m-transform = Transform3D(1, 0, 7.10542e-15, 0, 1, 0, -7.10542e-15, 0, 1, 0, 0, 0)[m
+[32m+[m[32mtransform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)[m
+[32m+[m[32mlayers = 3[m
+ light_color = Color(0.997214, 0.691001, 1.15514e-06, 1)[m
+ light_energy = 0.0[m
+ omni_range = 5.06471[m
+[36m@@ -1220,19 +1191,25 @@[m [mframe = 9[m
+ speed_scale = 10.0[m
+ [m
+ [node name="AudioEffect" type="AudioStreamPlayer3D" parent="."][m
+[31m-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0129902, 0)[m
+[32m+[m[32mtransform = Transform3D(1, 0, 0, 0, 0.999985, 0.00556757, 0, -0.00556757, 0.999985, 0, -0.0496138, 8.49813e-05)[m
+ stream = ExtResource("4_e2421")[m
+[32m+[m[32mattenuation_model = 1[m
+[32m+[m[32mvolume_db = 80.0[m
+[32m+[m[32munit_size = 30.0[m
+[32m+[m[32mmax_db = 6.0[m
+[32m+[m[32mpitch_scale = 1.2[m
+[32m+[m[32mmax_distance = 50.0[m
+ [m
+ [node name="Timer" type="Timer" parent="."][m
+ [m
+ [node name="PanSparks" type="GPUParticles3D" parent="."][m
+[31m-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.0223977, 0.0207455, -0.102858)[m
+[32m+[m[32mtransform = Transform3D(0.05, 0, 0, 0, 0.0499992, 0.000278379, 0, -0.000278379, 0.0499992, 0.0223977, -0.0164513, -0.102959)[m
+ emitting = false[m
+ amount = 30[m
+ lifetime = 0.3[m
+ one_shot = true[m
+ explosiveness = 0.83[m
+[31m-process_material = SubResource("ParticleProcessMaterial_j7d88")[m
+[32m+[m[32mprocess_material = SubResource("ParticleProcessMaterial_2lhdf")[m
+ draw_pass_1 = SubResource("QuadMesh_axuug")[m
+ [m
+ [node name="AnimationTree" type="AnimationTree" parent="."][m
+[36m@@ -1246,5 +1223,5 @@[m [mparameters/OneShot/internal_active = false[m
+ parameters/OneShot/request = 0[m
+ [m
+ [node name="CollisionShape3D" type="CollisionShape3D" parent="."][m
+[31m-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.63827e-08, -0.374793)[m
+[32m+[m[32mtransform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.00556753, 0, -0.0387105, -0.374775)[m
+ shape = SubResource("CapsuleShape3D_2g2ad")[m
+[1mdiff --git a/Items/Weapons/1795 Musket/Projectile/216544__felixblume__wind-in-a-field-recorded-close-to-the-ground-in-new-mexico-usa.wav b/Items/Weapons/1795 Musket/Projectile/216544__felixblume__wind-in-a-field-recorded-close-to-the-ground-in-new-mexico-usa.wav[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6b82946[m
+Binary files /dev/

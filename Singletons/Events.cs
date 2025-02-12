@@ -30,5 +30,4 @@ public partial class Events : Node
 	{
 		Instance = this;
 	}
-
 }

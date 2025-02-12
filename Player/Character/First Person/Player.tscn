@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://y3ldabdae6xn"]
+[gd_scene load_steps=18 format=3 uid="uid://djdku4ekx1emk"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
+[ext_resource type="Resource" uid="uid://b4nq6ejfy8ym6" path="res://UI/InventoryUI/Inventory/Inventory.tres" id="2_bh0i7"]
 [ext_resource type="Shader" path="res://Player/Character/First Person/UnderWater.gdshader" id="2_c45b1"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
@@ -35,6 +36,7 @@ height = 1.7
 [node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
 script = ExtResource("1_fdc88")
+inventory = ExtResource("2_bh0i7")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_f4xyh")
@@ -81,10 +83,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0159696, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/GunCam/Area3D"]
 shape = SubResource("BoxShape3D_1ltv5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
-shape = SubResource("CapsuleShape3D_s8qte")
-
 [node name="CamPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585, 0)
 script = ExtResource("5_kks8j")
@@ -122,3 +120,7 @@ script = ExtResource("9_hi04n")
 
 [node name="UI" parent="." instance=ExtResource("10_5jbsu")]
 metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
+shape = SubResource("CapsuleShape3D_s8qte")

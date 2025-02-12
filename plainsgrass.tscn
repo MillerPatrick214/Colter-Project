@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3w8shj4tuqs1"]
 
 [ext_resource type="PackedScene" uid="uid://cq8x4fuixtepf" path="res://plainsgrass.glb" id="1_i3iut"]
-[ext_resource type="Shader" path="res://UI/Scenes/MainMenu3d/GrassAtttempt.gdshader" id="2_q6l1o"]
+[ext_resource type="Shader" path="res://Level/MainMenu3d/GrassAtttempt.gdshader" id="2_q6l1o"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e1rvs"]
 noise_type = 3

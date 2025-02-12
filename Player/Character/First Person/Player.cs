@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using System.Dynamic;
+using System.IO;
 using Godot;
 
 public partial class Player : CharacterBody3D
@@ -12,8 +15,9 @@ public partial class Player : CharacterBody3D
 	public float JumpImpulse = 20f;
 	[Export]
 	public float JumpManueverSpeed = 15f;
+	
 	[Export]
-	public Inventory Inventory;
+	public Inventory inventory;
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
 
@@ -55,10 +59,12 @@ public partial class Player : CharacterBody3D
 
 	LeanDirection Leaning;
 	CanvasLayer UnderWaterCanvasLayer;
-	
+
     public override void _Ready()
     {
 		Instance = this;
+
+		GD.PrintErr($"Player Instance: {this.GetPath()}");
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
@@ -74,24 +80,19 @@ public partial class Player : CharacterBody3D
 		{
 			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect inventory information");
 		}
-		if (Inventory == null) {
+		if (inventory == null) {
 			GD.PrintErr("Error in Character.cs: inventory returned null");
 		}
-		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
-
+		if (CollisionShapeNode == null) {GD.PrintErr("Error Player.cs: CollisionShapeNode returned null");}
+		Events.Instance.PickUp += (item) => inventory.PickUpItem(item);
 
 		UnderWaterCanvasLayer = GetNodeOrNull<CanvasLayer>("SubViewportContainer/SubViewport/CanvasLayer");
 
-		if (Inventory == null) {
-			GD.PrintErr("Error in Character.cs: inventory returned null");
-		}
-		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
 		Events.Instance.UnderwaterToggle += (tf) => ToggleUnderWater(tf);
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
-
-		
     }
+
 
 	public override void _Process(double delta) {
 		int curr_slot = SlotIndex;
@@ -110,60 +111,64 @@ public partial class Player : CharacterBody3D
 		Equippable item = null;
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
-			item = Inventory.EquipFromSlot(0);
+			item = inventory.EquipFromSlot(0);
 			SlotIndex = 0;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
-			item = Inventory.EquipFromSlot(1);
+			item = inventory.EquipFromSlot(1);
 			SlotIndex = 1;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
-			item = Inventory.EquipFromSlot(2);
+			item = inventory.EquipFromSlot(2);
 			SlotIndex = 2;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon2"))
 		{
-			item = Inventory.EquipFromSlot(3);
+			item = inventory.EquipFromSlot(3);
 			SlotIndex = 3;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
-			item = Inventory.EquipFromSlot(4);
+			item = inventory.EquipFromSlot(4);
 			SlotIndex = 4;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
-			item = Inventory.EquipFromSlot(5);
+			item = inventory.EquipFromSlot(5);
 			SlotIndex = 5;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
-			item = Inventory.EquipFromSlot(6);
+			item = inventory.EquipFromSlot(6);
 			SlotIndex = 6;
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex += 1;
-			item = Inventory.EquipFromSlot(SlotIndex);
+			item = inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex -= 1;
-			item = Inventory.EquipFromSlot(SlotIndex);
+			item = inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 	}
 
+	public void SetStartPosition(Vector3 pos)
+	{
+		Position = pos;
+	}
 	public void SetEquipped(Equippable item) 
 	{
 		if (Held != null)

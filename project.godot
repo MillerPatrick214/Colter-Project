@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Colter"
-run/main_scene="res://Test Room.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 run/max_fps=144
 config/icon="res://icon.svg"
@@ -19,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://Singletons/Events.cs"
-Player="*res://Player/Character/First Person/Player.cs"
+Player="*res://Player/Character/First Person/Player.tscn"
+Global="*res://Level/Global.cs"
 
 [debug]
 

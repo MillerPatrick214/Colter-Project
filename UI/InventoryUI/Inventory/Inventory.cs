@@ -41,7 +41,7 @@ public partial class Inventory : Resource
 
     public void PickUpItem(InventoryItem item) // Doesn't take space into account. This will also have to throw an exception not just print an err 
     {
-        //GD.PrintErr("Pickup successfully called");
+       GD.PrintErr("Pickup successfully called");
 
         for (int i = 0; i < InventorySpace.Count; i++) 
         {

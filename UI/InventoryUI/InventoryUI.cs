@@ -2,10 +2,8 @@ using Godot;
 
 public partial class InventoryUI : Control
 {
-	Inventory Inventory; //This resource should be shared with character
 	public override void _Ready()
 	{
-		Inventory = Player.Instance.Inventory;
 		Visible = false;
 	}
 
