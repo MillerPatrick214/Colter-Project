@@ -19,6 +19,7 @@ public partial class CapyFlee : NPCState<Capybara>
 	{
 		Traveling = false;
 		NPC.NavAgent.NavigationFinished += NavFinished;
+		NPC.NavAgent.Use3DAvoidance = true;
 
 	}
 	
@@ -35,8 +36,9 @@ public partial class CapyFlee : NPCState<Capybara>
 	public override void PhysicsUpdate(double delta)
 	{
 		Godot.Vector3 fleeVector = FindFleeVector();
-		float vectorMagnitude = Mathf.Sqrt(fleeVector.Dot(fleeVector));
-		GD.Print("Vector Magnitude for Flee: " + vectorMagnitude);
+
+		float vectorMagnitude = Mathf.Sqrt(fleeVector.Dot(fleeVector));	//FindFleeVector returns the non-normalzied vector from the threat's global position to our position (no y component). Taking the square of V dot V returns the magnitude.
+		GD.PrintErr("Vector Magnitude for Flee: " + vectorMagnitude);
 
 		if (vectorMagnitude > 50) {				//if the magnitude(distance) of the vector between our position and the threat's is greater than x amount, chill
 			EmitSignal(SignalName.Finished, IDLE);
@@ -76,11 +78,12 @@ public partial class CapyFlee : NPCState<Capybara>
 
 			Random r = new Random();
 			int randomSign = (int)(r.NextDouble() < 5 ? 1 : -1); // decides whether or not we will be rotating left or right in case of unreachable target
-
-			while (!NPC.NavAgent.IsTargetReachable()) {
-				fleeVect = fleeVect.Rotated(NPC.Transform.Basis.Y.Normalized(), randomSign * .10f * Mathf.Pi); //Rotates around LOCAL y axis by 1/8 of a circle, 45 degrees, by a random sign representing left/right rotation
-				fleeVect.Y = 0;
-				NPC.NavAgent.TargetPosition = FindFleePoint(fleeVect);
+			
+			
+			if (!NPC.NavAgent.IsTargetReachable()) { //this while loop might be cucking us.
+				fleeVect = fleeVect.Rotated(NPC.Transform.Basis.Y.Normalized(), randomSign * .50f * Mathf.Pi); //Rotates around LOCAL y axis by 1/8 of a circle, 45 degrees, by a random sign representing left/right rotation
+				fleePoint = FindFleePoint(fleeVect);
+				NPC.NavAgent.TargetPosition = NavigationServer3D.MapGetClosestPoint(NPC.NavAgent.GetNavigationMap(), fleePoint);
 			}
 
 			Traveling = true; 

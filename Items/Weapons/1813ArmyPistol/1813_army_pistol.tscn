@@ -1,7 +1,7 @@
 [gd_scene load_steps=48 format=4 uid="uid://c5ntwqe7kftaw"]
 
 [ext_resource type="Script" path="res://Items/Weapons/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
-[ext_resource type="AnimationLibrary" path="res://Items/Weapons/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
+[ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
 [ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/1813ArmyPistol/1813ArmyPistol.png" id="2_0r2lh"]
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="2_7ruvr"]
 [ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/Particle Materials/Smoke.tres" id="2_c0nem"]

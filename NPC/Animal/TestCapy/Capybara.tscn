@@ -245,7 +245,7 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_vl53y")
 
 [node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.000269066, 5.96046e-08, 0.00410354)
 shape = SubResource("ConvexPolygonShape3D_fgndo")
 
 [node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
@@ -277,7 +277,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.275715, -0.00296891, 0.00216924, 0.961232)
+bones/2/rotation = Quaternion(0.252566, -0.00291639, 0.00223568, 0.967573)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 public abstract partial class RangedWeapon : Weapon
 {
@@ -18,6 +19,8 @@ public abstract partial class RangedWeapon : Weapon
 	[Export]
 	public virtual Vector3 DefaultRotation{get; set;} = Vector3.Zero;
 	public abstract float ProjectileVelocity { get; set; }
+	[Export]
+	public virtual float SwayFactor {get; set;}
 	
 	public abstract string AmmoPath { get; set;}
 	bool CanFire;
@@ -68,19 +71,12 @@ public abstract partial class RangedWeapon : Weapon
 
 	public override void _Process(double delta)
 	{
-		if (!IsInteracting) {
-			if (Input.IsActionPressed("Aim")) {
-				Aim(true, delta);
-			}
+		Aim(delta);
+	}
 
-			else {
-				Aim(false, delta);
-			}
-
-			if(IsAiming && Input.IsActionJustPressed("UseItem")) {
-				Fire();
-			}
-		}
+	public void SetIsAiming(bool tf)
+	{
+		IsAiming = tf;
 
 	}
 
@@ -88,8 +84,7 @@ public abstract partial class RangedWeapon : Weapon
 		CanFire = true;
 	}
 
-	public void Aim(bool aimBool, double delta){					//Tis will almost definitely need to be re-worked as animation improves
-		IsAiming = aimBool;
+	public void Aim( double delta){					//Tis will almost definitely need to be re-worked as animation improves
 		float currentAimState = (float)AniTree.Get("parameters/Blend2/blend_amount"); 
 		if (IsAiming) {
 			float newAimState = Mathf.Lerp(currentAimState, 1, (float)(5 * delta));
@@ -102,9 +97,8 @@ public abstract partial class RangedWeapon : Weapon
 	}
 
 	public void Fire() {
-		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);	//this needs to be changed -- ALL guns fire if signal is sent out lmaooo
+		AniTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);	
 		LaunchProjectile();
-
 	}
 
 	public virtual void ResetEmitters() {

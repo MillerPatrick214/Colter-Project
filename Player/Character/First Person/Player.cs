@@ -1,6 +1,4 @@
-using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
+using System;
 using Godot;
 
 public partial class Player : CharacterBody3D
@@ -163,12 +161,35 @@ public partial class Player : CharacterBody3D
 			item = inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
+
+		if (Held != null)
+		{
+			if (Held is RangedWeapon rangedwep)
+			{
+				if (Input.IsActionPressed("Aim"))
+				{
+					rangedwep.SetIsAiming(true);
+
+					if (Input.IsActionJustPressed("UseItem"))
+					{
+						rangedwep.Fire();
+					}
+				}
+
+				else
+				{
+					rangedwep.SetIsAiming(false);
+				}
+			}
+		}
+
 	}
 
 	public void SetStartPosition(Vector3 pos)
 	{
 		Position = pos;
 	}
+
 	public void SetEquipped(Equippable item) 
 	{
 		if (Held != null)
