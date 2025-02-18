@@ -28,19 +28,7 @@ public partial class pause_menu : Control
 
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		if (Input.IsActionJustPressed("PauseMenu")) {
-			if (!Opened) {
-				PauseMenu();
-			}
-			else {
-				Unpause();
-			}
-		}
-	}
-
+	// Called every frame. 'delta' is the elapsed time since the previous frame.s
 	public void PauseMenu() {
 		GetTree().Paused = true;
 		Show();

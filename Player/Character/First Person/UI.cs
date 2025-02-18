@@ -3,30 +3,24 @@ using Godot;
 
 public partial class UI : Control
 {
-	Node InputControl;
+	InputControl InputControl;
 
     public override void _Ready()
     {
-		InputControl = GetNodeOrNull<Node>("InputControl");
+		InputControl = GetNodeOrNull<InputControl>("InputControl");
 
-		InputControl.TransitionUI += (newUI) => 
+		InputControl.TransitionControl += (newUI) => TransitionUI(newUI);
     }
     Control CurrentControl;
 
-	public const string SKINNING = "Skinning";
-	public const string RELOADING = "Reloading";
-	public const string DIALOGUE = "Dialogue";
-	public const string PAUSE = "PauseMenu";
-	public const string INVENTORY = "InventoryUI";
-
-	public void TransitionUI(Control NewControl)
+	public void TransitionUI(string NewControlPath)
 	{
 		if (CurrentControl != null)
 		{
 			CurrentControl.Hide();
 		}
 
-		CurrentControl = NewControl;
+		CurrentControl = GetNode<Control>(NewControlPath);
 		CurrentControl.Show();
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4x77krwgrmgr"]
+[gd_scene load_steps=10 format=3 uid="uid://c4x77krwgrmgr"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
 [ext_resource type="Script" path="res://UI/pause_menu.cs" id="2_ymhem"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://t0fd544v45ma" path="res://Skinning/AnimalSkinningSetup.tscn" id="6_bderw"]
 [ext_resource type="PackedScene" uid="uid://oe5kwyao0abj" path="res://reload.tscn" id="8_jtp4a"]
 [ext_resource type="PackedScene" uid="uid://cgrey8ixgno8a" path="res://UI/InventoryUI/InventoryUI.tscn" id="8_tewgf"]
+[ext_resource type="Script" path="res://UI/InputControl.cs" id="9_hgomv"]
 
 [node name="UI" type="Control"]
 top_level = true
@@ -130,3 +131,4 @@ offset_bottom = 40.0
 [node name="Reloading" parent="." instance=ExtResource("8_jtp4a")]
 
 [node name="InputControl" type="Node" parent="."]
+script = ExtResource("9_hgomv")

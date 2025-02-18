@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 public partial class InputControl : Node
 {
 	[Signal]
-	public delegate void TransitionUIEventHandler(string TransitionTo);
+	public delegate void TransitionControlEventHandler(string TransitionTo);
 
 	public const string SKINNING = "Skinning";
 	public const string RELOADING = "Reloading";
@@ -20,12 +20,15 @@ public partial class InputControl : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
-
 		//INVENTORY
 		if (Input.IsActionJustPressed("Inventory")) {
-			EmitSignal(SignalName.TransitionUI, INVENTORY);
+			EmitSignal(SignalName.TransitionControl, INVENTORY);
 		}
 
+		if (Input.IsActionJustPressed(""))
+
+
+		if (Input.IsActionJustPressed("PauseMenu")) {
+		}
 	}
 }
