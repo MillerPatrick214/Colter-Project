@@ -1,29 +1,33 @@
 using Godot;
-using System;
+
 
 public partial class UI : Control
 {
-	// Called when the node enters the scene tree for the first time.
+	Node InputControl;
 
-	public enum UIState		//instead of setting show/hide manually we'll do it here.
+    public override void _Ready()
+    {
+		InputControl = GetNodeOrNull<Node>("InputControl");
+
+		InputControl.TransitionUI += (newUI) => 
+    }
+    Control CurrentControl;
+
+	public const string SKINNING = "Skinning";
+	public const string RELOADING = "Reloading";
+	public const string DIALOGUE = "Dialogue";
+	public const string PAUSE = "PauseMenu";
+	public const string INVENTORY = "InventoryUI";
+
+	public void TransitionUI(Control NewControl)
 	{
-		Skinning,
-		Reloading,
-		Dialogue,
-		Pause,
-		Inventory,
+		if (CurrentControl != null)
+		{
+			CurrentControl.Hide();
+		}
+
+		CurrentControl = NewControl;
+		CurrentControl.Show();
 	}
-
-	public override void _Ready()
-	{
-
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	
-	public override void _Process(double delta)
-	{
-
-	}
-
 }
+
