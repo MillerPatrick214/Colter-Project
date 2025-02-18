@@ -28,15 +28,6 @@ public partial class Water : MeshInstance3D
 		coll_area.AreaEntered += (area) => UnderwaterCheck(area, enter);
 		coll_area.AreaExited += (area) => UnderwaterCheck(area, exit);
 	}
-
-
-
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
 	public void UnderwaterCheck(Area3D area, bool isEnter)
 	{
 		GD.PrintErr($"Water:UnderwaterCheck() -- body is {area}");

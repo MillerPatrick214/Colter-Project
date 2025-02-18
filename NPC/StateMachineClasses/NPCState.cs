@@ -1,6 +1,7 @@
 using Godot;
 using System;
-using System.Threading.Tasks;
+
+using System.Diagnostics;
 
 public partial class NPCState<T> : State where T : NPCBase //using template to allow for greater flexibility
 {
@@ -14,10 +15,11 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 	public const string DEATH = "Death"; 
 	
 	
-	//so here we will continue to add string defs for different states as needed
+	protected Stopwatch _stopwatch = new Stopwatch();
 	
 	public override async void _Ready()
 	{
+		
 
 		NPC = Owner as T;
 		//GD.Print("Awaiting NPC Owner to be Ready");
@@ -32,4 +34,6 @@ public partial class NPCState<T> : State where T : NPCBase //using template to a
 
         }
 	}
+
+
 }

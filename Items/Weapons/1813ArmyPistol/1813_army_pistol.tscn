@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://c5ntwqe7kftaw"]
+[gd_scene load_steps=47 format=4 uid="uid://c5ntwqe7kftaw"]
 
 [ext_resource type="Script" path="res://Items/Weapons/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
 [ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_mh4wq"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_4yhk7"]
 [ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/Particle Materials/Sparks.tres" id="6_udhe1"]
-[ext_resource type="AudioStream" uid="uid://b7otrcvcmbywm" path="res://Items/Weapons/1813ArmyPistol/538795__brunoauzet__old-musket-bang.wav" id="11_2syqw"]
 
 [sub_resource type="Resource" id="Resource_cac6x"]
 script = ExtResource("3_d54wb")
@@ -47,6 +46,7 @@ sync = true
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_msc4f"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wikc5"]
+graph_offset = Vector2(0, -98)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_wlxnp")
 nodes/Animation/position = Vector2(-140, 340)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0l2f1")
@@ -558,10 +558,6 @@ billboard = 1
 sprite_frames = SubResource("SpriteFrames_scjv6")
 speed_scale = 10.0
 
-[node name="AudioEffect" type="AudioStreamPlayer3D" parent="WeaponEnd"]
-transform = Transform3D(-20, 0, -1.74846e-06, 0, 20, 0, 1.74846e-06, 0, -20, -3.31429e-06, -0.259804, 0.109356)
-stream = ExtResource("5_mh4wq")
-
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 bones/0/name = "HandleBone"
@@ -576,7 +572,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.82146e-07, 3.19049e-07, 4.61673e-07, 0.220604, -0.975363, 5.94957e-07, 0.975363, 0.220604, 0.210136, 1.96814, -0.754647)
 bones/1/enabled = true
 bones/1/position = Vector3(0.210136, 1.96814, -0.754647)
-bones/1/rotation = Quaternion(0.440535, -1.03607e-07, 2.55628e-07, 0.897735)
+bones/1/rotation = Quaternion(0.624258, -8.82942e-08, 3.66037e-07, 0.781218)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Frizzen_2"
 bones/2/parent = 1
@@ -590,7 +586,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, -6.1614e-07, 1.45205e-07, 4.14331e-07, 0.463655, -0.886016, 4.78585e-07, 0.886016, 0.463655, 0.208017, 1.56936, -0.242483)
 bones/3/enabled = true
 bones/3/position = Vector3(0.208017, 1.56936, -0.242483)
-bones/3/rotation = Quaternion(-0.0611806, -1.19524e-07, -4.52438e-08, 0.998127)
+bones/3/rotation = Quaternion(0.517854, -9.74259e-08, 3.01142e-07, 0.855469)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Hammer"
 bones/4/parent = 3
@@ -622,7 +618,7 @@ bones/7/rotation = Quaternion(0.341563, -3.3612e-07, 1.22152e-07, 0.939859)
 bones/7/scale = Vector3(1, 1, 1)
 
 [node name="Frizzen_2" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1, -1.16529e-12, 9.66338e-13, 1.18661e-12, 1, 1.78814e-06, -1.02318e-12, -1.78814e-06, 1, -7.89762e-07, -4.72367e-06, 3.08082e-06)
+transform = Transform3D(1, -7.24754e-13, 1.0516e-12, 1.08002e-12, 0.906461, -0.422291, -7.10543e-13, 0.422291, 0.906461, -7.89762e-07, 0.0184852, -0.0346637)
 bone_name = "Frizzen_2"
 bone_idx = 2
 
@@ -631,7 +627,7 @@ mesh = SubResource("ArrayMesh_28iqv")
 skeleton = NodePath("")
 
 [node name="Hammer" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1, 2.84217e-14, 6.53699e-13, -8.52651e-14, 1, 2.98023e-07, -8.2423e-13, -2.98023e-07, 1, 3.12924e-07, -9.53674e-07, -6.55651e-07)
+transform = Transform3D(1, 1.36424e-12, 3.12639e-13, -1.13687e-13, 0.351973, -0.93601, -1.50635e-12, 0.93601, 0.351973, 3.12924e-07, 0.701695, 0.332672)
 bone_name = "Hammer"
 bone_idx = 4
 
@@ -640,7 +636,7 @@ mesh = SubResource("ArrayMesh_pir4l")
 skeleton = NodePath("")
 
 [node name="Trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1, 1.38429e-08, -1.05001e-09, -1.52134e-08, 1, 6.10948e-07, 1.38516e-09, -6.33299e-07, 1, -6.51926e-09, -9.53674e-07, -6.55651e-07)
+transform = Transform3D(1, 8.81403e-09, 8.81118e-09, -9.62677e-09, 1, 7.97212e-07, -9.03492e-09, -8.49366e-07, 1, -1.58325e-08, -1.07288e-06, -7.7486e-07)
 bone_name = "Trigger"
 bone_idx = 6
 
@@ -668,9 +664,8 @@ process_material = ExtResource("6_udhe1")
 draw_pass_1 = SubResource("QuadMesh_u3aa5")
 
 [node name="AudioEffect" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999984, 0.00556757, 0, -0.00556757, 0.999984, 0, -0.00258052, -0.363657)
-stream = ExtResource("11_2syqw")
-attenuation_model = 1
-unit_size = 20.0
-pitch_scale = 1.4
-max_distance = 50.0
+transform = Transform3D(-1, -2.64698e-23, -8.74231e-08, 4.57537e-09, 0.998629, -0.052336, 8.73032e-08, -0.052336, -0.998629, -1.65715e-07, -0.004669, -0.372099)
+stream = ExtResource("5_mh4wq")
+volume_db = 38.75
+max_db = 6.0
+max_distance = 100.0

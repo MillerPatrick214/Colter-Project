@@ -85,14 +85,20 @@ public abstract partial class RangedWeapon : Weapon
 	}
 
 	public void Aim( double delta){					//Tis will almost definitely need to be re-worked as animation improves
+		var current_animation = AniTree.Get("anim_player/current_animation");
+		GD.PrintErr("current_animation " + current_animation.ToString());
 		float currentAimState = (float)AniTree.Get("parameters/Blend2/blend_amount"); 
 		if (IsAiming) {
 			float newAimState = Mathf.Lerp(currentAimState, 1, (float)(5 * delta));
 			AniTree.Set("parameters/Blend2/blend_amount", newAimState);
 		}
 		else {
-			float newAimState = Mathf.Lerp(currentAimState, 0, (float)(5 * delta));
-			AniTree.Set("parameters/Blend2/blend_amount", newAimState);
+			
+			
+			
+				float newAimState = Mathf.Lerp(currentAimState, 0, (float)(5 * delta));
+				AniTree.Set("parameters/Blend2/blend_amount", newAimState);
+			
 		}
 	}
 

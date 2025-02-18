@@ -12,10 +12,4 @@ public partial class Weapon : Item3D
 		Events.Instance.ChangeIsInteracting += (InteractBoolean) => isInteracting = InteractBoolean;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-
 }
