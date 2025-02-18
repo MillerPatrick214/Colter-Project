@@ -22,11 +22,6 @@ public partial class NPCBase : CharacterBody3D
 
 	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
-    public override void _PhysicsProcess(double delta)
-    {
-        MoveAndSlide();
-    }
-
     public void DamageHealth(float Damage) 
 	{
 		Health -= Damage; 

@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Numerics;
-using System.Threading;
 
 public partial class CapyIdle : NPCState<Capybara>
 {
@@ -17,7 +15,6 @@ public partial class CapyIdle : NPCState<Capybara>
 	SceneTreeTimer Test;
     public override void PhysicsUpdate(double delta)
 	{
-		NPC.Velocity = Godot.Vector3.Zero; // Keep resetting to zero. I hate doing this and would much rather fix the fucking Walk state than constantly set velocity to zero in these states.
 		if (!NPC.IsOnFloor()) {
 			EmitSignal(SignalName.Finished, FALL);
 		}
@@ -25,6 +22,14 @@ public partial class CapyIdle : NPCState<Capybara>
 
     public override void Enter(string previousStatePath)
     {
+		if (isIdleConfirmed) { 
+			Test = GetTree().CreateTimer(5.0f);
+			Test.Timeout += TimeToWalk;
+		}
+		
+		NPC.Velocity = Vector3.Zero;
+		NPC.MoveAndSlide();
+
 		isIdleConfirmed = true;
 		
 		if (isIdleConfirmed) { 
@@ -38,7 +43,11 @@ public partial class CapyIdle : NPCState<Capybara>
     }
     public override void Exit()
     {
-		Test.Timeout -= TimeToWalk;
+		if (Test != null)
+		{
+			Test.Timeout -= TimeToWalk;
+		}
+
 		isIdleConfirmed = false; 
         NPC.AniTree.Set("parameters/conditions/isIdle", false);
     }

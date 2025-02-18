@@ -23,6 +23,7 @@ public partial class NPCFall<T> : NPCState<T> where T : NPCBase
 		if (NPC.IsOnFloor()) {
 			EmitSignal(SignalName.Finished, IDLE);
 		}
+		NPC.MoveAndSlide();
 	}
 	
 }

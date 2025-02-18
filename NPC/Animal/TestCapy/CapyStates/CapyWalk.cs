@@ -64,6 +64,7 @@ public partial class CapyWalk : NPCState<Capybara>
 			if (!NPC.IsOnFloor()) {
 				EmitSignal(SignalName.Finished, FALL);
 			}
+			NPC.MoveAndSlide();
 		}
 	}
 	public void NavFinished() 
@@ -75,11 +76,14 @@ public partial class CapyWalk : NPCState<Capybara>
     public override void Exit()
     {
 		NPC.NavAgent.NavigationFinished -= NavFinished;					//if this signal isn't disconnected, I believe NavFinished will be called anytime we reach a nav point thus ending whatever state we're in. This breaks flee mechanic
-		NPC.Velocity = Godot.Vector3.Zero; // Reset velocity to zero
 		//GD.Print("Exiting CapyWalk state. Velocity reset to: ", NPC.Velocity);
 		NPC.AniTree.Set("parameters/conditions/isWalking", false);
 		//GD.Print ("Anitree isWalking set to FALSE");
 		enterComplete = false;
+
+		NPC.Velocity = Godot.Vector3.Zero;
+		NPC.MoveAndSlide();
+		
 		
     }
 	

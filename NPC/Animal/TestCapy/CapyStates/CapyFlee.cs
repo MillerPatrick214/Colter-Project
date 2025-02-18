@@ -48,6 +48,8 @@ public partial class CapyFlee : NPCState<Capybara>
 		if (!NPC.IsOnFloor()) {
 			EmitSignal(SignalName.Finished, FALL);
 		}
+
+		NPC.MoveAndSlide();
 	}
 
 	public Vector3 FindFleeVector() {					//TLDR; Return vector from threat to NPC

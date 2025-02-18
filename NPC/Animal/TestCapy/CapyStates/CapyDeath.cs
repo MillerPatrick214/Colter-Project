@@ -16,13 +16,12 @@ public partial class CapyDeath : NPCState<Capybara>
     public override void Enter(string previousStatePath)
     {
 		NPC.AniTree.Set("parameters/conditions/isDead", true);
+		NPC.Velocity = Godot.Vector3.Zero;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void PhysicsUpdate(double delta)
 	{
-		NPC.Velocity = new Vector3(0,0,0);
-
 	}
 
 }

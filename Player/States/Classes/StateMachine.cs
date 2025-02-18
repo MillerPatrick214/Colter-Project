@@ -27,25 +27,28 @@ public partial class StateMachine : Node
 			string previousStatePath = state.Name;
 			state.Exit();
 			state = GetNode<State>(targetStatePath);
-			state.Enter(previousStatePath);
+			state.Enter(previousStatePath);								
 			GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
 		}	
 
 	public override void _Process(double delta) {
 		state.Update(delta);
+		/*
 		GD.PrintErr("---------------------------");
 		GD.PrintErr($"CurrentState: {state.Name}");
 		GD.PrintErr($"Last Process Delta Took: {delta}");
 		GD.PrintErr("---------------------------");
-		
+		*/
 	}
 
 	public override void _PhysicsProcess(double delta) {
 		state.PhysicsUpdate(delta);
+		/*
 		GD.PrintErr("---------------------------");
 		GD.PrintErr($"CurrentState: {state.Name}");
 		GD.PrintErr($"Last Physics Process Delta Took: {delta}");
 		GD.PrintErr("---------------------------");
+		*/
 	}
 }
 

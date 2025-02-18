@@ -109,8 +109,9 @@ public partial class Capybara : NPCBase
 		GodotObject collObj = VisionRay.GetCollider(); 
 		return collObj;
 		}
-	
-	public void SensedAdd(Node3D body) {
+
+
+    public void SensedAdd(Node3D body) {
 		
 		//if (!SensedBodies.Any()) {					//This should catch any body that enters despite which state we're in and change the mode to Alert\
 		GD.Print($"Body that was detected is of {body.GetClass()}");
