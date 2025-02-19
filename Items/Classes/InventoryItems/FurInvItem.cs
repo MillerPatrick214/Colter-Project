@@ -29,6 +29,16 @@ public partial class FurInvItem : InventoryItem
         { (int)FurQuality.Shite, 0.2f }
     };
 
+    public void SetQuality(FurQuality quality)
+    {
+        Quality = quality;
+    }
+
+    public void SetQuality(int quality)
+    {
+        Quality = (FurQuality)quality;
+    }
+
     public void SetValue()
     {
         if (QualMultDict.TryGetValue((int)Quality, out float mult))

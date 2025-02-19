@@ -38,12 +38,11 @@ public partial class AnimalSkinning : Control
 
 	Godot.Collections.Dictionary<int, int> DictAccumRating = new()
 	{
-		{(int)FurQuality.NOTSET, 0},
 		{(int)FurQuality.Perfect, 800},
 		{(int)FurQuality.Good, 1750},
 		{(int)FurQuality.Decent, 2500},
 		{(int)FurQuality.Poor, 3250},
-		{(int)FurQuality.Shite, 4000}
+		{(int)FurQuality.Shite, 4000},
 	};
 
 	public override void _Ready()
@@ -219,28 +218,25 @@ public partial class AnimalSkinning : Control
 
 	public void RateSkinning(float devAccum) 
 	{
-	Godot.Collections.Dictionary<int, string> DictRatingComment = new()
-	{
-		{(int)FurQuality.NOTSET, "Note to dev: You didn't set the fur quality dumbass!"},
-		{(int)FurQuality.Perfect, "Great skinnin' partner!"},
-		{(int)FurQuality.Good, "Ay, not so bad bucko."},
-		{(int)FurQuality.Decent, "Eh, could be better...could be worse."},
-		{(int)FurQuality.Poor, "Wow, that looks pretty rough."},
-		{(int)FurQuality.Shite, "Holy shite, that's the worst skinnin' I ever seen!"}
-	};
+		Godot.Collections.Dictionary<int, string> DictRatingComment = new()
+		{
+			{(int)FurQuality.NOTSET, "Note to dev: You didn't set the fur quality dumbass!"},
+			{(int)FurQuality.Perfect, "Great skinnin' partner!"},
+			{(int)FurQuality.Good, "Ay, not so bad bucko."},
+			{(int)FurQuality.Decent, "Eh, could be better...could be worse."},
+			{(int)FurQuality.Poor, "Wow, that looks pretty rough."},
+			{(int)FurQuality.Shite, "Holy shite, that's the worst skinnin' I ever seen!"}
+		};
 
 		foreach (var (quality, accum) in DictAccumRating) {
-			if (devAccum <= accum) {
+			if (devAccum >= accum) {
+				currSkinnable.FurInvItem.SetQuality(quality);
+				Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
 				SkinComment.Text = DictRatingComment[quality];
+				timer.Start(2);
 				return;
 			}
-		}
-		SkinComment.Text = DictRatingComment[(int)FurQuality.NOTSET];
-		Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
-		timer.Start(2);
-
-		SkinComment.Text  = "Completely Ruined";
-		
+		}	
 	}
 
 	public void ResetSkinning() 
