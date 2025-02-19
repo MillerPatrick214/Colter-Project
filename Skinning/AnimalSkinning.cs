@@ -236,7 +236,7 @@ public partial class AnimalSkinning : Control
 			}
 		}
 		SkinComment.Text = DictRatingComment[(int)FurQuality.NOTSET];
-		Player.Instance.inventory.PickUpItem(currSkinnable.FurInvItem);
+		Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
 		timer.Start(2);
 
 		SkinComment.Text  = "Completely Ruined";

@@ -1,9 +1,8 @@
-using System;
 using Godot;
 
 public partial class Player : CharacterBody3D
 {
-	public static Player Instance;
+	public static Player Instance { get; private set; }
 	
 	[Export]
 	public float Speed = 4f;
@@ -13,9 +12,6 @@ public partial class Player : CharacterBody3D
 	public float JumpImpulse = 20f;
 	[Export]
 	public float JumpManueverSpeed = 15f;
-	
-	[Export]
-	public Inventory inventory;
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
 
@@ -58,10 +54,12 @@ public partial class Player : CharacterBody3D
 	LeanDirection Leaning;
 	CanvasLayer UnderWaterCanvasLayer;
 
+	public Inventory Inventory { get; private set; }
+ 
     public override void _Ready()
     {
 		Instance = this;
-
+		Inventory = new Inventory();
 		GD.PrintErr($"Player Instance: {this.GetPath()}");
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
@@ -73,16 +71,16 @@ public partial class Player : CharacterBody3D
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
-		InventoryUI inventoryUI = GetNodeOrNull<InventoryUI>("UI/InventoryUI");
-		if (inventoryUI == null)
+		InventoryUI InventoryUI = GetNodeOrNull<InventoryUI>("UI/InventoryUI");
+		if (InventoryUI == null)
 		{
-			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect inventory information");
+			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect Inventory information");
 		}
-		if (inventory == null) {
-			GD.PrintErr("Error in Character.cs: inventory returned null");
+		if (Inventory == null) {
+			GD.PrintErr("Error in Character.cs: Inventory returned null");
 		}
 		if (CollisionShapeNode == null) {GD.PrintErr("Error Player.cs: CollisionShapeNode returned null");}
-		Events.Instance.PickUp += (item) => inventory.PickUpItem(item);
+		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
 
 		UnderWaterCanvasLayer = GetNodeOrNull<CanvasLayer>("SubViewportContainer/SubViewport/CanvasLayer");
 
@@ -109,56 +107,56 @@ public partial class Player : CharacterBody3D
 		Equippable item = null;
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
-			item = inventory.EquipFromSlot(0);
+			item = Inventory.EquipFromSlot(0);
 			SlotIndex = 0;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("PrimaryWeapon2"))
 		{
-			item = inventory.EquipFromSlot(1);
+			item = Inventory.EquipFromSlot(1);
 			SlotIndex = 1;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon1"))
 		{
-			item = inventory.EquipFromSlot(2);
+			item = Inventory.EquipFromSlot(2);
 			SlotIndex = 2;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon2"))
 		{
-			item = inventory.EquipFromSlot(3);
+			item = Inventory.EquipFromSlot(3);
 			SlotIndex = 3;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("SecondaryWeapon3"))
 		{
-			item = inventory.EquipFromSlot(4);
+			item = Inventory.EquipFromSlot(4);
 			SlotIndex = 4;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("MeleeWeapon"))
 		{
-			item = inventory.EquipFromSlot(5);
+			item = Inventory.EquipFromSlot(5);
 			SlotIndex = 5;
 			SetEquipped(item);
 		}
 		if (Input.IsActionJustPressed("Utility"))
 		{
-			item = inventory.EquipFromSlot(6);
+			item = Inventory.EquipFromSlot(6);
 			SlotIndex = 6;
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex += 1;
-			item = inventory.EquipFromSlot(SlotIndex);
+			item = Inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 		if(Input.IsActionJustPressed("CycleUp"))
 		{
 			SlotIndex -= 1;
-			item = inventory.EquipFromSlot(SlotIndex);
+			item = Inventory.EquipFromSlot(SlotIndex);
 			SetEquipped(item);
 		}
 
@@ -216,8 +214,8 @@ public partial class Player : CharacterBody3D
 		float currentHeight = CapsuleShape.Height;
 		float currentCamPos = CamPivNode.Position.Y;
 
-		float targetHeight = (isCrouching) ? CrouchingHeight : StandingHeight;
-		float targetCamPos = (isCrouching) ? CrouchingCamPivot : StandingCamPivot;
+		float targetHeight = isCrouching ? CrouchingHeight : StandingHeight;
+		float targetCamPos = isCrouching ? CrouchingCamPivot : StandingCamPivot;
 		
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
