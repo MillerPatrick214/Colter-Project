@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dsklayaxmhru1"
-path="res://.godot/imported/1795 musketREAL.glb-3e656f1f8cce00cf391b13a23ae522a9.scn"
+valid=false
 
 [deps]
 
-source_file="res://Items/Weapons/1795 Musket/1795 musketREAL.glb"
-dest_files=["res://.godot/imported/1795 musketREAL.glb-3e656f1f8cce00cf391b13a23ae522a9.scn"]
+source_file="res://Items/Weapons/RangedWeapon/1795 Musket/1795 musketREAL.glb"
 
 [params]
 

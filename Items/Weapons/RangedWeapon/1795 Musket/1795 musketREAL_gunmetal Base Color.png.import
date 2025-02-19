@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rlyy8ni5fgsp"
-path.s3tc="res://.godot/imported/1795 musketREAL_gunmetal Base Color.png-3b885384acd348c3ff50193bb1d455ff.s3tc.ctex"
+path.s3tc="res://.godot/imported/1795 musketREAL_gunmetal Base Color.png-b9353249d6e45118157538965e3fb147.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Items/Weapons/1795 Musket/1795 musketREAL_gunmetal Base Color.png"
-dest_files=["res://.godot/imported/1795 musketREAL_gunmetal Base Color.png-3b885384acd348c3ff50193bb1d455ff.s3tc.ctex"]
+source_file="res://Items/Weapons/RangedWeapon/1795 Musket/1795 musketREAL_gunmetal Base Color.png"
+dest_files=["res://.godot/imported/1795 musketREAL_gunmetal Base Color.png-b9353249d6e45118157538965e3fb147.s3tc.ctex"]
 
 [params]
 

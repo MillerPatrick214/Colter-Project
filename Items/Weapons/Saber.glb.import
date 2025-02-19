@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bi25bqbnq0yhf"
-path="res://.godot/imported/1813ArmyPistol.glb-636393c764c45b6f1c92e7ac0a1314db.scn"
+uid="uid://pmpnsh1qjj2l"
+path="res://.godot/imported/Saber.glb-963feb4dd32f6b5ba366c6aa163937db.scn"
 
 [deps]
 
-source_file="res://Items/Weapons/1813ArmyPistol/1813ArmyPistol.glb"
-dest_files=["res://.godot/imported/1813ArmyPistol.glb-636393c764c45b6f1c92e7ac0a1314db.scn"]
+source_file="res://Items/Weapons/Saber.glb"
+dest_files=["res://.godot/imported/Saber.glb-963feb4dd32f6b5ba366c6aa163937db.scn"]
 
 [params]
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=70 format=4 uid="uid://mkhbyhetuydg"]
 
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="1_1b3rr"]
-[ext_resource type="Texture2D" uid="uid://rlyy8ni5fgsp" path="res://Items/Weapons/1795 Musket/1795 musketREAL_gunmetal Base Color.png" id="1_dwws7"]
-[ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Seventeen_Ninety_Five_Musket.cs" id="1_h0wpl"]
-[ext_resource type="Resource" uid="uid://brh6or0x4bks5" path="res://Items/Weapons/1795 Musket/InventoryItem/SeventeenNinetyFiveInventoryItem.tres" id="2_ceery"]
+[ext_resource type="Texture2D" uid="uid://rlyy8ni5fgsp" path="res://Items/Weapons/RangedWeapon/1795 Musket/1795 musketREAL_gunmetal Base Color.png" id="1_dwws7"]
+[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1795 Musket/Seventeen_Ninety_Five_Musket.cs" id="1_h0wpl"]
+[ext_resource type="Resource" uid="uid://brh6or0x4bks5" path="res://Items/Weapons/RangedWeapon/1795 Musket/InventoryItem/SeventeenNinetyFiveInventoryItem.tres" id="2_ceery"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="4_3o0bd"]
-[ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/Particle Materials/Smoke.tres" id="4_711rt"]
+[ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="4_711rt"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"]
-[ext_resource type="Script" path="res://Items/Weapons/1795 Musket/Smoke.cs" id="4_yf7fh"]
+[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1795 Musket/Smoke.cs" id="4_yf7fh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfgm7"]
 resource_name = "gunmetal"

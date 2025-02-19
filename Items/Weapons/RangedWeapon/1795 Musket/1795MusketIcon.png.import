@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqodgtxh6kvr3"
-path.s3tc="res://.godot/imported/1795MusketIcon.png-243a8540eac5114b1be5da78926a1411.s3tc.ctex"
+path.s3tc="res://.godot/imported/1795MusketIcon.png-c09dc26afad85aea6d23531963c77736.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Items/Weapons/1795 Musket/1795MusketIcon.png"
-dest_files=["res://.godot/imported/1795MusketIcon.png-243a8540eac5114b1be5da78926a1411.s3tc.ctex"]
+source_file="res://Items/Weapons/RangedWeapon/1795 Musket/1795MusketIcon.png"
+dest_files=["res://.godot/imported/1795MusketIcon.png-c09dc26afad85aea6d23531963c77736.s3tc.ctex"]
 
 [params]
 

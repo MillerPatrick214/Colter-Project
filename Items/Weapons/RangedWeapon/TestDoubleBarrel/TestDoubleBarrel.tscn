@@ -1,10 +1,10 @@
 [gd_scene load_steps=35 format=3 uid="uid://b6pnk5x7c6mob"]
 
-[ext_resource type="Script" path="res://Items/Weapons/TestDoubleBarrel/TestDoubleBarrel.cs" id="1_yp032"]
+[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/TestDoubleBarrel/TestDoubleBarrel.cs" id="1_yp032"]
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="2_8cdxi"]
 [ext_resource type="PackedScene" uid="uid://dshicn7lorymy" path="res://DoubleBarrelShotgun_00.fbx" id="3_6jtb3"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_bd2w8"]
-[ext_resource type="Script" path="res://Items/Weapons/TestDoubleBarrel/Bang.cs" id="4_y2yju"]
+[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/TestDoubleBarrel/Bang.cs" id="4_y2yju"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_xauwn"]
 
 [sub_resource type="Animation" id="Animation_g7mbn"]

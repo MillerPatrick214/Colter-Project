@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hku8yokjnvni"
-path.s3tc="res://.godot/imported/1813ArmyPistol.png-4551d430ec5b1889711e8b003f6248de.s3tc.ctex"
+path.s3tc="res://.godot/imported/1813ArmyPistol.png-60a52639e642b5b96acd954b92ab1393.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Items/Weapons/1813ArmyPistol/1813ArmyPistol.png"
-dest_files=["res://.godot/imported/1813ArmyPistol.png-4551d430ec5b1889711e8b003f6248de.s3tc.ctex"]
+source_file="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png"
+dest_files=["res://.godot/imported/1813ArmyPistol.png-60a52639e642b5b96acd954b92ab1393.s3tc.ctex"]
 
 [params]
 
