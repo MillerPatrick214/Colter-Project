@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cuap13057eoa6"]
 
-[ext_resource type="Script" path="res://UI/pause_menu.cs" id="1_vfxss"]
+[ext_resource type="Script" path="res://UI/PauseMenu.cs" id="1_vfxss"]
 
 [node name="Pause Menu" type="Control"]
 layout_mode = 3

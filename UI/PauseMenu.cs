@@ -1,16 +1,18 @@
 using Godot;
 using System;
 
-public partial class pause_menu : Control
+public partial class PauseMenu : Control
 {
 	// Called when the node enters the scene tree for the first time.
+	[Signal]
+	public delegate void PauseResumePressedEventHandler();
 
 	bool Opened = false;
 	Button Resume;
 	Button Settings;
 	Button Quit;
-	
-	public override void _Ready()
+
+    public override void _Ready()
 	{
 		this.ProcessMode = ProcessModeEnum.Always;			//basically this means that this node's script is always processed -- even when paused. 
 		Hide();
@@ -29,23 +31,22 @@ public partial class pause_menu : Control
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.s
-	public void PauseMenu() {
+	public void Pause() {
 		GetTree().Paused = true;
 		Show();
-		Opened = true;
 		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, true);
 
 	}
 
 	public void Unpause() {
 		GetTree().Paused = false;
-		Hide();
-		Opened = false;
 		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, false);
+		
 	}
 
 	public void OnResumePressed() {
 		Unpause();
+		EmitSignal(SignalName.PauseResumePressed);
 	}
 
 

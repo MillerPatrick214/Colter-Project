@@ -25,10 +25,13 @@ public partial class InputControl : Node
 			EmitSignal(SignalName.TransitionControl, INVENTORY);
 		}
 
-		if (Input.IsActionJustPressed(""))
-
+		if (Input.IsActionJustPressed("InteractWorld"))
+		{
+			EmitSignal(SignalName.TransitionControl, SKINNING);
+		}
 
 		if (Input.IsActionJustPressed("PauseMenu")) {
+			EmitSignal(SignalName.TransitionControl, PAUSE);
 		}
 	}
 }

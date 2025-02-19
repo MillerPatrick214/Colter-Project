@@ -48,6 +48,8 @@ public partial class AnimalSkinning : Control
 
 	public override void _Ready()
 	{
+		Hide();
+
 		skinningfact = GetNodeOrNull<SkinningFactory>("Skinning Factory"); 
 		timer = GetNodeOrNull<Timer>("Timer");
 		Sheathe = GetNodeOrNull<TextureRect>("Sheathe");
@@ -125,7 +127,7 @@ public partial class AnimalSkinning : Control
 
 			else if (!isMouseOnKnife && BowieKnife.Position != DefaultBowiePosition) {
 				Vector2 position = BowieKnife.Position; 
-				BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, DefaultBowiePosition.X , 5 * delta), DefaultBowiePosition.Y);
+				BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, DefaultBowiePosition.X , 3 * delta), DefaultBowiePosition.Y);
 				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.5f) {
 						BowieKnife.Position = DefaultBowiePosition;
 					}

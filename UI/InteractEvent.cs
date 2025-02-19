@@ -18,24 +18,6 @@ public partial class InteractEvent : Control
 		Hide();
 
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta) 
-	{
-		if (Input.IsActionJustPressed("InteractWorld")) {
-			isActive = !isActive;
-			if (isActive) 
-			{
-				Active();
-			}
-			else
-			{
-				Inactive();
-			}
-		}
-		
-	}
-
 	public void Inactive() {
 		EmitSignal(SignalName.PauseMouseInput, false);
 		Events.Instance.EmitSignal(Events.SignalName.ChangeIsInteracting, false);
