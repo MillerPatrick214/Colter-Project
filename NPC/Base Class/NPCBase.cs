@@ -3,10 +3,6 @@ using System;
 
 public partial class NPCBase : CharacterBody3D
 {	
-	[Signal]
-	public delegate void DeathSignalEventHandler();
-	[Export]
-	float Health = 100.0f;
 	[Export]
 	public float Speed = 5.0f;
 	[Export]
@@ -22,18 +18,15 @@ public partial class NPCBase : CharacterBody3D
 
 	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
-    public void DamageHealth(float Damage) 
-	{
-		Health -= Damage; 
-		if (Health <= 0 && !isDead) {
-			Death();
-		}
-	}
+    public override void _Ready()
+    {
+        base._Ready();
+		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;
+    }
 
 	virtual public void Death() //Note this is called Death but signal is DeathSignal
 	{
 		isDead = true;
-		EmitSignal(SignalName.DeathSignal);
 	}
 
 	virtual public void Interact() 

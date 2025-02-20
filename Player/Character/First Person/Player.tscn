@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://djdku4ekx1emk"]
+[gd_scene load_steps=17 format=3 uid="uid://djdku4ekx1emk"]
 
 [ext_resource type="Script" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
-[ext_resource type="Resource" uid="uid://b4nq6ejfy8ym6" path="res://UI/InventoryUI/Inventory/Inventory.tres" id="2_bh0i7"]
 [ext_resource type="Shader" path="res://Player/Character/First Person/UnderWater.gdshader" id="2_c45b1"]
 [ext_resource type="Script" path="res://Player/Character/CamPivot.cs" id="5_kks8j"]
 [ext_resource type="Script" path="res://Player/Character/InteractRayCast.cs" id="7_g3eq3"]
@@ -36,7 +35,6 @@ height = 1.7
 [node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
 script = ExtResource("1_fdc88")
-inventory = ExtResource("2_bh0i7")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_f4xyh")

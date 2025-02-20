@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=38 format=4 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_7d45k"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyAlert.cs" id="7_7tdts"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFlee.cs" id="10_g5a2g"]
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyDeath.cs" id="11_gtlnt"]
+[ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_vjc01"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_a0y8h"]
 
 [sub_resource type="Animation" id="Animation_2shjp"]
 length = 0.001
@@ -222,7 +224,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.24398, -0.00289646, 0.00226144, 0.969773)
+bones/2/rotation = Quaternion(0.278844, -0.00297624, 0.00215536, 0.960329)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -315,6 +317,14 @@ debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 6.0
 
+[node name="HitBoxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HealthComponent")]
+script = ExtResource("12_vjc01")
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
+shape = SubResource("CapsuleShape3D_48exc")
+
 [node name="VisionCone" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
@@ -328,3 +338,7 @@ target_position = Vector3(0, 0, 8)
 
 [node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
 shape = SubResource("SphereShape3D_pkh7y")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("13_a0y8h")
+MaxHealth = 50.0

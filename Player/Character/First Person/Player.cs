@@ -181,6 +181,14 @@ public partial class Player : CharacterBody3D
 			}
 		}
 
+		if (Held is MeleeWeapon meleewep)
+		{
+			if(Input.IsActionPressed("UseItem"))
+			{
+				meleewep.Attack();
+			}
+		}
+
 	}
 
 	public void SetStartPosition(Vector3 pos)

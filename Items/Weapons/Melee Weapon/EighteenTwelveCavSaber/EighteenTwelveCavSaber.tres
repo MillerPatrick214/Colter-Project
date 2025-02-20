@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://cm1sarff3cd70"]
+
+[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="1_xtqik"]
+[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="2_6sp7j"]
+
+[resource]
+script = ExtResource("2_6sp7j")
+SlotType = 4
+Name = "Cavalry Saber"
+Description = "A cavalry saber. Of very little use for fur trappers due to its lack of versatillity as a tool. It excels at one task only -- killing"
+Texture = ExtResource("1_xtqik")
+Quantity = 1
+IsStackable = false
+CurrentStack = 1
+MaxStack = 1
+Value = 20
+ScenePath = "uid://dkvmoh5wtmsq5"
+row = -1
+column = -1
+slot = -1

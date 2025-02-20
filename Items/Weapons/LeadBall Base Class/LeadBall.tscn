@@ -44,3 +44,8 @@ geometry_nodepath = NodePath("..")
 size = 0.1
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="HurtBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_76n2g")

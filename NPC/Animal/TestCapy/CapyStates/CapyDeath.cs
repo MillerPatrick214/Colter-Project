@@ -9,7 +9,7 @@ public partial class CapyDeath : NPCState<Capybara>
 	public override void _Ready()
 	{
 		base._Ready();
-		NPC.DeathSignal += () => EmitSignal(SignalName.Finished, DEATH);
+		NPC.GetNode<HealthComponent>("HealthComponent").DeathSignal += () => EmitSignal(SignalName.Finished, DEATH);
 		
 	}
 
@@ -18,10 +18,4 @@ public partial class CapyDeath : NPCState<Capybara>
 		NPC.AniTree.Set("parameters/conditions/isDead", true);
 		NPC.Velocity = Godot.Vector3.Zero;
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void PhysicsUpdate(double delta)
-	{
-	}
-
 }
