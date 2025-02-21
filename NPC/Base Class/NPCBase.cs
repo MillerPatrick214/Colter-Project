@@ -65,6 +65,7 @@ public partial class NPCBase : CharacterBody3D
 			Transform = transform;
 			return;
 		}
+		
 		//GD.PrintErr($"My Old Transform.Basis -- {Transform.Basis}");
 
 		transform.Basis = new Basis(interpolatedQuat);

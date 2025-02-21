@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public partial class CamPivot : Marker3D
 {
 	[Export]	
@@ -9,13 +10,12 @@ public partial class CamPivot : Marker3D
 	[Export]
 	float AimFOV = 50;
 
-	Vector3 CurrentArmPos;
-
 	bool isInteracting;
 
 	bool isAiming; 
 
-	Camera3D Camera;
+	Camera3D Camera ;
+
 
 	public override void _Ready()
 	{	
@@ -38,10 +38,9 @@ public partial class CamPivot : Marker3D
 				//GD.Print("Aiming deactivated");
 				isAiming = false;
 				Events.Instance.EmitSignal(Events.SignalName.ChangeIsAiming, isAiming);
-		}
+			}
 		}
 	}
-	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 
 	public void Aiming(bool isAiming, double delta) {

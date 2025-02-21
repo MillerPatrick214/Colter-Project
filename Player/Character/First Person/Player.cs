@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Player : CharacterBody3D
@@ -12,6 +13,8 @@ public partial class Player : CharacterBody3D
 	public float JumpImpulse = 20f;
 	[Export]
 	public float JumpManueverSpeed = 15f;
+
+	Godot.Vector2 MouseMotion;
 	float StandingHeight = 1.7f; //meters
 	float CrouchingHeight = 1.0f; //meters
 
@@ -21,16 +24,28 @@ public partial class Player : CharacterBody3D
 	float LeanDeg = 45f;
 	float LeanSpeed = 3f;
 
+	//CamPivot
+	[Export]
+	float CamPivRotAmount = .01f;
+	CamPivot CamPivNode;
 	float mouseRotX = 0f;
 	float mouseRotY = 0f;
 	float lookAroundSpeed = .1f;
-
 	float yRotMin = -70f;
 	float yRotMax = 70f;
 
-	CamPivot CamPivNode;
-	CollisionShape3D CollisionShapeNode;
+	//ItemMarker
+	[Export]
+	float ItemPivRotAmount = 0.2f;
+	[Export]
+	float ItemSwayAmount = 0.003f; 
+	[Export]
+	float bob_amount = 0.003f;
+	[Export]
+	float bob_frequency = 0.004f;
+
 	Marker3D ItemMarker;
+	CollisionShape3D CollisionShapeNode;
 
 	bool isCrouching;
 
@@ -90,6 +105,7 @@ public partial class Player : CharacterBody3D
     }
 
 
+
 	public override void _Process(double delta) {
 		int curr_slot = SlotIndex;
 		isCrouching = Input.IsActionPressed("Crouch") ? true : false;
@@ -105,6 +121,7 @@ public partial class Player : CharacterBody3D
 		Crouch(isCrouching);
 
 		Equippable item = null;
+
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
 			item = Inventory.EquipFromSlot(0);
@@ -189,9 +206,33 @@ public partial class Player : CharacterBody3D
 			}
 		}
 
+		Godot.Vector2 input_dir = Input.GetVector("Left", "Right", "Forward", "Back");
+        CamTilt(input_dir.X, delta);
+		ItemTilt(input_dir.X, delta);
+		ItemBob(delta);
+		ItemSway(delta);
 	}
 
-	public void SetStartPosition(Vector3 pos)
+	public override void _Input(InputEvent @event) {
+		if (!isInteracting) {
+			if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
+				MouseMotion = mouseMotion.Relative; //Saving this for weaponsway
+				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
+				mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
+				
+				mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
+
+				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 							
+				Vector3 cam_piv_rot = new Godot.Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
+				//Basis item_basis = ItemMarker.GlobalTransform.Basis;
+				RotationDegrees = char_rot;
+				CamPivNode.RotationDegrees = cam_piv_rot;
+				
+			}
+		}
+	}
+
+    public void SetStartPosition(Godot.Vector3 pos)
 	{
 		Position = pos;
 	}
@@ -227,28 +268,62 @@ public partial class Player : CharacterBody3D
 		
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
-			CamPivNode.Position = new Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
+			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
 
 			if (Mathf.Abs(targetHeight - currentHeight) < 0.01f) {
 				CapsuleShape.Height = targetHeight;
-				CamPivNode.Position = new Vector3(0, targetCamPos, 0);
+				CamPivNode.Position = new Godot.Vector3(0, targetCamPos, 0);
 			}
 		}
 	}
+	
+	public void CamTilt(float input_x, double delta)
+	{
+		Godot.Vector3 cam_piv_rot = CamPivNode.Rotation;
+		float tilt_rot = cam_piv_rot.Z;
+		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * CamPivRotAmount, 10 * (float)delta);
+		cam_piv_rot = new Godot.Vector3(cam_piv_rot.X, cam_piv_rot.Y, tilt_rot);
+		CamPivNode.Rotation = cam_piv_rot;
+	}
+	
+	public void ItemTilt(float input_x, double delta)
+	{	
+		Godot.Vector3 item_rot = ItemMarker.Rotation;
+		float tilt_rot = item_rot.Z;
+		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * ItemPivRotAmount, 10 * (float)delta);
+		item_rot = new Godot.Vector3(item_rot.X, item_rot.Y, tilt_rot);
+		ItemMarker.Rotation = item_rot;
+	}
 
-	public override void _Input(InputEvent @event) {
-		if (!isInteracting) {
-			if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
-				// modify accumulated mouse rotation
-				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
-				mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
-				
-				mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
+	public void ItemSway(double delta)
+	{
+		MouseMotion = MouseMotion.Lerp(Vector2.Zero, 10 * (float)delta);
 
-				RotationDegrees = new Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z);
-				CamPivNode.RotationDegrees = new Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
-			}
+		float item_rot_X = ItemMarker.Rotation.X;
+		float item_rot_Y = ItemMarker.Rotation.Y;
+
+		item_rot_X = Mathf.Lerp(item_rot_X, MouseMotion.Y * ItemSwayAmount, 10 * (float)delta);
+		item_rot_Y = Mathf.Lerp(item_rot_Y, MouseMotion.X * ItemSwayAmount, 10 * (float)delta);
+
+		ItemMarker.Rotation = new Vector3(item_rot_X, item_rot_Y, ItemMarker.Rotation.Z);
+	} 
+
+	public void ItemBob(double delta)
+	{
+		Vector3 item_pos = ItemMarker.Position;
+
+		if (Velocity != Vector3.Zero)
+		{
+			item_pos.X = Mathf.Lerp(item_pos.X, 0 + Mathf.Sin(Time.GetTicksMsec() * bob_frequency * .05f) * bob_amount, 10 * (float)delta);
+			item_pos.Y = Mathf.Lerp(item_pos.Y, 0 + Mathf.Sin(Time.GetTicksMsec() * bob_frequency + .2315f) * bob_amount, 10 * (float)delta);
 		}
+		
+		else 
+		{
+			item_pos = item_pos.Lerp(Vector3.Zero, 10 * (float) delta);
+		}
+
+		ItemMarker.Position = item_pos;
 	}
 
 	public void InteractMouseMode(bool isInteracting)
@@ -280,15 +355,15 @@ public partial class Player : CharacterBody3D
 		
 		float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
 	
-		RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, newRotation);
-		CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
+		RotationDegrees = new Godot.Vector3(RotationDegrees.X, RotationDegrees.Y, newRotation);
+		CamPivNode.RotationDegrees = new Godot.Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
 
 		if (Mathf.Abs(targetRotation - currentRotation) < .05f && !(currentRotation == targetRotation)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
-			RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, targetRotation);
+			RotationDegrees = new Godot.Vector3(RotationDegrees.X, RotationDegrees.Y, targetRotation);
 		}
 
 		if (Mathf.Abs(targetCamPivRot - currCamPivRot) < .05f && !(currCamPivRot == targetCamPivRot)) {		//Checks to see if current rotation is < .5 degrees away from target. If so, just snap to target & return.
-			CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, targetCamPivRot);
+			CamPivNode.RotationDegrees = new Godot.Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, targetCamPivRot);
 			//having a snap for the CamPivot breaks it, so for the time being we won't have one.
 		} 
 

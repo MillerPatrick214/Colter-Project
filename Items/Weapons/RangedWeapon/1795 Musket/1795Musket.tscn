@@ -513,74 +513,74 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
+tracks/2/path = NodePath("WeaponEnd/AnimatedSprite3D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"update": 1,
+"values": [9]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponEnd/AnimatedSprite3D:frame")
+tracks/3/path = NodePath("Skeleton3D/Cube:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
+"update": 0,
+"values": [Vector3(0.361283, -3.14159, 3.03687)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton3D/Cube:rotation")
+tracks/4/path = NodePath("WeaponEnd/Smoke:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.361283, -3.14159, 3.03687)]
+"update": 1,
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponEnd/Smoke:emitting")
+tracks/5/path = NodePath("Skeleton3D/hammer_001:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0.352067, 1.51624, 0.518492)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Skeleton3D/hammer_001:position")
+tracks/6/path = NodePath("Skeleton3D:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.352067, 1.51624, 0.518492)]
+"values": [Vector3(-1.36136, 0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath(".:position")
+tracks/7/path = NodePath("Skeleton3D:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0.045)]
+"values": [Vector3(0, -0.046, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vr1u2"]
@@ -594,7 +594,7 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Skeleton3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -606,14 +606,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
+tracks/1/path = NodePath("Skeleton3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.3735, 0.523599, 0.349066)]
+"values": [Vector3(-1.73486, 0.523599, 0.349066)]
 }
 
 [sub_resource type="Animation" id="Animation_cvhyg"]
@@ -669,34 +669,22 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath(".:rotation")
+tracks/5/path = NodePath("WeaponEnd/AnimatedSprite3D:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.045, 0.065, 0.79),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.0872665, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponEnd/AnimatedSprite3D:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0.045, 0.05, 0.065, 0.08, 0.095, 0.11, 0.125, 0.14, 0.155, 0.17),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 0]
 }
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("WeaponEnd/Smoke")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponEnd/Smoke")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -704,17 +692,41 @@ tracks/7/keys = {
 "method": &"restart"
 }]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("WeaponEnd/Smoke:emitting")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WeaponEnd/Smoke:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0.86),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton3D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.065, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.000933349, -0.0461051, 8.49813e-05), Vector3(0, 0, 0.07), Vector3(-0.000933349, -0.0461051, 8.49813e-05)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Skeleton3D:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.36136, 0, 0), Vector3(-1.27409, 0, 0), Vector3(-1.36136, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ibx18"]
@@ -723,26 +735,26 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Skeleton3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0.045)]
+"values": [Vector3(-0.000933349, -0.0461051, 8.49813e-05)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
+tracks/1/path = NodePath("Skeleton3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(-1.36136, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_878kn"]
@@ -916,7 +928,7 @@ MeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodeP
 ItemResource = ExtResource("2_ceery")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.0102436, 0.0489395, 0, -0.0489395, 0.0102436, -0.000933349, -0.0461051, 8.49813e-05)
+transform = Transform3D(0.05, 0, 0, 0, 0.0103956, 0.0489074, 0, -0.0489074, 0.0103956, 0, -0.046, 0)
 bones/0/name = "Bone_master"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -4.96308e-24, -1.65436e-24, 4.96308e-24, 1, 0, 1.65436e-24, 0, 1, -1.54737e-15, 8.41916e-07, 0)
@@ -929,7 +941,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, 5.68434e-14, 4.76837e-07, 3.90198e-07, 0.574785, -0.818305, -2.74079e-07, 0.818305, 0.574785, -1.27676e-15, 1.27325, -0.0417947)
 bones/1/enabled = true
 bones/1/position = Vector3(-1.27676e-15, 1.27325, -0.0417947)
-bones/1/rotation = Quaternion(0.461094, 2.11561e-07, 1.09933e-07, 0.887351)
+bones/1/rotation = Quaternion(0.230562, 2.31995e-07, 5.49702e-08, 0.973058)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "hammer.001"
 bones/2/parent = 1
@@ -943,7 +955,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, 5.68434e-14, 1.19209e-06, 1.16328e-06, 0.218538, -0.975829, -2.60518e-07, 0.975829, 0.218538, -9.64506e-16, 2.57276, 0.125786)
 bones/3/enabled = true
 bones/3/position = Vector3(-9.64506e-16, 2.57276, 0.125786)
-bones/3/rotation = Quaternion(0.982943, 1.0962e-07, 5.8588e-07, 0.183911)
+bones/3/rotation = Quaternion(0.61269, 4.7107e-07, 3.65192e-07, 0.790323)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Cube"
 bones/4/parent = 3
@@ -957,7 +969,7 @@ bones/5/parent = 0
 bones/5/rest = Transform3D(1, -2.16563e-16, -2.4211e-17, -2.42109e-17, -0.220833, 0.975312, -2.16563e-16, -0.975312, -0.220833, -1.48839e-15, 0.714868, -0.567939)
 bones/5/enabled = true
 bones/5/position = Vector3(-1.48839e-15, 0.714868, -0.567939)
-bones/5/rotation = Quaternion(-0.781291, 7.70435e-17, 7.70435e-17, 0.624166)
+bones/5/rotation = Quaternion(-0.783145, 7.67562e-17, 7.72263e-17, 0.621839)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "trigger"
 bones/6/parent = 5
@@ -1031,7 +1043,7 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.095485, 5.7232e-14, -2.66454e-14, -7.10543e-14, 0.0518365, -0.0504982, -2.4869e-14, 0.0726584, 0.0360268, 0.352067, 1.51624, 0.518492)
+transform = Transform3D(0.095485, 1.36002e-15, -2.13163e-14, -1.95399e-14, 0.0800565, -0.0274262, 3.55271e-14, 0.0394617, 0.05564, 0.352067, 1.51624, 0.518492)
 bone_name = "hammer.001"
 bone_idx = 2
 
@@ -1041,7 +1053,7 @@ mesh = SubResource("ArrayMesh_7xwlx")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.20404, 1.24789e-13, -3.12639e-13, 2.13163e-14, -0.190914, -0.0720011, -2.84217e-13, 0.0720014, -0.190913, 9.78941e-10, 2.64293, 0.204985)
+transform = Transform3D(0.202922, 0.0213288, -4.83883e-07, 0.0199517, -0.189822, -0.0721226, -0.00753963, 0.0717278, -0.190867, 9.78877e-10, 2.65967, 0.0654372)
 bone_name = "Cube"
 bone_idx = 4
 
@@ -1051,7 +1063,7 @@ mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.38473, 1.38624e-15, -1.12073e-15, -1.38624e-15, 1.33742, -6.24308, -1.12073e-15, 6.24308, 1.33742, 1.28955, 9.18679, -2.56122)
+transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11248e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
 bone_name = "trigger"
 bone_idx = 6
 
@@ -1157,7 +1169,6 @@ mesh = SubResource("ArrayMesh_qcsa8")
 skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-active = false
 libraries = {
 "": SubResource("AnimationLibrary_vr1u2"),
 "Chune?": SubResource("AnimationLibrary_878kn")
