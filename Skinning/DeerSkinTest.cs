@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class DeerSkinTest : Skinnable
@@ -8,7 +6,6 @@ public partial class DeerSkinTest : Skinnable
 	Area2D SkinArea; 
 	Marker2D StartMarker;
 	public override async void _Ready()
-
 	{
 		base._Ready();
 		SkinArea = GetNodeOrNull<Area2D>("SkinArea");

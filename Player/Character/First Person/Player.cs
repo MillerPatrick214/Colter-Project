@@ -2,28 +2,28 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {
+	[ExportCategory("Movement Settings")]
+	[Export(PropertyHint.None, "suffix:m/s")] public float SprintSpeed = 1.5f; 
+	
 	public static Player Instance { get; private set; }
 	
-	[Export]
-	public float Speed = 4f;
-	[Export]
-	public float SprintSpeed = 7f;
-	[Export]
-	public float JumpImpulse = 20f;
-	[Export]
-	public float JumpManueverSpeed = 15f;
-	float StandingHeight = 1.7f; //meters
-	float CrouchingHeight = 1.0f; //meters
+	[Export] public float Speed;
+	// [Export] public float SprintSpeed;
+	[Export] public float JumpImpulse ;
+	[Export] public float JumpManueverSpeed;
+	[Export] public float StandingHeight;
+	[Export] public float CrouchingHeight;
+	[Export] public float lookAroundSpeed;
 
 	float StandingCamPivot = 0.195f;
 	float CrouchingCamPivot = 0f;
 
-	float LeanDeg = 45f;
-	float LeanSpeed = 3f;
+	[Export] public float LeanAngle;
+	[Export] public float LeanSpeed;
 
 	float mouseRotX = 0f;
 	float mouseRotY = 0f;
-	float lookAroundSpeed = .1f;
+	
 
 	float yRotMin = -70f;
 	float yRotMax = 70f;
@@ -271,14 +271,14 @@ public partial class Player : CharacterBody3D
 		// If cam node and player node share a piv point it just lessens the overall lean subtractivly & disconnects player model & camera
 
 		float currentRotation = RotationDegrees.Z;
-		float targetRotation = (float)Leaning * LeanDeg;
+		float targetRotation = (float)Leaning * LeanAngle;
 
 		float currCamPivRot = CamPivNode.RotationDegrees.Z;
-		float targetCamPivRot = -(float)Leaning * (LeanDeg * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
+		float targetCamPivRot = -(float)Leaning * (LeanAngle * .5f);		//CamPivot Rotates the opposite direction, x% of the strength of the lean
 
-		float newRotation = Mathf.Wrap(Mathf.Lerp(currentRotation, targetRotation, (float)GetProcessDeltaTime() * LeanSpeed), -LeanDeg-1, LeanDeg+1);	// -+ 1 degree of tolerance
+		float newRotation = Mathf.Wrap(Mathf.Lerp(currentRotation, targetRotation, (float)GetProcessDeltaTime() * LeanSpeed), -LeanAngle-1, LeanAngle+1);	// -+ 1 degree of tolerance
 		
-		float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanDeg * .5f)-1, (LeanDeg * .5f)+1);
+		float newCamPivRot = Mathf.Wrap(Mathf.Lerp(currCamPivRot, targetCamPivRot, (float)GetProcessDeltaTime() * LeanSpeed), -(LeanAngle * .5f)-1, (LeanAngle * .5f)+1);
 	
 		RotationDegrees = new Vector3(RotationDegrees.X, RotationDegrees.Y, newRotation);
 		CamPivNode.RotationDegrees = new Vector3(CamPivNode.RotationDegrees.X, CamPivNode.RotationDegrees.Y, newCamPivRot);
