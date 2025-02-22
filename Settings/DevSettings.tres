@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="DevSettings" load_steps=2 format=3 uid="uid://bbk0d5u6d7aup"]
+
+[ext_resource type="Script" path="res://Settings/DevSettings.cs" id="1_slh4s"]
+
+[resource]
+script = ExtResource("1_slh4s")

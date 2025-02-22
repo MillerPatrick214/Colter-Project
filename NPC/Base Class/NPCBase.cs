@@ -1,6 +1,6 @@
 using Godot;
-using System;
 
+[GlobalClass]
 public partial class NPCBase : CharacterBody3D
 {	
 	[Export]
@@ -23,6 +23,7 @@ public partial class NPCBase : CharacterBody3D
         base._Ready();
 		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;
     }
+
 
 	virtual public void Death() //Note this is called Death but signal is DeathSignal
 	{

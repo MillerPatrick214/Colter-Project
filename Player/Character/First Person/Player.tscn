@@ -37,6 +37,15 @@ unique_name_in_owner = true
 script = ExtResource("1_fdc88")
 SprintSpeed = 10.0
 CamPivRotAmount = 0.05
+SprintSpeed = 20.0
+Speed = 10.0
+JumpImpulse = 20.0
+JumpManueverSpeed = 5.0
+StandingHeight = 1.7
+CrouchingHeight = 1.0
+lookAroundSpeed = 0.1
+LeanAngle = 45.0
+LeanSpeed = 3.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_f4xyh")

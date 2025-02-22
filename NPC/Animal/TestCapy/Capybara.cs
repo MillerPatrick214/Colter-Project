@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Numerics;
-using System.Threading;
 
 public partial class Capybara : NPCBase
 {

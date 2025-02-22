@@ -43,10 +43,6 @@ project/assembly_name="Colter"
 
 enabled=PackedStringArray("res://addons/level/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
-[filesystem]
-
-import/blender/enabled=false
-
 [global_group]
 
 Human="Any and all entities considered human"
