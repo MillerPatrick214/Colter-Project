@@ -9,15 +9,18 @@ public partial class Skinning : Control
 	[Export] public float SkinningReversalWeight;
 	[Export] public float SkinningJitterWeight;
 
-	KnifeArea KnifeAreaNode;
+	[ExportCategory("Cut Line Metrics")]
+	[Export] float MaxLength;
+	[Export] float Segments;
 
+	KnifeArea KnifeAreaNode;
 	bool isMouseOnKnife;
 	bool isKnifeOnSkin;
 	bool isKnifeHeld;
-
 	bool isSkinning;
 
 	TextureRect BowieKnife;
+
  	Vector2 mousePos;
 	Vector2 rotationAngle;
 
@@ -29,15 +32,15 @@ public partial class Skinning : Control
 
 	Line2D CutLine;
 	Timer timer;
-	
-	float MaxLength;
-	float SegmentLength; 
-
+	float SegmentLength;
 	int LineIndex;
 	float devAccum;
+	float cutLength ;
+	float revAccum ;
+	float jitterAccum;
+
 	float offsetXPosition;
 	Vector2 offsetPosition;
-
 	Vector2 DefaultBowiePosition;
 	Vector2 DefaultSheathePosition;
 
@@ -78,8 +81,6 @@ public partial class Skinning : Control
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue; //
 		skinningfact.SkinningInstance += (instance) => SetSkinnable(ref instance); //connects signal from skinnable object to recieve skinnable function.
-		LineIndex = 0;
-		devAccum = 0;
 
 		timer.WaitTime = 2.0f;
 		timer.Timeout += () => ResetSkinning();
@@ -184,55 +185,59 @@ public partial class Skinning : Control
 	}
 
 	public void SkinningEvent() {
-												//Accumulates deviation on the x axis relative to the starting point x
 		Vector2 lastPoint = CutLine.GetPointPosition(LineIndex);
 		float distance = lastPoint.DistanceTo(mousePos);
-		float cutLength = 0.0f;
-		float revAccum = 0.0f;
-		float jitterAccum = 0.0f;
 
 		GD.PrintErr(distance);
 		GD.PrintErr(SegmentLength);
 
-		while (distance >= SegmentLength) {						//while the distance between the last point and the mouse is cucked, we split up the line into iterations of proper segment length.
-			float segments = distance / SegmentLength;			//Calculate number of segments we need
+		// Only iterate while mouse movement per frame (distance) exceeds a single segment length
+		while (distance >= SegmentLength) {
+			for (int i = 1; i <= Segments; i++ ) {		// For each segment we go i/segment length of the way before placing a new point						
+				Vector2 newPoint = lastPoint.Lerp(mousePos, i / Segments);
 
-			for (int i = 1; i <= segments; i++ ) {				//For each segment we go i/segment length of the way before placing a new point. 							
-				Vector2 newPoint = lastPoint.Lerp(mousePos, i / segments);
-
+				// Terminate if the mouse passes the bottom of the skinning area
 				if (lastPoint.Y >= currSkinnable.StartMaker.GlobalPosition.Y + MaxLength) {
+					// Normalize to ideal cut line length and invert penalties to calculate scores
 					float distScore = 1.0f - (Mathf.Abs(cutLength - MaxLength) / MaxLength);
 					float devScore = 1.0f - (devAccum / MaxLength);
 					float revScore = 1.0f - (revAccum / MaxLength);
 					float jitterScore = 1.0f - (jitterAccum / MaxLength);
+
+					// Pass scores to RateSkinning to weight and combine scores to calculate quality
 					RateSkinning(distScore, devScore, revScore, jitterScore);
 					timer.Start();
-					//GD.PrintErr("Reached termination of cut line. Attempting to start timer.");
 					isSkinning = false;
+
+					GD.PrintRich(
+						"[color=cyan]Skinning: [/color]Cut Length: " + cutLength + "\n" +
+						"[color=cyan]Skinning: [/color]X Deviation Accumulated: " + devAccum + "\n" +
+						"[color=cyan]Skinning: [/color]Reversal Penalty Accumulated: " + revAccum + "\n" +
+						"[color=cyan]Skinning: [/color]Jitter Penalty Accumulated: " + jitterAccum);
+
 					return;
 				}
 
 				CutLine.AddPoint(newPoint);
 
-				// Cut line length distance accumulation
+				// Accumulates distance iterations to form cutLine total length
 				cutLength += distance;
 
-				// X Deviation accumulation
+				// Accumulates deviation on the x axis relative to the starting point x
 				devAccum += Mathf.Abs(newPoint.X - currSkinnable.StartMaker.GlobalPosition.X);
 				
-				// Reversal penalty accumulation
+				// Accumulates reversal penalty for any upward movements
 				if (newPoint.Y >= lastPoint.Y){
 					revAccum += Mathf.Abs(newPoint.Y - lastPoint.Y);
 				}
 
-				// Jitteriness penalty accumulation
+				// Accumulates jitteriness penalty by comparing current x deviation and prior x deviation
 				if (LineIndex >= 2) {
 					float prevDelta = lastPoint.X - CutLine.GetPointPosition(LineIndex - 2).X;
 					float currDelta = newPoint.X - lastPoint.X;
 					jitterAccum += Mathf.Abs(currDelta - prevDelta);
 				}
 
-				//GD.PrintErr($"AnimalSkinning -- devAccum showing {devAccum}");
 				LineIndex += 1; 
 			}
 
@@ -243,6 +248,12 @@ public partial class Skinning : Control
 
 	public void RateSkinning(float distScore, float devScore, float revScore, float jitterScore) 
 	{
+		GD.PrintRich(
+		"[color=cyan]Skinning: [/color]Distance Score: " + distScore + "\n" +
+		"[color=cyan]Skinning: [/color]Deviation Score: " + devScore + "\n" +
+		"[color=cyan]Skinning: [/color]Reversal Score: " + revScore + "\n" +
+		"[color=cyan]Skinning: [/color]Jitter Score: " + jitterScore);
+
 		Godot.Collections.Dictionary<int, string> DictRatingComment = new()
 		{
 			{(int)FurQuality.NOTSET, "Note to dev: You didn't set the fur quality dumbass!"},
@@ -253,7 +264,10 @@ public partial class Skinning : Control
 			{(int)FurQuality.Shite, "Holy shite, that's the worst skinnin' I ever seen!"}
 		};
 
+
 		float finalScore = Mathf.Clamp(100 * ((SkinningDistanceWeight * distScore) + (SkinningDeviationWeight * devScore) + (SkinningReversalWeight * revScore) + (SkinningJitterWeight * jitterScore)), 0, 100);
+		
+		GD.PrintRich("[color=cyan]Skinning: [/color][color=green]Final Score: [/color]" + finalScore );
 
 		Godot.Collections.Dictionary<int, float> DictRatingScore = new()
 		{
@@ -267,6 +281,7 @@ public partial class Skinning : Control
 
 		foreach (var (quality, score) in DictRatingScore) {
 			if (finalScore >= score) {
+				GD.PrintRich("[color=cyan]Skinning: [/color]Final score greater than: " + score + ".\nFur Quality set to:" + quality );
 				currSkinnable.FurInvItem.SetQuality(quality);
 				Player.Instance.Inventory.PickUpItem(currSkinnable.FurInvItem);
 				SkinComment.Text = DictRatingComment[quality];
@@ -278,18 +293,19 @@ public partial class Skinning : Control
 
 	public void ResetSkinning() 
 	{
-		//GD.PrintErr("Timer timed out and ResetSkinning was called.");
 		SkinComment.Text = "";
 		CutLine.ClearPoints();
 		LineIndex = 0;
 		devAccum = 0;
 		currSkinnable.QueueFree();
 		currSkinnable = null;
+		GD.PrintRich("[color=cyan]Skinning: [/color]Skinning Reset.");
 		
 	}
 
 	public void BeginSkinning() {
 		if (!isSkinning) {
+			GD.PrintRich("[color=cyan]Skinning: [/color]Beginning skinning..");
 			currSkinnable.PullRectangle();					
 			Vector2 rectSize = currSkinnable.GetSize();
 			Vector2 rectLocation= currSkinnable.GetShapeLocation();
@@ -301,7 +317,7 @@ public partial class Skinning : Control
 			GD.Print($"RectangleSize: {rectSize}\nRectangleLocation: {rectLocation}\nstartPOS: {startPos}");
 
 			MaxLength = (rectSize.Y - rectLocation.Y) * .66f; 	// so here I'm saying the total length of the cut line will be 75% of the size of the total collision shape. RectSize.Y is greater(but further down visually) than the location of Y. The difference is the length overall in pixels I beleive.					
-			SegmentLength = MaxLength/100; 						// so assuming 100 segements will make up our line
+			SegmentLength = MaxLength/Segments; 						// so assuming 100 segements will make up our line
 
 			BowieKnife.Position = startPos;
 			GetViewport().WarpMouse(startPos);	
