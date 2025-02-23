@@ -1,20 +1,21 @@
 using Godot;
-using System;
 
 public partial class KnifeArea : Area2D
 {
 	[Signal]
 	public delegate void MouseOnKnifeEventHandler(bool isTrue);
-	bool isMouseOnKnife;
+	bool isMouseOnKnife = false;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		MouseEntered += () => {
-			GD.Print("Mouse entered KnifeArea");
+			isMouseOnKnife = true;
 			EmitSignal(SignalName.MouseOnKnife, true);
 		};
+
 		MouseExited += () => {
-			GD.Print("Mouse exited KnifeArea");
+			isMouseOnKnife = false;
 			EmitSignal(SignalName.MouseOnKnife, false);
 		};
 

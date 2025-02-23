@@ -25,7 +25,6 @@ public partial class CapyWalk : NPCState<Capybara>
 	public override void Enter(string previousStatePath)
     {
 		NPC.NavAgent.NavigationFinished += NavFinished;
-		GD.Print("Entering enter function in CapyWalk now... See if I'm Before or After ");
 		NPC.AniTree.Set("parameters/conditions/isWalking", true);
 		//GD.Print ("Anitree isWalking set to TRUE");
 
@@ -35,11 +34,7 @@ public partial class CapyWalk : NPCState<Capybara>
 		newRandLocation.X = rnd.Next(-100, 100) + NPC.GlobalPosition.X;
 		newRandLocation.Z = rnd.Next(-100, 100) + NPC.GlobalPosition.Z;
 
-		GD.Print("Before bounds check: ", newRandLocation);
-
 		newRandLocation = NavigationServer3D.MapGetClosestPoint(NPC.NavAgent.GetNavigationMap(), newRandLocation);
-
-		GD.Print("After bounds check: ", newRandLocation);
 
 		NPC.NavAgent.TargetPosition = newRandLocation;
 		//NPC.setAnimation("CapybaraAnimations/CapyWalk");
@@ -95,7 +90,7 @@ public partial class CapyWalk : NPCState<Capybara>
 
 	private async Task AwaitNavAgent() {					//FIXME: this is a shitty temp HACK to avoid navagent being fucking null for some reason despite already awaiting for NPC _Ready to finish and everything else
 		while (NPC.NavAgent == null) {						//This feels wrong and shitty. I am pissed tf off 
-			GD.Print("Finding NavAgent in Capy Walk...");	//Go fuck yourself whoever is reading this
+			GD.Print("Finding NavAgent in Capy Walk...");	//Go fuck yourself whoever is reading this  // no go fuck YOURself
 			await Task.Delay(250);
 		}
 		GD.Print("CapyWalk found nav Agent!");
