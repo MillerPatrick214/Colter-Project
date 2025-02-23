@@ -32,8 +32,16 @@ public partial class Skinning : Control
 	bool isSkinning = false;
 
 	TextureRect BowieKnife;
-
 	Vector2 mousePos;
+
+	[ExportCategory("Cut Line Metrics")]
+	[Export] float MaxLength;
+	[Export] float Segments;
+
+
+	TextureRect BowieKnife;
+
+ 	Vector2 mousePos;
 	Vector2 rotationAngle;
 
 	SkinningFactory skinningfact;
@@ -228,6 +236,30 @@ public partial class Skinning : Control
 		while (distance >= SegmentLength && iterations < maxIterations)
 		{
 			iterations++;	// Prevent infinite loop
+			for (int i = 1; i <= Segments; i++ ) {		// For each segment we go i/segment length of the way before placing a new point						
+				Vector2 newPoint = lastPoint.Lerp(mousePos, i / Segments);
+
+				// Terminate if the mouse passes the bottom of the skinning area
+				if (lastPoint.Y >= currSkinnable.StartMaker.GlobalPosition.Y + MaxLength) {
+					// Normalize to ideal cut line length and invert penalties to calculate scores
+					float distScore = 1.0f - (Mathf.Abs(cutLength - MaxLength) / MaxLength);
+					float devScore = 1.0f - (devAccum / MaxLength);
+					float revScore = 1.0f - (revAccum / MaxLength);
+					float jitterScore = 1.0f - (jitterAccum / MaxLength);
+
+					// Pass scores to RateSkinning to weight and combine scores to calculate quality
+					RateSkinning(distScore, devScore, revScore, jitterScore);
+					timer.Start();
+					isSkinning = false;
+
+					GD.PrintRich(
+						"[color=cyan]Skinning: [/color]Cut Length: " + cutLength + "\n" +
+						"[color=cyan]Skinning: [/color]X Deviation Accumulated: " + devAccum + "\n" +
+						"[color=cyan]Skinning: [/color]Reversal Penalty Accumulated: " + revAccum + "\n" +
+						"[color=cyan]Skinning: [/color]Jitter Penalty Accumulated: " + jitterAccum);
+
+					return;
+				}
 
 			for (int i = 1; i <= Segments; i++)
 			{   
