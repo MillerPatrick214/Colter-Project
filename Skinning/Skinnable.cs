@@ -27,7 +27,6 @@ public partial class Skinnable : TextureRect
 
 	public Vector2 GetShapeLocation() {
 		Rect2 rectObj = PullRectangle();
-		GD.Print($"Skinnable Rect Position: {rectObj.Position}");
 		return rectObj.Position;
 	}
 

@@ -53,7 +53,6 @@ public partial class CapyIdle : NPCState<Capybara>
     }
 
 	public void TimeToWalk() {
-		GD.Print("Idle Time Bitch");
 		EmitSignal(SignalName.Finished, WALK);
 	}
 }

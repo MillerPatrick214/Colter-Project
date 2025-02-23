@@ -24,9 +24,7 @@ public partial class CapyAlert : NPCState<Capybara>
     public override void PhysicsUpdate(double delta)
 	{
 		if (NPC.GetThreat() != null)
-		{
-			GD.Print($"Current Focus = {NPC.GetThreat().Name}");
-			
+		{		
 			AssessThreat();
 		}
 
@@ -65,7 +63,6 @@ public partial class CapyAlert : NPCState<Capybara>
 		Godot.Vector3 NPClocation = NPC.GlobalPosition;
 		Godot.Vector3 TargetLocation = focused.GlobalPosition;
 		Godot.Vector3 direction = TargetLocation - NPClocation;
-		GD.Print("Direction: ", direction);
 
 		NPC.setRayCast(direction);
 		GodotObject collObj = NPC.GetRayCollision();
@@ -74,7 +71,6 @@ public partial class CapyAlert : NPCState<Capybara>
 		direction = direction.Normalized();
 		
 		NPC.Rotate(direction);
-		GD.Print($"VisionConeCheck: {NPC.isInVisionCone()}");
 		
 		if (NPC.isInVisionCone())
 		{
