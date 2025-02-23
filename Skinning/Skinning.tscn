@@ -20,10 +20,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_g7j4h")
-DistanceWeight = 100.0
-DeviationWeight = 100.0
-ReversalWeight = 100.0
-JitterWeight = 100.0
+DistanceWeight = 50.0
+DeviationWeight = 50.0
+ReversalWeight = 50.0
+JitterWeight = 50.0
 
 [node name="Skinning Factory" type="Control" parent="."]
 layout_mode = 1

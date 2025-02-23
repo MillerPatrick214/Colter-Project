@@ -27,7 +27,7 @@ public partial class Skinnable : TextureRect
 
 	public Vector2 GetShapeLocation() {
 		Rect2 rectObj = PullRectangle();
-		return rectObj.Position;
+		return rectObj.Position + CollShape.GlobalPosition;
 	}
 
 	/*
@@ -40,7 +40,6 @@ public partial class Skinnable : TextureRect
 
 	public Rect2 PullRectangle() {
 		RectangleShape2D Rect = CollShape.Shape as RectangleShape2D;
-
 		
 		return Rect.GetRect();
 	}
