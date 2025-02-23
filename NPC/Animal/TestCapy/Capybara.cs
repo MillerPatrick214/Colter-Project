@@ -113,7 +113,6 @@ public partial class Capybara : NPCBase
 		//if (!SensedBodies.Any()) {					//This should catch any body that enters despite which state we're in and change the mode to Alert\
 		if (body.IsClass("CharacterBody3D") && body.IsInGroup("Human")) 
 		{ 
-			GD.Print("Successfully Detected Character");
 			if (!isDead)						//Temp work around to avoid entering alert from death
 			{						
 				Threat = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?

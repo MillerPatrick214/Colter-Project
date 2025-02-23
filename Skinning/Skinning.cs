@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using static FurInvItem;
@@ -5,10 +6,10 @@ using static FurInvItem;
 public partial class Skinning : Control
 {
 	[ExportCategory("Line Trace Scoring Settings")]
-	[Export(PropertyHint.None, "suffix:%")] public float DistanceWeight = 90;
-	[Export(PropertyHint.None, "suffix:%")] public float DeviationWeight = 90;
-	[Export(PropertyHint.None, "suffix:%")] public float ReversalWeight = 55;
-	[Export(PropertyHint.None, "suffix:%")] public float JitterWeight = 55;
+	[Export(PropertyHint.None, "suffix:%")] public float DistanceWeight = 100;
+	[Export(PropertyHint.None, "suffix:%")] public float DeviationWeight = 100;
+	[Export(PropertyHint.None, "suffix:%")] public float ReversalWeight = 100;
+	[Export(PropertyHint.None, "suffix:%")] public float JitterWeight = 100;
 
 	[ExportCategory("Line Trace Score Quality Thresholds")]
 	[Export(PropertyHint.None, "suffix:%")] public float PerfectScoreThreshold = 90;
@@ -47,11 +48,13 @@ public partial class Skinning : Control
 	float cutLength;
 	float revAccum;
 	float jitterAccum;
+	float revCount;
 
 	float offsetXPosition;
 	Vector2 offsetPosition;
 	Vector2 DefaultBowiePosition;
 	Vector2 DefaultSheathePosition;
+
 
 	public override void _Ready()
 	{
@@ -227,34 +230,36 @@ public partial class Skinning : Control
 				// Accumulate deviation on the x axis relative to the starting point x
 				devAccum += Mathf.Abs(newPoint.X - CurrentSkinnable.StartMaker.GlobalPosition.X);
 
-				// Accumulate reversal penalty for any upward movements
-				if (newPoint.Y >= lastPoint.Y)
-				{
-					revAccum += Mathf.Abs(newPoint.Y - lastPoint.Y);
-				}
-
-				// Accumulate jitteriness penalty by comparing current x deviation and prior x deviation
 				if (LineIndex >= 2)
 				{
+					// Accumulate reversal penalty
+					bool wasMovingDown = lastPoint.Y > CutLine.GetPointPosition(LineIndex - 2).Y;
+					bool isMovingUp = newPoint.Y < lastPoint.Y;
+					if (wasMovingDown && isMovingUp)
+					{
+						revAccum += Mathf.Abs(newPoint.Y - lastPoint.Y) + revCount * 10;
+						revCount++;
+					}
+
+					// Accumulate jitteriness penalty 
 					float prevDelta = lastPoint.X - CutLine.GetPointPosition(LineIndex - 2).X;
 					float currDelta = newPoint.X - lastPoint.X;
-					jitterAccum += Mathf.Abs(currDelta - prevDelta);
+					float prevDir = Mathf.Sign(prevDelta);
+					float currDir = Mathf.Sign(currDelta);
+					if (currDir != 0 && currDir != prevDir)
+					{
+						jitterAccum += Mathf.Abs(prevDelta) * 0.25f +  Mathf.Abs(currDelta) * 0.75f;
+					}
 				}
 
 				// Terminate if the mouse passes the bottom of the skinning area
 				if (lastPoint.Y >= CurrentSkinnable.StartMaker.GlobalPosition.Y + IdealCutLength) {
 
-					// Normalize to ideal cut line length and invert penalties to calculate scores
-					float distScore = 1.0f - Mathf.Abs(cutLength - IdealCutLength) / IdealCutLength * 0.1f;
-					float devScore = 1.0f - devAccum / IdealCutLength * 0.1f;
-					float revScore = 1.0f - revAccum / IdealCutLength * 0.1f;
-					float jitterScore = 1.0f - jitterAccum / IdealCutLength * 0.1f;
-
-					GD.PrintRich(
-					$"[color=cyan]Skinning: [/color]Cut Length: {cutLength}\n" +
-					$"[color=cyan]Skinning: [/color]X Deviation Accumulated: {devAccum}\n" +
-					$"[color=cyan]Skinning: [/color]Reversal Penalty Accumulated: {revAccum}\n" +
-					$"[color=cyan]Skinning: [/color]Jitter Penalty Accumulated: {jitterAccum}");
+					// Normalize scores to ideal cut line length 
+					float distScore = 100 * Mathf.Exp(-Mathf.Abs(cutLength - IdealCutLength) / (50 * IdealCutLength)); 
+					float devScore = 100 * Mathf.Exp(-devAccum / (100 * IdealCutLength));
+					float revScore = 100 * Mathf.Exp(-revAccum / (0.5f * IdealCutLength));
+					float jitterScore = 100 * Mathf.Exp(-jitterAccum / (30 * IdealCutLength));
 
 					// Pass scores to RateSkinning to weight and combine scores to calculate quality
 					RateSkinning(distScore, devScore, revScore, jitterScore);
@@ -273,10 +278,10 @@ public partial class Skinning : Control
 	public void RateSkinning(float distScore, float devScore, float revScore, float jitterScore)
 	{
 		GD.PrintRich(
-		$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Distance Score: {distScore}\n" +
-		$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Deviation Score: {devScore}\n" +
-		$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Reversal Score: {revScore}\n" +
-		$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Jitter Score: {jitterScore}");
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Distance Score: {distScore}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Deviation Score: {devScore}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Reversal Score: {revScore}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Jitter Score: {jitterScore}");
 
 		Godot.Collections.Dictionary<int, string> DictRatingComment = new()
 		{
@@ -288,31 +293,39 @@ public partial class Skinning : Control
 			{(int)FurQuality.Shite, "Holy shite, that's the worst skinnin' I ever seen!"}
 		};
 
-		// Prevent divide by 0 error
-		float weightSum = DistanceWeight + DeviationWeight + ReversalWeight + JitterWeight;
-		if (weightSum <= 0)
-		{
-			GD.PrintErr("Skinning metric weights invalid. Setting weightSum to 1.");
-			weightSum = 1;
-		}
+		float weightedDist = DistanceWeight / 100 * distScore;
+		float weightedDev = DeviationWeight / 100 * devScore;
+		float weightedRev = ReversalWeight / 100 * revScore;
+		float weightedJitter = JitterWeight / 100 * jitterScore;
 
 		// Take a weighted average of scores by taking weighted scores and dividing by sum of weights
-		float weightedAvg = (DistanceWeight * distScore + 
-			DeviationWeight * devScore + 
-			ReversalWeight * revScore + 
-			JitterWeight * jitterScore) / weightSum;
+		float weightSum = DistanceWeight + DeviationWeight + ReversalWeight + JitterWeight;
+		if (weightSum == 0) weightSum = 1;
+		float weightedAvg = 100 * (weightedDist + weightedDev + weightedRev + weightedJitter) / weightSum;
 
-		// Multiplicative slight penalty for exceptionally low scores
-		float penalty = 1.0f - (1.0f - distScore) * (1.0f - devScore) * (1.0f - revScore) * (1.0f - jitterScore);
+		// Multiplicative penalty for exceptionally low scores
+		float distPenalty = 1 - weightedDist / 100;
+		float devPenalty = 1 - weightedDev / 100;
+		float revPenalty = 1 - weightedRev / 100;
+		float jitterPenalty = 1 - weightedJitter / 100;
+		var penaltyList = new Godot.Collections.Array{distPenalty, devPenalty, revPenalty, jitterPenalty};
+		float penalty = Mathf.Clamp(1 - (float)penaltyList.Max() / 100, 0, 1);
+
+		GD.PrintRich(
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Distance Penalty: {distPenalty}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Deviation Penalty: {devPenalty}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Reversal Penalty: {revPenalty}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Jitter Penalty: {jitterPenalty}\n" +
+			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Final Penalty: {penalty}");
 
 		// Score 0 - 100 based on weighted average * penalty
-		float finalScore = Mathf.Clamp(100 * weightedAvg * penalty, 0, 100);
+		float finalScore = Mathf.Clamp(weightedAvg * (1 - penalty), 0, 100);
 
 		GD.PrintRich($"[color=cyan]Skinning: [/color][color=green][color=purple]Metrics: [/color]Final Score: [/color]{finalScore}");
 
 		Godot.Collections.Dictionary<int, float> DictRatingScore = new()
 		{
-			{(int)FurQuality.NOTSET, 100},
+			{(int)FurQuality.NOTSET, 0},
 			{(int)FurQuality.Perfect, PerfectScoreThreshold},
 			{(int)FurQuality.Good, GoodScoreThreshold},
 			{(int)FurQuality.Decent, DecentScoreThreshold},

@@ -22,10 +22,6 @@ Events="*res://Singletons/Events.cs"
 Player="*res://Player/Character/First Person/Player.tscn"
 Global="*res://Level/Global.cs"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/viewport_width=2560
