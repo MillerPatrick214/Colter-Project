@@ -928,7 +928,7 @@ MeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodeP
 ItemResource = ExtResource("2_ceery")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.0103956, 0.0489074, 0, -0.0489074, 0.0103956, 0, -0.046, 0)
+transform = Transform3D(0.05, 0, 0, 0, 0.0103954, 0.0489074, 0, -0.0489074, 0.0103954, 0, -0.046, 0)
 bones/0/name = "Bone_master"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -4.96308e-24, -1.65436e-24, 4.96308e-24, 1, 0, 1.65436e-24, 0, 1, -1.54737e-15, 8.41916e-07, 0)
@@ -1043,7 +1043,7 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.095485, 1.36002e-15, -2.13163e-14, -1.95399e-14, 0.0800565, -0.0274262, 3.55271e-14, 0.0394617, 0.05564, 0.352067, 1.51624, 0.518492)
+transform = Transform3D(0.095485, 1.11022e-16, -2.4869e-14, -1.77636e-14, 0.0800565, -0.0274262, 3.90799e-14, 0.0394617, 0.05564, 0.352067, 1.51624, 0.518492)
 bone_name = "hammer.001"
 bone_idx = 2
 
@@ -1063,7 +1063,7 @@ mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11248e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
+transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11249e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
 bone_name = "trigger"
 bone_idx = 6
 

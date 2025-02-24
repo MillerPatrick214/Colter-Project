@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_7d45k"]
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_myvag"]
 [ext_resource type="AnimationLibrary" uid="uid://cjl2q2vwxjni" path="res://NPC/Animal/TestCapy/CapyAnimations/CapybaraAnimations.tres" id="4_xeeau"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFall.cs" id="4_yhbp3"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyWalk.cs" id="5_geobw"]
 [ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="5_iqgn2"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyIdle.cs" id="6_34blc"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyAlert.cs" id="7_7tdts"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyFlee.cs" id="10_g5a2g"]
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/CapyStates/CapyDeath.cs" id="11_gtlnt"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCFall.cs" id="6_mqvpo"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCWalk.cs" id="7_efcoa"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCIdle.cs" id="8_npa5g"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCAlert.cs" id="9_da8rr"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCFlee.cs" id="10_wq7rp"]
+[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCDeath.cs" id="11_2jntu"]
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_vjc01"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_a0y8h"]
 
@@ -181,11 +181,17 @@ points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 5, -5, 0, 5, 5, 5, 5, -5, 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
 radius = 7.0
 
-[node name="Capybara" type="CharacterBody3D"]
+[node name="Capybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_7dout")
+RunSpeed = 10.0
+NavAgent = NodePath("NavigationAgent3D")
+AniTree = NodePath("AnimationTree")
+VisionRay = NodePath("VisionRay")
+HearingArea = NodePath("HearingArea")
+VisionCone = NodePath("VisionCone")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -224,7 +230,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.282157, -0.00298288, 0.00224378, 0.959361)
+bones/2/rotation = Quaternion(0.267335, -0.00294739, 0.00223163, 0.963596)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -294,22 +300,22 @@ parameters/conditions/isWalking = false
 script = ExtResource("5_iqgn2")
 
 [node name="Fall" type="Node" parent="StateMachine"]
-script = ExtResource("4_yhbp3")
+script = ExtResource("6_mqvpo")
 
 [node name="Walk" type="Node" parent="StateMachine"]
-script = ExtResource("5_geobw")
+script = ExtResource("7_efcoa")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("6_34blc")
+script = ExtResource("8_npa5g")
 
 [node name="Alert" type="Node" parent="StateMachine"]
-script = ExtResource("7_7tdts")
+script = ExtResource("9_da8rr")
 
 [node name="Flee" type="Node" parent="StateMachine"]
-script = ExtResource("10_g5a2g")
+script = ExtResource("10_wq7rp")
 
 [node name="Death" type="Node" parent="StateMachine"]
-script = ExtResource("11_gtlnt")
+script = ExtResource("11_2jntu")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
