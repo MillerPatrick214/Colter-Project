@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://x34aas21so5x"]
+[gd_scene load_steps=60 format=4 uid="uid://x34aas21so5x"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/LimboCapybara.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/NewWanderPosition.cs" id="2_1uyqb"]
@@ -20,15 +20,20 @@ var/Target/type = 9
 var/Target/value = Vector3(0, 0, 0)
 var/Target/hint = 0
 var/Target/hint_string = ""
-var/Focus/name = &"Focus"
-var/Focus/type = 24
-var/Focus/hint = 34
-var/Focus/hint_string = "Node3D"
+var/hasFocus/name = &"hasFocus"
+var/hasFocus/type = 1
+var/hasFocus/value = false
+var/hasFocus/hint = 0
+var/hasFocus/hint_string = "Node3D"
 var/isHeadDown/name = &"isHeadDown"
 var/isHeadDown/type = 1
 var/isHeadDown/value = true
 var/isHeadDown/hint = 0
 var/isHeadDown/hint_string = ""
+var/Focus/name = &"Focus"
+var/Focus/type = 24
+var/Focus/hint = 34
+var/Focus/hint_string = "Node3D"
 script = SubResource("CSharpScript_a1jjo")
 var/Target/name = &"Target"
 var/Target/type = 9
@@ -44,12 +49,19 @@ var/isHeadDown/type = 1
 var/isHeadDown/value = true
 var/isHeadDown/hint = 0
 var/isHeadDown/hint_string = ""
+var/hasFocus/name = &"hasFocus"
+var/hasFocus/type = 1
+var/hasFocus/value = false
+var/hasFocus/hint = 0
+var/hasFocus/hint_string = "Node3D"
 
 [sub_resource type="BBVariant" id="BBVariant_nndm1"]
-saved_value = null
+resource_name = "false"
+saved_value = false
+type = 1
 
 [sub_resource type="BTCheckVar" id="BTCheckVar_u2316"]
-variable = &"Focus"
+variable = &"hasFocus"
 value = SubResource("BBVariant_nndm1")
 
 [sub_resource type="BBNode" id="BBNode_2d0tl"]
@@ -133,7 +145,7 @@ saved_value = NodePath("AnimationPlayer")
 await_completion = 1.0
 animation_player = SubResource("BBNode_i0h1j")
 animation_name = &"CapybaraAnimations/CapyHeadDown"
-speed = -1.0
+speed = -2.0
 from_end = true
 
 [sub_resource type="BBVariant" id="BBVariant_f4du1"]
@@ -158,13 +170,9 @@ script = ExtResource("4_jtgjo")
 [sub_resource type="BTInvert" id="BTInvert_mi6o4"]
 children = [SubResource("BTAction_wtmu8")]
 
-[sub_resource type="BTDelay" id="BTDelay_x5v0f"]
-children = [SubResource("BTInvert_mi6o4")]
-seconds = 0.5
-
 [sub_resource type="BTSequence" id="BTSequence_it7n1"]
 custom_name = "Alert"
-children = [SubResource("BTAction_5r1xr"), SubResource("BTAlwaysSucceed_wmlbj"), SubResource("BTDelay_x5v0f")]
+children = [SubResource("BTAction_5r1xr"), SubResource("BTAlwaysSucceed_wmlbj"), SubResource("BTInvert_mi6o4")]
 
 [sub_resource type="BBNode" id="BBNode_7dq7g"]
 resource_name = "AnimationPlayer"
@@ -178,16 +186,9 @@ speed = 3.5
 [sub_resource type="BTAction" id="BTAction_m6tn0"]
 script = ExtResource("6_7jh8d")
 
-[sub_resource type="BBVariant" id="BBVariant_522xg"]
-saved_value = null
-
-[sub_resource type="BTSetVar" id="BTSetVar_lym7f"]
-variable = &"Focus"
-value = SubResource("BBVariant_522xg")
-
 [sub_resource type="BTSequence" id="BTSequence_3aw1o"]
 custom_name = "Flee"
-children = [SubResource("BTPlayAnimation_dg4iv"), SubResource("BTAction_m6tn0"), SubResource("BTSetVar_lym7f")]
+children = [SubResource("BTPlayAnimation_dg4iv"), SubResource("BTAction_m6tn0")]
 
 [sub_resource type="BTSelector" id="BTSelector_nj4lj"]
 children = [SubResource("BTDynamicSequence_mkvnv"), SubResource("BTSequence_it7n1"), SubResource("BTSequence_3aw1o")]
@@ -318,78 +319,78 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.32831e-10, 1.14786e-07, -1.25729e-08)
 bones/0/enabled = true
-bones/0/position = Vector3(8.32667e-17, 0.000688345, 0.378978)
+bones/0/position = Vector3(8.32667e-17, -0.378979, 1.62399e-08)
 bones/0/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.3283e-10, 1.06973, -0.00194299)
 bones/1/enabled = true
-bones/1/position = Vector3(-1.52656e-16, 1.07042, 0.377035)
+bones/1/position = Vector3(0.268607, 1.08706, -0.00197445)
 bones/1/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
-bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.305264, -0.00303464, 0.00207233, 0.952261)
+bones/2/position = Vector3(2.3283e-10, 2.1388, -0.0408518)
+bones/2/rotation = Quaternion(0.0243039, 2.48393e-17, 7.24781e-18, 0.999705)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
 bones/3/rest = Transform3D(1, 7.95808e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, 0.521562, 2.51634, 0.746557)
 bones/3/enabled = true
-bones/3/position = Vector3(0.521562, 2.61156, 0.97996)
-bones/3/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
+bones/3/position = Vector3(0.521562, 2.31672, 0.753158)
+bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/3/scale = Vector3(1, 1, 1.00001)
 bones/4/name = "LowerBone.004.R"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, 0.521562, 2.62876, 1.35067)
 bones/4/enabled = true
-bones/4/position = Vector3(0.521562, 2.56679, 1.39368)
-bones/4/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
+bones/4/position = Vector3(0.521562, 2.00991, 1.36961)
+bones/4/rotation = Quaternion(0.733558, 9.72213e-07, 1.04936e-06, 0.679627)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "UpperBone.005.R"
 bones/5/parent = -1
 bones/5/rest = Transform3D(1, 4.54747e-13, 2.861e-06, 2.7712e-06, -0.248596, -0.968604, 7.11237e-07, 0.968607, -0.248596, 0.521562, 0.229447, 0.820321)
 bones/5/enabled = true
-bones/5/position = Vector3(0.521562, 0.30712, 0.883757)
+bones/5/position = Vector3(0.521562, 0.435332, 0.826186)
 bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
 bones/5/scale = Vector3(1, 1, 0.999997)
 bones/6/name = "LowerBone.006.R"
 bones/6/parent = -1
 bones/6/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, 0.521562, 0.0831632, 1.40116)
 bones/6/enabled = true
-bones/6/position = Vector3(0.521562, 0.160836, 1.4646)
-bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
+bones/6/position = Vector3(0.521562, 0.62051, 1.47384)
+bones/6/rotation = Quaternion(0.275591, 1.37511e-06, 3.94237e-07, 0.961275)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "UpperBone.007.R"
 bones/7/parent = -1
 bones/7/rest = Transform3D(1, 3.41061e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, -0.526884, 2.53763, 0.746518)
 bones/7/enabled = true
-bones/7/position = Vector3(-0.526884, 2.62943, 0.991525)
-bones/7/rotation = Quaternion(0.84419, 7.66824e-07, 1.20763e-06, 0.536044)
+bones/7/position = Vector3(-0.526884, 2.67488, 0.746269)
+bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerBone.008.R"
 bones/8/parent = -1
 bones/8/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, -0.526884, 2.65005, 1.35063)
 bones/8/enabled = true
-bones/8/position = Vector3(-0.526884, 2.58808, 1.39364)
-bones/8/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
+bones/8/position = Vector3(-0.526884, 3.27417, 1.31524)
+bones/8/rotation = Quaternion(0.360581, 1.33428e-06, 5.15815e-07, 0.932728)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperBone.009.R"
 bones/9/parent = -1
 bones/9/rest = Transform3D(1, 4.54747e-13, 3.33783e-06, 3.23306e-06, -0.248596, -0.968603, 8.29776e-07, 0.968607, -0.248595, -0.526884, 0.250735, 0.820282)
 bones/9/enabled = true
-bones/9/position = Vector3(-0.526884, 0.328409, 0.883718)
+bones/9/position = Vector3(-0.526884, 0.107145, 0.764395)
 bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
 bones/9/scale = Vector3(1, 1, 0.999996)
 bones/10/name = "LowerBone.010.R"
 bones/10/parent = -1
 bones/10/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, -0.526884, 0.104451, 1.40113)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.526884, 0.182125, 1.46456)
-bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
+bones/10/position = Vector3(-0.526884, -0.255229, 1.34979)
+bones/10/rotation = Quaternion(0.648315, 1.08915e-06, 9.27421e-07, 0.761373)
 bones/10/scale = Vector3(1, 1, 1)
 
 [node name="BTPlayer" type="BTPlayer" parent="."]

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Godot;
+using Microsoft.VisualBasic;
 
 [GlobalClass, Tool]
 public partial class NPCBase : CharacterBody3D
@@ -30,7 +31,7 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	public bool IsInteractable = false;	
 	public Node3D Focus = null;
-	BTPlayer BTPlayer; 
+	protected BTPlayer BTPlayer; 
 
 	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
@@ -60,6 +61,7 @@ public partial class NPCBase : CharacterBody3D
 
 	virtual public void Death() //Note this is called Death but signal is DeathSignal
 	{
+		BTPlayer.Active = false; 
 		isDead = true;
 		IsInteractable = true;
 	}
@@ -135,10 +137,25 @@ public partial class NPCBase : CharacterBody3D
 			{						
 				Focus = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
 				EmitSignal(SignalName.Sensed);
-				BTPlayer.Blackboard.SetVar("Focus", Focus);
+
+				BTPlayer.Blackboard.SetVar("hasFocus", true);
 			}
 		}
 		
+	}
+
+	public override void _PhysicsProcess(double delta)
+    {
+		if (Engine.IsEditorHint())
+		{
+			return;
+		}
+        if (!IsOnFloor())
+		{
+			Velocity =  Velocity - new Vector3(0, gravity, 0) * (float)delta;
+    	}
+
+		MoveAndSlide();
 	}
 
 	public void SensedRemove(Node3D body) 
@@ -147,8 +164,8 @@ public partial class NPCBase : CharacterBody3D
 		if ( Focus != null && !HearingArea.OverlapsBody(Focus) && !VisionCone.OverlapsBody(Focus)) //This needs to be totally changed. 
 		{
 			Focus = null;
-			BTPlayer.Blackboard.SetVar("Focus", Focus);
+			
+			BTPlayer.Blackboard.SetVar("hasFocus", false);
 		}
 	}
-
 }

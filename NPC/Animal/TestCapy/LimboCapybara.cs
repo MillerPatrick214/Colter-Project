@@ -35,20 +35,5 @@ public partial class LimboCapybara : NPCBase
 		}
 		Events.Instance.EmitSignal(Events.SignalName.BeginSkinning, SkinningScene);
 	}
-
-
-    public override void _PhysicsProcess(double delta)
-    {
-		if (Engine.IsEditorHint())
-		{
-			return;
-		}
-        if (!IsOnFloor())
-		{
-			Velocity =  Velocity - new Vector3(0, gravity, 0) * (float)delta;
-    	}
-
-		MoveAndSlide();
-	}
 }
 
