@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://teocnmy3m2wg"
+path="res://.godot/imported/BulletHell.wav-72a935ce3e944a718f8bbce42679834f.sample"
+
+[deps]
+
+source_file="res://Items/Weapons/RangedWeapon/1795 Musket/Projectile/BulletHell.wav"
+dest_files=["res://.godot/imported/BulletHell.wav-72a935ce3e944a718f8bbce42679834f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

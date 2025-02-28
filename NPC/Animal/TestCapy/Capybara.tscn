@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://d1tywn615fc2s"]
+[gd_scene load_steps=39 format=4 uid="uid://d1tywn615fc2s"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_7d45k"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCDeath.cs" id="11_2jntu"]
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_vjc01"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_a0y8h"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="14_kw70l"]
 
 [sub_resource type="Animation" id="Animation_2shjp"]
 length = 0.001
@@ -230,7 +231,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.267335, -0.00294739, 0.00223163, 0.963596)
+bones/2/rotation = Quaternion(0.244377, -0.00289691, 0.002267, 0.969673)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
@@ -348,3 +349,9 @@ shape = SubResource("SphereShape3D_pkh7y")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("13_a0y8h")
 MaxHealth = 50.0
+
+[node name="InteractComponent" parent="." instance=ExtResource("14_kw70l")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
+shape = SubResource("CapsuleShape3D_48exc")

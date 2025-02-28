@@ -39,7 +39,7 @@ public abstract partial class RangedWeapon : Weapon
 	float ADS_Speed;
 	PackedScene AmmoScene;
 	AnimationPlayer AniPlayer;
-	AnimationTree AniTree;
+	public AnimationTree AniTree; //temp public fixme
 	Marker3D WeaponEnd;
 	Timer timer;
 	public override void _Ready()
@@ -97,7 +97,7 @@ public abstract partial class RangedWeapon : Weapon
 
 	public override void _Process(double delta)
 	{
-		if (Owner is Player)
+		if (GetParent().Name == "PlayerItemMarker")
 		{
 			Aim(delta);
 		}
@@ -133,7 +133,7 @@ public abstract partial class RangedWeapon : Weapon
 		CanFire = true;
 	}
 
-	public void Aim( double delta){					//Tis will almost definitely need to be re-worked as animation improves
+	public void Aim(double delta){					//Tis will almost definitely need to be re-worked as animation improves
 		//var current_animation = AniTree.Get("anim_player/current_animation");
 		float currentAimState = (float)AniTree.Get("parameters/Blend2/blend_amount"); 
 		if (IsAiming) {

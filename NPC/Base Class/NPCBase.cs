@@ -37,11 +37,25 @@ public partial class NPCBase : CharacterBody3D
 
     public override void _Ready()
     {
+		UpdateConfigurationWarnings();
+		
+		if (Engine.IsEditorHint())
+		{
+			return;
+		}
+
+
         base._Ready();
 		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;
+
 		HearingArea.BodyEntered += (Node3D body) => SensedAdd(body);		
 		VisionCone.BodyEntered += (Node3D body) => SensedAdd(body);
+
+		HearingArea.BodyExited += (Node3D body) => SensedRemove(body);		
+		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
+		
 		BTPlayer = GetNodeOrNull<BTPlayer>("BTPlayer");
+		if (BTPlayer == null) {GD.PrintErr($"NPC Base {this.GetPath()}: BTPlayer returned null");}
 
 		UpdateConfigurationWarnings();
     }

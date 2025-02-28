@@ -25,6 +25,10 @@ public partial class Capybara : NPCBase
 
 	public override void _Ready()
 	{
+		if (Engine.IsEditorHint())
+		{
+			return;
+		}
 
 		base._Ready();
 

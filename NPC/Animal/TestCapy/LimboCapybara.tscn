@@ -166,6 +166,8 @@ children = [SubResource("BTSequence_v2vid")]
 
 [sub_resource type="BTAction" id="BTAction_wtmu8"]
 script = ExtResource("4_jtgjo")
+SusSpeed = 10
+UnusSpeed = 5
 
 [sub_resource type="BTInvert" id="BTInvert_mi6o4"]
 children = [SubResource("BTAction_wtmu8")]

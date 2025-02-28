@@ -63,8 +63,10 @@ public partial class ConfirmThreat : BTAction
     public void Rotate(Node3D focus, double delta)
     {
         Vector3 target = focus.GlobalPosition - agent.GlobalPosition;
+        if (target == Vector3.Zero) {return;}
         target.Y = 0;
         target.Normalized();
+        if (target.IsZeroApprox()) {return;}
 
         Transform3D transform = agent.Transform;
 		 Basis a = agent.Transform.Basis;			
@@ -99,11 +101,11 @@ public partial class ConfirmThreat : BTAction
         
         if (char_body != null && char_body.IsInGroup("ThreatLevel3"))
         {
-            Susometer += 5 * (float)delta;
+            Susometer += SusSpeed * (float)delta;
         }
         else
         {
-            Susometer -= 3 * (float)delta;
+            Susometer -= UnusSpeed * (float)delta;
         }
     }
 

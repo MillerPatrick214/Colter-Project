@@ -18,13 +18,13 @@ public partial class Weapon : Item3D
 	{
 		base._Ready();
 		
-		if (Owner is Player)
+		if (GetParent().Name == "PlayerItemMarker")
 		{
 			Position = DefaultPlayerPosition;
 			RotationDegrees = DefaultPlayerRotation;
 		}
 
-		if (Owner is NPCBase)
+		if (GetParent().Name == "NPCItemMarker")
 		{
 			GD.PrintErr($"Weapon {this.GetPath()} has Owner of NPC Base -- setting position of {DefaultNPCPosition}, Rotation as {DefaultNPCRotation}");
 			Position = DefaultNPCPosition;

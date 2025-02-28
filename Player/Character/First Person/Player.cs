@@ -84,7 +84,7 @@ public partial class Player : CharacterBody3D
 		Events.Instance.ChangeIsInteracting += (isActive) => InteractMouseMode(isActive);
 		InteractMouseMode(false);
 		
-		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/ItemMarker");
+		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/PlayerItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");

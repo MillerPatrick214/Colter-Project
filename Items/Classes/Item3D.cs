@@ -120,10 +120,12 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		SetCollisionMaskValue(2, collBool);
 	}
 	
-	public void Interact() 
+	/*
+	public void PickUp(InventoryItem ItemResource) 
 	{
 		Events.Instance.EmitSignal(Events.SignalName.PickUp, ItemResource);
 		QueueFree();
 	}
+	*/ //now in InteractComponent
 	
 }
