@@ -122,7 +122,7 @@ public partial class Player : CharacterBody3D
 		Lean(Leaning);
 		Crouch(isCrouching);
 
-		Equippable item = null;
+		Equippable item;
 
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
@@ -221,15 +221,14 @@ public partial class Player : CharacterBody3D
 				MouseMotion = mouseMotion.Relative; //Saving this for weaponsway
 				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
 				mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
-				
+
 				mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
 
-				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 							
+				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 	
 				Vector3 cam_piv_rot = new Godot.Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
 				//Basis item_basis = ItemMarker.GlobalTransform.Basis;
 				RotationDegrees = char_rot;
 				CamPivNode.RotationDegrees = cam_piv_rot;
-				
 			}
 		}
 	}
@@ -267,7 +266,7 @@ public partial class Player : CharacterBody3D
 
 		float targetHeight = isCrouching ? CrouchingHeight : StandingHeight;
 		float targetCamPos = isCrouching ? CrouchingCamPivot : StandingCamPivot;
-		
+
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
 			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
@@ -382,6 +381,7 @@ public partial class Player : CharacterBody3D
 			UnderWaterCanvasLayer.Show();
 			AudioServer.SetBusEffectEnabled(0, 0, true);
 		}
+		
 		else
 		{
 			UnderWaterCanvasLayer.Hide(); 

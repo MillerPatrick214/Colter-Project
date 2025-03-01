@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://t0fd544v45ma"]
+[gd_scene load_steps=7 format=3 uid="uid://bujq473h6ortl"]
 
 [ext_resource type="Script" path="res://Skinning/Skinning.cs" id="1_g7j4h"]
 [ext_resource type="Script" path="res://Skinning/SkinningFactory.cs" id="2_gsbnr"]

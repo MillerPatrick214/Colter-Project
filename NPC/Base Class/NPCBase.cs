@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-
 using Godot;
-using Microsoft.VisualBasic;
 
 [GlobalClass, Tool]
 public partial class NPCBase : CharacterBody3D
@@ -26,6 +24,9 @@ public partial class NPCBase : CharacterBody3D
 	public Area3D HearingArea;
 	[Export]
 	public Area3D VisionCone;
+	[Export]
+	public Area3D InteractComponent;
+	public InteractComponent InteractComponentCast;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 	[Export]
@@ -38,12 +39,13 @@ public partial class NPCBase : CharacterBody3D
     public override void _Ready()
     {
 		UpdateConfigurationWarnings();
-		
+
 		if (Engine.IsEditorHint())
 		{
 			return;
 		}
 
+		InteractComponentCast = InteractComponent as InteractComponent;
 
         base._Ready();
 		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;
@@ -69,6 +71,7 @@ public partial class NPCBase : CharacterBody3D
 		if (VisionRay == null){ warnings.Add("Warning: RayCast3D VisionRay Node not set in editor!");}
 		if (HearingArea == null){ warnings.Add("Warning: Area3D HearingArea Node not set in editor!");}
 		if (VisionCone == null){ warnings.Add("Warning: Area3D VisionCone Node not set in editor!");}
+		if (InteractComponent == null){ warnings.Add("Warning: InteractComponent node not set in editor!");}
 
 		return warnings.ToArray();
 	}

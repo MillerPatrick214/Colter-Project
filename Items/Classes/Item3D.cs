@@ -9,7 +9,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public bool IsInteractable = true;
 
 	[Export]
-	
 	public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
 
 	[Export]
@@ -53,9 +52,9 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		}
 		else
 		{
+			
 			FreezeMode = FreezeModeEnum.Kinematic;
 			SetCollision(true);
-			
 		}
 
 		Freeze = held;

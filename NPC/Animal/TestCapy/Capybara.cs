@@ -3,25 +3,8 @@ using Godot;
 [Tool]
 public partial class Capybara : NPCBase
 {
-	
-	// Called when the node enters the scene tree for the first time.
 	PackedScene SkinningScene;
 	string currState = ""; 
-	
-	//
-	//I think we will likely want a curr List of sensed bodies and a body for the "Threat" that is set by the alert mode once "proof" of that threat is visually confirmed or susometer reaches max?
-	//
-
-	//List<Node3D> SensedBodies;
-
-
-	//so current flow is
-	//	1. Added to sensed
-	//	2. Rotate VisualArea to include body
-	//	3. Adjust RayCast to attempt to find body
-	//	4.		If : RayCast finds body, set to flee (and then somehow pass data over to it telling it the direction to flee in? Maybe use nav )
-	//	5. 		Else : RayCast Can't find body after x seconds, go back to Idle
-
 
 	public override void _Ready()
 	{
@@ -49,6 +32,11 @@ public partial class Capybara : NPCBase
 	public override void Death() {
 		base.Death(); 
 		IsInteractable = true;
+	}
+
+	public PackedScene GetSkinScene()
+	{
+		return SkinningScene;
 	}
 
     public override void Interact() {

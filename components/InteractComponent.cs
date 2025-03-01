@@ -1,29 +1,28 @@
-using DialogueManagerRuntime;
 using Godot;
-using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
+
+
 
 public partial class InteractComponent : Area3D
 {
-
-	Node ParentNode;
+	
+	[Export]
+	public InteractMode CurrentInteractMode {get; set;}
 
 	[Export]
-	public InteractMode CurrentInteractMode;
-
-
-	[Export]
-	public Resource SkinBehavior;
+	public SkinLogic SkinLogic;
 
 	[Export]
-	public InteractTalkLogic InteractTalkLogic;
+	public TalkLogic TalkLogic;
 
 	[Export]
-	public Resource LootBehavior;
+	public LootLogic LootLogic;
 
 	[Export]
-	public InteractPickUpLogic InteractPickUpLogic;
+	public PickUpLogic PickUpLogic;
+
+	[Export]
+	public Node ParentNode;
 
 	public enum InteractMode
 	{
@@ -37,16 +36,14 @@ public partial class InteractComponent : Area3D
 	// Called when the node enters the scene tree for the first time.
 	public override async void _Ready()
 	{
+		
+		if (ParentNode != null){ return;}
+
     	while (!IsInsideTree())
 		{
 			await Task.Delay(10); // Small delay to avoid blocking the thread
 		}
 		ParentNode = GetParent();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public void Interact()
@@ -57,21 +54,24 @@ public partial class InteractComponent : Area3D
 			return;
 			
 			case (InteractMode.SKIN):
+			if (SkinLogic == null) {return;}
+			SkinLogic.Interact();
 			return;
 
 			case(InteractMode.TALK):
-			InteractTalkLogic.Interact();
+			if (TalkLogic == null) {return;}
+			TalkLogic.Interact();
 			return;
 
 			case(InteractMode.LOOT):
 			return;
 
 			case(InteractMode.PICKUP):
-			if (ParentNode is Item3D item)
-			{
-				InteractPickUpLogic.Interact(item);
-			}
+			if (PickUpLogic == null) {return;}
+			PickUpLogic.Interact(ParentNode);
 			return;
 		}
 	}
 }
+
+

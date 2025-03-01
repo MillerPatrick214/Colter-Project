@@ -5,7 +5,6 @@ public partial class InteractLogic : Resource
 {
     public virtual void Interact()
     {
-
     }
 
 }

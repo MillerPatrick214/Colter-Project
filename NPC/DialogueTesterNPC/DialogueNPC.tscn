@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://NPC/Humanoid/Humanoid.cs" id="1_gn00u"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="4_jt0uy"]
 [ext_resource type="Resource" uid="uid://dswnoltgatyh3" path="res://Dialogue/Test/Tester.dialogue" id="5_cpbe6"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/InteractTalkLogic.cs" id="6_1gpws"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/TalkLogic.cs" id="6_1gpws"]
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="9_qlduw"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_u2kpq"]
 
@@ -68,12 +68,12 @@ points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 30, -5, 0, 30, 5, 5, 30, -
 [sub_resource type="SphereShape3D" id="SphereShape3D_j2l3g"]
 radius = 7.0
 
-[sub_resource type="Resource" id="Resource_12xeu"]
+[sub_resource type="Resource" id="Resource_3qrep"]
 script = ExtResource("6_1gpws")
 DialogueStart = "start"
 DialougeResource = ExtResource("5_cpbe6")
 
-[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
+[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_gn00u")
 itemMarker = NodePath("NPCItemMarker")
@@ -82,6 +82,7 @@ AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
+InteractComponent = NodePath("InteractComponent")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_lr8vt")
@@ -137,7 +138,7 @@ MaxHealth = 50.0
 
 [node name="InteractComponent" parent="." instance=ExtResource("4_jt0uy")]
 CurrentInteractMode = 2
-InteractTalkLogic = SubResource("Resource_12xeu")
+TalkLogic = SubResource("Resource_3qrep")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902813, 0)

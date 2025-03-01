@@ -51,6 +51,11 @@ public partial class Aim : BTAction
         target.Y = 0;
         target.Normalized();
 
+        if (target.IsZeroApprox())
+        {
+            return Status.Running;
+        }
+
         Transform3D transform = agent.Transform;
 		 Basis a = agent.Transform.Basis;			
 

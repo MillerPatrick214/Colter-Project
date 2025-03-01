@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://x34aas21so5x"]
+[gd_scene load_steps=62 format=4 uid="uid://x34aas21so5x"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/LimboCapybara.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/NewWanderPosition.cs" id="2_1uyqb"]
@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_4op7t"]
 [ext_resource type="Script" path="res://ai/tasks/ConfirmThreat.cs" id="4_jtgjo"]
 [ext_resource type="Script" path="res://ai/tasks/Flee.cs" id="6_7jh8d"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="12_td3j1"]
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_xw2tj"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/SkinLogic.cs" id="13_5r5f4"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_t1s4s"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_a1jjo"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jy2mn"]
 var/Target/name = &"Target"
@@ -34,26 +34,6 @@ var/Focus/name = &"Focus"
 var/Focus/type = 24
 var/Focus/hint = 34
 var/Focus/hint_string = "Node3D"
-script = SubResource("CSharpScript_a1jjo")
-var/Target/name = &"Target"
-var/Target/type = 9
-var/Target/value = Vector3(0, 0, 0)
-var/Target/hint = 0
-var/Target/hint_string = ""
-var/Focus/name = &"Focus"
-var/Focus/type = 24
-var/Focus/hint = 34
-var/Focus/hint_string = "Node3D"
-var/isHeadDown/name = &"isHeadDown"
-var/isHeadDown/type = 1
-var/isHeadDown/value = true
-var/isHeadDown/hint = 0
-var/isHeadDown/hint_string = ""
-var/hasFocus/name = &"hasFocus"
-var/hasFocus/type = 1
-var/hasFocus/value = false
-var/hasFocus/hint = 0
-var/hasFocus/hint_string = "Node3D"
 
 [sub_resource type="BBVariant" id="BBVariant_nndm1"]
 resource_name = "false"
@@ -304,16 +284,21 @@ radius = 7.0
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_ucith"]
 
-[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
+[sub_resource type="Resource" id="Resource_ip3hn"]
+script = ExtResource("13_5r5f4")
+SkinningNodePath = "uid://cw0mtrrkpq73g"
+
+[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_g31wg")
 NavAgent = NodePath("NavigationAgent3D")
 AniTree = NodePath("AnimationTree")
-VisionRay = NodePath("VisionRay")
+VisionRay = NodePath("HearingArea/VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
+InteractComponent = NodePath("InteractComponent")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -397,6 +382,7 @@ bones/10/scale = Vector3(1, 1, 1)
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_7ahmb")
+active = false
 blackboard_plan = SubResource("BlackboardPlan_0s5l1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -434,14 +420,14 @@ shape = SubResource("CapsuleShape3D_48exc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
 shape = SubResource("ConvexPolygonShape3D_h0vrs")
 
-[node name="VisionRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-target_position = Vector3(0, 0, 8)
-
 [node name="HearingArea" type="Area3D" parent="."]
 
 [node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
 shape = SubResource("SphereShape3D_pkh7y")
+
+[node name="VisionRay" type="RayCast3D" parent="HearingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, 0, 8)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("13_t1s4s")
@@ -449,3 +435,11 @@ MaxHealth = 50.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationRootNode_ucith")
+
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("ParentNode") instance=ExtResource("12_td3j1")]
+ParentNode = NodePath("..")
+SkinLogic = SubResource("Resource_ip3hn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
+shape = SubResource("CapsuleShape3D_48exc")

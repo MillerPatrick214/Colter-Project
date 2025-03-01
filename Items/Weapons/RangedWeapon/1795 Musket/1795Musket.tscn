@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/InteractPickUpLogic.cs" id="10_hxyg4"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="10_hxyg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfgm7"]
 resource_name = "gunmetal"
@@ -920,7 +920,7 @@ node_connections = [&"Blend2", 0, &"Animation 3", &"Blend2", 1, &"Animation 2", 
 radius = 0.2
 height = 1.4
 
-[sub_resource type="Resource" id="Resource_ls1jc"]
+[sub_resource type="Resource" id="Resource_0f0yk"]
 script = ExtResource("10_hxyg4")
 
 [node name="1795Musket" type="RigidBody3D"]
@@ -1240,7 +1240,7 @@ transform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.005567
 shape = SubResource("CapsuleShape3D_2g2ad")
 
 [node name="InteractComponent" parent="." instance=ExtResource("9_qd8h7")]
-InteractPickUpLogic = SubResource("Resource_ls1jc")
+PickUpLogic = SubResource("Resource_0f0yk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.00556753, 0, -0.0387105, -0.374775)

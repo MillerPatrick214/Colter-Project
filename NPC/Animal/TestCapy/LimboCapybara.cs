@@ -25,8 +25,8 @@ public partial class LimboCapybara : NPCBase
 
 
 	public override void Death() {
-		base.Death(); 
-		IsInteractable = true;
+		base.Death();
+		InteractComponentCast.CurrentInteractMode = global::InteractComponent.InteractMode.SKIN;
 	}
 
 	public override void Interact() {
