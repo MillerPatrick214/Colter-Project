@@ -64,7 +64,6 @@ public partial class CapyWalk : NPCState<Capybara>
 	}
 	public void NavFinished() 
 	{
-		GD.Print("FROM WALK STATE: Navigation finished");
 		EmitSignal(SignalName.Finished, IDLE);
 	}
 
@@ -90,7 +89,6 @@ public partial class CapyWalk : NPCState<Capybara>
 
 	private async Task AwaitNavAgent() {					//FIXME: this is a shitty temp HACK to avoid navagent being fucking null for some reason despite already awaiting for NPC _Ready to finish and everything else
 		while (NPC.NavAgent == null) {						//This feels wrong and shitty. I am pissed tf off 
-			GD.Print("Finding NavAgent in Capy Walk...");	//Go fuck yourself whoever is reading this  // no go fuck YOURself
 			await Task.Delay(250);
 		}
 		GD.Print("CapyWalk found nav Agent!");

@@ -1,0 +1,372 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtixggui7nc7t"]
+
+[ext_resource type="Texture2D" uid="uid://dcqaxt7vmw05e" path="res://UI/MainMenu/Campfire.jpg" id="1_3pcmf"]
+[ext_resource type="Theme" uid="uid://c8bwm6chjehha" path="res://UI/Themes/MainMenuTheme.tres" id="1_3qaea"]
+[ext_resource type="Script" path="res://UI/MainMenu/MainMenu.cs" id="2_g4eny"]
+[ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="2_youq5"]
+[ext_resource type="AudioStream" uid="uid://cn4s8utwlwb01" path="res://UI/MainMenu/FireAudio.mp3" id="3_fejs2"]
+[ext_resource type="PackedScene" uid="uid://cjouu6yj88fsg" path="res://Level/FreeRoamMainMenu.tscn" id="3_p6r0n"]
+[ext_resource type="AudioStream" uid="uid://br0xl531ru24o" path="res://UI/MainMenu/WindAudio.mp3" id="4_ke4oq"]
+[ext_resource type="Script" path="res://UI/MainMenu/SettingsTabContainer.cs" id="7_lseeb"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("ButtonContainer", "FadeRect", "ContinueButton", "NewGameButton", "LoadGameButton", "SettingsButton", "SettingsButtonContainer", "SettingsTabContainer", "GameplayButton", "ControlsButton", "GraphicsButton", "AudioButton", "BackButton", "ApplyButton", "QuitButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_3qaea")
+script = ExtResource("2_g4eny")
+ButtonContainer = NodePath("ButtonContainer")
+FadeRect = NodePath("FadeRect")
+GameScene = ExtResource("3_p6r0n")
+ContinueButton = NodePath("ButtonContainer/Continue")
+NewGameButton = NodePath("ButtonContainer/NewGame")
+LoadGameButton = NodePath("ButtonContainer/LoadGame")
+SettingsButton = NodePath("ButtonContainer/Settings")
+SettingsButtonContainer = NodePath("SettingsButtonContainer")
+SettingsTabContainer = NodePath("SettingsTabContainer")
+GameplayButton = NodePath("SettingsButtonContainer/Gameplay")
+ControlsButton = NodePath("SettingsButtonContainer/Controls")
+GraphicsButton = NodePath("SettingsButtonContainer/Graphics")
+AudioButton = NodePath("SettingsButtonContainer/Audio")
+BackButton = NodePath("SettingsButtonContainer/Back")
+ApplyButton = NodePath("ApplyButton")
+QuitButton = NodePath("ButtonContainer/Quit")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3pcmf")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.388
+anchor_right = 0.209
+anchor_bottom = 1.0
+offset_left = 197.0
+offset_top = 0.279968
+offset_right = -1.04004
+offset_bottom = -110.0
+grow_vertical = 0
+
+[node name="Continue" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+disabled = true
+text = "continue"
+flat = true
+
+[node name="NewGame" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "new game
+"
+flat = true
+
+[node name="LoadGame" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+disabled = true
+text = "load game"
+flat = true
+
+[node name="Settings" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "settings"
+flat = true
+
+[node name="Quit" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.20871, 0.20871, 0.20871, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "quit"
+flat = true
+
+[node name="FireAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fejs2")
+volume_db = -20.0
+autoplay = true
+bus = &"MenuSFX"
+parameters/looping = true
+
+[node name="WindAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ke4oq")
+volume_db = -10.0
+autoplay = true
+bus = &"MenuSFX"
+parameters/looping = true
+
+[node name="SettingsButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.388
+anchor_right = 0.209
+anchor_bottom = 1.0
+offset_left = 197.0
+offset_top = 0.279968
+offset_right = -1.04004
+offset_bottom = -110.0
+grow_vertical = 0
+
+[node name="Gameplay" type="Button" parent="SettingsButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+text = "gameplay"
+flat = true
+
+[node name="Controls" type="Button" parent="SettingsButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "controls"
+flat = true
+
+[node name="Graphics" type="Button" parent="SettingsButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "graphics"
+flat = true
+
+[node name="Audio" type="Button" parent="SettingsButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.207843, 0.207843, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "audio"
+flat = true
+
+[node name="Back" type="Button" parent="SettingsButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_colors/font_hover_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_colors/font_pressed_color = Color(0.20871, 0.20871, 0.20871, 1)
+theme_override_fonts/font = ExtResource("2_youq5")
+text = "back"
+flat = true
+
+[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSSpinBox", "MaxFPSLabel", "StrikeLine")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = 0.003
+anchor_right = 1.0
+anchor_bottom = 0.881
+offset_left = -7.0
+offset_top = 126.68
+offset_right = -148.0
+offset_bottom = 0.359985
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 2
+tabs_visible = false
+script = ExtResource("7_lseeb")
+LookSensitivitySlider = NodePath("GameplayTab/MarginContainer/SettingsContainer/LookSensitivity/HBoxContainer/HSlider")
+LookSensitivitySpinBox = NodePath("GameplayTab/MarginContainer/SettingsContainer/LookSensitivity/HBoxContainer/SpinBox")
+WindowModeButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/WindowMode/OptionButton")
+ResolutionButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/Resolution/OptionButton")
+VSyncButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/VSync/CheckBox")
+MaxFPSSpinBox = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/SpinBox")
+MaxFPSLabel = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS")
+StrikeLine = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS/Line2D")
+
+[node name="GameplayTab" type="ScrollContainer" parent="SettingsTabContainer"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsTabContainer/GameplayTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingsContainer" type="VBoxContainer" parent="SettingsTabContainer/GameplayTab/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LookSensitivity" type="HBoxContainer" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LookSensitivity" type="Label" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer/LookSensitivity"]
+layout_mode = 2
+text = "Mouse Sensitivity"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer/LookSensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="HSlider" type="HSlider" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer/LookSensitivity/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="SpinBox" type="SpinBox" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer/LookSensitivity/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_arrow_step = 1.0
+select_all_on_focus = true
+
+[node name="ControlsTab" type="ScrollContainer" parent="SettingsTabContainer"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsTabContainer/ControlsTab"]
+layout_mode = 2
+
+[node name="SettingsContainer" type="VBoxContainer" parent="SettingsTabContainer/ControlsTab/MarginContainer"]
+layout_mode = 2
+
+[node name="Interact" type="HBoxContainer" parent="SettingsTabContainer/ControlsTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="Interact" type="Label" parent="SettingsTabContainer/ControlsTab/MarginContainer/SettingsContainer/Interact"]
+layout_mode = 2
+text = "Interact"
+
+[node name="GraphicsTab" type="ScrollContainer" parent="SettingsTabContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsTabContainer/GraphicsTab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SettingsContainer" type="VBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="WindowMode" type="HBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WindowMode" type="Label" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/WindowMode"]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="OptionButton" type="OptionButton" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/WindowMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Resolution" type="HBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="Resolution" type="Label" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/Resolution"]
+layout_mode = 2
+text = "Resolution
+"
+
+[node name="OptionButton" type="OptionButton" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSync" type="HBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="VSync" type="Label" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/VSync"]
+layout_mode = 2
+text = "V-Sync Enabled"
+
+[node name="CheckBox" type="CheckBox" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/VSync"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="MaxFPS" type="HBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="MaxFPS" type="Label" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/MaxFPS"]
+layout_mode = 2
+text = "Max Frame Rate"
+
+[node name="Line2D" type="Line2D" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS"]
+visible = false
+position = Vector2(5, 4)
+points = PackedVector2Array(442, 21, 264, 24, 121, 21, -8, 19)
+width = 6.0
+default_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/MaxFPS"]
+layout_mode = 2
+max_value = 144.0
+rounded = true
+select_all_on_focus = true
+
+[node name="AudioTab" type="ScrollContainer" parent="SettingsTabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ApplyButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.751
+anchor_top = 0.003
+anchor_right = 1.0
+anchor_bottom = 0.981
+offset_left = -0.560059
+offset_top = 1264.68
+offset_right = -189.0
+offset_bottom = -0.640137
+theme_override_font_sizes/font_size = 56
+text = "apply changes"
+
+[node name="FadeRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0352941, 0.0235294, 0.00784314, 1)

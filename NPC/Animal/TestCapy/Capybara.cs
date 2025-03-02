@@ -47,8 +47,7 @@ public partial class Capybara : NPCBase
 
 		NavAgent= GetNodeOrNull<NavigationAgent3D>("NavigationAgent3D"); 
 
-		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");}
-		else {GD.Print("We're Chuned! NavAgent found successfully");} 
+		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");} 
 
 		if (AniTree == null) {GD.Print("Capybara: Fuck AniTree is Null");}
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Skinning/Skinning.cs" id="1_g7j4h"]
 [ext_resource type="Script" path="res://Skinning/SkinningFactory.cs" id="2_gsbnr"]
 [ext_resource type="Script" path="res://Skinning/KnifeArea.cs" id="3_1ooa8"]
-[ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Beth_Ellen/BethEllen-Regular.ttf" id="4_xu1ta"]
+[ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="4_xu1ta"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ayat0"]
 load_path = "res://.godot/imported/Bowie Knife No Blur.png-2767f3fee8705d9dfbdd016b3b588a34.ctex"

@@ -34,17 +34,14 @@ public partial class Inventory : Resource
     public Inventory()
     {
         // Inventory already Initialized
-        if (InventorySpace != null && InventorySpace.Count > 0)
-        {
+        if (InventorySpace != null && InventorySpace.Count > 0) {
             return;
         }
-        else{
-        for (int i = 0; i < InventoryRows; i++)
-            {
+        else {
+            for (int i = 0; i < InventoryRows; i++) {
                 InventorySpace.Add(new Godot.Collections.Array<InventoryItem>());
 
-                for (int j = 0; j < InventoryColumns; j++)
-                {
+                for (int j = 0; j < InventoryColumns; j++) {
                     InventorySpace[i].Add(null);
                 }
             }
@@ -64,24 +61,19 @@ public partial class Inventory : Resource
 
     public void PickUpItem(InventoryItem item) // Doesn't take space into account. This will also have to throw an exception not just print an err 
     {
-       GD.PrintErr("Pickup successfully called");
-
-        for (int i = 0; i < InventorySpace.Count; i++) 
-        {
+        for (int i = 0; i < InventorySpace.Count; i++)  {
             //GD.PrintErr($"Inventory: Entered For loop i{i}");
             Godot.Collections.Array<InventoryItem> array = InventorySpace[i];
-            for (int j = 0; j < array.Count; j++) 
-            {
+            for (int j = 0; j < array.Count; j++)  {
                // GD.PrintErr($"Inventory: Entered For loop j{j}");
                // GD.PrintErr("At Array J = ", array[j]);
-                if (array[j] == null) 
-                {
+                if (array[j] == null) {
                     array[j] = item; // Assign the item to the empty slot
 
                     item.row = i;
                     item.column = j;
 
-                    GD.Print($"Success! Item put in slot # {j}");
+                    GD.PrintRich($"[color=deep_sky_blue]Inventory: [/color]Success! Item put in slot # {j}");
 
                     Events.Instance.EmitSignal(Events.SignalName.InventoryChanged);
                     return;         // Exit after placing the item
