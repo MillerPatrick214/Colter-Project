@@ -25,8 +25,7 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	public Area3D VisionCone;
 	[Export]
-	public Area3D InteractComponent;
-	public InteractComponent InteractComponentCast;
+	public InteractComponent InteractComponent;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 	[Export]
@@ -45,7 +44,7 @@ public partial class NPCBase : CharacterBody3D
 			return;
 		}
 
-		InteractComponentCast = InteractComponent as InteractComponent;
+		if (InteractComponent != null) {InteractComponent.ParentNode = this;}
 
         base._Ready();
 		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;

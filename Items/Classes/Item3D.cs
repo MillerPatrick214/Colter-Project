@@ -1,7 +1,5 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
-
+using System.Collections.Generic;
 public partial class Item3D : RigidBody3D //base for all items and tools visible in the game world
 {
 
@@ -15,12 +13,16 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public InventoryItem ItemResource {get; set;}
 
 	[Export]
+	public InteractComponent InteractComponent {get; set;}
+
+	[Export]
 	public virtual bool isHeld {get; set;} = false;
 
 	public Item3D() {}
 	public Item3D(bool isHeld)
 	{
 		this.isHeld = isHeld;
+		if (InteractComponent != null) {InteractComponent.ParentNode = this;}
 	}
 
 	public override void _Ready()
@@ -56,6 +58,12 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 			FreezeMode = FreezeModeEnum.Kinematic;
 			SetCollision(true);
 		}
+
+		if (InteractComponent != null)
+		{
+			InteractComponent.Monitorable = !held;
+		}
+		
 
 		Freeze = held;
 		
@@ -117,6 +125,15 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		SetCollisionLayerValue(2, collBool);
 		SetCollisionMaskValue(1, collBool);
 		SetCollisionMaskValue(2, collBool);
+	}
+
+	public override string[] _GetConfigurationWarnings()
+	{
+		List<string> warnings = new List<string>();
+
+		if (InteractComponent == null){ warnings.Add("Warning: InteractComponent node not set in editor!");}
+
+		return warnings.ToArray();
 	}
 	
 	/*

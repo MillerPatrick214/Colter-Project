@@ -288,7 +288,7 @@ radius = 7.0
 script = ExtResource("13_5r5f4")
 SkinningNodePath = "uid://cw0mtrrkpq73g"
 
-[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
+[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
@@ -298,7 +298,6 @@ AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("HearingArea/VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
-InteractComponent = NodePath("InteractComponent")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -436,8 +435,8 @@ MaxHealth = 50.0
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationRootNode_ucith")
 
-[node name="InteractComponent" parent="." node_paths=PackedStringArray("ParentNode") instance=ExtResource("12_td3j1")]
-ParentNode = NodePath("..")
+[node name="InteractComponent" parent="." instance=ExtResource("12_td3j1")]
+CurrentInteractMode = 1
 SkinLogic = SubResource("Resource_ip3hn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

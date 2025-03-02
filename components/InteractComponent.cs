@@ -21,7 +21,6 @@ public partial class InteractComponent : Area3D
 	[Export]
 	public PickUpLogic PickUpLogic;
 
-	[Export]
 	public Node ParentNode;
 
 	public enum InteractMode
