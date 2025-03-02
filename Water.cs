@@ -1,6 +1,4 @@
 using Godot;
-using System;
-
 
 public partial class Water : MeshInstance3D
 {
@@ -30,7 +28,6 @@ public partial class Water : MeshInstance3D
 	}
 	public void UnderwaterCheck(Area3D area, bool isEnter)
 	{
-		GD.PrintErr($"Water:UnderwaterCheck() -- body is {area}");
 		if (area.IsInGroup("PlayerCamera"))
 		{
 			Events.Instance.EmitSignal(Events.SignalName.UnderwaterToggle, isEnter);

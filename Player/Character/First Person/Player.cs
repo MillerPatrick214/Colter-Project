@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Godot;
 
 public partial class Player : CharacterBody3D
@@ -22,7 +23,6 @@ public partial class Player : CharacterBody3D
 	[Export(PropertyHint.None, "suffix:%")] float BobFrequency = 40;
 
 	[ExportGroup("Camera Settings")]
-	[Export(PropertyHint.None, "suffix:%")] float lookAroundSpeed = 10;
 	[Export(PropertyHint.None, "suffix:m")] float StandingHeight = 1.7f; 
 	[Export(PropertyHint.None, "suffix:m")] float CrouchingHeight = 1.0f;
 	[Export(PropertyHint.None, "suffix:%")] float StandingCameraPivot = 19.5f;
@@ -30,7 +30,7 @@ public partial class Player : CharacterBody3D
 	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMinimum = -70;
 	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMaximum = 70;
 	
-	
+	float lookAroundSpeed;
 	CamPivot CamPivNode;
 	float mouseRotX = 0;
 	float mouseRotY = 0;
@@ -62,7 +62,6 @@ public partial class Player : CharacterBody3D
     {
 		Instance = this;
 		Inventory = new Inventory();
-		GD.PrintErr($"Player Instance: {this.GetPath()}");
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
@@ -89,6 +88,8 @@ public partial class Player : CharacterBody3D
 		Events.Instance.UnderwaterToggle += (tf) => ToggleUnderWater(tf);
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
+
+		lookAroundSpeed = (float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
     }
 
 

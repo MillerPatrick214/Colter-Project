@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using static FurInvItem;
@@ -321,7 +320,7 @@ public partial class Skinning : Control
 		// Score 0 - 100 based on weighted average * penalty
 		float finalScore = Mathf.Clamp(weightedAvg * (1 - penalty), 0, 100);
 
-		GD.PrintRich($"[color=cyan]Skinning: [/color][color=green][color=purple]Metrics: [/color]Final Score: [/color]{finalScore}");
+		GD.PrintRich($"[color=cyan]Skinning: [/color][color=green]Final Score: [/color]{finalScore}");
 
 		Godot.Collections.Dictionary<int, float> DictRatingScore = new()
 		{
@@ -339,7 +338,7 @@ public partial class Skinning : Control
 			if (finalScore > DictRatingScore[quality])
 			{
 				// Assigns corresponding quality before passing a PickUpItem call to the Players inventory for the FurInvItem
-				GD.PrintRich($"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Fur Quality set to: {quality} (Threshold surpassed: {score})");
+				GD.PrintRich($"[color=cyan]Skinning: [/color]Fur Quality set to: {quality} (Threshold surpassed: {score})");
 				
 				CurrentSkinnable.FurInvItem.SetQuality(quality);
 				Player.Instance.Inventory.PickUpItem(CurrentSkinnable.FurInvItem);

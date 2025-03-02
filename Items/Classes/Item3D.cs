@@ -28,7 +28,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	{
 		if(IsInsideTree())
 		{
-			GD.PrintErr("ITEM3D._READY STARTED");
 			SetFreezeEnabled(true);
 			SetHeld(isHeld);
 			SetVis(isHeld);
