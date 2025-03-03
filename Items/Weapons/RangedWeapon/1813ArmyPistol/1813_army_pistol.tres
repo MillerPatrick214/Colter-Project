@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://dkyv8ed0fs10o"]
+
+[ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png" id="1_xxexi"]
+[ext_resource type="Script" path="res://Items/Classes/InventoryItems/InventoryItem.cs" id="2_xlt7w"]
+
+[resource]
+script = ExtResource("2_xlt7w")
+Name = "1831 Army Pistol"
+Description = "No Description"
+Texture = ExtResource("1_xxexi")
+Quantity = 1
+IsStackable = false
+CurrentStack = 1
+MaxStack = 1
+Value = 0
+ScenePath = "uid://c5ntwqe7kftaw"
+row = -1
+column = -1
+slot = -1

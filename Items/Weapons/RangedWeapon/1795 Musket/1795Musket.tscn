@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://mkhbyhetuydg"]
+[gd_scene load_steps=72 format=4 uid="uid://mkhbyhetuydg"]
 
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="1_1b3rr"]
 [ext_resource type="Texture2D" uid="uid://rlyy8ni5fgsp" path="res://Items/Weapons/RangedWeapon/1795 Musket/1795 musketREAL_gunmetal Base Color.png" id="1_dwws7"]
@@ -8,7 +8,8 @@
 [ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="4_711rt"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"]
-[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1795 Musket/Smoke.cs" id="4_yf7fh"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="10_hxyg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfgm7"]
 resource_name = "gunmetal"
@@ -739,7 +740,7 @@ tracks/0/path = NodePath("Skeleton3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-0.000933349, -0.0461051, 8.49813e-05)]
@@ -751,7 +752,7 @@ tracks/1/path = NodePath("Skeleton3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-1.36136, 0, 0)]
@@ -919,16 +920,19 @@ node_connections = [&"Blend2", 0, &"Animation 3", &"Blend2", 1, &"Animation 2", 
 radius = 0.2
 height = 1.4
 
-[node name="1795Musket" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.045)
+[sub_resource type="Resource" id="Resource_0f0yk"]
+script = ExtResource("10_hxyg4")
+
+[node name="1795Musket" type="RigidBody3D" node_paths=PackedStringArray("InteractComponent")]
 collision_layer = 3
 script = ExtResource("1_h0wpl")
 ADSPosition = Vector3(0, -0.013, 0)
 MeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodePath("Skeleton3D/Cube/Cube"), NodePath("Skeleton3D/trigger/trigger"), NodePath("Skeleton3D/Barrel/Barrel"), NodePath("Skeleton3D/Cylinder_002/Cylinder_002"), NodePath("Skeleton3D/Cylinder_003/Cylinder_003"), NodePath("Skeleton3D/Cylinder_005/Cylinder_005"), NodePath("Skeleton3D/plate/plate"), NodePath("Skeleton3D/tipcowel_005/tipcowel_005"), NodePath("Skeleton3D/tray/tray"), NodePath("Skeleton3D/triiger guard/triiger guard"), NodePath("Skeleton3D/wood/wood"), NodePath("Skeleton3D/Sphere")])
 ItemResource = ExtResource("2_ceery")
+InteractComponent = NodePath("InteractComponent")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.0103956, 0.0489074, 0, -0.0489074, 0.0103956, 0, -0.046, 0)
+transform = Transform3D(0.05, 0, 0, 0, 0.0103954, 0.0489074, 0, -0.0489074, 0.0103954, 0, -0.046, 0)
 bones/0/name = "Bone_master"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -4.96308e-24, -1.65436e-24, 4.96308e-24, 1, 0, 1.65436e-24, 0, 1, -1.54737e-15, 8.41916e-07, 0)
@@ -1043,7 +1047,7 @@ bones/15/rotation = Quaternion(-0.000978702, 1.16948e-23, 2.17312e-19, 1)
 bones/15/scale = Vector3(-1.06096, -1.06096, -1.06096)
 
 [node name="hammer_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.095485, 1.36002e-15, -2.13163e-14, -1.95399e-14, 0.0800565, -0.0274262, 3.55271e-14, 0.0394617, 0.05564, 0.352067, 1.51624, 0.518492)
+transform = Transform3D(0.095485, 1.11022e-16, -2.4869e-14, -1.77636e-14, 0.0800565, -0.0274262, 3.90799e-14, 0.0394617, 0.05564, 0.352067, 1.51624, 0.518492)
 bone_name = "hammer.001"
 bone_idx = 2
 
@@ -1063,7 +1067,7 @@ mesh = SubResource("ArrayMesh_fw076")
 skeleton = NodePath("")
 
 [node name="trigger" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11248e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
+transform = Transform3D(6.38473, 1.38445e-15, -1.11248e-15, -1.38445e-15, 1.37454, -6.23501, -1.11249e-15, 6.23501, 1.37454, 1.28955, 9.17477, -2.61159)
 bone_name = "trigger"
 bone_idx = 6
 
@@ -1185,7 +1189,6 @@ lifetime = 4.0
 explosiveness = 1.0
 process_material = ExtResource("4_711rt")
 draw_pass_1 = SubResource("QuadMesh_r5cbn")
-script = ExtResource("4_yf7fh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WeaponEnd"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
@@ -1234,5 +1237,12 @@ parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.00556753, 0, -0.0387105, -0.374775)
+shape = SubResource("CapsuleShape3D_2g2ad")
+
+[node name="InteractComponent" parent="." instance=ExtResource("9_qd8h7")]
+PickUpLogic = SubResource("Resource_0f0yk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.00556753, 0, -0.0387105, -0.374775)
 shape = SubResource("CapsuleShape3D_2g2ad")

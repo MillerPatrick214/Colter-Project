@@ -15,7 +15,7 @@ public partial class HitBoxComponent : Area3D
 
 		else
 		{
-			GD.PrintErr($"{GetPathTo(this)}, error! no healthcomponent found.");
+			GD.PrintErr($"{GetPath()}, error! no healthcomponent found.");
 		}
 	}
 }

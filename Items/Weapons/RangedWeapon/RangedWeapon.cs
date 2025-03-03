@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 public abstract partial class RangedWeapon : Weapon
 {
@@ -14,14 +11,9 @@ public abstract partial class RangedWeapon : Weapon
 	public virtual Vector3 ADSPosition {get; set;} = Vector3.Zero;
 	[Export]
 	public virtual Vector3 ADSRotation {get; set;} = Vector3.Zero;
-	[Export]
-	public virtual Vector3 DefaultPosition {get; set;} = Vector3.Zero;
-	[Export]
-	public virtual Vector3 DefaultRotation{get; set;} = Vector3.Zero;
 	public abstract float ProjectileVelocity { get; set; }
 	[Export]
 	public virtual float SwayFactor {get; set;}
-
 
 	//Recoil Values
 	/*
@@ -40,7 +32,6 @@ public abstract partial class RangedWeapon : Weapon
 	public float CurrentTime;
 	*/
 	
-	
 	public abstract string AmmoPath { get; set;}
 	bool CanFire;
 	bool IsAiming;		//Player is aiming
@@ -48,11 +39,12 @@ public abstract partial class RangedWeapon : Weapon
 	float ADS_Speed;
 	PackedScene AmmoScene;
 	AnimationPlayer AniPlayer;
-	AnimationTree AniTree;
+	public AnimationTree AniTree; //temp public fixme
 	Marker3D WeaponEnd;
 	Timer timer;
 	public override void _Ready()
 	{
+
 		base._Ready();
 		//TargetRotation.Y = Rotation.Y;
 		//CurrentTime = 1;
@@ -90,6 +82,7 @@ public abstract partial class RangedWeapon : Weapon
 		timer.Timeout += CanFireReset;
 		Events.Instance.ChangeIsInteracting += (interactbool) => IsInteracting = interactbool;
 	}
+
 	/*
 	public void ApplyRecoil()
 	{
@@ -104,8 +97,12 @@ public abstract partial class RangedWeapon : Weapon
 
 	public override void _Process(double delta)
 	{
-		Aim(delta);
+		if (GetParent().Name == "PlayerItemMarker")
+		{
+			Aim(delta);
+		}
 	}
+	
 	/*
     public override void _PhysicsProcess(double delta)
     {
@@ -136,17 +133,14 @@ public abstract partial class RangedWeapon : Weapon
 		CanFire = true;
 	}
 
-	public void Aim( double delta){					//Tis will almost definitely need to be re-worked as animation improves
-		var current_animation = AniTree.Get("anim_player/current_animation");
+	public void Aim(double delta){					//Tis will almost definitely need to be re-worked as animation improves
+		//var current_animation = AniTree.Get("anim_player/current_animation");
 		float currentAimState = (float)AniTree.Get("parameters/Blend2/blend_amount"); 
 		if (IsAiming) {
 			float newAimState = Mathf.Lerp(currentAimState, 1, (float)(5 * delta));
 			AniTree.Set("parameters/Blend2/blend_amount", newAimState);
 		}
 		else {
-			
-			
-			
 				float newAimState = Mathf.Lerp(currentAimState, 0, (float)(5 * delta));
 				AniTree.Set("parameters/Blend2/blend_amount", newAimState);
 			

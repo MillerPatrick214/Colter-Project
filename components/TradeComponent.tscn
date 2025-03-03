@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm18cgf65ab6g"]
+
+[ext_resource type="Script" path="res://components/TradeComponent.cs" id="1_s5f55"]
+
+[node name="TradeComponent" type="Node"]
+script = ExtResource("1_s5f55")

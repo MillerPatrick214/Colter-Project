@@ -40,7 +40,7 @@ public void DeferredGotoScene(string path)
     public override void _Ready()
     {
 		Viewport root = GetTree().Root;
-		CurrentScene = root.GetChild(-1);
+		CurrentScene = root.GetChild(-1); //This is a really terrible way to fetch the map scene.
 		Instance = this;
 		CurrentScene.Ready += AssignPlayerPos;
 	}

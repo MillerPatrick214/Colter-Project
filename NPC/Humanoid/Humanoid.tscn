@@ -1,9 +1,109 @@
-[gd_scene load_steps=5 format=4 uid="uid://dj550l5ru6fro"]
+[gd_scene load_steps=43 format=4 uid="uid://dj550l5ru6fro"]
+
+[ext_resource type="Script" path="res://NPC/Humanoid/Humanoid.cs" id="1_5we11"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="1_vv1oa"]
+[ext_resource type="PackedScene" uid="uid://c5ntwqe7kftaw" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813_army_pistol.tscn" id="2_cv25x"]
+[ext_resource type="Script" path="res://ai/tasks/NewWanderPosition.cs" id="2_j3t3j"]
+[ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="3_rrr3v"]
+[ext_resource type="Script" path="res://ai/tasks/MoveTo.cs" id="3_voarb"]
+[ext_resource type="Script" path="res://ai/tasks/Freeze.cs" id="4_q258x"]
+[ext_resource type="Script" path="res://ai/tasks/ConfirmThreat.cs" id="5_xehvi"]
+[ext_resource type="Script" path="res://ai/tasks/Aim.cs" id="6_4d148"]
+[ext_resource type="Script" path="res://ai/tasks/Fire.cs" id="7_lwbvo"]
+[ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png" id="9_tibvy"]
+[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="10_4oq7l"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_fsg4v"]
+var/hasFocus/name = &"hasFocus"
+var/hasFocus/type = 1
+var/hasFocus/value = false
+var/hasFocus/hint = 0
+var/hasFocus/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_w62q8"]
+resource_name = "false"
+saved_value = false
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_686py"]
+variable = &"hasFocus"
+value = SubResource("BBVariant_w62q8")
+
+[sub_resource type="BBVariant" id="BBVariant_k33uh"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTSetVar" id="BTSetVar_xxesb"]
+variable = &"isHeadDown"
+value = SubResource("BBVariant_k33uh")
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_yk5kf"]
+min_duration = 3.0
+max_duration = 10.0
+
+[sub_resource type="BTAction" id="BTAction_0odf5"]
+script = ExtResource("2_j3t3j")
+
+[sub_resource type="BTAction" id="BTAction_715es"]
+script = ExtResource("3_voarb")
+
+[sub_resource type="BTSequence" id="BTSequence_ebqil"]
+custom_name = "Wander"
+children = [SubResource("BTSetVar_xxesb"), SubResource("BTRandomWait_yk5kf"), SubResource("BTAction_0odf5"), SubResource("BTAction_715es")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_mctm4"]
+children = [SubResource("BTCheckVar_686py"), SubResource("BTSequence_ebqil")]
+
+[sub_resource type="BTAction" id="BTAction_aksl4"]
+script = ExtResource("4_q258x")
+
+[sub_resource type="BTAction" id="BTAction_nrs0m"]
+script = ExtResource("5_xehvi")
+SusSpeed = 20
+UnusSpeed = 10
+
+[sub_resource type="BTInvert" id="BTInvert_klnu4"]
+children = [SubResource("BTAction_nrs0m")]
+
+[sub_resource type="BTSequence" id="BTSequence_yxxcb"]
+custom_name = "Alert"
+children = [SubResource("BTAction_aksl4"), SubResource("BTInvert_klnu4")]
+
+[sub_resource type="BBVariant" id="BBVariant_nlq16"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_7726p"]
+variable = &"hasFocus"
+value = SubResource("BBVariant_nlq16")
+
+[sub_resource type="BTAction" id="BTAction_jhv0i"]
+script = ExtResource("6_4d148")
+
+[sub_resource type="BTAction" id="BTAction_cw6jw"]
+script = ExtResource("7_lwbvo")
+
+[sub_resource type="BTWait" id="BTWait_5lyqe"]
+duration = 5.0
+
+[sub_resource type="BTSequence" id="BTSequence_y8pix"]
+custom_name = "Attack"
+children = [SubResource("BTCheckVar_7726p"), SubResource("BTAction_jhv0i"), SubResource("BTAction_cw6jw"), SubResource("BTWait_5lyqe")]
+
+[sub_resource type="BTSelector" id="BTSelector_ggnbn"]
+children = [SubResource("BTDynamicSequence_mctm4"), SubResource("BTSequence_yxxcb"), SubResource("BTSequence_y8pix")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_pmo6d"]
+blackboard_plan = SubResource("BlackboardPlan_fsg4v")
+root_task = SubResource("BTSelector_ggnbn")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_t7obh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwvfe"]
 resource_name = "Humanoid_NotOverlapping"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fnbig"]
@@ -42,14 +142,95 @@ shadow_mesh = SubResource("ArrayMesh_fnbig")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wo45j"]
 radius = 0.235
+height = 1.8
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="Resource" id="Resource_s07wk"]
+resource_local_to_scene = true
+script = ExtResource("10_4oq7l")
+SlotType = 3
+Name = "1813 Army Pistol"
+Description = "No Description"
+Texture = ExtResource("9_tibvy")
+Quantity = 1
+IsStackable = false
+CurrentStack = 1
+MaxStack = 1
+Value = 0
+ScenePath = "uid://c5ntwqe7kftaw"
+row = -1
+column = -1
+slot = -1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ugoan"]
+points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 30, -5, 0, 30, 5, 5, 30, -5, 5, 30)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j2l3g"]
+radius = 7.0
+
+[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 3
+script = ExtResource("1_5we11")
+itemMarker = NodePath("NPCItemMarker")
+NavAgent = NodePath("NavigationAgent3D")
+AniTree = NodePath("AnimationTree")
+VisionRay = NodePath("VisionRay")
+HearingArea = NodePath("HearingArea")
+VisionCone = NodePath("VisionCone")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = SubResource("BehaviorTree_pmo6d")
+blackboard_plan = SubResource("BlackboardPlan_t7obh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="HumanoidBase_NotOverlapping" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0538352, -1.19209e-07, 1.31039)
 mesh = SubResource("ArrayMesh_klhml")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.952555, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902813, 0)
 shape = SubResource("CapsuleShape3D_wo45j")
+
+[node name="NPCItemMarker" type="Marker3D" parent="."]
+transform = Transform3D(-0.772073, -0.100703, 0.627504, 0.495789, 0.522294, 0.693832, -0.397612, 0.846799, -0.353321, -0.794794, 1.01817, 0.0162636)
+
+[node name="1813ArmyPistol" parent="NPCItemMarker" instance=ExtResource("2_cv25x")]
+IsInteractable = false
+ItemResource = SubResource("Resource_s07wk")
+isHeld = true
+
+[node name="HitBoxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HealthComponent")]
+collision_layer = 3
+script = ExtResource("3_rrr3v")
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902813, 0)
+shape = SubResource("CapsuleShape3D_wo45j")
+
+[node name="VisionCone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724514, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
+shape = SubResource("ConvexPolygonShape3D_ugoan")
+
+[node name="TEMPFIRE" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67497, 0.805727)
+
+[node name="VisionRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67497, 0)
+target_position = Vector3(0, 0, 8)
+
+[node name="HearingArea" type="Area3D" parent="."]
+
+[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
+shape = SubResource("SphereShape3D_j2l3g")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_vv1oa")
+MaxHealth = 50.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]

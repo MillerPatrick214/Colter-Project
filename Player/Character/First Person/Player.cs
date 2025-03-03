@@ -68,7 +68,7 @@ public partial class Player : CharacterBody3D
 		Events.Instance.ChangeIsInteracting += (isActive) => InteractMouseMode(isActive);
 		InteractMouseMode(false);
 		
-		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/ItemMarker");
+		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/PlayerItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
@@ -108,7 +108,7 @@ public partial class Player : CharacterBody3D
 		Lean(Leaning);
 		Crouch(isCrouching);
 
-		Equippable item = null;
+		Equippable item;
 
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
@@ -210,12 +210,11 @@ public partial class Player : CharacterBody3D
 				
 				mouseRotY = Mathf.Clamp(mouseRotY, YRotationMinimum, YRotationMaximum);
 
-				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 							
+				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 	
 				Vector3 cam_piv_rot = new Godot.Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
 				//Basis item_basis = ItemMarker.GlobalTransform.Basis;
 				RotationDegrees = char_rot;
 				CamPivNode.RotationDegrees = cam_piv_rot;
-				
 			}
 		}
 	}
@@ -368,6 +367,7 @@ public partial class Player : CharacterBody3D
 			UnderWaterCanvasLayer.Show();
 			AudioServer.SetBusEffectEnabled(0, 0, true);
 		}
+		
 		else
 		{
 			UnderWaterCanvasLayer.Hide(); 

@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://UI/PauseMenu.cs" id="2_ymhem"]
 [ext_resource type="Script" path="res://UI/InteractText.cs" id="3_wqbe1"]
 [ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
-[ext_resource type="PackedScene" uid="uid://t0fd544v45ma" path="res://Skinning/Skinning.tscn" id="6_bderw"]
-[ext_resource type="PackedScene" uid="uid://oe5kwyao0abj" path="res://reload.tscn" id="8_jtp4a"]
+[ext_resource type="PackedScene" uid="uid://bujq473h6ortl" path="res://Skinning/Skinning.tscn" id="6_bderw"]
+[ext_resource type="PackedScene" uid="uid://d2oxyp0wr6oua" path="res://reload.tscn" id="8_jtp4a"]
 [ext_resource type="PackedScene" uid="uid://cgrey8ixgno8a" path="res://UI/InventoryUI/InventoryUI.tscn" id="8_tewgf"]
 [ext_resource type="Script" path="res://UI/InputControl.cs" id="9_hgomv"]
 

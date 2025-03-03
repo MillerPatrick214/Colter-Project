@@ -1,4 +1,5 @@
 using Godot;
+using Microsoft.VisualBasic;
 using System;
 
 public partial class InteractRayCast : RayCast3D
@@ -7,17 +8,18 @@ public partial class InteractRayCast : RayCast3D
 
 	public override void _Ready()
 	{
-		CollisionMask = 2;
+		SetCollisionMaskValue(3, true);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{	
-		
-		Node InteractableObject = (Node)GetCollider();
-
-		if ((InteractableObject is NPCBase|| InteractableObject is Item3D || InteractableObject is null ) && InteractableObject != LastSeen) 
-		{ 
+		InteractComponent InteractableObject;
+		Node collision = (Node)GetCollider();
+		InteractableObject = collision as InteractComponent;
+	
+		if (InteractableObject != LastSeen) 
+		{	
 			Events.Instance.EmitSignal(Events.SignalName.PlayerRayCast, InteractableObject);
 		}
 
@@ -25,15 +27,7 @@ public partial class InteractRayCast : RayCast3D
 
 		if (Input.IsActionJustPressed("InteractWorld") && InteractableObject != null) 
 		{
-			if (InteractableObject is Item3D worldItem && worldItem.IsInteractable) {
-				GD.Print("Recognized Object as Item3D");
-				worldItem.Interact();
-			}
-			
-			else if (InteractableObject is NPCBase NPC && NPC.IsInteractable) {
-				GD.Print("Recognized Object as NPCBase");
-				NPC.Interact();
-			}
+				InteractableObject.Interact();
 		}
 	}
 }
