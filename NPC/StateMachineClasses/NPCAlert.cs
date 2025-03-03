@@ -65,7 +65,6 @@ public partial class NPCAlert : NPCState
 		Godot.Vector3 NPClocation = NPC.GlobalPosition;
 		Godot.Vector3 TargetLocation = focused.GlobalPosition;
 		Godot.Vector3 direction = TargetLocation - NPClocation;
-		GD.Print("Direction: ", direction);
 
 		NPC.setRayCast(direction);
 		GodotObject collObj = NPC.GetRayCollision();
@@ -74,7 +73,6 @@ public partial class NPCAlert : NPCState
 		direction = direction.Normalized();
 		
 		NPC.Rotate(direction);
-		GD.Print($"VisionConeCheck: {NPC.isInVisionCone()}");
 		
 		if (NPC.isInVisionCone())
 		{

@@ -1,0 +1,94 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://c8bwm6chjehha"]
+
+[ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="1_athqw"]
+[ext_resource type="FontFile" uid="uid://bm6bhwepur6ls" path="res://UI/Themes/Fonts/SpecialElite-Regular.ttf" id="2_nrtj7"]
+[ext_resource type="Texture2D" uid="uid://1ihknwr0jagd" path="res://UI/Themes/Textures/OldPaper.png" id="3_1tu55"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fdec3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xxthm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ll8ha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tc4ha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svmqa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sisgg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grph6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3kbw1"]
+texture = ExtResource("3_1tu55")
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[resource]
+Button/colors/font_color = Color(0.934191, 0.889445, 0.818891, 1)
+Button/colors/font_disabled_color = Color(0.458824, 0.380392, 0.25098, 1)
+Button/colors/font_hover_color = Color(0.620523, 0.526817, 0.368861, 1)
+Button/colors/font_pressed_color = Color(0.26018, 0.211944, 0.129854, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0)
+Button/colors/icon_focus_color = Color(1, 1, 1, 0)
+Button/colors/icon_hover_color = Color(1, 1, 1, 0)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
+Button/colors/icon_normal_color = Color(1, 1, 1, 0)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 0)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_athqw")
+Button/styles/disabled = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/disabled_mirrored = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/focus = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/hover = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/hover_mirrored = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/normal = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/normal_mirrored = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/pressed = SubResource("StyleBoxEmpty_fdec3")
+Button/styles/pressed_mirrored = SubResource("StyleBoxEmpty_fdec3")
+HBoxContainer/constants/separation = 300
+HSlider/styles/slider = null
+Label/colors/font_color = Color(0.114441, 0.0882862, 0.0437305, 1)
+Label/colors/font_outline_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+Label/constants/outline_size = 3
+Label/font_sizes/font_size = 56
+Label/fonts/font = ExtResource("2_nrtj7")
+LineEdit/colors/font_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+LineEdit/colors/font_outline_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+LineEdit/constants/outline_size = 4
+LineEdit/font_sizes/font_size = 48
+LineEdit/fonts/font = ExtResource("2_nrtj7")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_xxthm")
+MarginContainer/constants/margin_bottom = 75
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 125
+MarginContainer/constants/margin_top = 75
+OptionButton/colors/font_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+OptionButton/colors/font_outline_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+OptionButton/constants/outline_size = 4
+OptionButton/font_sizes/font_size = 48
+OptionButton/fonts/font = ExtResource("2_nrtj7")
+OptionButton/styles/disabled = null
+OptionButton/styles/disabled_mirrored = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/hover_mirrored = null
+OptionButton/styles/normal = SubResource("StyleBoxEmpty_ll8ha")
+OptionButton/styles/pressed = null
+RichTextLabel/colors/default_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+RichTextLabel/colors/font_outline_color = Color(0.113725, 0.0901961, 0.0431373, 1)
+RichTextLabel/constants/outline_size = 3
+RichTextLabel/font_sizes/normal_font_size = 56
+RichTextLabel/fonts/normal_font = ExtResource("2_nrtj7")
+RichTextLabel/styles/background = SubResource("StyleBoxEmpty_tc4ha")
+RichTextLabel/styles/fill = SubResource("StyleBoxEmpty_svmqa")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_sisgg")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_grph6")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_3kbw1")

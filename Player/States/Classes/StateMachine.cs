@@ -27,8 +27,7 @@ public partial class StateMachine : Node
 			string previousStatePath = state.Name;
 			state.Exit();
 			state = GetNode<State>(targetStatePath);
-			state.Enter(previousStatePath);								
-			GD.Print($"{Owner.Name} transitioned from {previousStatePath} to {targetStatePath}."); 
+			state.Enter(previousStatePath);								 
 		}	
 
 	public override void _Process(double delta) {

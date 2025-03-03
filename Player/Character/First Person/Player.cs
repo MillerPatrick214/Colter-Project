@@ -1,65 +1,50 @@
-using System;
+using System.Security.Cryptography.X509Certificates;
 using Godot;
 
 public partial class Player : CharacterBody3D
 {
-	[ExportCategory("Movement Settings")]
-	[Export(PropertyHint.None, "suffix:m/s")] public float SprintSpeed = 1.5f; 
-	
 	public static Player Instance { get; private set; }
+
+	[ExportGroup("Movement Settings")]
+	[Export(PropertyHint.None, "suffix:m/s")] public float SprintSpeed = 30; 
+	[Export(PropertyHint.None, "suffix:m/s")] public float Speed = 20;
+	[Export(PropertyHint.None, "suffix:m/s")] public float JumpManueverSpeed = 15;
+	[Export] public float JumpImpulse = 20;
+
+	[ExportSubgroup("Camera Movement Settings")]
+	[Export(PropertyHint.None, "suffix:\u00ba")] public float LeanAngle = 30;
+	[Export(PropertyHint.None, "suffix:m/s")] public float LeanSpeed = 10;
+	[Export(PropertyHint.None, "suffix:%")] float CameraPivotRotation = 10;
+
+	[ExportSubgroup("Item Movement Settings")]
+	[Export(PropertyHint.None, "suffix:%")] float ItemSwayAmount = 30;
+	[Export(PropertyHint.None, "suffix:%")] float ItemPivotRotation = 20; 
+	[Export(PropertyHint.None, "suffix:%")] float BobAmount = 30;
+	[Export(PropertyHint.None, "suffix:%")] float BobFrequency = 40;
+
+	[ExportGroup("Camera Settings")]
+	[Export(PropertyHint.None, "suffix:m")] float StandingHeight = 1.7f; 
+	[Export(PropertyHint.None, "suffix:m")] float CrouchingHeight = 1.0f;
+	[Export(PropertyHint.None, "suffix:%")] float StandingCameraPivot = 19.5f;
+	[Export(PropertyHint.None, "suffix:%")] float CrouchingCameraPivot = 0;
+	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMinimum = -70;
+	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMaximum = 70;
 	
-	[Export]
-	public float Speed = 4f;
-
-	[Export]
-	public float JumpImpulse = 20f;
-	[Export]
-	public float JumpManueverSpeed = 15f;
-
-	Godot.Vector2 MouseMotion;
-	float StandingHeight = 1.7f; //meters
-	float CrouchingHeight = 1.0f; //meters
-
-	float StandingCamPivot = 0.195f;
-	float CrouchingCamPivot = 0f;
-
-	[Export] public float LeanAngle;
-	[Export] public float LeanSpeed;
-
-	//CamPivot
-	[Export]
-	float CamPivRotAmount = .01f;
+	float lookAroundSpeed;
 	CamPivot CamPivNode;
-	float mouseRotX = 0f;
-	float mouseRotY = 0f;
-	float lookAroundSpeed = .1f;
-	float yRotMin = -70f;
-	float yRotMax = 70f;
+	float mouseRotX = 0;
+	float mouseRotY = 0;
 
-	//ItemMarker
-	[Export]
-	float ItemPivRotAmount = 0.2f;
-	[Export]
-	float ItemSwayAmount = 0.003f; 
-	[Export]
-	float bob_amount = 0.003f;
-	[Export]
-	float bob_frequency = 0.004f;
 
 	Marker3D ItemMarker;
 	CollisionShape3D CollisionShapeNode;
-
+	Vector2 MouseMotion;
 	bool isCrouching;
-
 	bool isInteracting;
 	int SlotIndex = 0;
-	
 	Item3D Held;
-	
 	UI UINode;
-	
 	GodotObject ObjectSeen; 
-
 	CapsuleShape3D CapsuleShape;	// We need to access the Shape property of our collisionshape3d and store it here
 
 	public enum LeanDirection {
@@ -77,7 +62,6 @@ public partial class Player : CharacterBody3D
     {
 		Instance = this;
 		Inventory = new Inventory();
-		GD.PrintErr($"Player Instance: {this.GetPath()}");
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
@@ -104,6 +88,8 @@ public partial class Player : CharacterBody3D
 		Events.Instance.UnderwaterToggle += (tf) => ToggleUnderWater(tf);
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
+
+		lookAroundSpeed = (float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
     }
 
 
@@ -219,10 +205,10 @@ public partial class Player : CharacterBody3D
 		if (!isInteracting) {
 			if (@event is InputEventMouseMotion mouseMotion) { //mouseMotion is a local variable here
 				MouseMotion = mouseMotion.Relative; //Saving this for weaponsway
-				mouseRotX += mouseMotion.Relative.X * lookAroundSpeed;		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
-				mouseRotY -= mouseMotion.Relative.Y * lookAroundSpeed;
-
-				mouseRotY = Mathf.Clamp(mouseRotY, yRotMin, yRotMax);
+				mouseRotX += mouseMotion.Relative.X * (lookAroundSpeed / 100);		//Note -- The XY may seen flipped, but it's not. Rotation on the X axis is up and down according to the player.
+				mouseRotY -= mouseMotion.Relative.Y * (lookAroundSpeed / 100);
+				
+				mouseRotY = Mathf.Clamp(mouseRotY, YRotationMinimum, YRotationMaximum);
 
 				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 	
 				Vector3 cam_piv_rot = new Godot.Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
@@ -265,8 +251,8 @@ public partial class Player : CharacterBody3D
 		float currentCamPos = CamPivNode.Position.Y;
 
 		float targetHeight = isCrouching ? CrouchingHeight : StandingHeight;
-		float targetCamPos = isCrouching ? CrouchingCamPivot : StandingCamPivot;
-
+		float targetCamPos = isCrouching ? CrouchingCameraPivot / 100 : StandingCameraPivot / 100;
+		
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
 			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
@@ -282,7 +268,7 @@ public partial class Player : CharacterBody3D
 	{
 		Godot.Vector3 cam_piv_rot = CamPivNode.Rotation;
 		float tilt_rot = cam_piv_rot.Z;
-		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * CamPivRotAmount, 10 * (float)delta);
+		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * CameraPivotRotation / 1000, 10 * (float)delta);
 		cam_piv_rot = new Godot.Vector3(cam_piv_rot.X, cam_piv_rot.Y, tilt_rot);
 		CamPivNode.Rotation = cam_piv_rot;
 	}
@@ -291,7 +277,7 @@ public partial class Player : CharacterBody3D
 	{	
 		Godot.Vector3 item_rot = ItemMarker.Rotation;
 		float tilt_rot = item_rot.Z;
-		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * ItemPivRotAmount, 10 * (float)delta);
+		tilt_rot = Godot.Mathf.Lerp(tilt_rot, -input_x * ItemPivotRotation / 100, 10 * (float)delta);
 		item_rot = new Godot.Vector3(item_rot.X, item_rot.Y, tilt_rot);
 		ItemMarker.Rotation = item_rot;
 	}
@@ -303,8 +289,8 @@ public partial class Player : CharacterBody3D
 		float item_rot_X = ItemMarker.Rotation.X;
 		float item_rot_Y = ItemMarker.Rotation.Y;
 
-		item_rot_X = Mathf.Lerp(item_rot_X, MouseMotion.Y * ItemSwayAmount, 10 * (float)delta);
-		item_rot_Y = Mathf.Lerp(item_rot_Y, MouseMotion.X * ItemSwayAmount, 10 * (float)delta);
+		item_rot_X = Mathf.Lerp(item_rot_X, MouseMotion.Y * ItemSwayAmount / 10_000, 10 * (float)delta);
+		item_rot_Y = Mathf.Lerp(item_rot_Y, MouseMotion.X * ItemSwayAmount / 10_000, 10 * (float)delta);
 
 		ItemMarker.Rotation = new Vector3(item_rot_X, item_rot_Y, ItemMarker.Rotation.Z);
 	} 
@@ -315,8 +301,8 @@ public partial class Player : CharacterBody3D
 
 		if (Velocity != Vector3.Zero)
 		{
-			item_pos.X = Mathf.Lerp(item_pos.X, 0 + Mathf.Sin(Time.GetTicksMsec() * bob_frequency * .05f) * bob_amount, 10 * (float)delta);
-			item_pos.Y = Mathf.Lerp(item_pos.Y, 0 + Mathf.Sin(Time.GetTicksMsec() * bob_frequency + .2315f) * bob_amount, 10 * (float)delta);
+			item_pos.X = Mathf.Lerp(item_pos.X, 0 + Mathf.Sin(Time.GetTicksMsec() * (BobFrequency / 10_000) * .05f) * (BobAmount / 10_000), 10 * (float)delta);
+			item_pos.Y = Mathf.Lerp(item_pos.Y, 0 + Mathf.Sin(Time.GetTicksMsec() * (BobFrequency / 10_000) + .2315f) * (BobAmount / 10_000), 10 * (float)delta);
 		}
 		
 		else 

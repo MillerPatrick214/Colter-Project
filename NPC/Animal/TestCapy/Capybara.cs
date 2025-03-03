@@ -17,8 +17,7 @@ public partial class Capybara : NPCBase
 
 		SkinningScene = GD.Load<PackedScene>("res://Skinning/DeerSkinTest.tscn"); // load scene
 
-		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");}
-		else {GD.Print("We're Chuned! NavAgent found successfully");} 
+		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");} 
 
 		if (AniTree == null) {GD.Print("Capybara: Fuck AniTree is Null");}
 

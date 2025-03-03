@@ -35,8 +35,8 @@ height = 1.7
 [node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
 script = ExtResource("1_fdc88")
-SprintSpeed = 11.0
-Speed = 7.0
+SprintSpeed = 20.0
+Speed = 10.0
 JumpManueverSpeed = 5.0
 LeanAngle = 45.0
 LeanSpeed = 3.0

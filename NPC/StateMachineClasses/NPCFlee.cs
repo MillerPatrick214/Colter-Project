@@ -112,7 +112,6 @@ public partial class NPCFlee : NPCState
 
 	private async Task AwaitNavAgent() {					//FIXME: this is a shitty temp HACK to avoid navagent being fucking null for some reason despite already awaiting for NPC _Ready to finish in the base class and everything else
 		while (NPC.NavAgent == null) {						//This feels wrong and shitty. I am pissed tf off 
-			GD.Print("Finding NavAgent in Capy Walk...");	//Go fuck yourself whoever is reading this
 			await Task.Delay(250);
 		}
 		GD.Print("CapyWalk found nav Agent!");			
