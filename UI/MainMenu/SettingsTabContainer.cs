@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public partial class SettingsTabContainer : TabContainer
@@ -14,14 +13,20 @@ public partial class SettingsTabContainer : TabContainer
 	[Export] OptionButton WindowModeButton;
 	[Export] OptionButton ResolutionButton;
 	[Export] CheckBox VSyncButton;
-	[Export] SpinBox MaxFPSSpinBox;
-	[Export] Label MaxFPSLabel;
+	[Export] OptionButton MaxFPSButton;
 	[Export] Line2D StrikeLine;
 	
 	// [ExportGroup("Audio")]
 
+	private Godot.Collections.Array<string> windowModes = new();
+	private Godot.Collections.Array<string> resolutions = new();
+	private Godot.Collections.Array<int> fpss = new();
+
 	public override void _Ready()  {
 		StrikeLine.Hide();
+		windowModes = Settings.Instance.WindowModes;
+		resolutions = Settings.Instance.Resolutions;
+		fpss = Settings.Instance.FPSs;
 
 		LookSensitivitySlider.ValueChanged += OnLookSensitivitySlider;
 		LookSensitivitySpinBox.ValueChanged += OnLookSensitivitySpinBox;
@@ -29,7 +34,7 @@ public partial class SettingsTabContainer : TabContainer
 		WindowModeButton.ItemSelected += OnWindowModeButton;
 		ResolutionButton.ItemSelected += OnResolutionButton;
 		VSyncButton.Pressed += OnVSyncButton;
-		MaxFPSSpinBox.ValueChanged += OnMaxFPSSpinBox;
+		MaxFPSButton.ItemSelected += OnMaxFPSButton;
 
 		LoadSettings();
 	}
@@ -42,31 +47,40 @@ public partial class SettingsTabContainer : TabContainer
 
 		// Window Mode OptionButton
 		string currentMode = (string)Settings.Instance.GetSetting("graphics", "window_mode");
-		Enum.TryParse(currentMode, true, out Settings.WindowDisplayMode mode);
-		WindowModeButton.Select((int)mode);
+		WindowModeButton.Clear();
+		for (int i = 0; i < windowModes.Count; i++) {
+			WindowModeButton.AddItem(windowModes[i], i);
+			if (windowModes[i] == currentMode) { WindowModeButton.Select(i); }
+		}
 		
 		// Resolution OptionButton
 		string currentRes = (string)Settings.Instance.GetSetting("graphics", "resolution");
-		currentRes = currentRes.Replace(" ", "");
-
-		Enum.TryParse("Res_" + currentRes, true, out Settings.WindowDisplayMode res);
-    	ResolutionButton.Select((int)res);
-
+		ResolutionButton.Clear();
+		for (int i = 0; i < resolutions.Count; i++) {
+			ResolutionButton.AddItem(resolutions[i], i);
+			if (resolutions[i] == currentRes) { ResolutionButton.Select(i); }
+		}
 
 		// VSync CheckButton
-		if ((string)Settings.Instance.GetSetting("graphics", "vsync") == "true") {
+		if ((bool)Settings.Instance.GetSetting("graphics", "vsync") == true) {
 			VSyncButton.ButtonPressed = true;
-			MaxFPSSpinBox.Hide();
+			MaxFPSButton.Hide();
 			StrikeLine.Show();
 		}
 		else { 
 			VSyncButton.ButtonPressed = false;
-			MaxFPSSpinBox.Show();
+			MaxFPSButton.Show();
 			StrikeLine.Hide();
 		}
 
-		// MaxFPS SpinBox
-		MaxFPSSpinBox.Value = (double)Settings.Instance.GetSetting("graphics", "max_fps");
+		// MaxFPS OptionButton
+		int currentFPS = (int)Settings.Instance.GetSetting("graphics", "max_fps");
+		MaxFPSButton.Clear();
+		MaxFPSButton.AddItem("Unlimited", 0);
+		for (int i = 1; i < fpss.Count - 1; i++) {
+			MaxFPSButton.AddItem(fpss[i].ToString(), i);
+			if (fpss[i] == currentFPS) { MaxFPSButton.Select(i); }
+		}
 
 	}
 
@@ -88,15 +102,15 @@ public partial class SettingsTabContainer : TabContainer
 	public void OnVSyncButton() { 
 		Settings.Instance.SetSetting("graphics", "vsync", VSyncButton.ButtonPressed);
 		if (VSyncButton.ButtonPressed == true) {
-			MaxFPSSpinBox.Hide();
+			MaxFPSButton.Hide();
 			StrikeLine.Show();
 		}
 		else {
-			MaxFPSSpinBox.Show();
+			MaxFPSButton.Show();
 			StrikeLine.Hide();
 		}
 	}
-	public void OnMaxFPSSpinBox(double value) {  Settings.Instance.SetSetting("graphics", "max_fps" , value); }
+	public void OnMaxFPSButton(long item) {  Settings.Instance.SetSetting("graphics", "max_fps" , (int)item); }
 
 	// [audio]
 }

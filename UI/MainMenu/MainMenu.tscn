@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtixggui7nc7t"]
+[gd_scene load_steps=8 format=3 uid="uid://dtixggui7nc7t"]
 
 [ext_resource type="Texture2D" uid="uid://dcqaxt7vmw05e" path="res://UI/MainMenu/Campfire.jpg" id="1_3pcmf"]
 [ext_resource type="Theme" uid="uid://c8bwm6chjehha" path="res://UI/Themes/MainMenuTheme.tres" id="1_3qaea"]
 [ext_resource type="Script" path="res://UI/MainMenu/MainMenu.cs" id="2_g4eny"]
 [ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="2_youq5"]
 [ext_resource type="AudioStream" uid="uid://cn4s8utwlwb01" path="res://UI/MainMenu/FireAudio.mp3" id="3_fejs2"]
-[ext_resource type="PackedScene" uid="uid://cjouu6yj88fsg" path="res://Level/FreeRoamMainMenu.tscn" id="3_p6r0n"]
 [ext_resource type="AudioStream" uid="uid://br0xl531ru24o" path="res://UI/MainMenu/WindAudio.mp3" id="4_ke4oq"]
 [ext_resource type="Script" path="res://UI/MainMenu/SettingsTabContainer.cs" id="7_lseeb"]
 
@@ -20,7 +19,6 @@ theme = ExtResource("1_3qaea")
 script = ExtResource("2_g4eny")
 ButtonContainer = NodePath("ButtonContainer")
 FadeRect = NodePath("FadeRect")
-GameScene = ExtResource("3_p6r0n")
 ContinueButton = NodePath("ButtonContainer/Continue")
 NewGameButton = NodePath("ButtonContainer/NewGame")
 LoadGameButton = NodePath("ButtonContainer/LoadGame")
@@ -182,7 +180,7 @@ theme_override_fonts/font = ExtResource("2_youq5")
 text = "back"
 flat = true
 
-[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSSpinBox", "MaxFPSLabel", "StrikeLine")]
+[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSButton", "StrikeLine")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.275
@@ -203,8 +201,7 @@ LookSensitivitySpinBox = NodePath("GameplayTab/MarginContainer/SettingsContainer
 WindowModeButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/WindowMode/OptionButton")
 ResolutionButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/Resolution/OptionButton")
 VSyncButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/VSync/CheckBox")
-MaxFPSSpinBox = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/SpinBox")
-MaxFPSLabel = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS")
+MaxFPSButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/OptionButton")
 StrikeLine = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS/Line2D")
 
 [node name="GameplayTab" type="ScrollContainer" parent="SettingsTabContainer"]
@@ -242,6 +239,10 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 0.1
 
 [node name="SpinBox" type="SpinBox" parent="SettingsTabContainer/GameplayTab/MarginContainer/SettingsContainer/LookSensitivity/HBoxContainer"]
 layout_mode = 2
@@ -294,6 +295,10 @@ text = "Window Mode"
 [node name="OptionButton" type="OptionButton" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/WindowMode"]
 layout_mode = 2
 size_flags_horizontal = 3
+item_count = 3
+popup/item_0/id = 1
+popup/item_1/id = 2
+popup/item_2/id = 3
 
 [node name="Resolution" type="HBoxContainer" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer"]
 layout_mode = 2
@@ -335,11 +340,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="SpinBox" type="SpinBox" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/MaxFPS"]
+[node name="OptionButton" type="OptionButton" parent="SettingsTabContainer/GraphicsTab/MarginContainer/SettingsContainer/MaxFPS"]
 layout_mode = 2
-max_value = 144.0
-rounded = true
-select_all_on_focus = true
+size_flags_horizontal = 3
 
 [node name="AudioTab" type="ScrollContainer" parent="SettingsTabContainer"]
 visible = false

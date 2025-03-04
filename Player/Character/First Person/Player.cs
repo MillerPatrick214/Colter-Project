@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Godot;
 
 public partial class Player : CharacterBody3D
