@@ -1240,7 +1240,8 @@ parameters/OneShot/request = 0
 transform = Transform3D(1, 0, 0, 0, 0.00556753, -0.999985, 0, 0.999985, 0.00556753, 0, -0.0387105, -0.374775)
 shape = SubResource("CapsuleShape3D_2g2ad")
 
-[node name="InteractComponent" parent="." instance=ExtResource("9_qd8h7")]
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("9_qd8h7")]
+CollisionShape = NodePath("CollisionShape3D")
 PickUpLogic = SubResource("Resource_0f0yk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

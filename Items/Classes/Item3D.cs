@@ -37,7 +37,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		{
 			GD.Print("Node is not yet inside the scene tree.");
 		}
-		
 	}
 
 	
@@ -60,7 +59,7 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 
 		if (InteractComponent != null)
 		{
-			InteractComponent.Monitorable = !held;
+			InteractComponent.SetDisabled(held);
 		}
 		
 

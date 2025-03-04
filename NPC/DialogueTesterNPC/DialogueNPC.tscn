@@ -83,6 +83,7 @@ VisionRay = NodePath("VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
 InteractComponent = NodePath("InteractComponent")
+IsInteractable = true
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_lr8vt")
@@ -139,6 +140,7 @@ MaxHealth = 50.0
 [node name="InteractComponent" parent="." instance=ExtResource("4_jt0uy")]
 CurrentInteractMode = 2
 TalkLogic = SubResource("Resource_3qrep")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902813, 0)

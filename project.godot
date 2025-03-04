@@ -23,7 +23,6 @@ Global="*res://Level/Global.cs"
 Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
 Player="*res://Player/Character/First Person/Player.tscn"
-Global="*res://Level/Global.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]

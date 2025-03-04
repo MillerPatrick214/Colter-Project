@@ -674,7 +674,8 @@ volume_db = 38.75
 max_db = 6.0
 max_distance = 100.0
 
-[node name="InteractComponent" parent="." instance=ExtResource("11_302nq")]
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("11_302nq")]
+CollisionShape = NodePath("CollisionShape3D")
 PickUpLogic = SubResource("Resource_qf8fy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

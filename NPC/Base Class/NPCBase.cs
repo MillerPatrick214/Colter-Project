@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-[GlobalClass, Tool]
+[GlobalClass]
 public partial class NPCBase : CharacterBody3D
 {	
 	[Signal]
@@ -25,7 +25,9 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	public Area3D VisionCone;
 	[Export]
-	public InteractComponent InteractComponent;
+	public InteractComponent InteractComponent {get; set;}
+
+	public InteractComponent InteractComponentCasted;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 	[Export]
@@ -44,7 +46,11 @@ public partial class NPCBase : CharacterBody3D
 			return;
 		}
 
-		if (InteractComponent != null) {InteractComponent.ParentNode = this;}
+		if (InteractComponent != null) 
+		{
+			InteractComponentCasted = InteractComponent as InteractComponent; 
+			InteractComponentCasted.ParentNode = this;
+		}
 
         base._Ready();
 		GetNode<HealthComponent>("HealthComponent").DeathSignal += Death;

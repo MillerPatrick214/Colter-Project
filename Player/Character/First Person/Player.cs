@@ -89,7 +89,7 @@ public partial class Player : CharacterBody3D
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
 
-		lookAroundSpeed = (float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
+		lookAroundSpeed = 10.0f; //(float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
     }
 
 
@@ -251,15 +251,15 @@ public partial class Player : CharacterBody3D
 		float currentCamPos = CamPivNode.Position.Y;
 
 		float targetHeight = isCrouching ? CrouchingHeight : StandingHeight;
-		float targetCamPos = isCrouching ? CrouchingCameraPivot / 100 : StandingCameraPivot / 100;
+		//float targetCamPos = isCrouching ? CrouchingCameraPivot : StandingCameraPivot; //TF happened here?
 		
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
-			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
+			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetHeight, 0.05f), CamPivNode.Position.Z); 
 
 			if (Mathf.Abs(targetHeight - currentHeight) < 0.01f) {
 				CapsuleShape.Height = targetHeight;
-				CamPivNode.Position = new Godot.Vector3(0, targetCamPos, 0);
+				CamPivNode.Position = new Godot.Vector3(0, targetHeight, 0);
 			}
 		}
 	}

@@ -40,7 +40,6 @@ Speed = 10.0
 JumpManueverSpeed = 5.0
 LeanAngle = 45.0
 LeanSpeed = 3.0
-CamPivRotAmount = 0.05
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_f4xyh")

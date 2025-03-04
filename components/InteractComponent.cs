@@ -2,13 +2,14 @@ using Godot;
 using System.Threading.Tasks;
 
 
-
+[GlobalClass]
 public partial class InteractComponent : Area3D
 {
 	
 	[Export]
 	public InteractMode CurrentInteractMode {get; set;}
-
+	[Export]
+	CollisionShape3D CollisionShape;
 	[Export]
 	public SkinLogic SkinLogic;
 
@@ -70,6 +71,14 @@ public partial class InteractComponent : Area3D
 			PickUpLogic.Interact(ParentNode);
 			return;
 		}
+	}
+	/// <summary>
+	/// Set InteractComponent's Collision Shape to Disabled (true) or Active (false)
+	/// </summary>
+	/// <param name="tf"></param>
+	public void SetDisabled(bool tf)
+	{
+		CollisionShape.Disabled = tf;
 	}
 }
 

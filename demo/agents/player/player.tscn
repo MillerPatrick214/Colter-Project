@@ -25,9 +25,6 @@ shape = SubResource("RectangleShape2D_8pofm")
 [node name="Hurtbox" parent="Root" index="2"]
 collision_layer = 4
 
-[node name="Health" parent="." index="3"]
-max_health = 30.0
-
 [node name="LimboHSM" type="LimboHSM" parent="." index="4"]
 
 [node name="IdleState" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("animation_player")]

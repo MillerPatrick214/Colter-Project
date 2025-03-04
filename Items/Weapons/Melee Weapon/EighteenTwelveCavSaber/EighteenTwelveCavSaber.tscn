@@ -24,6 +24,9 @@ row = -1
 column = -1
 slot = -1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1yfv"]
+size = Vector3(0.17, 1.1, 0.1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afxnp"]
 resource_name = "Material.001"
 cull_mode = 2
@@ -142,9 +145,6 @@ albedo_texture_msdf = true
 metallic = 1.0
 metallic_specular = 1.0
 roughness = 0.45
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i1yfv"]
-size = Vector3(0.17, 1.1, 0.1)
 
 [sub_resource type="Animation" id="Animation_itp7m"]
 resource_name = "RESET"
@@ -283,13 +283,18 @@ _data = {
 [sub_resource type="Resource" id="Resource_dwe3p"]
 script = ExtResource("6_fpjvg")
 
-[node name="EighteenTwelveCavSaber" type="RigidBody3D" node_paths=PackedStringArray("Hurtbox")]
+[node name="EighteenTwelveCavSaber" type="RigidBody3D" node_paths=PackedStringArray("Hurtbox", "InteractComponent")]
 collision_layer = 3
 script = ExtResource("1_3tpfj")
 StrikeDamage = 50.0
 Hurtbox = NodePath("Cube/HurtBox")
 MeshNodes = Array[NodePath]([NodePath("Cube")])
 ItemResource = SubResource("Resource_bfxi0")
+InteractComponent = NodePath("InteractComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.333807, 0.942641, 0, 0.942641, 0.333807, -1, 1.45912e-08, -4.12042e-08, 0.314312, -0.0172076, -0.5)
+shape = SubResource("BoxShape3D_i1yfv")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.82359e-05, -2.01879, 7.53422, 0, 7.53422, 2.01879, -7.8, 7.30798e-06, -2.72738e-05, 0.415, -0.3, -0.5)
@@ -313,17 +318,14 @@ transform = Transform3D(-5.60379e-09, -1.14804e-13, -0.128205, -0.033182, 0.1238
 stream = ExtResource("4_rssdi")
 pitch_scale = 1.3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.333807, 0.942641, 0, 0.942641, 0.333807, -1, 1.45912e-08, -4.12042e-08, 0.314312, -0.0172076, -0.5)
-shape = SubResource("BoxShape3D_i1yfv")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3evw2")
 }
 
-[node name="InteractComponent" parent="." instance=ExtResource("5_7sc07")]
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("5_7sc07")]
 transform = Transform3D(-3.61999e-06, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 9.36921e-07, -3.49664e-06, 0.415, -0.3, -0.5)
+CollisionShape = NodePath("CollisionShape3D2")
 PickUpLogic = SubResource("Resource_dwe3p")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractComponent"]
