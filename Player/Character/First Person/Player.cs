@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using Godot;
 
 public partial class Player : CharacterBody3D
@@ -60,7 +59,9 @@ public partial class Player : CharacterBody3D
  
     public override void _Ready()
     {
-		Instance = this;
+        Instance ??= this;
+        if (Instance != this) QueueFree();
+
 		Inventory = new Inventory();
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;

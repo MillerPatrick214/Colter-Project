@@ -3,55 +3,45 @@ using Godot;
 public partial class Settings : Node
 {
 	public static Settings Instance { get; private set; }
+
 	[Signal] public delegate void SettingChangedEventHandler();
+	[Signal] public delegate void SettingUnchangedEventHandler();
 
-	string defaultPath = "res://Settings/DefaultSettings.cfg";
-	ConfigFile defaultFile = new ConfigFile();
-	Godot.Collections.Dictionary<string, Variant> defaultDict = new();
+	private const string defaultPath = "res://Settings/DefaultSettings.cfg";
+	private ConfigFile defaultConfig = new ConfigFile();
+	private const string settingsPath = "user://settings/settings.cfg";
+	private ConfigFile SettingsConfig = new ConfigFile();
+	private ConfigFile settingsConfigFile = new ConfigFile();
+	private Godot.Collections.Dictionary<string, Callable>  settingActionDict = new();
+	private Godot.Collections.Dictionary<string, string> actionQueue = new();
 
-	string settingsPath = "user://settings/settings.cfg";
-	ConfigFile SettingsFile = new ConfigFile();
-
-	Godot.Collections.Dictionary<string, Callable>  settingActionDict = new();
-
-	Godot.Collections.Dictionary<string, string> actionQueue = new();
-
-	public enum WindowDisplayMode {
-		Fullscreen = 3,
-		Windowed = 1,
-		Borderless = 2,
+	public readonly Godot.Collections.Array<string> WindowModes = new() {
+		"fullscreen", "windowed", "borderless"
 	};
-
-	public enum ProjectResolution {
-		Res_3840x2160,	// 0
-		Res_3440x1440,	// 1
-		Res_2560x1600,	// 2
-		Res_2560x1440,	// 3
-		Res_1920x1080,	// 4
-		Res_1920x1200,	// 5
-		Res_1366x768,	// 6
+	public readonly Godot.Collections.Array<string> Resolutions = new () {
+		"3840x2160", "3440x1440", "2560x1600", "2560x1440", "1920x1080", "1920x1200", "1366x768"
 	};
-	
-
+	public readonly Godot.Collections.Array<int> FPSs = new() {
+		0, 30, 60, 120, 144, 240
+	};
 
 	public override void _Ready() {
-		Instance = this;
-		defaultFile.Load(defaultPath);
-		SettingsFile.Load(settingsPath);
+        Instance ??= this;
+        if (Instance != this) QueueFree();
+		
+		defaultConfig.Load(defaultPath);
 
-		if (SettingsFile == null) {
+		if (SettingsConfig.Load(settingsPath) != Error.Ok) {
 			if (!FileAccess.FileExists(settingsPath)) {
 				GD.Print($"[color=red]Settings: [/color] No file found at {settingsPath}");
 				GD.Print($"[color=red]Settings: [/color] Generating default settings.");
 
-				FileAccess defaultFile = FileAccess.Open(defaultPath, FileAccess.ModeFlags.Read);
-				string content = defaultFile.GetAsText();
-				FileAccess newFile = FileAccess.Open(settingsPath, FileAccess.ModeFlags.Write);
-				newFile.StoreString(content);
-				SettingsFile.Load(settingsPath);
+				defaultConfig.Save(settingsPath);
+				SettingsConfig.Load(settingsPath);
 			}
 			else { GD.PrintErr($"Can't load ConfigFile at {settingsPath}"); }
 		}
+		settingsConfigFile.Load(settingsPath);
 
 		settingActionDict = new() {
 			// [gameplay]
@@ -61,22 +51,26 @@ public partial class Settings : Node
 			{"vsync", new Callable(this, MethodName.VSync)},
 			{"max_fps", new Callable(this, MethodName.MaxFPS)},
 			// [audio]
+			// {"master_volume", new Callable(this, MethodName.MasterVolumne)}
 		};
 
 		LoadDefaults();
 	}
 
 	private void LoadDefaults() {
-		foreach (string section in defaultFile.GetSections()) {
-			foreach (string key in defaultFile.GetSectionKeys(section)) {
-				defaultDict[key] = defaultFile.GetValue(section, key);
+		// loop through default file and check the settings file has all settings
+		foreach (string dSection in defaultConfig.GetSections()) {
+			foreach (string dKey in defaultConfig.GetSectionKeys(dSection)) {
+				if (!SettingsConfig.HasSectionKey(dSection, dKey)) {
+					SetSetting(dSection, dKey, defaultConfig.GetValue(dSection, dKey));
+				}
 			}
 		}
-
-		foreach (string setting_section in SettingsFile.GetSections()) {
-			foreach (string setting_key in SettingsFile.GetSectionKeys(setting_section)) {
-				if (!defaultFile.HasSectionKey(setting_section, setting_key)) {
-					SetSetting(setting_section, setting_key, defaultFile.GetValue(setting_section, setting_key));
+		// loop through settings file and remove any not in the default
+		foreach (string section in SettingsConfig.GetSections()) {
+			foreach (string key in SettingsConfig.GetSectionKeys(section)) {
+				if (!defaultConfig.HasSectionKey(section, key)) {
+					SettingsConfig.EraseSectionKey(section, key);
 				}
 			}
 		}
@@ -84,18 +78,19 @@ public partial class Settings : Node
 	}
 
 	/// <summary>
-	/// Gets a setting value from the active ConfigFile settings file object.
+	/// Gets a setting value from the active ConfigFile in-memory object.
 	/// </summary>
 	/// <param name="section">The settings.ini section string.</param>
 	/// <param name="key">The settings.ini key string.</param>
+	/// /// <param name="file">Optional. If set to true, pulls settings from file instead of object. Default is false.</param>
 	/// <returns>The setting value.</returns>
-	public Variant GetSetting(string section, string key) {
-		return SettingsFile.GetValue(section, key);
+	public Variant GetSetting(string section, string key, bool file = false) {
+		if (file == false) { return SettingsConfig.GetValue(section, key); }
+		return settingsConfigFile.GetValue(section, key);
 	}
 
 	/// <summary>
-	/// Sets a setting value to the active ConfigFile settings file object. 
-	// NOTE: It does not apply those settings to the settings.ini user file or implement them. Run SaveSettings() to save and apply active changes.
+	/// Updates a settings value to the ConfigFile in-memory object and adds corresponding save action to queue. 
 	/// </summary>
 	/// <param name="section">The settings.ini section string.</param>
 	/// <param name="key">The settings.ini key string.</param>
@@ -104,26 +99,26 @@ public partial class Settings : Node
 		section = section.ToLower();
 		key = key.ToLower();
 
-		if (value.Equals(GetSetting(section, key))) { 
+		if (value.ToString().ToLower() == GetSetting(section, key, true).ToString().ToLower()) { 
 			if (actionQueue.ContainsKey(key)) { actionQueue.Remove(key); }
+			if (actionQueue.Count == 0) { EmitSignal(SignalName.SettingUnchanged); }
 			return;
-		 }
-
-		SettingsFile.SetValue(section, key, value);
-		if (!actionQueue.ContainsKey(key)) {
-			actionQueue.Add(key, section);
 		}
+		SettingsConfig.SetValue(section, key, value);
+		actionQueue[key] = section;
 		EmitSignal(SignalName.SettingChanged);
 	}
 
 	/// <summary>
-	/// Saves the ConfigFile object to settings.ini and runs any active setting change actions initiated via SetSetting().
+	/// Saves active configfile in-memory object to file and runs any active setting change actions initiated via SetSetting().
 	/// </summary>
 	public void SaveSettings() {
-		SettingsFile.Save(settingsPath);
+		SettingsConfig.Save(settingsPath);
+		SettingsConfig.Load(settingsPath);
+		settingsConfigFile.Load(settingsPath);
 		foreach (var (setting, section) in actionQueue) {
 			if (settingActionDict.ContainsKey(setting)) {
-				settingActionDict[setting].Call(SettingsFile.GetValue(section, setting));
+				settingActionDict[setting].Call(SettingsConfig.GetValue(section, setting));
 			}
 		}
 		actionQueue.Clear();
@@ -131,7 +126,6 @@ public partial class Settings : Node
 
 	private void WindowMode(string mode) {
 		mode = mode.ToLower();
-		
 		switch (mode) {
 			case "fullscreen":
 				ProjectSettings.SetSetting("display/window/size/mode", (int)DisplayServer.WindowMode.Fullscreen);
@@ -155,7 +149,6 @@ public partial class Settings : Node
 
 	private void Resolution(string res) {
 		res = res.ToLower();
-		res = res.Replace("Res_", "");
 		string[] strings = res.Split("x");
 		int width = strings[0].ToInt();
 		int height = strings[1].ToInt();

@@ -7,13 +7,13 @@ public partial class MainMenu : Control
 	[Export] public ColorRect FadeRect;
 	[Export(PropertyHint.None, "suffix:s")] public float ScreenFadeTime = 2.0f;
 	[Export(PropertyHint.None, "suffix:s")] public float AudioFadeTime = 2.5f;
-	[Export] public PackedScene GameScene;
 
 	[ExportGroup("Continue")]
 	[Export] public Button ContinueButton;
 
 	[ExportGroup("New Game")]
 	[Export] public Button NewGameButton;
+	[Export] public string NewGamePath = "res://Level/FreeRoamMainMenu.tscn";
 
 	[ExportGroup("Load Game")]
 	[Export] public Button LoadGameButton;
@@ -56,9 +56,9 @@ public partial class MainMenu : Control
 		BackButton.Pressed += OnBack;
 
 		Settings.Instance.SettingChanged += ApplySettingsVisible;
+		Settings.Instance.SettingUnchanged += ApplySettingsHidden;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
-
-	public override void _Process(double delta) { Input.MouseMode = Input.MouseModeEnum.Visible; }
 
 	public async void OnContinue() {
 		ContinueButton.Disabled = true; // temp
@@ -67,7 +67,7 @@ public partial class MainMenu : Control
 
 	public async void OnNewGame() {
 		await StartGame();
-		GetTree().ChangeSceneToPacked(GameScene); // temp temp
+		LevelManager.Instance.GotoScene(NewGamePath);
 	}
 
 	public async void OnLoadGame() {
@@ -120,9 +120,8 @@ public partial class MainMenu : Control
 		ButtonContainer.Show();
 	}
 
-	private void ApplySettingsVisible() {
-		if (ApplyButton.Visible == false && SettingsTabContainer.Visible == true) { ApplyButton.Show(); }
-	}
+	private void ApplySettingsVisible() { if (SettingsTabContainer.Visible == true) { ApplyButton.Show(); } }
+	private void ApplySettingsHidden() { ApplyButton.Hide(); }
 
 	private void CheckSavePending() {
 		if (ApplyButton.Visible == true) {
