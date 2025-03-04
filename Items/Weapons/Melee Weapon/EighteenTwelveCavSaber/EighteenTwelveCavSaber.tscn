@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=4 uid="uid://bvlxi6skdgcr2"]
 
 [ext_resource type="Script" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/EighteenTwelveCavSaber.cs" id="1_3tpfj"]
-[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="2_q24ae"]
+[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="2_noo1o"]
 [ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_tmg7v"]
 [ext_resource type="AudioStream" uid="uid://d1dgcvplyf0ct" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/422506__nightflame__swinging-staff-whoosh-strong-01.wav" id="4_rssdi"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="5_7sc07"]
@@ -13,7 +13,7 @@ script = ExtResource("3_tmg7v")
 SlotType = 4
 Name = "Cavalry Saber"
 Description = "A cavalry saber. Of very little use for fur trappers due to its lack of versatillity as a tool. It excels at one task only -- killing"
-Texture = ExtResource("2_q24ae")
+Texture = ExtResource("2_noo1o")
 Quantity = 1
 IsStackable = false
 CurrentStack = 1

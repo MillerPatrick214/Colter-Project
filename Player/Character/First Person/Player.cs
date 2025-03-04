@@ -34,7 +34,7 @@ public partial class Player : CharacterBody3D
 	float mouseRotX = 0;
 	float mouseRotY = 0;
 
-	string PlayerDataPath = "ccgu64xutyl85";
+	string PlayerDataPath = "uid://ccgu64xutyl85";
 	PlayerData PlayerData;
 	Marker3D ItemMarker;
 	CollisionShape3D CollisionShapeNode;
@@ -60,7 +60,7 @@ public partial class Player : CharacterBody3D
  
     public override void _Ready()
     {
-		PlayerData = GD.Load<PlayerData>(PlayerDataPath); 
+		PlayerData = LoadData();
 		Instance = this;
 		Inventory = PlayerData.PlayerInventory;
 		Mathf.Wrap(SlotIndex, 0, 6);
@@ -72,19 +72,25 @@ public partial class Player : CharacterBody3D
 		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/PlayerItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
+
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
 		InventoryUI InventoryUI = GetNodeOrNull<InventoryUI>("UI/InventoryUI");
+
 		if (InventoryUI == null)
 		{
 			GD.PrintErr("Error in Character.cs: InventoryUI returned null. Unable to connect Inventory information");
 		}
+
 		if (Inventory == null) {
 			GD.PrintErr("Error in Character.cs: Inventory returned null");
 		}
+
 		if (CollisionShapeNode == null) {GD.PrintErr("Error Player.cs: CollisionShapeNode returned null");}
+		
 		Events.Instance.PickUp += (item) => Inventory.PickUpItem(item);
 
 		UnderWaterCanvasLayer = GetNodeOrNull<CanvasLayer>("SubViewportContainer/SubViewport/CanvasLayer");
+		if (UnderWaterCanvasLayer == null) GD.PrintErr("Player UnderWaterCanvaslayer null. I'm going to freak the fuck out and take a man's life over this shit rn");
 
 		Events.Instance.UnderwaterToggle += (tf) => ToggleUnderWater(tf);
 
@@ -95,12 +101,13 @@ public partial class Player : CharacterBody3D
 
 	public void SaveData()
 	{
-		ResourceSaver.Save(Inventory, PlayerDataPath);
+		ResourceSaver.Save(PlayerData, PlayerDataPath);
 	}
 
-	public void LoadData()
+	public PlayerData LoadData()
 	{
-		PlayerData = GD.Load<PlayerData>(PlayerDataPath); 
+		PlayerData = GD.Load<PlayerData>(PlayerDataPath);
+		return PlayerData;
 	}
 
 	public override void _Process(double delta) {
@@ -371,6 +378,7 @@ public partial class Player : CharacterBody3D
 	public void ToggleUnderWater(bool tf)
 	{
 		GD.PrintErr("Toggling Underwater");
+
 		if(tf)	//if true
 		{
 			UnderWaterCanvasLayer.Show();

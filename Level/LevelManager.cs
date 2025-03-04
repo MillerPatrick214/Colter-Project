@@ -3,7 +3,7 @@ using Godot;
 public partial class LevelManager : Node3D
 {
 
-	LevelManager Instance; 
+	public static LevelManager Instance; 
 	public Node CurrentScene { get; set; }
 public void GotoScene(string path)
 {
@@ -21,7 +21,9 @@ public void GotoScene(string path)
 
 public void DeferredGotoScene(string path)
 {
-    Player.Instance.SaveData();
+    Instance = this;
+    if (Player.Instance != null) {Player.Instance.SaveData();}
+
     CurrentScene.Free();
 
     // Load a new scene.

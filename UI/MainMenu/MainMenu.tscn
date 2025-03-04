@@ -21,6 +21,7 @@ ButtonContainer = NodePath("ButtonContainer")
 FadeRect = NodePath("FadeRect")
 ContinueButton = NodePath("ButtonContainer/Continue")
 NewGameButton = NodePath("ButtonContainer/NewGame")
+NewGamePath = "uid://cjouu6yj88fsg"
 LoadGameButton = NodePath("ButtonContainer/LoadGame")
 SettingsButton = NodePath("ButtonContainer/Settings")
 SettingsButtonContainer = NodePath("SettingsButtonContainer")
@@ -180,7 +181,7 @@ theme_override_fonts/font = ExtResource("2_youq5")
 text = "back"
 flat = true
 
-[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSButton", "StrikeLine")]
+[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "StrikeLine")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.275
@@ -201,7 +202,6 @@ LookSensitivitySpinBox = NodePath("GameplayTab/MarginContainer/SettingsContainer
 WindowModeButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/WindowMode/OptionButton")
 ResolutionButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/Resolution/OptionButton")
 VSyncButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/VSync/CheckBox")
-MaxFPSButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/OptionButton")
 StrikeLine = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS/Line2D")
 
 [node name="GameplayTab" type="ScrollContainer" parent="SettingsTabContainer"]

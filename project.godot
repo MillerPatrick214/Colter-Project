@@ -14,12 +14,14 @@ config/name="Colter"
 run/main_scene="res://Level/FreeRoamMainMenu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 run/max_fps=144
+run/delta_smoothing=false
 config/icon="res://icon.svg"
 
 [autoload]
 
+Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
-Global="*res://Level/LevelManager.cs"
+LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]
@@ -37,6 +39,9 @@ window/size/viewport_width=2560
 window/size/viewport_height=1440
 window/size/mode=3
 window/size/initial_position_type=2
+window/size/resizable=false
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 

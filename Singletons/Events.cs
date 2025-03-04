@@ -27,7 +27,7 @@ public partial class Events : Node
 	public delegate void UnderwaterToggleEventHandler(bool isUnderwater);
 	public override void _Ready() 
 	{
-        Instance ??= this;
-        if (Instance != this) QueueFree();
+        Instance ??= this;					///If Instance is null, set = this
+        if (Instance != this) QueueFree();	//If instance already exists, delete yourself 
 	}
 }
