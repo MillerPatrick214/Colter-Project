@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://c5ntwqe7kftaw"]
+[gd_scene load_steps=50 format=4 uid="uid://c5ntwqe7kftaw"]
 
 [ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
 [ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
@@ -10,18 +10,21 @@
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_mh4wq"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_4yhk7"]
 [ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/RangedWeapon/Particle Materials/Sparks.tres" id="6_udhe1"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="11_302nq"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="12_lp8x7"]
 
-[sub_resource type="Resource" id="Resource_cac6x"]
+[sub_resource type="Resource" id="Resource_ithbi"]
+resource_local_to_scene = true
 script = ExtResource("3_d54wb")
 SlotType = 3
-Name = "1813 Model Army Pistol"
-Description = "A military contract pistol, made by famed gunsmith Simeon North. What it lacks in accuracy, it makes up for with its slow moving but hard hitting  .69 caliber projectile. "
+Name = "1813 Army Pistol"
+Description = "No Description"
 Texture = ExtResource("2_0r2lh")
 Quantity = 1
 IsStackable = false
 CurrentStack = 1
 MaxStack = 1
-Value = 24
+Value = 0
 ScenePath = "uid://c5ntwqe7kftaw"
 row = -1
 column = -1
@@ -505,12 +508,14 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_b3jfs")
 size = Vector2(0.02, 0.02)
 
-[node name="1813ArmyPistol" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.99863, -0.052336, 0, 0.052336, 0.99863, 0, -0.038, -0.5)
-collision_layer = 3
+[sub_resource type="Resource" id="Resource_qf8fy"]
+script = ExtResource("12_lp8x7")
+
+[node name="1813ArmyPistol" type="RigidBody3D" node_paths=PackedStringArray("InteractComponent")]
 script = ExtResource("1_amlpt")
 MeshNodes = Array[NodePath]([NodePath("Skeleton3D/Frizzen_2/Frizzen_2"), NodePath("Skeleton3D/Hammer/Hammer"), NodePath("Skeleton3D/Trigger/Trigger"), NodePath("Skeleton3D/PistolBody/PistolBody")])
-ItemResource = SubResource("Resource_cac6x")
+ItemResource = SubResource("Resource_ithbi")
+InteractComponent = NodePath("InteractComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -558,7 +563,7 @@ sprite_frames = SubResource("SpriteFrames_scjv6")
 speed_scale = 10.0
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
 bones/0/name = "HandleBone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -7.10543e-14, 7.15256e-07, -4.59224e-07, 0.76667, 0.642041, -5.48366e-07, -0.642041, 0.76667, -0.00900126, -0.936905, 1.8666)
@@ -668,3 +673,11 @@ stream = ExtResource("5_mh4wq")
 volume_db = 38.75
 max_db = 6.0
 max_distance = 100.0
+
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("11_302nq")]
+CollisionShape = NodePath("CollisionShape3D")
+PickUpLogic = SubResource("Resource_qf8fy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_kb4ot")

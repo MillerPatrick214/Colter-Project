@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class NPCFall<T> : NPCState<T> where T : NPCBase
+public partial class NPCFall : NPCState
 {	
 
 	Vector3 FallVelocity = Vector3.Zero; 

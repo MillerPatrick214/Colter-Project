@@ -1,7 +1,5 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
-
+using System.Collections.Generic;
 public partial class Item3D : RigidBody3D //base for all items and tools visible in the game world
 {
 
@@ -9,11 +7,13 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public bool IsInteractable = true;
 
 	[Export]
-	
 	public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
 
 	[Export]
 	public InventoryItem ItemResource {get; set;}
+
+	[Export]
+	public InteractComponent InteractComponent {get; set;}
 
 	[Export]
 	public virtual bool isHeld {get; set;} = false;
@@ -22,6 +22,7 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 	public Item3D(bool isHeld)
 	{
 		this.isHeld = isHeld;
+		if (InteractComponent != null) {InteractComponent.ParentNode = this;}
 	}
 
 	public override void _Ready()
@@ -36,7 +37,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		{
 			GD.Print("Node is not yet inside the scene tree.");
 		}
-		
 	}
 
 	
@@ -52,10 +52,16 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		}
 		else
 		{
+			
 			FreezeMode = FreezeModeEnum.Kinematic;
 			SetCollision(true);
-			
 		}
+
+		if (InteractComponent != null)
+		{
+			InteractComponent.SetDisabled(held);
+		}
+		
 
 		Freeze = held;
 		
@@ -118,11 +124,22 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		SetCollisionMaskValue(1, collBool);
 		SetCollisionMaskValue(2, collBool);
 	}
+
+	public override string[] _GetConfigurationWarnings()
+	{
+		List<string> warnings = new List<string>();
+
+		if (InteractComponent == null){ warnings.Add("Warning: InteractComponent node not set in editor!");}
+
+		return warnings.ToArray();
+	}
 	
-	public void Interact() 
+	/*
+	public void PickUp(InventoryItem ItemResource) 
 	{
 		Events.Instance.EmitSignal(Events.SignalName.PickUp, ItemResource);
 		QueueFree();
 	}
+	*/ //now in InteractComponent
 	
 }

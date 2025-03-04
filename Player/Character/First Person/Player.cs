@@ -69,7 +69,7 @@ public partial class Player : CharacterBody3D
 		Events.Instance.ChangeIsInteracting += (isActive) => InteractMouseMode(isActive);
 		InteractMouseMode(false);
 		
-		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/ItemMarker");
+		ItemMarker = GetNodeOrNull<Marker3D>("CamPivot/PlayerItemMarker");
 		CamPivNode = GetNodeOrNull<CamPivot>("CamPivot");
 		UINode = GetNodeOrNull<UI>("UI");
 		CollisionShapeNode = GetNodeOrNull<CollisionShape3D>("CollisionShape3D");
@@ -90,7 +90,7 @@ public partial class Player : CharacterBody3D
 
 		CapsuleShape = CollisionShapeNode.Shape as CapsuleShape3D;
 
-		lookAroundSpeed = (float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
+		lookAroundSpeed = 10.0f; //(float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
     }
 
 
@@ -109,7 +109,7 @@ public partial class Player : CharacterBody3D
 		Lean(Leaning);
 		Crouch(isCrouching);
 
-		Equippable item = null;
+		Equippable item;
 
 		if (Input.IsActionJustPressed("PrimaryWeapon1"))
 		{
@@ -211,12 +211,11 @@ public partial class Player : CharacterBody3D
 				
 				mouseRotY = Mathf.Clamp(mouseRotY, YRotationMinimum, YRotationMaximum);
 
-				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 							
+				Vector3 char_rot = new Godot.Vector3(RotationDegrees.X, -mouseRotX, RotationDegrees.Z); 	
 				Vector3 cam_piv_rot = new Godot.Vector3(mouseRotY, CamPivNode.RotationDegrees.Y, CamPivNode.RotationDegrees.Z);
 				//Basis item_basis = ItemMarker.GlobalTransform.Basis;
 				RotationDegrees = char_rot;
 				CamPivNode.RotationDegrees = cam_piv_rot;
-				
 			}
 		}
 	}
@@ -253,15 +252,15 @@ public partial class Player : CharacterBody3D
 		float currentCamPos = CamPivNode.Position.Y;
 
 		float targetHeight = isCrouching ? CrouchingHeight : StandingHeight;
-		float targetCamPos = isCrouching ? CrouchingCameraPivot / 100 : StandingCameraPivot / 100;
+		//float targetCamPos = isCrouching ? CrouchingCameraPivot : StandingCameraPivot; //TF happened here?
 		
 		if  (currentHeight != StandingHeight || currentHeight != CrouchingHeight) {
 			CapsuleShape.Height = Mathf.Lerp(currentHeight, targetHeight, 0.05f);
-			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetCamPos, 0.05f), CamPivNode.Position.Z); 
+			CamPivNode.Position = new Godot.Vector3(CamPivNode.Position.X, Mathf.Lerp(currentCamPos, targetHeight, 0.05f), CamPivNode.Position.Z); 
 
 			if (Mathf.Abs(targetHeight - currentHeight) < 0.01f) {
 				CapsuleShape.Height = targetHeight;
-				CamPivNode.Position = new Godot.Vector3(0, targetCamPos, 0);
+				CamPivNode.Position = new Godot.Vector3(0, targetHeight, 0);
 			}
 		}
 	}
@@ -369,6 +368,7 @@ public partial class Player : CharacterBody3D
 			UnderWaterCanvasLayer.Show();
 			AudioServer.SetBusEffectEnabled(0, 0, true);
 		}
+		
 		else
 		{
 			UnderWaterCanvasLayer.Hide(); 
