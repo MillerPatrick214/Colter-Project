@@ -511,11 +511,10 @@ size = Vector2(0.02, 0.02)
 [sub_resource type="Resource" id="Resource_qf8fy"]
 script = ExtResource("12_lp8x7")
 
-[node name="1813ArmyPistol" type="RigidBody3D" node_paths=PackedStringArray("InteractComponent")]
+[node name="1813ArmyPistol" type="RigidBody3D"]
 script = ExtResource("1_amlpt")
 MeshNodes = Array[NodePath]([NodePath("Skeleton3D/Frizzen_2/Frizzen_2"), NodePath("Skeleton3D/Hammer/Hammer"), NodePath("Skeleton3D/Trigger/Trigger"), NodePath("Skeleton3D/PistolBody/PistolBody")])
 ItemResource = SubResource("Resource_ithbi")
-InteractComponent = NodePath("InteractComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -674,8 +673,7 @@ volume_db = 38.75
 max_db = 6.0
 max_distance = 100.0
 
-[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("11_302nq")]
-CollisionShape = NodePath("CollisionShape3D")
+[node name="InteractComponent" parent="." instance=ExtResource("11_302nq")]
 PickUpLogic = SubResource("Resource_qf8fy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

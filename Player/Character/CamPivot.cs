@@ -31,7 +31,7 @@ public partial class CamPivot : Marker3D
 			if (Input.IsActionJustPressed("Aim")) { //Switched the Just Pressed as I only want 1 signal
 				isAiming = true;
 				Events.Instance.EmitSignal(Events.SignalName.ChangeIsAiming, isAiming);
-				//GD.Print("Aiming activated");
+				//GD.Print("Aiming activated");a
 			}
 				
 			else if (Input.IsActionJustReleased("Aim")) {

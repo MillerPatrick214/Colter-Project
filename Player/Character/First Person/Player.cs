@@ -24,7 +24,7 @@ public partial class Player : CharacterBody3D
 	[ExportGroup("Camera Settings")]
 	[Export(PropertyHint.None, "suffix:m")] float StandingHeight = 1.7f; 
 	[Export(PropertyHint.None, "suffix:m")] float CrouchingHeight = 1.0f;
-	[Export(PropertyHint.None, "suffix:%")] float StandingCameraPivot = 19.5f;
+	[Export(PropertyHint.None, "suffix:%")] float StandingCameraPivot = .55f;
 	[Export(PropertyHint.None, "suffix:%")] float CrouchingCameraPivot = 0;
 	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMinimum = -70;
 	[Export(PropertyHint.None, "suffix:\u00ba")] float YRotationMaximum = 70;
@@ -34,7 +34,8 @@ public partial class Player : CharacterBody3D
 	float mouseRotX = 0;
 	float mouseRotY = 0;
 
-
+	string PlayerDataPath = "ccgu64xutyl85";
+	PlayerData PlayerData;
 	Marker3D ItemMarker;
 	CollisionShape3D CollisionShapeNode;
 	Vector2 MouseMotion;
@@ -59,10 +60,9 @@ public partial class Player : CharacterBody3D
  
     public override void _Ready()
     {
-        Instance ??= this;
-        if (Instance != this) QueueFree();
-
-		Inventory = new Inventory();
+		PlayerData = GD.Load<PlayerData>(PlayerDataPath); 
+		Instance = this;
+		Inventory = PlayerData.PlayerInventory;
 		Mathf.Wrap(SlotIndex, 0, 6);
 		Leaning = LeanDirection.None;
 		ObjectSeen = null;
@@ -93,7 +93,15 @@ public partial class Player : CharacterBody3D
 		lookAroundSpeed = 10.0f; //(float)Settings.Instance.GetSetting("gameplay", "look_sensitivity");
     }
 
+	public void SaveData()
+	{
+		ResourceSaver.Save(Inventory, PlayerDataPath);
+	}
 
+	public void LoadData()
+	{
+		PlayerData = GD.Load<PlayerData>(PlayerDataPath); 
+	}
 
 	public override void _Process(double delta) {
 		int curr_slot = SlotIndex;

@@ -283,14 +283,13 @@ _data = {
 [sub_resource type="Resource" id="Resource_dwe3p"]
 script = ExtResource("6_fpjvg")
 
-[node name="EighteenTwelveCavSaber" type="RigidBody3D" node_paths=PackedStringArray("Hurtbox", "InteractComponent")]
+[node name="EighteenTwelveCavSaber" type="RigidBody3D" node_paths=PackedStringArray("Hurtbox")]
 collision_layer = 3
 script = ExtResource("1_3tpfj")
 StrikeDamage = 50.0
 Hurtbox = NodePath("Cube/HurtBox")
 MeshNodes = Array[NodePath]([NodePath("Cube")])
 ItemResource = SubResource("Resource_bfxi0")
-InteractComponent = NodePath("InteractComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, -0.333807, 0.942641, 0, 0.942641, 0.333807, -1, 1.45912e-08, -4.12042e-08, 0.314312, -0.0172076, -0.5)
@@ -323,9 +322,8 @@ libraries = {
 "": SubResource("AnimationLibrary_3evw2")
 }
 
-[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("5_7sc07")]
+[node name="InteractComponent" parent="." instance=ExtResource("5_7sc07")]
 transform = Transform3D(-3.61999e-06, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 9.36921e-07, -3.49664e-06, 0.415, -0.3, -0.5)
-CollisionShape = NodePath("CollisionShape3D2")
 PickUpLogic = SubResource("Resource_dwe3p")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractComponent"]
