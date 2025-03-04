@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Events : Node
 {
@@ -28,6 +27,7 @@ public partial class Events : Node
 	public delegate void UnderwaterToggleEventHandler(bool isUnderwater);
 	public override void _Ready() 
 	{
-		Instance = this;
+        Instance ??= this;
+        if (Instance != this) QueueFree();
 	}
 }
