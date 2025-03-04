@@ -3,8 +3,9 @@ using Godot;
 public partial class LevelManager : Node3D
 {
 
-	public static LevelManager Instance; 
+	public static LevelManager Instance { get; private set; } 
 	public Node CurrentScene { get; set; }
+
 public void GotoScene(string path)
 {
     // This function will usually be called from a signal callback,
@@ -21,9 +22,7 @@ public void GotoScene(string path)
 
 public void DeferredGotoScene(string path)
 {
-    Instance = this;
-    if (Player.Instance != null) {Player.Instance.SaveData();}
-
+    Player.Instance.SaveData();
     CurrentScene.Free();
 
     // Load a new scene.
@@ -41,19 +40,10 @@ public void DeferredGotoScene(string path)
 
     public override void _Ready()
     {
+        Instance ??= this;
+        if (Instance != this) QueueFree();
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(-1);
-        GD.PrintErr($"CurrentScene in Global is {CurrentScene}");
-		Instance = this;
-		CurrentScene.Ready += AssignPlayerPos;
-	}
-
-	public void AssignPlayerPos()
-	{ 
-		if ( CurrentScene is Level lvl)
-		{
-			Player.Instance.SetStartPosition(lvl.player_start); 
-		}
 	}
 }
 

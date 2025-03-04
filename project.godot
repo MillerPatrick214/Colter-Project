@@ -24,10 +24,6 @@ Events="*res://Singletons/Events.cs"
 LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [dialogue_manager]
 
 runtime/balloon_path="res://Dialogue/Balloon.tscn"
@@ -37,7 +33,6 @@ runtime/advanced/uses_dotnet=true
 
 window/size/viewport_width=2560
 window/size/viewport_height=1440
-window/size/mode=3
 window/size/initial_position_type=2
 window/size/resizable=false
 window/size/window_width_override=1280

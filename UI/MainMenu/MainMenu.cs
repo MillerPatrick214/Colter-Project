@@ -67,7 +67,6 @@ public partial class MainMenu : Control
 
 	public async void OnNewGame() {
 		await StartGame();
-		LevelManager.Instance.GotoScene(NewGamePath);
 	}
 
 	public async void OnLoadGame() {

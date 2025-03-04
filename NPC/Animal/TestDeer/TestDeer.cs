@@ -1,10 +1,8 @@
-using System.Runtime.CompilerServices;
 using Godot;
 
 public partial class TestDeer : NPCBase
 {
-	[Signal]
-	public delegate void SensedEventHandler();
+	[Signal] public delegate void SensedEventHandler();
 	PackedScene SkinningScene;
 
 	// Called when the node enters the scene tree for the first time.

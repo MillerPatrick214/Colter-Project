@@ -36,6 +36,10 @@ public partial class Settings : Node
 				GD.Print($"[color=red]Settings: [/color] No file found at {settingsPath}");
 				GD.Print($"[color=red]Settings: [/color] Generating default settings.");
 
+				// Creates user settings ini at SettingsPath if necessary, opens it, and closes.
+				FileAccess file = FileAccess.Open(settingsPath, FileAccess.ModeFlags.WriteRead);
+				file.Close();
+
 				defaultConfig.Save(settingsPath);
 				SettingsConfig.Load(settingsPath);
 			}

@@ -14,7 +14,7 @@ public partial class SettingsTabContainer : TabContainer
 	[Export] OptionButton ResolutionButton;
 	[Export] CheckBox VSyncButton;
 	[Export] OptionButton MaxFPSButton;
-	[Export] Line2D StrikeLine;
+	[Export] Line2D MaxFPSStrikeLine;
 	
 	// [ExportGroup("Audio")]
 
@@ -23,7 +23,7 @@ public partial class SettingsTabContainer : TabContainer
 	private Godot.Collections.Array<int> fpss = new();
 
 	public override void _Ready()  {
-		StrikeLine.Hide();
+		MaxFPSStrikeLine.Hide();
 		windowModes = Settings.Instance.WindowModes;
 		resolutions = Settings.Instance.Resolutions;
 		fpss = Settings.Instance.FPSs;
@@ -50,9 +50,11 @@ public partial class SettingsTabContainer : TabContainer
 		WindowModeButton.Clear();
 		for (int i = 0; i < windowModes.Count; i++) {
 			WindowModeButton.AddItem(windowModes[i], i);
-			if (windowModes[i] == currentMode) { WindowModeButton.Select(i); }
+			if (windowModes[i] == currentMode) {
+				WindowModeButton.Select(i);
+			}
 		}
-		
+
 		// Resolution OptionButton
 		string currentRes = (string)Settings.Instance.GetSetting("graphics", "resolution");
 		ResolutionButton.Clear();
@@ -65,12 +67,12 @@ public partial class SettingsTabContainer : TabContainer
 		if ((bool)Settings.Instance.GetSetting("graphics", "vsync") == true) {
 			VSyncButton.ButtonPressed = true;
 			MaxFPSButton.Hide();
-			StrikeLine.Show();
+			MaxFPSStrikeLine.Show();
 		}
 		else { 
 			VSyncButton.ButtonPressed = false;
 			MaxFPSButton.Show();
-			StrikeLine.Hide();
+			MaxFPSStrikeLine.Hide();
 		}
 
 		// MaxFPS OptionButton
@@ -103,11 +105,11 @@ public partial class SettingsTabContainer : TabContainer
 		Settings.Instance.SetSetting("graphics", "vsync", VSyncButton.ButtonPressed);
 		if (VSyncButton.ButtonPressed == true) {
 			MaxFPSButton.Hide();
-			StrikeLine.Show();
+			MaxFPSStrikeLine.Show();
 		}
 		else {
 			MaxFPSButton.Show();
-			StrikeLine.Hide();
+			MaxFPSStrikeLine.Hide();
 		}
 	}
 	public void OnMaxFPSButton(long item) {  Settings.Instance.SetSetting("graphics", "max_fps" , (int)item); }
