@@ -1,6 +1,7 @@
 using Godot;
 
-[Tool]
+
+
 public partial class Capybara : NPCBase
 {
 	PackedScene SkinningScene;

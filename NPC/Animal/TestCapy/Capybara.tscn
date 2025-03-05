@@ -182,17 +182,11 @@ points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 5, -5, 0, 5, 5, 5, 5, -5, 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pkh7y"]
 radius = 7.0
 
-[node name="Capybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
+[node name="Capybara" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_7dout")
-RunSpeed = 10.0
-NavAgent = NodePath("NavigationAgent3D")
-AniTree = NodePath("AnimationTree")
-VisionRay = NodePath("VisionRay")
-HearingArea = NodePath("HearingArea")
-VisionCone = NodePath("VisionCone")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -231,7 +225,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.285889, -0.00299199, 0.00213345, 0.958256)
+bones/2/rotation = Quaternion(0.271058, -0.00295661, 0.00220907, 0.962556)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1

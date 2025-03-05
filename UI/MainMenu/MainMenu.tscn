@@ -181,7 +181,7 @@ theme_override_fonts/font = ExtResource("2_youq5")
 text = "back"
 flat = true
 
-[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSButton", "MaxFPSStrikeLine")]
+[node name="SettingsTabContainer" type="TabContainer" parent="." node_paths=PackedStringArray("LookSensitivitySlider", "LookSensitivitySpinBox", "WindowModeButton", "ResolutionButton", "VSyncButton", "MaxFPSButton")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.275
@@ -203,7 +203,6 @@ WindowModeButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/Windo
 ResolutionButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/Resolution/OptionButton")
 VSyncButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/VSync/CheckBox")
 MaxFPSButton = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/OptionButton")
-MaxFPSStrikeLine = NodePath("GraphicsTab/MarginContainer/SettingsContainer/MaxFPS/MaxFPS/Line2D")
 
 [node name="GameplayTab" type="ScrollContainer" parent="SettingsTabContainer"]
 visible = false

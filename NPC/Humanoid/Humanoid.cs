@@ -18,7 +18,8 @@ public partial class Humanoid : NPCBase
     PackedScene AmmoScene;
     bool CanFire;
     public Marker3D TEMPFIRE;
-    //----------------------------------------------------------------------------------
+
+        //----------------------------------------------------------------------------------
     public override void _Ready()
     {
         base._Ready();

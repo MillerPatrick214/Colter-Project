@@ -288,11 +288,17 @@ radius = 7.0
 script = ExtResource("13_5r5f4")
 SkinningNodePath = "uid://cw0mtrrkpq73g"
 
-[node name="LimboCapybara" type="CharacterBody3D"]
+[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_g31wg")
+NavAgent = NodePath("NavigationAgent3D")
+AniTree = NodePath("AnimationTree")
+VisionRay = NodePath("HearingArea/VisionRay")
+HearingArea = NodePath("HearingArea")
+VisionCone = NodePath("VisionCone")
+InteractComponent = NodePath("InteractComponent")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
