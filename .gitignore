@@ -99,3 +99,5 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
+*.exr
+*.wav
