@@ -23,6 +23,7 @@ Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
 LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+HerdManager="*res://components/Herd/HerdManager.cs"
 
 [dialogue_manager]
 
@@ -53,6 +54,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://add
 Human="Any and all entities considered human"
 ThreatLevel3="Describes relative intimidation factor of the entity"
 PlayerCamera="PlayerCameraGroup"
+Capybara="Capybara"
 
 [gui]
 

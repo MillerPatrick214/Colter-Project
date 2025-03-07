@@ -34,8 +34,7 @@ public partial class Flee : BTAction
 
     public override Status _Tick(double delta)
     {
-		if (agent.GetFocus() == null) { return Status.Failure;}
-        Vector3 fleeVector = FindFleeVector();
+	    Vector3 fleeVector = FindFleeVector();
         TravelFleePoint(fleeVector);
         
         if (agent.NavAgent.IsNavigationFinished())

@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 public partial class HerdManager : Node
 {
@@ -14,8 +11,9 @@ public partial class HerdManager : Node
 
 	public override void _Ready()
 	{
-		Instance ??= this; 
+		RequestQueue = new();
 		if (Instance != null) {this.QueueFree();}
+		Instance ??= this; 							// If not null, it's this
 
 		HerdRequest += (ticket) => RequestQueue.Add(ticket); //HerdComponent Asking Mom if it's ok if their friend spends the night basically.
 
@@ -23,7 +21,7 @@ public partial class HerdManager : Node
 
     public override void _Process(double delta)
     {
-		if ((RequestQueue.Count == 0)) {return;}
+		if ((RequestQueue.Count == 0)) {return;} //if no requests, chill;
 		HerdTicketManager(RequestQueue[0]);		//Return first element in RequestQueue
 		
 
@@ -31,46 +29,47 @@ public partial class HerdManager : Node
 
     public void HerdTicketManager(HerdRequestTicket ticket)
 	{
-
+		GD.Print("HerdManager Recieved Ticket");
 		HerdComponent sender_comp = ticket.HerdComp;
 		HerdComponent external_comp = ticket.ExternalComp;
 		int count = RequestQueue.Count;
 
-		if (count == 1)
+		HerdTransfer(sender_comp, external_comp);
+
+		Godot.Collections.Array<int> IndToRemove = new Godot.Collections.Array<int>();
+		
+		for (int i = 0; i < RequestQueue.Count; ++i)				
 		{
-			sender_comp.AddToHerd(external_comp);
-			external_comp.TransferToHerd(sender_comp.Herd);
+			HerdRequestTicket newTicket = RequestQueue[i];
+			
+			if (newTicket == ticket || (newTicket.HerdComp == external_comp && newTicket.ExternalComp == sender_comp))		//This also removes the currently handled ticket.
+			{
+				IndToRemove.Add(i);
+			}
+		}
+
+		for (int j = 0; j < IndToRemove.Count; ++j)
+		{
+			int ind = IndToRemove[j];
+			RequestQueue.RemoveAt(ind);
+		}
+	}
+
+	public void HerdTransfer(HerdComponent HerdComp1, HerdComponent HerdComp2)
+	{	
+
+		try
+		{
+			HerdComp1.MergeHerds(HerdComp2);
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr(e);
 			return;
 		}
 
-		Godot.Collections.Array<HerdRequestTicket> ToRemove;
-		
-		for (int i = 1; i < RequestQueue.Count; ++i)
-		{
-			/*
-			HerdRequestTicket newTicket = RequestQueue[i];
-			if (sender_comp == newTicket.ExternalComp)
-			{
-
-			}
-			*/
-
-
-		}
 	}
-
-	
-
-		//if herd is max size return
-		
-		//Check if NPC matches our parents group
-		//Check if We have tickets with shared references either target or sender
-			//Tickets with 
-			//Compare and see which herd is larger
-				//if herd isn't max size...
-				//smaller into larger
-
-	}
+}
 
 	
 

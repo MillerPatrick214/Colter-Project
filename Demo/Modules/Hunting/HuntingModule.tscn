@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxfm7pban85rm"]
+[gd_scene load_steps=8 format=3 uid="uid://cxfm7pban85rm"]
 
-[ext_resource type="PackedScene" uid="uid://djdku4ekx1emk" path="res://Player/Character/First Person/Player.tscn" id="2_a4j10"]
-
-[sub_resource type="Gradient" id="Gradient_2th7g"]
+[sub_resource type="Gradient" id="Gradient_nih3y"]
 offsets = PackedFloat32Array(0.2, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rjyok"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s68em"]
 noise_type = 2
 frequency = 0.03
 cellular_jitter = 3.0
@@ -18,12 +16,12 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_lacunarity = 1.5
 domain_warp_fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_heall"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ehbvk"]
 seamless = true
-color_ramp = SubResource("Gradient_2th7g")
-noise = SubResource("FastNoiseLite_rjyok")
+color_ramp = SubResource("Gradient_nih3y")
+noise = SubResource("FastNoiseLite_s68em")
 
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_yf78q"]
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_o8ppj"]
 _shader_parameters = {
 "blend_sharpness": 0.87,
 "height_blending": true,
@@ -34,12 +32,12 @@ _shader_parameters = {
 "noise1_scale": 0.04,
 "noise2_scale": 0.076,
 "noise3_scale": 0.225,
-"noise_texture": SubResource("NoiseTexture2D_heall"),
+"noise_texture": SubResource("NoiseTexture2D_ehbvk"),
 "vertex_normals_distance": 128.0
 }
 show_checkered = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg31x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5f6ip"]
 transparency = 4
 cull_mode = 2
 vertex_color_use_as_albedo = true
@@ -49,23 +47,21 @@ distance_fade_mode = 1
 distance_fade_min_distance = 960.0
 distance_fade_max_distance = 480.0
 
-[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_3qvtn"]
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_04iet"]
 height_offset = 0.5
 density = 10.0
-material_override = SubResource("StandardMaterial3D_xg31x")
+material_override = SubResource("StandardMaterial3D_5f6ip")
 generated_type = 1
 
-[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_4a2tb"]
-mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_3qvtn")])
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_bvsvd"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_04iet")])
 
 [node name="HuntingModule" type="Node3D"]
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
 data_directory = "res://Demo/Modules/Hunting/MapData"
-material = SubResource("Terrain3DMaterial_yf78q")
-assets = SubResource("Terrain3DAssets_4a2tb")
+material = SubResource("Terrain3DMaterial_o8ppj")
+assets = SubResource("Terrain3DAssets_bvsvd")
 top_level = true
 metadata/_edit_lock_ = true
-
-[node name="Player" parent="." instance=ExtResource("2_a4j10")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1068.05, 28.5162, 1196.21)
+metadata/_edit_group_ = true

@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccygd4wouya0s"]
+[gd_scene load_steps=3 format=3 uid="uid://ccygd4wouya0s"]
 
 [ext_resource type="Script" path="res://components/Herd/HerdComponent.cs" id="1_rsgqi"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_igvob"]
+
 [node name="HerdComponent" type="Area3D"]
 script = ExtResource("1_rsgqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_igvob")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://x34aas21so5x"]
+[gd_scene load_steps=63 format=4 uid="uid://x34aas21so5x"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/LimboCapybara.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/NewWanderPosition.cs" id="2_1uyqb"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_xw2tj"]
 [ext_resource type="Script" path="res://components/Interact SubComponents/SkinLogic.cs" id="13_5r5f4"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_t1s4s"]
+[ext_resource type="PackedScene" uid="uid://ccygd4wouya0s" path="res://components/Herd/HerdComponent.tscn" id="14_mh11t"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jy2mn"]
 var/Target/name = &"Target"
@@ -382,7 +383,6 @@ bones/10/scale = Vector3(1, 1, 1)
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_7ahmb")
-active = false
 blackboard_plan = SubResource("BlackboardPlan_0s5l1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -436,10 +436,14 @@ MaxHealth = 50.0
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationRootNode_ucith")
 
-[node name="InteractComponent" parent="." instance=ExtResource("12_td3j1")]
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("12_td3j1")]
 CurrentInteractMode = 1
+CollisionShape = NodePath("CollisionShape3D")
 SkinLogic = SubResource("Resource_ip3hn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
 shape = SubResource("CapsuleShape3D_48exc")
+
+[node name="HerdComponent" parent="." groups=["Capybara"] instance=ExtResource("14_mh11t")]
+SpeciesGroup = &"Capybara"
