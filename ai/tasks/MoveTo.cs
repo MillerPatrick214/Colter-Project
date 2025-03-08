@@ -4,7 +4,9 @@ using System;
 [Tool]
 public partial class MoveTo : BTAction
 {
+    Vector3 SafeVelocity;
     NPCBase agent;
+    HerdComponent comp;
     public override string _GenerateName()
     {
         return "MoveTo";
@@ -15,18 +17,29 @@ public partial class MoveTo : BTAction
         if (Agent is NPCBase agent)
         {
             this.agent = agent;
+            agent.NavAgent.VelocityComputed += (vel) => SafeVelocity = vel;
+        }
+
+        if (Agent is Animal animal)
+        {
+            comp = animal.HerdComponent;
         }
     }
 
     public override void _Enter()
     {
-        
     }
 
     public override void _Exit()
     {
         agent.NavAgent.TargetPosition = Vector3.Zero;
+        agent.NavAgent.Velocity = Vector3.Zero;
         agent.Velocity = Vector3.Zero;
+
+        if (!agent.HasNode("HerdComponent")) return;
+
+        HerdComponent comp = agent.GetNode<HerdComponent>("HerdComponent");
+       // comp.UpdatePositionWithinHerd();
     }
 
     public override Status _Tick(double delta)
@@ -39,9 +52,9 @@ public partial class MoveTo : BTAction
 		direction.Y = 0;
 		//GD.PrintErr(direction);
 
-		agent.Rotate(direction);
-	
-		agent.Velocity = direction * agent.GetWalkSpeed();
+		if (!(direction == Vector3.Zero)) agent.Rotate(direction);
+		agent.NavAgent.Velocity = direction * agent.GetWalkSpeed();
+		agent.Velocity = SafeVelocity;
 
 
         if (agent.NavAgent.IsNavigationFinished()){

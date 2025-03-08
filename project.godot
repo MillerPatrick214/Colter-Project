@@ -23,7 +23,6 @@ Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
 LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-HerdManager="*res://components/Herd/HerdManager.cs"
 
 [dialogue_manager]
 

@@ -1,16 +1,20 @@
 using Godot;
 using System;
-
+/*
 public partial class HerdManager : Node
 {
-	[Signal]
-	public delegate void HerdRequestEventHandler(HerdRequestTicket ticket);
+	[Signal] public delegate void HerdRequestEventHandler(HerdRequestTicket ticket);
+	[Signal] public delegate void HerdCreatedEventHandler(Herd self);
+	[Signal] public delegate void HerdDestroyedEventHandler(Herd self);
 
 	public static HerdManager Instance;
+
+	Godot.Collections.Array<Herd> ActiveHerds;
 	Godot.Collections.Array<HerdRequestTicket> RequestQueue;
 
 	public override void _Ready()
 	{
+		ActiveHerds = new();
 		RequestQueue = new();
 		if (Instance != null) {this.QueueFree();}
 		Instance ??= this; 							// If not null, it's this
@@ -18,6 +22,7 @@ public partial class HerdManager : Node
 		HerdRequest += (ticket) => RequestQueue.Add(ticket); //HerdComponent Asking Mom if it's ok if their friend spends the night basically.
 
 	}
+	
 
     public override void _Process(double delta)
     {
@@ -42,7 +47,7 @@ public partial class HerdManager : Node
 		{
 			HerdRequestTicket newTicket = RequestQueue[i];
 			
-			if (newTicket == ticket || (newTicket.HerdComp == external_comp && newTicket.ExternalComp == sender_comp))		//This also removes the currently handled ticket.
+			if (newTicket.HerdComp.Herd == newTicket.ExternalComp.Herd)		//This also removes the currently handled ticket.
 			{
 				IndToRemove.Add(i);
 			}
@@ -55,8 +60,10 @@ public partial class HerdManager : Node
 		}
 	}
 
+	
+
 	public void HerdTransfer(HerdComponent HerdComp1, HerdComponent HerdComp2)
-	{	
+	{
 
 		try
 		{
@@ -67,9 +74,8 @@ public partial class HerdManager : Node
 			GD.PrintErr(e);
 			return;
 		}
-
 	}
 }
-
+*/
 	
 

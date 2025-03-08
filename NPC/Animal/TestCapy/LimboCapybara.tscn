@@ -1,10 +1,9 @@
 [gd_scene load_steps=63 format=4 uid="uid://x34aas21so5x"]
 
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/LimboCapybara.cs" id="1_g31wg"]
-[ext_resource type="Script" path="res://ai/tasks/NewWanderPosition.cs" id="2_1uyqb"]
+[ext_resource type="Script" path="res://NPC/Animal/TestCapy/Animal.cs" id="1_g31wg"]
+[ext_resource type="Script" path="res://ai/tasks/MoveHerd.cs" id="2_2e18s"]
 [ext_resource type="AnimationLibrary" uid="uid://cjl2q2vwxjni" path="res://NPC/Animal/TestCapy/CapyAnimations/CapybaraAnimations.tres" id="2_gjf4o"]
 [ext_resource type="Script" path="res://ai/tasks/Freeze.cs" id="2_sfyec"]
-[ext_resource type="Script" path="res://ai/tasks/MoveTo.cs" id="3_fkhrd"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_pd75m"]
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_4op7t"]
 [ext_resource type="Script" path="res://ai/tasks/ConfirmThreat.cs" id="4_jtgjo"]
@@ -35,6 +34,11 @@ var/Focus/name = &"Focus"
 var/Focus/type = 24
 var/Focus/hint = 34
 var/Focus/hint_string = "Node3D"
+var/HerdMean/name = &"HerdMean"
+var/HerdMean/type = 9
+var/HerdMean/value = Vector3(0, 0, 0)
+var/HerdMean/hint = 0
+var/HerdMean/hint_string = ""
 
 [sub_resource type="BBVariant" id="BBVariant_nndm1"]
 resource_name = "false"
@@ -72,8 +76,8 @@ animation_player = SubResource("BBNode_v1am8")
 animation_name = &"CapybaraAnimations/CapyGraze"
 
 [sub_resource type="BTRandomWait" id="BTRandomWait_l48bx"]
-min_duration = 3.0
-max_duration = 10.0
+min_duration = 2.0
+max_duration = 3.0
 
 [sub_resource type="BBVariant" id="BBVariant_uyefc"]
 resource_name = "false"
@@ -93,15 +97,18 @@ animation_player = SubResource("BBNode_oxo4o")
 animation_name = &"CapybaraAnimations/CapyWalk"
 speed = 3.0
 
-[sub_resource type="BTAction" id="BTAction_7qvh1"]
-script = ExtResource("2_1uyqb")
+[sub_resource type="BTAction" id="BTAction_nev3t"]
+script = ExtResource("2_2e18s")
 
-[sub_resource type="BTAction" id="BTAction_1xjgd"]
-script = ExtResource("3_fkhrd")
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_yfypj"]
+children = [SubResource("BTAction_nev3t")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_kphke"]
+children = [SubResource("BTTimeLimit_yfypj")]
 
 [sub_resource type="BTSequence" id="BTSequence_di6sm"]
 custom_name = "Graze"
-children = [SubResource("BTPlayAnimation_tfxkp"), SubResource("BTSetVar_j23lb"), SubResource("BTPlayAnimation_4qasw"), SubResource("BTRandomWait_l48bx"), SubResource("BTSetVar_74172"), SubResource("BTPlayAnimation_7bjt1"), SubResource("BTAction_7qvh1"), SubResource("BTAction_1xjgd")]
+children = [SubResource("BTPlayAnimation_tfxkp"), SubResource("BTSetVar_j23lb"), SubResource("BTPlayAnimation_4qasw"), SubResource("BTRandomWait_l48bx"), SubResource("BTSetVar_74172"), SubResource("BTPlayAnimation_7bjt1"), SubResource("BTAlwaysSucceed_kphke")]
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_mkvnv"]
 children = [SubResource("BTCheckVar_u2316"), SubResource("BTSequence_di6sm")]
@@ -294,6 +301,8 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 
 collision_layer = 3
 safe_margin = 0.01
 script = ExtResource("1_g31wg")
+isHerding = true
+SpeciesGroup = &"Capybara"
 NavAgent = NodePath("NavigationAgent3D")
 AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("HearingArea/VisionRay")
@@ -307,14 +316,14 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.32831e-10, 1.14786e-07, -1.25729e-08)
 bones/0/enabled = true
-bones/0/position = Vector3(8.32667e-17, -0.378979, 1.62399e-08)
+bones/0/position = Vector3(0, 0, 0)
 bones/0/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.3283e-10, 1.06973, -0.00194299)
 bones/1/enabled = true
-bones/1/position = Vector3(0.268607, 1.08706, -0.00197445)
+bones/1/position = Vector3(0.201257, 1.08272, -0.00196656)
 bones/1/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
@@ -322,63 +331,63 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(2.3283e-10, 2.1388, -0.0408518)
-bones/2/rotation = Quaternion(0.0243039, 2.48393e-17, 7.24781e-18, 0.999705)
+bones/2/rotation = Quaternion(0.000748262, 2.42761e-17, 7.89561e-18, 1)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
 bones/3/rest = Transform3D(1, 7.95808e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, 0.521562, 2.51634, 0.746557)
 bones/3/enabled = true
-bones/3/position = Vector3(0.521562, 2.31672, 0.753158)
+bones/3/position = Vector3(0.521562, 2.36677, 0.751503)
 bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/3/scale = Vector3(1, 1, 1.00001)
 bones/4/name = "LowerBone.004.R"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, 0.521562, 2.62876, 1.35067)
 bones/4/enabled = true
-bones/4/position = Vector3(0.521562, 2.00991, 1.36961)
-bones/4/rotation = Quaternion(0.733558, 9.72213e-07, 1.04936e-06, 0.679627)
+bones/4/position = Vector3(0.521562, 2.17394, 1.37148)
+bones/4/rotation = Quaternion(0.691793, 1.03297e-06, 9.89617e-07, 0.722096)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "UpperBone.005.R"
 bones/5/parent = -1
 bones/5/rest = Transform3D(1, 4.54747e-13, 2.861e-06, 2.7712e-06, -0.248596, -0.968604, 7.11237e-07, 0.968607, -0.248596, 0.521562, 0.229447, 0.820321)
 bones/5/enabled = true
-bones/5/position = Vector3(0.521562, 0.435332, 0.826186)
+bones/5/position = Vector3(0.521562, 0.383709, 0.824715)
 bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
 bones/5/scale = Vector3(1, 1, 0.999997)
 bones/6/name = "LowerBone.006.R"
 bones/6/parent = -1
 bones/6/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, 0.521562, 0.0831632, 1.40116)
 bones/6/enabled = true
-bones/6/position = Vector3(0.521562, 0.62051, 1.47384)
-bones/6/rotation = Quaternion(0.275591, 1.37511e-06, 3.94237e-07, 0.961275)
+bones/6/position = Vector3(0.521562, 0.485776, 1.45562)
+bones/6/rotation = Quaternion(0.320611, 1.355e-06, 4.58639e-07, 0.947211)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "UpperBone.007.R"
 bones/7/parent = -1
 bones/7/rest = Transform3D(1, 3.41061e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, -0.526884, 2.53763, 0.746518)
 bones/7/enabled = true
-bones/7/position = Vector3(-0.526884, 2.67488, 0.746269)
+bones/7/position = Vector3(-0.526884, 2.64047, 0.746331)
 bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerBone.008.R"
 bones/8/parent = -1
 bones/8/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, -0.526884, 2.65005, 1.35063)
 bones/8/enabled = true
-bones/8/position = Vector3(-0.526884, 3.27417, 1.31524)
-bones/8/rotation = Quaternion(0.360581, 1.33428e-06, 5.15815e-07, 0.932728)
+bones/8/position = Vector3(-0.526884, 3.12211, 1.32964)
+bones/8/rotation = Quaternion(0.4159, 1.30092e-06, 5.9495e-07, 0.90941)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperBone.009.R"
 bones/9/parent = -1
 bones/9/rest = Transform3D(1, 4.54747e-13, 3.33783e-06, 3.23306e-06, -0.248596, -0.968603, 8.29776e-07, 0.968607, -0.248595, -0.526884, 0.250735, 0.820282)
 bones/9/enabled = true
-bones/9/position = Vector3(-0.526884, 0.107145, 0.764395)
+bones/9/position = Vector3(-0.526884, 0.143149, 0.778409)
 bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
 bones/9/scale = Vector3(1, 1, 0.999996)
 bones/10/name = "LowerBone.010.R"
 bones/10/parent = -1
 bones/10/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, -0.526884, 0.104451, 1.40113)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.526884, -0.255229, 1.34979)
-bones/10/rotation = Quaternion(0.648315, 1.08915e-06, 9.27421e-07, 0.761373)
+bones/10/position = Vector3(-0.526884, -0.165043, 1.36266)
+bones/10/rotation = Quaternion(0.601953, 1.14231e-06, 8.61101e-07, 0.798532)
 bones/10/scale = Vector3(1, 1, 1)
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
@@ -403,6 +412,12 @@ shape = SubResource("CapsuleShape3D_48exc")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
+radius = 1.0
+time_horizon_agents = 0.1
+time_horizon_obstacles = 0.1
+max_speed = 15.0
+avoidance_layers = 2
+avoidance_mask = 2
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 6.0
@@ -446,4 +461,4 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 shape = SubResource("CapsuleShape3D_48exc")
 
 [node name="HerdComponent" parent="." groups=["Capybara"] instance=ExtResource("14_mh11t")]
-SpeciesGroup = &"Capybara"
+max_speed = 13.0

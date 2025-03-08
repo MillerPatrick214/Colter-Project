@@ -1,113 +1,153 @@
 using Godot;
 using System;
-
 public partial class HerdComponent : Area3D
 {
-	Timer timer;
 
+	[Export] public float AvoidanceFactor = 5f; //by what factor do we steer away
+	[Export] public float turn_bias_degrees = .1f;
+	[Export] float min_speed = 5;
+	[Export] float max_speed = 12;
+
+	Timer timer;
 	Area3D Hearing;
 	Area3D Sight;
-
-	bool awaitingResponse = false;
-	public NPCBase Parent;
-
 	[Export]
-	public StringName SpeciesGroup;					//make a group for each species that will filter what species is being added to the list;
+	public Animal Parent;
+	StringName SpeciesGroup;					//make a group for each species that will filter what species is being added to the list;
 
-	public Herd Herd;
+	//public Herd Herd;
 
-	bool CanRequestAddToHerd = true;
+	public Godot.Collections.Array<HerdComponent> Boids; 
 
-	public override void _Ready()
-	{
-		if (SpeciesGroup == null) {GD.PrintErr($"Error {this.GetPath()} No SpeciesGroup set in editor!!!  Will not function.");}
-		this.AddToGroup(SpeciesGroup);
-		Herd = new();
-
-		timer = new Timer();
-		AddChild(timer);
-
-		NPCBase Parent = (NPCBase)GetParent<Node3D>();
-
+    public override void _EnterTree()
+    {
+		Boids = new();
+		Parent = (Animal)GetParent<Node3D>();
+		if (Parent == null) GD.PrintErr($"Error HerdComponent({GetPath()} No parent assigned!)");
+		this.AddToGroup(Parent.SpeciesGroup);
 		Hearing = Parent.HearingArea;
-		Sight = Parent.VisionCone;
-
-		try 
-		{
-			Herd.AddToHerd(this);
-		}
 		
-		catch (Exception e)
+		Hearing.AreaEntered += (area) => AddBoid(area);
+		Hearing.AreaExited += (area) => RemoveBoid(area);
+
+		Godot.Collections.Array<Area3D> init_areas = Hearing.GetOverlappingAreas();
+		foreach (Area3D area in init_areas) 
 		{
-			GD.PrintErr(e);
-		}
-
-		Hearing.AreaEntered += (area) => HerdManagerRequest(area);
-		Sight.AreaEntered += (area) => HerdManagerRequest(area);
-
-		timer.Timeout += () => CanRequestAddToHerd = true;
-	}
-	/// <summary>
-	/// Attempts to Merge two herds using the operator overload (+) for Herd. Will not merge if combined count over max count limit.
-	/// </summary>
-	/// <param name="extern_comp"></param>
-	public void MergeHerds(HerdComponent extern_comp)
-	{
-		if (extern_comp.IsInGroup(SpeciesGroup))
-		{
-			Herd NewHerd;
-
-			try 
-			{
-				NewHerd = Herd + extern_comp.Herd;
-			}
-			catch (Exception e)
-			{
-				GD.PrintErr(e);
-				return;
-			}
-		
-			for (int i = 0; i < NewHerd.HerdArray.Count; ++i)
-			{
-				HerdComponent comp = NewHerd.HerdArray[i];
-				comp.Herd = NewHerd;
-			}
+			if (!(area is HerdComponent)) return;
+			if (area as HerdComponent == this) return;
+			HerdComponent comp = area as HerdComponent;
+			AddBoid(comp);
 		}
 	}
-	
-	/// <summary>
-	/// Submits ticket to HerdManager singleton to attempt a merge. HerdManager deletes copies of requests. 
-	/// </summary>
-	/// <param name="extern_comp"></param>
-	public void HerdManagerRequest(Area3D extern_comp)
+
+	public void AddBoid(Area3D comp)
 	{
-		if (!(extern_comp is HerdComponent)) {return;}
-		if (!CanRequestAddToHerd) {return;}
+		if (!(comp is HerdComponent cast_comp)) return;
+		if (!Boids.Contains(cast_comp)) Boids.Add(cast_comp);
+	}
 
-		HerdComponent ExternalherdComp = extern_comp as HerdComponent;
-		if (ExternalherdComp.Herd == this.Herd) {return;}
+	public void RemoveBoid(Area3D comp)
+	{
+		if (!(comp is HerdComponent cast_comp)) return;
+		if (Boids.Contains(cast_comp)) Boids.Remove(cast_comp);
+	}
 
-		if (ExternalherdComp.IsInGroup(SpeciesGroup) && !Herd.HerdArray.Contains(ExternalherdComp))
+	public Vector3 Separation()
+	{
+		if (Boids == null) return Vector3.Zero;
+
+		float close_dx = 0;
+		float close_dz = 0;
+
+		foreach (HerdComponent other_comp in Boids)
 		{
-			HerdManager.Instance.EmitSignal(HerdManager.SignalName.HerdRequest, new HerdRequestTicket(this, ExternalherdComp));
-			CanRequestAddToHerd = false;
-			timer.Start(3);
+			close_dx += this.GlobalPosition.X - other_comp.GlobalPosition.X;
+			close_dz += this.GlobalPosition.Z - other_comp.GlobalPosition.Z;
 		}
+		Vector3 vect = new Vector3(close_dx*AvoidanceFactor, 0, close_dz*AvoidanceFactor);
+		return vect;
+	}
+
+	public Vector3 Alignment()
+	{
+		if (Boids.Count == 0)  return Vector3.Zero;
+
+		float x_avg_vel = 0;
+		float z_avg_vel = 0;
+		float count = Boids.Count;
+		
+		foreach (HerdComponent other_comp in Boids)
+		{
+			if (other_comp == null) {GD.PrintErr("OtherComp null");}
+			if (other_comp.Parent == null) {GD.PrintErr("OtherComp parent null");}
+			x_avg_vel += other_comp.Parent.Velocity.X;
+			z_avg_vel += other_comp.Parent.Velocity.Z;
+
+		}
+		x_avg_vel = x_avg_vel/count;
+		z_avg_vel = z_avg_vel/count;
+
+		
+		Vector3 vect = new(x_avg_vel, 0, z_avg_vel);
+		return vect;
+	}
+
+	public Vector3 Cohesion()
+	{
+		if (Boids.Count == 0)  return Vector3.Zero;
+
+		float x_pos_avg = 0;
+		float z_pos_avg = 0;
+		
+		foreach (HerdComponent other_comp in Boids)
+		{
+			x_pos_avg += other_comp.GlobalPosition.X;
+			z_pos_avg += other_comp.GlobalPosition.Z;
+		}
+
+		x_pos_avg = x_pos_avg/Boids.Count;
+		z_pos_avg = z_pos_avg/Boids.Count;
+
+		Vector3 vect = new(x_pos_avg, 0, z_pos_avg);
+		return vect;
+	}
+
+	public Vector3 GetBoidVelocity(float min_speed, float max_speed) 
+	{
+		Vector3 vel_vect;
+
+		vel_vect = Separation();
+		vel_vect += Alignment();
+		vel_vect += Cohesion();
+
+		vel_vect = vel_vect.Normalized();
+
+		float x_vel = vel_vect.X;
+		float z_vel = vel_vect.Z;
+
+		float speed = Mathf.Sqrt(Mathf.Pow(x_vel, 2) + Mathf.Pow(z_vel, 2));
+
+		if (speed > max_speed)
+		{
+			x_vel = (x_vel/speed) * max_speed;
+		}		
+		
+		if (speed < min_speed)
+		{
+			z_vel = (z_vel/speed) * max_speed;
+		}
+
+		vel_vect = new(x_vel, 0, z_vel);
+		
+		if (vel_vect == Vector3.Zero )
+		{
+			vel_vect = new Vector3(0,0, -1);
+		}
+
+		vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(turn_bias_degrees));
+		return vel_vect;
 	}
 }
 
-/// <summary>
-/// MergeRequest Ticket that contains basic info that the HerdManager needs to sort out requests.
-/// </summary>
-public partial class HerdRequestTicket : Resource	//Request to add a specified NPC to your herd. Keeping this a class as opposed to a struct as the godot array in HerdManager Can't deal with non-variant derived objects :(
-{
-	public HerdComponent HerdComp;
-	public HerdComponent ExternalComp;
-	public HerdRequestTicket(HerdComponent HerdComp, HerdComponent ExternalComp) 
-	{
-		this.HerdComp = HerdComp; 
-		this.ExternalComp = ExternalComp;
-	}
-}
 
 
