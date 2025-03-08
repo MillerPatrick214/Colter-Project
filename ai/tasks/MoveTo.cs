@@ -46,6 +46,8 @@ public partial class MoveTo : BTAction
     {
 		Godot.Vector3 destination = agent.NavAgent.GetNextPathPosition();
 		Godot.Vector3 LocalDestination = destination - agent.GlobalPosition;
+
+        
 		
 		Godot.Vector3 direction = LocalDestination.Normalized();
 

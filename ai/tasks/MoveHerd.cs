@@ -10,6 +10,8 @@ public partial class MoveHerd : BTAction
     HerdComponent comp;
     NavigationAgent3D NavAgent;
 
+    Status status;
+
     Vector3 SafeVel;
     
     public override string _GenerateName()
@@ -29,7 +31,8 @@ public partial class MoveHerd : BTAction
     }
 
     public override void _Enter()
-    {  
+    {
+        status = Status.Running;
         if (comp == null) comp = agent.HerdComponent;
         if (NavAgent == null )NavAgent = agent.NavAgent;
         
@@ -40,44 +43,56 @@ public partial class MoveHerd : BTAction
 
     public override void _Exit()
     {
-        agent.NavAgent.TargetPosition = Vector3.Zero;
         agent.NavAgent.Velocity = Vector3.Zero;
         agent.Velocity = Vector3.Zero;
-
-        if (!agent.HasNode("HerdComponent")) return;    
     }
 
     public override Status _Tick(double delta)
-    { 
-        float min_speed = 5.0f;
-        float max_speed = 13.0f; 
+    {
+        float min_speed = 3.0f;
+        float max_speed = 5.0f; 
 
 
-        Vector3 vel_vect = comp.GetBoidVelocity(min_speed, max_speed);
+        Vector3 vel_vect = comp.GetBoidVelocity(min_speed, max_speed, delta);
 
-		vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(comp.turn_bias_degrees));
-
-        Vector3 new_target = agent.GlobalPosition + vel_vect;
-		agent.NavAgent.TargetPosition = new_target;
-
-        while (!NavAgent.IsTargetReachable())
-        {
-            Vector3 rotated_vect = new_target.Rotated(Vector3.Up, .25f * Mathf.Pi);
-            NavAgent.TargetPosition = rotated_vect;
+        Vector3 pos_vect = agent.GlobalPosition;
+        pos_vect.Y = 0;
+        Vector3 new_target = pos_vect + vel_vect;
+		NavAgent.TargetPosition = new_target;
+        
+        if (!NavAgent.IsTargetReachable())
+        {  
+            Vector3 nearest_point = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), new_target);
+            
+            // Calculate direction to the nearest navigable point
+            Vector3 dirToSafe = (nearest_point - agent.GlobalPosition).Normalized();
+            
+            // Blend current velocity with the safe direction
+            float blendFactor = 0.5f; // Adjust this to control how quickly agents respond to obstacles
+            Vector3 safeVel = dirToSafe * vel_vect.Length();
+            vel_vect = vel_vect.Lerp(safeVel, blendFactor);
         }
+    
+		float speed = vel_vect.Length();
 
-        vel_vect = NavAgent.TargetPosition - agent.GlobalPosition;
+		if (speed > max_speed)
+		{
+			vel_vect.X = (vel_vect.X/speed) * max_speed;
+            vel_vect.Z = (vel_vect.Z/speed) * max_speed;
+		}		
+		
+		if (speed < min_speed)
+		{
+			vel_vect.X = (vel_vect.X/speed) * min_speed;
+            vel_vect.Z = (vel_vect.Z/speed) * min_speed;
+		}
 
-        Godot.Vector3 destination = agent.NavAgent.GetNextPathPosition();
-        Godot.Vector3 LocalDestination = destination - agent.GlobalPosition;
-        Godot.Vector3 direction = LocalDestination.Normalized();
-    	
-		agent.Rotate(direction);
-		NavAgent.Velocity = vel_vect;
-        agent.Velocity = SafeVel; 
+		agent.Rotate(vel_vect);
+        agent.Velocity = vel_vect;
 
-        return Status.Running;
+        return status;
     }
+    
 
     public override string[] _GetConfigurationWarnings()
     {

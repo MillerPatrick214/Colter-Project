@@ -117,9 +117,13 @@ public partial class Flee : BTAction
 		LocalDest.Y = 0;
 		Vector3 direction = LocalDest.Normalized();
 
+		
+
 		agent.Rotate(direction);
 		agent.NavAgent.Velocity = direction * agent.GetRunSpeed();
 		agent.Velocity = SafeVelocity;
+
+		
 	}	
 
     public override string[] _GetConfigurationWarnings()

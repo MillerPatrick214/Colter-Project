@@ -29,9 +29,12 @@ public partial class Animal : NPCBase
 	{
 		if (isHerding)
 		{
+			HerdComponent = GetNodeOrNull<HerdComponent>("HerdComponent");
+			if (HerdComponent == null)
+			{
 			HerdComponent = GD.Load<PackedScene>(herd_comp_path).Instantiate() as HerdComponent;
 			AddChild(HerdComponent);
-				
+			}				
 		}
 		
 		base._Ready();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://x34aas21so5x"]
+[gd_scene load_steps=61 format=4 uid="uid://x34aas21so5x"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Animal.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/MoveHerd.cs" id="2_2e18s"]
@@ -100,15 +100,9 @@ speed = 3.0
 [sub_resource type="BTAction" id="BTAction_nev3t"]
 script = ExtResource("2_2e18s")
 
-[sub_resource type="BTTimeLimit" id="BTTimeLimit_yfypj"]
-children = [SubResource("BTAction_nev3t")]
-
-[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_kphke"]
-children = [SubResource("BTTimeLimit_yfypj")]
-
 [sub_resource type="BTSequence" id="BTSequence_di6sm"]
 custom_name = "Graze"
-children = [SubResource("BTPlayAnimation_tfxkp"), SubResource("BTSetVar_j23lb"), SubResource("BTPlayAnimation_4qasw"), SubResource("BTRandomWait_l48bx"), SubResource("BTSetVar_74172"), SubResource("BTPlayAnimation_7bjt1"), SubResource("BTAlwaysSucceed_kphke")]
+children = [SubResource("BTPlayAnimation_tfxkp"), SubResource("BTSetVar_j23lb"), SubResource("BTPlayAnimation_4qasw"), SubResource("BTRandomWait_l48bx"), SubResource("BTSetVar_74172"), SubResource("BTPlayAnimation_7bjt1"), SubResource("BTAction_nev3t")]
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_mkvnv"]
 children = [SubResource("BTCheckVar_u2316"), SubResource("BTSequence_di6sm")]
@@ -411,13 +405,15 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 shape = SubResource("CapsuleShape3D_48exc")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+navigation_layers = 3
 avoidance_enabled = true
 radius = 1.0
+neighbor_distance = 10.0
 time_horizon_agents = 0.1
 time_horizon_obstacles = 0.1
 max_speed = 15.0
-avoidance_layers = 2
-avoidance_mask = 2
+avoidance_layers = 3
+avoidance_mask = 3
 debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 6.0
@@ -460,5 +456,5 @@ SkinLogic = SubResource("Resource_ip3hn")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
 shape = SubResource("CapsuleShape3D_48exc")
 
-[node name="HerdComponent" parent="." groups=["Capybara"] instance=ExtResource("14_mh11t")]
-max_speed = 13.0
+[node name="HerdComponent" parent="." node_paths=PackedStringArray("Parent") groups=["Capybara"] instance=ExtResource("14_mh11t")]
+Parent = NodePath("..")
