@@ -64,6 +64,8 @@ public partial class ConfirmThreat : BTAction
     {
         Vector3 target = focus.GlobalPosition - agent.GlobalPosition;
         if (target == Vector3.Zero) {return;}
+        if (!target.IsNormalized()) target = target.Normalized();
+
         target.Y = 0;
         target.Normalized();
         if (target.IsZeroApprox()) {return;}

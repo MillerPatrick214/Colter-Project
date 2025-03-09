@@ -23,7 +23,6 @@ Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
 LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-HerdManager="*res://components/Herd/HerdManager.cs"
 
 [dialogue_manager]
 
@@ -47,7 +46,7 @@ project/assembly_name="Colter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/level/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [global_group]
 

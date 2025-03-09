@@ -6,6 +6,7 @@ public partial class Flee : BTAction
 {
     Vector3 threatPosition;
     NPCBase agent;
+	Vector3 SafeVelocity;
     Node3D Focus;
     bool Traveling;
     public override string _GenerateName()
@@ -15,21 +16,25 @@ public partial class Flee : BTAction
 
     public override void _Setup()
     {
-        if (Agent is NPCBase agent){this.agent = agent;}
+        if (Agent is NPCBase agent)
+		{
+			this.agent = agent;
+			agent.NavAgent.VelocityComputed += (vel) => SafeVelocity = vel;
+		}
+
     }
 
     public override void _Enter()
     {
         Traveling = false;
         Focus = (Node3D)Blackboard.GetVar("Focus");
-        
     }
 
     public override void _Exit()
     {
         Traveling = false;
         agent.Velocity = Vector3.Zero;
-
+		agent.NavAgent.Velocity = Vector3.Zero;
     }
 
     public override Status _Tick(double delta)
@@ -112,14 +117,17 @@ public partial class Flee : BTAction
 		LocalDest.Y = 0;
 		Vector3 direction = LocalDest.Normalized();
 
+		
+
 		agent.Rotate(direction);
-		direction.Y = 0;
-		agent.Velocity = direction * agent.GetRunSpeed();
-	}
+		agent.NavAgent.Velocity = direction * agent.GetRunSpeed();
+		agent.Velocity = SafeVelocity;
+
+		
+	}	
 
     public override string[] _GetConfigurationWarnings()
     {
         return Array.Empty<string>();
     }
-
 }

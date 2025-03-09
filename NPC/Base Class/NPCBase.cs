@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class NPCBase : CharacterBody3D
 {	
+	
 	[Signal]
 	public delegate void SensedEventHandler();
 	[Export]
@@ -34,7 +36,6 @@ public partial class NPCBase : CharacterBody3D
 	public bool IsInteractable = false;	
 	public Node3D Focus = null;
 	protected BTPlayer BTPlayer; 
-
 	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
     public override void _Ready()
@@ -117,8 +118,11 @@ public partial class NPCBase : CharacterBody3D
 	}
 
 
-	public void Rotate(Godot.Vector3 direction) //GAME-BREAKING GLITCH: This no longer adjusts 
+	public void Rotate(Godot.Vector3 direction)
 	{
+		if (direction == Vector3.Zero) return;
+		if (!direction.IsNormalized()) direction = direction.Normalized();
+
 		Transform3D transform = Transform;
 		Basis a = Transform.Basis;			
 
@@ -137,9 +141,10 @@ public partial class NPCBase : CharacterBody3D
 			return;
 		}
 
-		transform.Basis = new Basis(interpolatedQuat);
+		transform.Basis = new Basis(interpolatedQuat).Orthonormalized();
 		Transform  = transform;
 	}
+
 	
 	
 	public bool isInVisionCone() 
@@ -159,7 +164,6 @@ public partial class NPCBase : CharacterBody3D
 			{						
 				Focus = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
 				EmitSignal(SignalName.Sensed);
-
 				BTPlayer.Blackboard.SetVar("hasFocus", true);
 			}
 		}
