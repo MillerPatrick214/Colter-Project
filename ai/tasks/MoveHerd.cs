@@ -37,8 +37,6 @@ public partial class MoveHerd : BTAction
         if (NavAgent == null ) NavAgent = agent.NavAgent;
         
         if (comp == null) GD.PrintErr($"CRAP! Comp is null in MoveHerd:{GetParent().GetPath()}!!!");
-
-        GD.PrintErr("Entering Move Herd");
     }
 
     public override void _Exit()
@@ -49,8 +47,8 @@ public partial class MoveHerd : BTAction
 
     public override Status _Tick(double delta)
     {
-        float min_speed = 3.0f;
-        float max_speed = 5.0f; 
+        float min_speed = 5.0f;
+        float max_speed = 12.0f; 
 
 
         Vector3 vel_vect = comp.GetBoidVelocity(delta);
@@ -87,12 +85,14 @@ public partial class MoveHerd : BTAction
             vel_vect.Z = (vel_vect.Z/speed) * min_speed;
 		}
         
-        if (vel_vect != agent.GlobalPosition && vel_vect != Vector3.Zero)
-        {
-            agent.LookAt(agent.Velocity.Slerp(vel_vect, .1f));
-        }
         
-        agent.Velocity = agent.Velocity.Slerp(vel_vect, .1f);
+        agent.Velocity = agent.Velocity.Slerp(vel_vect, .07f);
+
+        if ((vel_vect != agent.GlobalPosition) && (vel_vect != Vector3.Zero))
+        {
+            GD.PrintErr("Turning!");
+            agent.Rotate(agent.Velocity);
+        }
 
         return status;
     }

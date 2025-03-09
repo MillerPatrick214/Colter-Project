@@ -4,10 +4,10 @@ public partial class HerdComponent : Area3D
 {
 
 	[Export] public float separation_factor = .5f; //by what factor do we steer away
-	[Export] public float basis_matching_factor = .2f; //by what factor do we match velocity
+	[Export] public float basis_matching_factor = .08f; //by what factor do we match velocity
 	[Export] public float centering_factor = .05f; //by what factor do we go towards center
-	[Export] public float personal_space = 3.0f; //distance at which we steer away from other capy
-	[Export] public float herd_radius = 4.0f;
+	[Export] public float personal_space = 1.0f; //distance at which we steer away from other capy
+	[Export] public float herd_radius = 2.0f;
 
 	[Export] float frequency_bias;
 	[Export]float bias_magnitude = 5;
@@ -165,7 +165,7 @@ public partial class HerdComponent : Area3D
 
 	public Vector3 GetBoidVelocity(double delta) 
 	{
-		float curr_bias = bias_magnitude * MathF.Sin(start_bias + frequency_bias * (float)delta);
+		float curr_bias = bias_magnitude * MathF.Sin(start_bias * (float)delta);
 		Vector3 vel_vect;
 
 		vel_vect = Separation();
@@ -174,7 +174,7 @@ public partial class HerdComponent : Area3D
 
 		if (vel_vect != Vector3.Zero || curr_bias != 0)
 		{
-			//vel_vect = vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(curr_bias));
+			vel_vect = vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(curr_bias));
 		}
 
 		return vel_vect;
