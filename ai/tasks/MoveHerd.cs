@@ -90,7 +90,6 @@ public partial class MoveHerd : BTAction
 
         if ((vel_vect != agent.GlobalPosition) && (vel_vect != Vector3.Zero))
         {
-            GD.PrintErr("Turning!");
             agent.Rotate(agent.Velocity);
         }
 
