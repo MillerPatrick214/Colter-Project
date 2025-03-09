@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://x34aas21so5x"]
+[gd_scene load_steps=61 format=4 uid="uid://ccdcdhajuhd2u"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Animal.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/MoveHerd.cs" id="2_2e18s"]

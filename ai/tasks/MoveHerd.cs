@@ -53,7 +53,7 @@ public partial class MoveHerd : BTAction
         float max_speed = 5.0f; 
 
 
-        Vector3 vel_vect = comp.GetBoidVelocity(min_speed, max_speed, delta);
+        Vector3 vel_vect = comp.GetBoidVelocity(delta);
 
         Vector3 pos_vect = agent.GlobalPosition;
         pos_vect.Y = 0;
@@ -75,20 +75,20 @@ public partial class MoveHerd : BTAction
     
 		float speed = vel_vect.Length();
 
-		if (speed > max_speed)
+		if (speed > max_speed && speed != 0)
 		{
 			vel_vect.X = (vel_vect.X/speed) * max_speed;
             vel_vect.Z = (vel_vect.Z/speed) * max_speed;
 		}		
 		
-		if (speed < min_speed)
+		if (speed < min_speed && speed != 0)
 		{
 			vel_vect.X = (vel_vect.X/speed) * min_speed;
             vel_vect.Z = (vel_vect.Z/speed) * min_speed;
 		}
 
-		agent.Rotate(vel_vect);
-        agent.Velocity = vel_vect;
+		agent.Rotate(vel_vect, .1f);
+        agent.Velocity = agent.Velocity.Slerp(vel_vect, .1f);
 
         return status;
     }

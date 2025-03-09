@@ -141,6 +141,34 @@ public partial class NPCBase : CharacterBody3D
 			return;
 		}
 
+		transform.Basis = new Basis(interpolatedQuat).Orthonormalized();
+		Transform  = transform;
+	}
+
+	public void Rotate(Godot.Vector3 direction, float speed_factor)
+	{
+		if (direction == Vector3.Zero) return;
+		if (!direction.IsNormalized()) direction = direction.Normalized();
+
+		Transform3D transform = Transform;
+		Basis a = Transform.Basis;			
+
+		Basis b =  Basis.LookingAt(-direction);
+
+		Godot.Quaternion aQuat = a.GetRotationQuaternion();
+		Godot.Quaternion bQuat = b.GetRotationQuaternion();
+
+		aQuat = aQuat.Normalized();
+		bQuat = bQuat.Normalized();
+
+		Godot.Quaternion interpolatedQuat = aQuat.Slerp(bQuat, speed_factor);
+		
+		if (aQuat.IsEqualApprox(bQuat)) {		
+			transform.Basis = new Basis(bQuat);
+			Transform = transform;
+			return;
+		}
+
 		transform.Basis = new Basis(interpolatedQuat);
 		Transform  = transform;
 	}
@@ -163,7 +191,7 @@ public partial class NPCBase : CharacterBody3D
 			{						
 				Focus = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
 				EmitSignal(SignalName.Sensed);
-
+				GD.PrintErr("Detected Player!");
 				BTPlayer.Blackboard.SetVar("hasFocus", true);
 			}
 		}
