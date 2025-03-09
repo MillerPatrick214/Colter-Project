@@ -31,9 +31,9 @@ public partial class HerdComponent : Area3D
 
 		timer.Timeout += GenerateBias;
 
-		RandomNumberGenerator rand = new();
-		start_bias = rand.RandfRange(-2f * Mathf.Pi, -2f * Mathf.Pi);
-		frequency_bias = rand.RandfRange(-.05f, .05f);
+		//RandomNumberGenerator rand = new();
+		//start_bias = rand.RandfRange(-2f * Mathf.Pi, -2f * Mathf.Pi);
+		//frequency_bias = rand.RandfRange(-.05f, .05f);
 		
 
 
@@ -42,9 +42,6 @@ public partial class HerdComponent : Area3D
 		if (Parent == null) GD.PrintErr($"Error HerdComponent({GetPath()} No parent assigned!)");
 		this.AddToGroup(Parent.SpeciesGroup);
 		Hearing = Parent.HearingArea;
-
-		start_bias = rand.RandfRange(-2f * Mathf.Pi, -2f * Mathf.Pi);
-		frequency_bias = rand.RandfRange(-.05f, .05f);
 		
 		Hearing.AreaEntered += (area) => AddBoid(area);
 		Hearing.AreaExited += (area) => RemoveBoid(area);
@@ -76,7 +73,7 @@ public partial class HerdComponent : Area3D
 
 		float close_dx = 0;
 		float close_dz = 0;
-		float strength = personal_space;
+		
 		
 		foreach (HerdComponent other_comp in Boids)
 		{
@@ -124,7 +121,7 @@ public partial class HerdComponent : Area3D
 			}
 
 		}
-		if (count != 01)
+		if (count != 0)
 		{
 			x_avg_vel = x_avg_vel/count;
 			z_avg_vel = z_avg_vel/count;
@@ -177,9 +174,9 @@ public partial class HerdComponent : Area3D
 
 		if (vel_vect != Vector3.Zero || curr_bias != 0)
 		{
-			vel_vect = vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(curr_bias));
+			//vel_vect = vel_vect.Rotated(Vector3.Up, Mathf.DegToRad(curr_bias));
 		}
-		
+
 		return vel_vect;
 	}
 }

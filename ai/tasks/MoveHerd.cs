@@ -34,7 +34,7 @@ public partial class MoveHerd : BTAction
     {
         status = Status.Running;
         if (comp == null) comp = agent.HerdComponent;
-        if (NavAgent == null )NavAgent = agent.NavAgent;
+        if (NavAgent == null ) NavAgent = agent.NavAgent;
         
         if (comp == null) GD.PrintErr($"CRAP! Comp is null in MoveHerd:{GetParent().GetPath()}!!!");
 
@@ -86,8 +86,12 @@ public partial class MoveHerd : BTAction
 			vel_vect.X = (vel_vect.X/speed) * min_speed;
             vel_vect.Z = (vel_vect.Z/speed) * min_speed;
 		}
-
-		agent.Rotate(vel_vect, .1f);
+        
+        if (vel_vect != agent.GlobalPosition && vel_vect != Vector3.Zero)
+        {
+            agent.LookAt(agent.Velocity.Slerp(vel_vect, .1f));
+        }
+        
         agent.Velocity = agent.Velocity.Slerp(vel_vect, .1f);
 
         return status;
