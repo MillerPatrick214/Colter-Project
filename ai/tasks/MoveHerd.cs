@@ -86,7 +86,7 @@ public partial class MoveHerd : BTAction
 		}
         
         
-        agent.Velocity = agent.Velocity.Slerp(vel_vect, .07f);
+        agent.Velocity = agent.Velocity.Slerp(vel_vect, .05f);
 
         if ((vel_vect != agent.GlobalPosition) && (vel_vect != Vector3.Zero))
         {

@@ -6,11 +6,11 @@ public partial class Animal : NPCBase
 	[Export] public Dietary DietaryHabits;
 	[Export] public bool isHerding = false;
 	[Export] public StringName SpeciesGroup;					//make a group for each species that will filter what species is being added to the list;
+	[Export] public string SkinningScenePath {get; set;} = "res://Skinning/DeerSkinTest.tscn";
 
 	
 	public HerdComponent HerdComponent;
 	string herd_comp_path = "uid://ccygd4wouya0s";
-	
 	
 	public enum Dietary
 	{
@@ -20,9 +20,6 @@ public partial class Animal : NPCBase
 		OMNI_SCAVANGER,
 		VEGETARIAN
 	}
-
-	
-
 
 	PackedScene SkinningScene;
 	public override void _Ready()
@@ -38,8 +35,8 @@ public partial class Animal : NPCBase
 		}
 		
 		base._Ready();
-
-		SkinningScene = GD.Load<PackedScene>("res://Skinning/DeerSkinTest.tscn"); // load scene
+		
+		SkinningScene = GD.Load<PackedScene>(SkinningScenePath); // load skinning scene;
 
 		if (NavAgent == null) {GD.Print("God damn this is fucked! Capybara: NavAgent is null");}
 		else {GD.Print("We're Chuned! NavAgent found successfully");} 
@@ -47,9 +44,9 @@ public partial class Animal : NPCBase
 		if (AniTree == null) {GD.Print("Capybara: Fuck AniTree is Null");}
 
 		if (HearingArea == null || VisionCone == null || VisionRay == null) {
-			 GD.Print((HearingArea == null) ? "Capybara: HearingArea came back as null" : "");
-			 GD.Print((VisionCone == null) ? "Capybara: VisionCone came back as null" : "");
-			 GD.Print((VisionRay == null) ? "Capybara: VisionRay came back as null" : "");
+			GD.Print((HearingArea == null) ? "Capybara: HearingArea came back as null" : "");
+			GD.Print((VisionCone == null) ? "Capybara: VisionCone came back as null" : "");
+			GD.Print((VisionRay == null) ? "Capybara: VisionRay came back as null" : "");
 		}
 	}
 

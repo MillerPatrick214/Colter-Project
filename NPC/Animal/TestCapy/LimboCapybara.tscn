@@ -1,8 +1,9 @@
-[gd_scene load_steps=61 format=4 uid="uid://ccdcdhajuhd2u"]
+[gd_scene load_steps=67 format=4 uid="uid://ccdcdhajuhd2u"]
 
 [ext_resource type="Script" path="res://NPC/Animal/TestCapy/Animal.cs" id="1_g31wg"]
 [ext_resource type="Script" path="res://ai/tasks/MoveHerd.cs" id="2_2e18s"]
 [ext_resource type="AnimationLibrary" uid="uid://cjl2q2vwxjni" path="res://NPC/Animal/TestCapy/CapyAnimations/CapybaraAnimations.tres" id="2_gjf4o"]
+[ext_resource type="Script" path="res://ai/tasks/Trapped.cs" id="2_qxr7o"]
 [ext_resource type="Script" path="res://ai/tasks/Freeze.cs" id="2_sfyec"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_pd75m"]
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_4op7t"]
@@ -39,6 +40,27 @@ var/HerdMean/type = 9
 var/HerdMean/value = Vector3(0, 0, 0)
 var/HerdMean/hint = 0
 var/HerdMean/hint_string = ""
+var/IsTrapped/name = &"IsTrapped"
+var/IsTrapped/type = 1
+var/IsTrapped/value = false
+var/IsTrapped/hint = 0
+var/IsTrapped/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_7e3rr"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_shfb5"]
+variable = &"IsTrapped"
+value = SubResource("BBVariant_7e3rr")
+
+[sub_resource type="BTAction" id="BTAction_bxdbc"]
+script = ExtResource("2_qxr7o")
+
+[sub_resource type="BTSequence" id="BTSequence_gqsns"]
+custom_name = "CheckTrapped"
+children = [SubResource("BTCheckVar_shfb5"), SubResource("BTAction_bxdbc")]
 
 [sub_resource type="BBVariant" id="BBVariant_nndm1"]
 resource_name = "false"
@@ -174,12 +196,15 @@ script = ExtResource("6_7jh8d")
 custom_name = "Flee"
 children = [SubResource("BTPlayAnimation_dg4iv"), SubResource("BTAction_m6tn0")]
 
-[sub_resource type="BTSelector" id="BTSelector_nj4lj"]
+[sub_resource type="BTSequence" id="BTSequence_x8eqc"]
 children = [SubResource("BTDynamicSequence_mkvnv"), SubResource("BTSequence_it7n1"), SubResource("BTSequence_3aw1o")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_pnat6"]
+children = [SubResource("BTSequence_gqsns"), SubResource("BTSequence_x8eqc")]
 
 [sub_resource type="BehaviorTree" id="BehaviorTree_7ahmb"]
 blackboard_plan = SubResource("BlackboardPlan_jy2mn")
-root_task = SubResource("BTSelector_nj4lj")
+root_task = SubResource("BTDynamicSelector_pnat6")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_0s5l1"]
 resource_local_to_scene = true
@@ -290,7 +315,7 @@ radius = 7.0
 script = ExtResource("13_5r5f4")
 SkinningNodePath = "uid://cw0mtrrkpq73g"
 
-[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
+[node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree", "InteractComponent", "HitBoxComponent")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 3
 safe_margin = 0.01
@@ -302,7 +327,9 @@ AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("HearingArea/VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
+BehaviorTree = NodePath("BTPlayer")
 InteractComponent = NodePath("InteractComponent")
+HitBoxComponent = NodePath("HitBoxComponent")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

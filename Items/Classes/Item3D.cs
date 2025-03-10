@@ -3,14 +3,11 @@ using System.Collections.Generic;
 public partial class Item3D : RigidBody3D //base for all items and tools visible in the game world
 {
 
-	[Export]
-	public bool IsInteractable = true;
+	[Export] public bool IsInteractable = true;
 
-	[Export]
-	public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
+	[Export] public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
 
-	[Export]
-	public InventoryItem ItemResource {get; set;}
+	[Export] public InventoryItem ItemResource {get; set;}
 
 	[Export]
 	public InteractComponent InteractComponent {get; set;}

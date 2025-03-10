@@ -3,9 +3,9 @@ using System;
 public partial class HerdComponent : Area3D
 {
 
-	[Export] public float separation_factor = .5f; //by what factor do we steer away
-	[Export] public float basis_matching_factor = .08f; //by what factor do we match velocity
-	[Export] public float centering_factor = .05f; //by what factor do we go towards center
+	[Export] public float separation_factor = .03f; //by what factor do we steer away
+	[Export] public float basis_matching_factor = .05f; //by what factor do we match velocity
+	[Export] public float centering_factor = .04f; //by what factor do we go towards center
 	[Export] public float personal_space = 1.0f; //distance at which we steer away from other capy
 	[Export] public float herd_radius = 2.0f;
 
@@ -78,6 +78,31 @@ public partial class HerdComponent : Area3D
 		foreach (HerdComponent other_comp in Boids)
 		{
 			float distance = (this.GlobalPosition - other_comp.GlobalPosition).Length();
+			if (distance > 0 && distance < personal_space)	//Note, this also measures in the Y component.
+			{
+				float strength_x =  personal_space / (personal_space - (this.GlobalPosition.X - other_comp.GlobalPosition.X)); 
+				float strength_z =  personal_space / (personal_space - (this.GlobalPosition.Z - other_comp.GlobalPosition.Z));
+
+				close_dx +=  strength_x * separation_factor;
+				close_dz += strength_z * separation_factor;
+			}
+		}
+
+		Vector3 vect = new Vector3(close_dx, 0, close_dz);
+		return vect;
+	}
+/*
+	public Vector3 Separation()
+	{
+		if (Boids == null) return Vector3.Zero;
+
+		float close_dx = 0;
+		float close_dz = 0;
+		
+		
+		foreach (HerdComponent other_comp in Boids)
+		{
+			float distance = (this.GlobalPosition - other_comp.GlobalPosition).Length();
 
 			if (distance == 0) continue;
 
@@ -92,12 +117,13 @@ public partial class HerdComponent : Area3D
 		Vector3 vect = new Vector3(close_dx * separation_factor, 0, close_dz * separation_factor);
 		return vect;
 	}
+	*/
 
 	public void GenerateBias()
 	{
 		RandomNumberGenerator rand = new();
 		start_bias = rand.RandfRange(-2f * Mathf.Pi, -2f * Mathf.Pi);
-		frequency_bias = rand.RandfRange(-.05f, .05f);
+		frequency_bias = rand.RandfRange(-.1f, .1f);
 		bias_magnitude =  rand.RandfRange(-20, 20);
 		timer.Start(5);
 	}

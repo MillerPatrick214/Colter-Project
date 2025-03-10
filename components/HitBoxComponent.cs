@@ -3,8 +3,9 @@ using System;
 
 public partial class HitBoxComponent : Area3D
 {
-	[Export]					//Using Area3d for hitboxes. Collisionbodies are for physics calcs.
-	public HealthComponent HealthComponent;
+	[Signal] public delegate void TrappedEventHandler(bool tf);
+	[Export]public HealthComponent HealthComponent;
+	
 
 	public void Damage(float damage)
 	{
@@ -17,5 +18,11 @@ public partial class HitBoxComponent : Area3D
 		{
 			GD.PrintErr($"{GetPath()}, error! no healthcomponent found.");
 		}
+	}
+
+	public void SetTrapped(bool IsImmobilized)
+	{
+		EmitSignal(SignalName.Trapped, IsImmobilized);
+
 	}
 }

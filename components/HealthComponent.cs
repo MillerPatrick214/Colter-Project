@@ -21,5 +21,10 @@ public partial class HealthComponent : Node
 		}
 	}
 
+	public float GetHealth()
+	{
+		return health;
+	}
+
 
 }

@@ -27,7 +27,12 @@ public partial class NPCBase : CharacterBody3D
 	[Export]
 	public Area3D VisionCone;
 	[Export]
-	public InteractComponent InteractComponent {get; set;}
+	public BTPlayer BehaviorTree;
+	[Export] public InteractComponent InteractComponent {get; private set;}
+
+	[Export] public HitBoxComponent HitBoxComponent {get; private set;}
+
+	bool isTrapped = false;
 
 	public InteractComponent InteractComponentCasted;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -65,6 +70,7 @@ public partial class NPCBase : CharacterBody3D
 		BTPlayer = GetNodeOrNull<BTPlayer>("BTPlayer");
 		if (BTPlayer == null) {GD.PrintErr($"NPC Base {this.GetPath()}: BTPlayer returned null");}
 
+		HitBoxComponent.Trapped += (tf) => Trapped(tf);
 		UpdateConfigurationWarnings();
     }
 
@@ -104,6 +110,14 @@ public partial class NPCBase : CharacterBody3D
 	public float GetRunSpeed() {
 		return RunSpeed;
 	}
+
+	public void Trapped(bool tf)
+	{
+		isTrapped = tf;
+		BehaviorTree.Blackboard.SetVar("IsTrapped", tf);
+		GD.PrintErr("TRAPPED!!!!");
+	}
+
 
 	public void setRayCast(Godot.Vector3 direction) 
 	{
@@ -171,7 +185,7 @@ public partial class NPCBase : CharacterBody3D
 	}
 
 	public override void _PhysicsProcess(double delta)
-    {
+    {		
 		if (Engine.IsEditorHint())
 		{
 			return;
@@ -180,7 +194,7 @@ public partial class NPCBase : CharacterBody3D
 		{
 			Velocity =  Velocity - new Vector3(0, gravity, 0) * (float)delta;
     	}
-
+		
 		MoveAndSlide();
 	}
 
