@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://cq5hc8s21orhv"]
 
 [ext_resource type="PackedScene" uid="uid://iqs1ygahdihk" path="res://MapAssets/trees/pine_tree.glb" id="1_81b38"]
-[ext_resource type="Shader" path="res://MapAssets/trees/PineTreeFixed.gdshader" id="2_n1dkm"]
+[ext_resource type="Shader" uid="uid://b65p83nyfsxo8" path="res://MapAssets/trees/PineTreeFixed.gdshader" id="2_n1dkm"]
 [ext_resource type="Texture2D" uid="uid://b28cpqn7oxm12" path="res://MapAssets/trees/pine_tree_pine_lowres.png" id="3_ld0ae"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_lc1xx"]
@@ -12,13 +12,13 @@ noise = SubResource("FastNoiseLite_lc1xx")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tgdua"]
 render_priority = 0
 shader = ExtResource("2_n1dkm")
+shader_parameter/texture_albedo = ExtResource("3_ld0ae")
 shader_parameter/albedo_darken = 0.8
 shader_parameter/wind_direction = Vector3(1, 0, 0)
 shader_parameter/wind_strength = 1.0
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_fsfg4")
 shader_parameter/wind_noise_size = 0.05
 shader_parameter/wind_noise_speed = 0.057
-shader_parameter/texture_albedo = ExtResource("3_ld0ae")
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_fsfg4")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_0wq84"]
 resource_name = "pine_tree_Cube_001"

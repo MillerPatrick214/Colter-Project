@@ -4,10 +4,10 @@ public partial class HerdComponent : Area3D
 {
 
 	[Export] public float separation_factor = .03f; //by what factor do we steer away
-	[Export] public float basis_matching_factor = .05f; //by what factor do we match velocity
-	[Export] public float centering_factor = .04f; //by what factor do we go towards center
-	[Export] public float personal_space = 1.0f; //distance at which we steer away from other capy
-	[Export] public float herd_radius = 2.0f;
+	[Export] public float basis_matching_factor = .07f; //by what factor do we match velocity
+	[Export] public float centering_factor = .02f; //by what factor do we go towards center
+	[Export] public float personal_space = 2.0f; //distance at which we steer away from other capy
+	[Export] public float herd_radius = 4.0f;
 
 	[Export] float frequency_bias;
 	[Export]float bias_magnitude = 5;

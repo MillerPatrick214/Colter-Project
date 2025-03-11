@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cay8lyk26nkop"]
 
-[ext_resource type="Script" path="res://UI/FPS.cs" id="1_vpbtd"]
+[ext_resource type="Script" uid="uid://c6mjwjh46a3yv" path="res://UI/FPS.cs" id="1_vpbtd"]
 
 [node name="FPS" type="Control"]
 layout_mode = 3

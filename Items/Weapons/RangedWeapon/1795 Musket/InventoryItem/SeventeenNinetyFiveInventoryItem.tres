@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://brh6or0x4bks5"]
 
 [ext_resource type="Texture2D" uid="uid://cqodgtxh6kvr3" path="res://Items/Weapons/RangedWeapon/1795 Musket/1795MusketIcon.png" id="1_0m6it"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="1_hpd2a"]
+[ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="1_hpd2a"]
 
 [resource]
 script = ExtResource("1_hpd2a")

@@ -6,32 +6,22 @@ using Godot;
 public partial class NPCBase : CharacterBody3D
 {	
 	
-	[Signal]
-	public delegate void SensedEventHandler();
-	[Export]
-	public float WalkSpeed = 5.0f;
-	[Export]
-	public float RunSpeed = 7.5f;
-	[Export]
-	public float JumpVelocity = 4.5f;
-	[Export]
-	public bool isDead = false;
-	[Export]
-	public NavigationAgent3D NavAgent;
-	[Export]
-	public AnimationTree AniTree;
-	[Export]
-	public RayCast3D VisionRay; 
-	[Export]
-	public Area3D HearingArea;
-	[Export]
-	public Area3D VisionCone;
-	[Export]
-	public BTPlayer BehaviorTree;
+	[Signal] public delegate void SensedEventHandler();
+	[Export] public float WalkSpeed = 5.0f;
+	[Export] public float RunSpeed = 7.5f;
+	[Export] public float JumpVelocity = 4.5f;
+	[Export] public bool isDead = false;
+	[Export] public NavigationAgent3D NavAgent;
+	[Export] public AnimationTree AniTree;
+	[Export] public RayCast3D VisionRay; 
+	[Export] public Area3D HearingArea;
+	[Export] public Area3D VisionCone;
+	[Export] public BTPlayer BehaviorTree;
 	[Export] public InteractComponent InteractComponent {get; private set;}
-
 	[Export] public HitBoxComponent HitBoxComponent {get; private set;}
 
+	public VisibleOnScreenNotifier3D VisNotifier;
+	public bool IsVisibleOnScreen;
 	bool isTrapped = false;
 
 	public InteractComponent InteractComponentCasted;
@@ -46,6 +36,9 @@ public partial class NPCBase : CharacterBody3D
     public override void _Ready()
     {
 		UpdateConfigurationWarnings();
+
+		VisNotifier = new();
+		AddChild(VisNotifier);
 
 		if (Engine.IsEditorHint())
 		{
@@ -66,6 +59,10 @@ public partial class NPCBase : CharacterBody3D
 
 		HearingArea.BodyExited += (Node3D body) => SensedRemove(body);		
 		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
+
+		VisNotifier.ScreenEntered += () => IsVisibleOnScreen = true;
+		VisNotifier.ScreenExited += () => IsVisibleOnScreen = false;
+
 		
 		BTPlayer = GetNodeOrNull<BTPlayer>("BTPlayer");
 		if (BTPlayer == null) {GD.PrintErr($"NPC Base {this.GetPath()}: BTPlayer returned null");}
@@ -159,8 +156,6 @@ public partial class NPCBase : CharacterBody3D
 		Transform  = transform;
 	}
 
-	
-	
 	public bool isInVisionCone() 
 	{
 		return VisionCone.OverlapsBody(Focus);
@@ -184,7 +179,26 @@ public partial class NPCBase : CharacterBody3D
 		
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		if (IsVisibleOnScreen)
+		{
+			//ShaderManager.Instance.RegisterOrUpdate(this, GlobalPosition); SAVED FOR SHADERMANAGER UPDATE
+		}
+    }
+
+	public void OffScreen()
+	{
+		IsVisibleOnScreen = false;
+		//ShaderManager.Instance.OutOfSight(this);		SAVED FOR SHADERMANAGER UPDATE
+	}
+	public void OnScreen()
+	{
+		IsVisibleOnScreen = true;
+	}
+
+    public override void _PhysicsProcess(double delta)
     {		
 		if (Engine.IsEditorHint())
 		{

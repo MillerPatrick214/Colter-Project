@@ -19,7 +19,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kij03"]
 _data = {
-"Walk": SubResource("Animation_jdb2c")
+&"Walk": SubResource("Animation_jdb2c")
 }
 
 [node name="CapyBoy" instance=ExtResource("1_dcyln")]

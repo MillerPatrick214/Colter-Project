@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ewsuiyyn4qb0"]
 
 [ext_resource type="Texture2D" uid="uid://hcsy7i38spn5" path="res://GunshotEntrance.png" id="1_dlap8"]
-[ext_resource type="Script" path="res://BulletHitLiving.cs" id="2_10o4s"]
+[ext_resource type="Script" uid="uid://btqamd806x0n7" path="res://BulletHitLiving.cs" id="2_10o4s"]
 [ext_resource type="Texture2D" uid="uid://bfe3tnhtri20l" path="res://Particles/PNG (Transparent)/smoke_04.png" id="3_ldyu4"]
 [ext_resource type="AudioStream" uid="uid://cs76py1susxqi" path="res://522091__magnuswaker__pound-of-flesh-1.wav" id="4_a65yo"]
 
@@ -12,7 +12,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_gny63")
 
 [sub_resource type="Curve" id="Curve_kll34"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5), 0.0, 0.0, 0, 0]
 point_count = 2
 

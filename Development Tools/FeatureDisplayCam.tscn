@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddut5tsi4n76x"]
+
+[ext_resource type="Script" uid="uid://d1kevhe854b83" path="res://Level/FeatureDisplayCam.cs" id="1_cn073"]
+
+[node name="FeatureDisplayCam" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0513198, 0.0695308, -0.0713201)
+script = ExtResource("1_cn073")
+PivotSpeed = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -4.43379e-10, 2.11685e-10, -1.57618e-20, 0.697165, 0.716911, 0, -0.716911, 0.697165, 0, 9.035, 9.92)

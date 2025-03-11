@@ -99,10 +99,10 @@ render_priority = 0
 shader = SubResource("Shader_rvp4j")
 shader_parameter/wind_direction = Vector3(-5, 0, -5)
 shader_parameter/wind_strength = 0.2
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_ygbc1")
 shader_parameter/wind_noise_size = 0.05
 shader_parameter/wind_noise_speed = 0.5
 shader_parameter/bend_strength = 0.002
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_ygbc1")
 shader_parameter/texture = ExtResource("3_bw2i8")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xpr16"]

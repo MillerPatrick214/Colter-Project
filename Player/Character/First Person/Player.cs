@@ -258,7 +258,7 @@ public partial class Player : CharacterBody3D
 			var instance = ResourceLoader.Load<PackedScene>(item.ScenePath).Instantiate();
 			ItemMarker.AddChild(instance);
 			Held = GetNodeOrNull<Item3D>(instance.GetPath());
-			Held.SetHeld(true);
+			Held.SetHeld(true, true);
 		}
 	}
 

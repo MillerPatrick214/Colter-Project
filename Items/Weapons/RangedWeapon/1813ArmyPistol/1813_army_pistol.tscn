@@ -1,17 +1,17 @@
 [gd_scene load_steps=50 format=4 uid="uid://c5ntwqe7kftaw"]
 
-[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
+[ext_resource type="Script" uid="uid://dq3rtvrdpnrd8" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
 [ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
 [ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png" id="2_0r2lh"]
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="2_7ruvr"]
 [ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="2_c0nem"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_d54wb"]
+[ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_d54wb"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_eqlaj"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_mh4wq"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_4yhk7"]
 [ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/RangedWeapon/Particle Materials/Sparks.tres" id="6_udhe1"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="11_302nq"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="12_lp8x7"]
+[ext_resource type="Script" uid="uid://b5w70f1gxhyiv" path="res://components/Interact SubComponents/PickUpLogic.cs" id="12_lp8x7"]
 
 [sub_resource type="Resource" id="Resource_ithbi"]
 resource_local_to_scene = true

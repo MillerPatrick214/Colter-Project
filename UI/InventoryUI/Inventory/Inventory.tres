@@ -1,7 +1,64 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b4nq6ejfy8ym6"]
+[gd_resource type="Resource" load_steps=16 format=3 uid="uid://b4nq6ejfy8ym6"]
 
-[ext_resource type="Script" path="res://UI/InventoryUI/Inventory/Inventory.cs" id="1_1xcip"]
+[ext_resource type="Script" uid="uid://bd7ms1jkeom08" path="res://UI/InventoryUI/Inventory/Inventory.cs" id="1_1xcip"]
+[ext_resource type="Script" uid="uid://d2gk85nhhn050" path="res://UI/InventoryUI/Inventory/EquipInvSlot.cs" id="1_qkdb0"]
+
+[sub_resource type="Resource" id="Resource_84fiv"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 2
+
+[sub_resource type="Resource" id="Resource_reldt"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 2
+
+[sub_resource type="Resource" id="Resource_myryk"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 3
+
+[sub_resource type="Resource" id="Resource_4xcj8"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 3
+
+[sub_resource type="Resource" id="Resource_3i0ml"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 3
+
+[sub_resource type="Resource" id="Resource_v4dce"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 4
+
+[sub_resource type="Resource" id="Resource_8hjtx"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 1
+
+[sub_resource type="Resource" id="Resource_jrnlg"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 5
+
+[sub_resource type="Resource" id="Resource_1rwr4"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 6
+
+[sub_resource type="Resource" id="Resource_ytsu1"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 7
+
+[sub_resource type="Resource" id="Resource_doemk"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 8
+
+[sub_resource type="Resource" id="Resource_dmj4d"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 9
+
+[sub_resource type="Resource" id="Resource_4l726"]
+script = ExtResource("1_qkdb0")
+EquipSlotType = 10
 
 [resource]
 script = ExtResource("1_1xcip")
-InventorySpace = [[null, null, null, null], [null, null, null, null], [null, null, null, null]]
+InventoryRows = 3
+InventoryColumns = 4
+EquippedSlotList = Array[ExtResource("1_qkdb0")]([SubResource("Resource_84fiv"), SubResource("Resource_reldt"), SubResource("Resource_myryk"), SubResource("Resource_4xcj8"), SubResource("Resource_3i0ml"), SubResource("Resource_v4dce"), SubResource("Resource_8hjtx"), SubResource("Resource_jrnlg"), SubResource("Resource_1rwr4"), SubResource("Resource_ytsu1"), SubResource("Resource_doemk"), SubResource("Resource_dmj4d"), SubResource("Resource_4l726")])
+InventorySpace = Array[Array]([[null, null, null, null], [null, null, null, null], [null, null, null, null]])
+DefaultItems = null

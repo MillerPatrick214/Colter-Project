@@ -68,7 +68,7 @@ public partial class MoveHerd : BTAction
             // Blend current velocity with the safe direction
             float blendFactor = 0.5f; // Adjust this to control how quickly agents respond to obstacles
             Vector3 safeVel = dirToSafe * vel_vect.Length();
-            vel_vect = vel_vect.Lerp(safeVel, blendFactor);
+            vel_vect = vel_vect.Slerp(safeVel, blendFactor);
         }
     
 		float speed = vel_vect.Length();
@@ -86,7 +86,7 @@ public partial class MoveHerd : BTAction
 		}
         
         
-        agent.Velocity = agent.Velocity.Slerp(vel_vect, .05f);
+        agent.Velocity = agent.Velocity.Slerp(vel_vect, 3f * (float)delta);
 
         if ((vel_vect != agent.GlobalPosition) && (vel_vect != Vector3.Zero))
         {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://31f4gssyyxbt"]
 
-[ext_resource type="Script" path="res://Items/Weapons/LeadBall Base Class/LeadBall.cs" id="1_k171d"]
+[ext_resource type="Script" uid="uid://mj3vv0k2f1xw" path="res://Items/Weapons/LeadBall Base Class/LeadBall.cs" id="1_k171d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_76n2g"]
 radius = 0.025

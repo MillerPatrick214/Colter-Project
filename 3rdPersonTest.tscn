@@ -1,7 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://doki3othuqvny"]
 
-[ext_resource type="PackedScene" path="res://Player/Character/Character.tscn" id="1_b2jun"]
-[ext_resource type="Script" path="res://main.cs" id="1_regd4"]
+[ext_resource type="Script" uid="uid://dadcxntwk3xas" path="res://main.cs" id="1_regd4"]
 [ext_resource type="PackedScene" uid="uid://cuap13057eoa6" path="res://UI/PauseMenu.tscn" id="3_svvgg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lpshb"]
@@ -9,6 +8,9 @@ size = Vector3(60, 0, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_251qx"]
 size = Vector3(60, 0, 60)
+
+[sub_resource type="Resource" id="Resource_3ki3e"]
+metadata/__load_path__ = "res://Player/Character/Character.tscn"
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_regd4")
@@ -25,7 +27,7 @@ mesh = SubResource("BoxMesh_251qx")
 transform = Transform3D(1, 0, 0, 0, -0.801097, 0.598534, 0, -0.598534, -0.801097, 2.49242, 13.0437, 1.47798)
 shadow_enabled = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_b2jun")]
+[node name="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00868988, 0.53363, 0.0466146)
 
 [node name="Pause Menu" parent="." instance=ExtResource("3_svvgg")]

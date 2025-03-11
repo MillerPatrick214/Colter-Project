@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://m1nht11rq28f"]
 
-[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/TestDoubleBarrel/World Item/WorldItemShotgun.cs" id="1_hwl2n"]
+[ext_resource type="Script" uid="uid://g2ncobmue18d" path="res://Items/Weapons/RangedWeapon/TestDoubleBarrel/World Item/WorldItemShotgun.cs" id="1_hwl2n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqnyt"]
 resource_name = "DoubleBarrelShotgun"

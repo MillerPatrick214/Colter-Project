@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ba566boay68n2"]
 
 [ext_resource type="ArrayMesh" uid="uid://b23gd3hr00p1f" path="res://Level/MainMenu3d/GrassMesh.res" id="1_t3pqe"]
-[ext_resource type="Shader" path="res://Level/MainMenu3d/GrassAtttempt.gdshader" id="1_y5yob"]
+[ext_resource type="Shader" uid="uid://bhxfwcf6c62vx" path="res://Level/MainMenu3d/GrassAtttempt.gdshader" id="1_y5yob"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_eme81"]
 noise_type = 3
@@ -24,9 +24,9 @@ shader_parameter/ambient_occlusion_factor = 1.0
 shader_parameter/specular_strength = 0.0
 shader_parameter/wind_direction = Vector3(1, 0, -0.125)
 shader_parameter/wind_strength = 0.3
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_n0yat")
 shader_parameter/wind_noise_size = 0.05
 shader_parameter/wind_noise_speed = 0.02
-shader_parameter/wind_noise = SubResource("NoiseTexture2D_n0yat")
 
 [node name="Node3D" type="Node3D"]
 

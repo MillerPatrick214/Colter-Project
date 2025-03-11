@@ -1,6 +1,19 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://noh8whqnypxe"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://noh8whqnypxe"]
 
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/InventoryItem.cs" id="1_qc6gp"]
+[ext_resource type="Script" uid="uid://b8e8yy3uo56xd" path="res://Items/Classes/InventoryItems/InventoryItem.cs" id="1_qc6gp"]
+[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="1_w3r5l"]
 
 [resource]
 script = ExtResource("1_qc6gp")
+Name = "No Name"
+Description = "No Description"
+Texture = ExtResource("1_w3r5l")
+Quantity = 1
+IsStackable = false
+CurrentStack = 1
+MaxStack = 1
+Value = 0
+ScenePath = ""
+row = -1
+column = -1
+slot = -1

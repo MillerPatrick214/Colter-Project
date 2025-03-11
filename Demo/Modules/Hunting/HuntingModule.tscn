@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxfm7pban85rm"]
+[gd_scene load_steps=9 format=3 uid="uid://cxfm7pban85rm"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hnqwa"]
 
 [sub_resource type="Gradient" id="Gradient_nih3y"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -58,7 +60,10 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_04iet")])
 
 [node name="HuntingModule" type="Node3D"]
 
-[node name="Terrain3D" type="Terrain3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_hnqwa")
+
+[node name="Terrain3D" type="Terrain3D" parent="NavigationRegion3D"]
 data_directory = "res://Demo/Modules/Hunting/MapData"
 material = SubResource("Terrain3DMaterial_o8ppj")
 assets = SubResource("Terrain3DAssets_bvsvd")

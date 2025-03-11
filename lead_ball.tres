@@ -7,5 +7,4 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 
 "
-graph_offset = Vector2(-88.5119, -38.86)
 nodes/fragment/0/position = Vector2(400, 140)

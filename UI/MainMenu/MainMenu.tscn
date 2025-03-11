@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dcqaxt7vmw05e" path="res://UI/MainMenu/Campfire.jpg" id="1_3pcmf"]
 [ext_resource type="Theme" uid="uid://c8bwm6chjehha" path="res://UI/Themes/MainMenuTheme.tres" id="1_3qaea"]
-[ext_resource type="Script" path="res://UI/MainMenu/MainMenu.cs" id="2_g4eny"]
+[ext_resource type="Script" uid="uid://bh5gv7g4j7b3j" path="res://UI/MainMenu/MainMenu.cs" id="2_g4eny"]
 [ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="2_youq5"]
 [ext_resource type="AudioStream" uid="uid://cn4s8utwlwb01" path="res://UI/MainMenu/FireAudio.mp3" id="3_fejs2"]
 [ext_resource type="AudioStream" uid="uid://br0xl531ru24o" path="res://UI/MainMenu/WindAudio.mp3" id="4_ke4oq"]
-[ext_resource type="Script" path="res://UI/MainMenu/SettingsTabContainer.cs" id="7_lseeb"]
+[ext_resource type="Script" uid="uid://njhbx4uf6ha2" path="res://UI/MainMenu/SettingsTabContainer.cs" id="7_lseeb"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("ButtonContainer", "FadeRect", "ContinueButton", "NewGameButton", "LoadGameButton", "SettingsButton", "SettingsButtonContainer", "SettingsTabContainer", "GameplayButton", "ControlsButton", "GraphicsButton", "AudioButton", "BackButton", "ApplyButton", "QuitButton")]
 layout_mode = 3

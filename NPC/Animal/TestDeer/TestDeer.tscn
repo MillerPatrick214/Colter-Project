@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=4 uid="uid://bgbabeyqriv8w"]
 
-[ext_resource type="Script" path="res://NPC/Animal/TestDeer/TestDeer.cs" id="1_idqs1"]
-[ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="2_ap5pk"]
-[ext_resource type="Script" path="res://components/HealthComponent.cs" id="3_qfeti"]
+[ext_resource type="Script" uid="uid://bjg4m3eunvp7v" path="res://NPC/Animal/TestDeer/TestDeer.cs" id="1_idqs1"]
+[ext_resource type="Script" uid="uid://dq8gkvql1xx5u" path="res://components/HitBoxComponent.cs" id="2_ap5pk"]
+[ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="3_qfeti"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ukctg"]
 size = Vector3(3.09671, 1.9762, 1)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://cm1sarff3cd70"]
 
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="1_xtqik"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="2_6sp7j"]
+[ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="2_6sp7j"]
 
 [resource]
 script = ExtResource("2_6sp7j")

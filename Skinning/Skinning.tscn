@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://t0fd544v45ma"]
 
-[ext_resource type="Script" path="res://Skinning/Skinning.cs" id="1_g7j4h"]
-[ext_resource type="Script" path="res://Skinning/SkinningFactory.cs" id="2_gsbnr"]
-[ext_resource type="Script" path="res://Skinning/KnifeArea.cs" id="3_1ooa8"]
+[ext_resource type="Script" uid="uid://biygcbuj30kkq" path="res://Skinning/Skinning.cs" id="1_g7j4h"]
+[ext_resource type="Script" uid="uid://bfqsqwq7n7a0a" path="res://Skinning/SkinningFactory.cs" id="2_gsbnr"]
+[ext_resource type="Script" uid="uid://gnk5p7em32h4" path="res://Skinning/KnifeArea.cs" id="3_1ooa8"]
 [ext_resource type="FontFile" uid="uid://bmg4icwa7qke1" path="res://UI/Themes/Fonts/BethEllen-Regular.ttf" id="4_xu1ta"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ayat0"]

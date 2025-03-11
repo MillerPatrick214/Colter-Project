@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnyxac75sfnna"]
 
-[ext_resource type="Script" path="res://Items/TestDirectionalSprite/DirectionalController.cs" id="1_p0o32"]
+[ext_resource type="Script" uid="uid://btoxi2ecd3wug" path="res://Items/TestDirectionalSprite/DirectionalController.cs" id="1_p0o32"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_45s82"]
 load_path = "res://Items/TestDirectionalSprite/Textures/Anvil Front.png-394270c90ec8a5521eadcacc9083ebcb.ctex"

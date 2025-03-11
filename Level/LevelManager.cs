@@ -6,6 +6,7 @@ public partial class LevelManager : Node3D
 	public static LevelManager Instance { get; private set; } 
 	public Node CurrentScene { get; set; }
 
+
 public void GotoScene(string path)
 {
     // This function will usually be called from a signal callback,

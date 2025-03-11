@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://c246qxlt84r8j"]
 
-[ext_resource type="Script" path="res://RagDollTests/CapyPhysicalBoneSimulator3d.cs" id="1_kixek"]
+[ext_resource type="Script" uid="uid://o7kl2lwo7lsi" path="res://RagDollTests/CapyPhysicalBoneSimulator3d.cs" id="1_kixek"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ol4a"]
 resource_name = "capybara1"
