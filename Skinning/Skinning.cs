@@ -1,4 +1,3 @@
-using System.Linq;
 using Godot;
 using static FurInvItem;
 
@@ -67,8 +66,7 @@ public partial class Skinning : Control
 		BowieKnife = GetNodeOrNull<TextureRect>("BowieKnife");
 		KnifeAreaNode = GetNodeOrNull<KnifeArea>("BowieKnife/Knife Area");
 
-		if (BowieKnife == null || KnifeAreaNode == null || skinningfact == null || timer == null)
-		{
+		if (BowieKnife == null || KnifeAreaNode == null || skinningfact == null || timer == null) {
 			GD.PrintErr("Error in AnimalSkinning: One of the Nodes returned null");
 			GD.PrintErr(BowieKnife == null ? "BowieKnife is null" : "");
 			GD.PrintErr(KnifeAreaNode == null ? "KnifeAreaNode is null" : "");
@@ -77,20 +75,9 @@ public partial class Skinning : Control
 			GD.PrintErr(Sheathe == null ? "Sheate is null" : "");
 		}
 
-		if (timer == null)
-		{
-			GD.PrintErr("Timer Returned null in Animal Skinning");
-		}
-
-		if (CutLine == null)
-		{
-			GD.PrintErr("Animal Skinning Node: Unable to connect to cutline node");
-		}
-
-		if (KnifeAreaNode == null)
-		{
-			GD.PrintErr("Animal Skinning Node: Knife Area child node returned null");
-		}
+		if (timer == null) { GD.PrintErr("Timer Returned null in Animal Skinning");}
+		if (CutLine == null) { GD.PrintErr("Animal Skinning Node: Unable to connect to cutline node"); }
+		if (KnifeAreaNode == null) { GD.PrintErr("Animal Skinning Node: Knife Area child node returned null"); }
 
 		KnifeAreaNode.MouseOnKnife += (isTrue) => isMouseOnKnife = isTrue;
 		skinningfact.SkinningInstance += (instance) => SetSkinnable(ref instance); //connects signal from skinnable object to recieve skinnable function.
@@ -111,41 +98,28 @@ public partial class Skinning : Control
 	{
 		mousePos = GetGlobalMousePosition();
 
-		if (isSkinning)
-		{
-			SkinningEvent();
-		}
+		if (isSkinning) SkinningEvent();
 
-		if (!isKnifeHeld)
-		{
-			if (isMouseOnKnife && BowieKnife.Position <= DefaultBowiePosition && BowieKnife.Position >= offsetPosition)
-			{
-
-				if (BowieKnife.Position.X != offsetXPosition)
-				{
+		if (!isKnifeHeld) {
+			if (isMouseOnKnife && BowieKnife.Position <= DefaultBowiePosition && BowieKnife.Position >= offsetPosition) {
+				if (BowieKnife.Position.X != offsetXPosition) {
 					Vector2 position = BowieKnife.Position;
 
 					BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, offsetXPosition, 5 * delta), DefaultBowiePosition.Y);
 
-					if (BowieKnife.Position.X - offsetXPosition < 0.1f)
-					{
-						BowieKnife.Position = new Vector2((float)offsetXPosition, DefaultBowiePosition.Y);
-					}
+					if (BowieKnife.Position.X - offsetXPosition < 0.1f) BowieKnife.Position = new Vector2(offsetXPosition, DefaultBowiePosition.Y);
 				}
 
-				if (Input.IsActionJustPressed("UseItem"))
-				{
+				if (Input.IsActionJustPressed("UseItem")) {
 					//GD.Print("UseItem Pressed on Knife");
 					isKnifeHeld = true;
 				}
 			}
 
-			else if (!isMouseOnKnife && BowieKnife.Position != DefaultBowiePosition)
-			{
+			else if (!isMouseOnKnife && BowieKnife.Position != DefaultBowiePosition) {
 				Vector2 position = BowieKnife.Position;
 				BowieKnife.Position = new Vector2((float)Mathf.Lerp(position.X, DefaultBowiePosition.X, 3 * delta), DefaultBowiePosition.Y);
-				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.5f)
-				{
+				if (DefaultBowiePosition.X - BowieKnife.Position.X < 0.5f) {
 					BowieKnife.Position = DefaultBowiePosition;
 				}
 			}
@@ -156,27 +130,17 @@ public partial class Skinning : Control
 			BowieKnife.Position = mousePos - BowieKnife.PivotOffset;
 			float targetAngle = rotationAngle.Angle();
 			BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, targetAngle, 0.1f);
-			if (Input.IsActionJustPressed("Aim"))
-			{
-				isKnifeHeld = false;
-			}
+			if (Input.IsActionJustPressed("Aim")) isKnifeHeld = false;
 
-			if (Input.IsActionJustPressed("UseItem") && CurrentSkinnable != null && isKnifeOnSkin && !isSkinning)
-			{
-				BeginSkinning();
-			}
+			if (Input.IsActionJustPressed("UseItem") && CurrentSkinnable != null && isKnifeOnSkin && !isSkinning) BeginSkinning();
 		}
 
-		else if (!isKnifeHeld && (BowieKnife.Position != DefaultBowiePosition || BowieKnife.Rotation != 0.0f))
-		{
-			SheatheKnife(delta);
-		}
+		else if (!isKnifeHeld && (BowieKnife.Position != DefaultBowiePosition || BowieKnife.Rotation != 0.0f)) SheatheKnife(delta);
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (isKnifeHeld && @event is InputEventMouseMotion mouseMotion)
-		{
+		if (isKnifeHeld && @event is InputEventMouseMotion mouseMotion) {
 			rotationAngle = mouseMotion.Relative;
 			//BowieKnife.Rotation = rotationAngle.Angle();
 		}
@@ -189,22 +153,15 @@ public partial class Skinning : Control
 		BowieKnife.Rotation = Mathf.LerpAngle(BowieKnife.Rotation, 0, lerpFactor);
 		BowieKnife.Position = BowieKnife.Position.Lerp(DefaultBowiePosition, lerpFactor);
 
-		if (BowieKnife.Position.DistanceTo(DefaultBowiePosition) < 2.0f)
-		{
-			BowieKnife.Position = DefaultBowiePosition;     // Snap to position to avoid overshooting
-		}
+		if (BowieKnife.Position.DistanceTo(DefaultBowiePosition) < 2.0f) { BowieKnife.Position = DefaultBowiePosition; }   // Snap to position to avoid overshooting
 
-		if (Mathf.Abs(BowieKnife.Rotation) < .1f)
-		{
-			BowieKnife.Rotation = 0;
-		}
+		if (Mathf.Abs(BowieKnife.Rotation) < .1f) { BowieKnife.Rotation = 0; }
 	}
 
 	public void SetSkinnable(ref Skinnable instance)
 	{
 		CurrentSkinnable = instance;
-		if (CurrentSkinnable != null)
-		{
+		if (CurrentSkinnable != null) {
 			CurrentSkinnable.MouseOnSkin += (isTrue) => isKnifeOnSkin = isTrue;
 		}
 
@@ -215,9 +172,15 @@ public partial class Skinning : Control
 		Vector2 lastPoint = CutLine.GetPointPosition(LineIndex);
 		float distance = lastPoint.DistanceTo(mousePos);
 
+		bool wasMovingDown;
+		bool isMovingUp;
+		float prevDelta;
+		float currDelta;
+		float prevDir;
+		float currDir;
+
 		// Only iterate while mouse movement per frame (distance) exceeds a single segment length
-		while (distance >= SegmentLength)
-		{
+		while (distance >= SegmentLength) {
 			for (int i = 1; i < Segments; i++ ) {		// For each segment we go i/segment length of the way before placing a new point						
 				Vector2 newPoint = lastPoint.Lerp(mousePos, i / Segments);
 				CutLine.AddPoint(newPoint);
@@ -229,24 +192,21 @@ public partial class Skinning : Control
 				// Accumulate deviation on the x axis relative to the starting point x
 				devAccum += Mathf.Abs(newPoint.X - CurrentSkinnable.StartMaker.GlobalPosition.X);
 
-				if (LineIndex >= 2)
-				{
+				if (LineIndex >= 2) {
 					// Accumulate reversal penalty
-					bool wasMovingDown = lastPoint.Y > CutLine.GetPointPosition(LineIndex - 2).Y;
-					bool isMovingUp = newPoint.Y < lastPoint.Y;
-					if (wasMovingDown && isMovingUp)
-					{
+					wasMovingDown = lastPoint.Y > CutLine.GetPointPosition(LineIndex - 2).Y;
+					isMovingUp = newPoint.Y < lastPoint.Y;
+					if (wasMovingDown && isMovingUp) {
 						revAccum += Mathf.Abs(newPoint.Y - lastPoint.Y) + revCount * 10;
 						revCount++;
 					}
 
 					// Accumulate jitteriness penalty 
-					float prevDelta = lastPoint.X - CutLine.GetPointPosition(LineIndex - 2).X;
-					float currDelta = newPoint.X - lastPoint.X;
-					float prevDir = Mathf.Sign(prevDelta);
-					float currDir = Mathf.Sign(currDelta);
-					if (currDir != 0 && currDir != prevDir)
-					{
+					prevDelta = lastPoint.X - CutLine.GetPointPosition(LineIndex - 2).X;
+					currDelta = newPoint.X - lastPoint.X;
+					prevDir = Mathf.Sign(prevDelta);
+					currDir = Mathf.Sign(currDelta);
+					if (currDir != 0 && currDir != prevDir) {
 						jitterAccum += Mathf.Abs(prevDelta) * 0.25f +  Mathf.Abs(currDelta) * 0.75f;
 					}
 				}
@@ -264,7 +224,6 @@ public partial class Skinning : Control
 					RateSkinning(distScore, devScore, revScore, jitterScore);
 					timer.Start();
 					isSkinning = false;
-
 					return;
 				}
 			}
@@ -284,7 +243,7 @@ public partial class Skinning : Control
 
 		Godot.Collections.Dictionary<int, string> DictRatingComment = new()
 		{
-			{(int)FurQuality.NOTSET, "Note to dev: You didn't set the fur quality dumbass!"},
+			{(int)FurQuality.NOTSET, "Brother, I think you cheated."},
 			{(int)FurQuality.Perfect, "Great skinnin' partner!"},
 			{(int)FurQuality.Good, "Ay, not so bad bucko."},
 			{(int)FurQuality.Decent, "Eh, could be better...could be worse."},
@@ -303,12 +262,11 @@ public partial class Skinning : Control
 		float weightedAvg = 100 * (weightedDist + weightedDev + weightedRev + weightedJitter) / weightSum;
 
 		// Multiplicative penalty for exceptionally low scores
-		float distPenalty = 1 - weightedDist / 100;
-		float devPenalty = 1 - weightedDev / 100;
-		float revPenalty = 1 - weightedRev / 100;
-		float jitterPenalty = 1 - weightedJitter / 100;
-		var penaltyList = new Godot.Collections.Array{distPenalty, devPenalty, revPenalty, jitterPenalty};
-		float penalty = Mathf.Clamp(1 - (float)penaltyList.Max() / 100, 0, 1);
+		float distPenalty = 1 - distScore / 100;
+		float devPenalty = 1 - devScore / 100;
+		float revPenalty = 1 - revScore / 100;
+		float jitterPenalty = 1 - jitterScore / 100;
+		float penalty = Mathf.Clamp(1 - (distPenalty + devPenalty + revPenalty + jitterPenalty) / (4 * 100), 0, 1);
 
 		GD.PrintRich(
 			$"[color=cyan]Skinning: [/color][color=purple]Metrics: [/color]Distance Penalty: {distPenalty}\n" +
@@ -324,7 +282,7 @@ public partial class Skinning : Control
 
 		Godot.Collections.Dictionary<int, float> DictRatingScore = new()
 		{
-			{(int)FurQuality.NOTSET, 0},
+			{(int)FurQuality.NOTSET, 100},
 			{(int)FurQuality.Perfect, PerfectScoreThreshold},
 			{(int)FurQuality.Good, GoodScoreThreshold},
 			{(int)FurQuality.Decent, DecentScoreThreshold},
@@ -333,7 +291,7 @@ public partial class Skinning : Control
 		};
 
 		// Iterates the scoring dictionary based on descending score
-		foreach (var (quality, score) in DictRatingScore.OrderByDescending(kvp => kvp.Value))
+		foreach (var (quality, score) in DictRatingScore)
 		{
 			if (finalScore > DictRatingScore[quality])
 			{

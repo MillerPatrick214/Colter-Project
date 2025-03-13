@@ -1,6 +1,4 @@
 using Godot;
-using Microsoft.VisualBasic;
-using System;
 
 public partial class InteractRayCast : RayCast3D
 {
@@ -27,7 +25,7 @@ public partial class InteractRayCast : RayCast3D
 
 		if (Input.IsActionJustPressed("InteractWorld") && InteractableObject != null) 
 		{
-				InteractableObject.Interact();
+			InteractableObject.Interact();
 		}
 	}
 }

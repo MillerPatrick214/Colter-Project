@@ -24,7 +24,7 @@ public partial class InteractComponent : Area3D
 
 	public Node ParentNode;
 
-	public enum InteractMode
+	public enum InteractMode 
 	{
 		NONE,
 		SKIN,
@@ -56,6 +56,7 @@ public partial class InteractComponent : Area3D
 			case (InteractMode.SKIN):
 			if (SkinLogic == null) {return;}
 			SkinLogic.Interact();
+			CurrentInteractMode = InteractMode.NONE;
 			return;
 
 			case(InteractMode.TALK):

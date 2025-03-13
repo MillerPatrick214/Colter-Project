@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://ai/tasks/Freeze.cs" id="2_sfyec"]
 [ext_resource type="Script" path="res://ai/tasks/MoveTo.cs" id="3_fkhrd"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_pd75m"]
-[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_4op7t"]
+[ext_resource type="Texture2D" uid="uid://b8bsf2vt5sapb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_4op7t"]
 [ext_resource type="Script" path="res://ai/tasks/ConfirmThreat.cs" id="4_jtgjo"]
 [ext_resource type="Script" path="res://ai/tasks/Flee.cs" id="6_7jh8d"]
-[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="12_td3j1"]
+[ext_resource type="PackedScene" uid="uid://bjoeuwsju5qos" path="res://components/InteractComponent.tscn" id="12_td3j1"]
 [ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_xw2tj"]
 [ext_resource type="Script" path="res://components/Interact SubComponents/SkinLogic.cs" id="13_5r5f4"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_t1s4s"]
@@ -286,7 +286,7 @@ radius = 7.0
 
 [sub_resource type="Resource" id="Resource_ip3hn"]
 script = ExtResource("13_5r5f4")
-SkinningNodePath = "uid://cw0mtrrkpq73g"
+SkinnableScenePath = "uid://cw0mtrrkpq73g"
 
 [node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "InteractComponent")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
@@ -436,8 +436,8 @@ MaxHealth = 50.0
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationRootNode_ucith")
 
-[node name="InteractComponent" parent="." instance=ExtResource("12_td3j1")]
-CurrentInteractMode = 1
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("12_td3j1")]
+CollisionShape = NodePath("CollisionShape3D")
 SkinLogic = SubResource("Resource_ip3hn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

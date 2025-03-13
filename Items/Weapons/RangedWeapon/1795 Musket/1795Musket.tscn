@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="4_711rt"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"]
-[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
+[ext_resource type="PackedScene" uid="uid://bjoeuwsju5qos" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
 [ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="10_hxyg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfgm7"]
@@ -1242,6 +1242,9 @@ shape = SubResource("CapsuleShape3D_2g2ad")
 
 [node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("9_qd8h7")]
 CollisionShape = NodePath("CollisionShape3D")
+SkinLogic = null
+TalkLogic = null
+LootLogic = null
 PickUpLogic = SubResource("Resource_0f0yk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

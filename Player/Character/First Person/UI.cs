@@ -6,7 +6,6 @@ public partial class UI : Control
 	
 	InputControl InputControl;
 	Control CurrentControl;
-	
 	PauseMenu PauseMenu;
 
     public override void _Ready()
