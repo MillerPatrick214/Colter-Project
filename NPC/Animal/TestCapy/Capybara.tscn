@@ -1,18 +1,18 @@
 [gd_scene load_steps=39 format=4 uid="uid://d1tywn615fc2s"]
 
-[ext_resource type="Script" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
+[ext_resource type="Script" uid="uid://wdbj5oyl1cf3" path="res://NPC/Animal/TestCapy/Capybara.cs" id="1_7dout"]
 [ext_resource type="Texture2D" uid="uid://dh6qn1brda5mb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara1_texture.png" id="3_7d45k"]
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="4_myvag"]
 [ext_resource type="AnimationLibrary" uid="uid://cjl2q2vwxjni" path="res://NPC/Animal/TestCapy/CapyAnimations/CapybaraAnimations.tres" id="4_xeeau"]
-[ext_resource type="Script" path="res://Player/States/Classes/StateMachine.cs" id="5_iqgn2"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCFall.cs" id="6_mqvpo"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCWalk.cs" id="7_efcoa"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCIdle.cs" id="8_npa5g"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCAlert.cs" id="9_da8rr"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCFlee.cs" id="10_wq7rp"]
-[ext_resource type="Script" path="res://NPC/StateMachineClasses/NPCDeath.cs" id="11_2jntu"]
-[ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="12_vjc01"]
-[ext_resource type="Script" path="res://components/HealthComponent.cs" id="13_a0y8h"]
+[ext_resource type="Script" uid="uid://cbogmigrqaq02" path="res://Player/States/Classes/StateMachine.cs" id="5_iqgn2"]
+[ext_resource type="Script" uid="uid://dulxss6s6f3xy" path="res://NPC/StateMachineClasses/NPCFall.cs" id="6_mqvpo"]
+[ext_resource type="Script" uid="uid://c0t7dssww8jp6" path="res://NPC/StateMachineClasses/NPCWalk.cs" id="7_efcoa"]
+[ext_resource type="Script" uid="uid://cyrnkryadigmv" path="res://NPC/StateMachineClasses/NPCIdle.cs" id="8_npa5g"]
+[ext_resource type="Script" uid="uid://csind5juc1ng5" path="res://NPC/StateMachineClasses/NPCAlert.cs" id="9_da8rr"]
+[ext_resource type="Script" uid="uid://de6ytjo2vuajc" path="res://NPC/StateMachineClasses/NPCFlee.cs" id="10_wq7rp"]
+[ext_resource type="Script" uid="uid://cqy1b45l08cvs" path="res://NPC/StateMachineClasses/NPCDeath.cs" id="11_2jntu"]
+[ext_resource type="Script" uid="uid://dq8gkvql1xx5u" path="res://components/HitBoxComponent.cs" id="12_vjc01"]
+[ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="13_a0y8h"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="14_kw70l"]
 
 [sub_resource type="Animation" id="Animation_2shjp"]
@@ -20,7 +20,7 @@ length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aq1vd"]
 _data = {
-"RESET": SubResource("Animation_2shjp")
+&"RESET": SubResource("Animation_2shjp")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkgfi"]
@@ -225,7 +225,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.271058, -0.00295661, 0.00220907, 0.962556)
+bones/2/rotation = Quaternion(0.256484, -0.00292289, 0.00226016, 0.966541)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1

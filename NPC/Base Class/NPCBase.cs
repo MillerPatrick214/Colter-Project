@@ -1,31 +1,28 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
 public partial class NPCBase : CharacterBody3D
 {	
-	[Signal]
-	public delegate void SensedEventHandler();
-	[Export]
-	public float WalkSpeed = 5.0f;
-	[Export]
-	public float RunSpeed = 7.5f;
-	[Export]
-	public float JumpVelocity = 4.5f;
-	[Export]
-	public bool isDead = false;
-	[Export]
-	public NavigationAgent3D NavAgent;
-	[Export]
-	public AnimationTree AniTree;
-	[Export]
-	public RayCast3D VisionRay; 
-	[Export]
-	public Area3D HearingArea;
-	[Export]
-	public Area3D VisionCone;
-	[Export]
-	public InteractComponent InteractComponent {get; set;}
+	
+	[Signal] public delegate void SensedEventHandler();
+	[Export] public float WalkSpeed = 5.0f;
+	[Export] public float RunSpeed = 7.5f;
+	[Export] public float JumpVelocity = 4.5f;
+	[Export] public bool isDead = false;
+	[Export] public NavigationAgent3D NavAgent;
+	[Export] public AnimationTree AniTree;
+	[Export] public RayCast3D VisionRay; 
+	[Export] public Area3D HearingArea;
+	[Export] public Area3D VisionCone;
+	[Export] public BTPlayer BehaviorTree;
+	[Export] public InteractComponent InteractComponent {get; private set;}
+	[Export] public HitBoxComponent HitBoxComponent {get; private set;}
+
+	public VisibleOnScreenNotifier3D VisNotifier;
+	public bool IsVisibleOnScreen;
+	bool isTrapped = false;
 
 	public InteractComponent InteractComponentCasted;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -34,12 +31,14 @@ public partial class NPCBase : CharacterBody3D
 	public bool IsInteractable = false;	
 	public Node3D Focus = null;
 	protected BTPlayer BTPlayer; 
-
 	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
     public override void _Ready()
     {
 		UpdateConfigurationWarnings();
+
+		VisNotifier = new();
+		AddChild(VisNotifier);
 
 		if (Engine.IsEditorHint())
 		{
@@ -60,10 +59,15 @@ public partial class NPCBase : CharacterBody3D
 
 		HearingArea.BodyExited += (Node3D body) => SensedRemove(body);		
 		VisionCone.BodyExited += (Node3D body) => SensedRemove(body);
+
+		VisNotifier.ScreenEntered += () => IsVisibleOnScreen = true;
+		VisNotifier.ScreenExited += () => IsVisibleOnScreen = false;
+
 		
 		BTPlayer = GetNodeOrNull<BTPlayer>("BTPlayer");
 		if (BTPlayer == null) {GD.PrintErr($"NPC Base {this.GetPath()}: BTPlayer returned null");}
 
+		HitBoxComponent.Trapped += (tf) => Trapped(tf);
 		UpdateConfigurationWarnings();
     }
 
@@ -104,6 +108,14 @@ public partial class NPCBase : CharacterBody3D
 		return RunSpeed;
 	}
 
+	public void Trapped(bool tf)
+	{
+		isTrapped = tf;
+		BehaviorTree.Blackboard.SetVar("IsTrapped", tf);
+		GD.PrintErr("TRAPPED!!!!");
+	}
+
+
 	public void setRayCast(Godot.Vector3 direction) 
 	{
 		Godot.Vector3 localDir = VisionRay.ToLocal(GlobalPosition + direction);
@@ -117,8 +129,11 @@ public partial class NPCBase : CharacterBody3D
 	}
 
 
-	public void Rotate(Godot.Vector3 direction) //GAME-BREAKING GLITCH: This no longer adjusts 
+	public void Rotate(Godot.Vector3 direction)
 	{
+		if (direction == Vector3.Zero) return;
+		if (!direction.IsNormalized()) direction = direction.Normalized();
+
 		Transform3D transform = Transform;
 		Basis a = Transform.Basis;			
 
@@ -137,11 +152,10 @@ public partial class NPCBase : CharacterBody3D
 			return;
 		}
 
-		transform.Basis = new Basis(interpolatedQuat);
+		transform.Basis = new Basis(interpolatedQuat).Orthonormalized();
 		Transform  = transform;
 	}
-	
-	
+
 	public bool isInVisionCone() 
 	{
 		return VisionCone.OverlapsBody(Focus);
@@ -159,15 +173,33 @@ public partial class NPCBase : CharacterBody3D
 			{						
 				Focus = body;					//FIXME -- currently this will just add the last body as the focused body if that makes sense idk. We should probably draw from list based off of distance of sound/sight in the future?
 				EmitSignal(SignalName.Sensed);
-
 				BTPlayer.Blackboard.SetVar("hasFocus", true);
 			}
 		}
 		
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
     {
+        base._Process(delta);
+		if (IsVisibleOnScreen)
+		{
+			//ShaderManager.Instance.RegisterOrUpdate(this, GlobalPosition); SAVED FOR SHADERMANAGER UPDATE
+		}
+    }
+
+	public void OffScreen()
+	{
+		IsVisibleOnScreen = false;
+		//ShaderManager.Instance.OutOfSight(this);		SAVED FOR SHADERMANAGER UPDATE
+	}
+	public void OnScreen()
+	{
+		IsVisibleOnScreen = true;
+	}
+
+    public override void _PhysicsProcess(double delta)
+    {		
 		if (Engine.IsEditorHint())
 		{
 			return;
@@ -176,7 +208,7 @@ public partial class NPCBase : CharacterBody3D
 		{
 			Velocity =  Velocity - new Vector3(0, gravity, 0) * (float)delta;
     	}
-
+		
 		MoveAndSlide();
 	}
 

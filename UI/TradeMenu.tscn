@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ch1kbuhtihwv2"]
 
-[ext_resource type="Script" path="res://TradeMenu.cs" id="1_t6d3w"]
+[ext_resource type="Script" uid="uid://d1jrhb2mns2gx" path="res://TradeMenu.cs" id="1_t6d3w"]
 
 [node name="Trade Menu" type="Control"]
 layout_mode = 3

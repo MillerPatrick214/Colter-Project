@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://dkyv8ed0fs10o"]
 
 [ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png" id="1_xxexi"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/InventoryItem.cs" id="2_xlt7w"]
+[ext_resource type="Script" uid="uid://b8e8yy3uo56xd" path="res://Items/Classes/InventoryItems/InventoryItem.cs" id="2_xlt7w"]
 
 [resource]
 script = ExtResource("2_xlt7w")

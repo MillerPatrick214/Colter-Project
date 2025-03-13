@@ -3,14 +3,14 @@ using System.Collections.Generic;
 public partial class Item3D : RigidBody3D //base for all items and tools visible in the game world
 {
 
-	[Export]
-	public bool IsInteractable = true;
+	[Export] public bool IsInteractable = true;
+	
+	/// <summary>
+	/// Facillitates flipping visibility layers based on whether or not an object is held;
+	/// </summary>
+	[Export] public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
 
-	[Export]
-	public Godot.Collections.Array<NodePath> MeshNodes;	//Set in editor, this holds all meshs that represent the item3D. Facilitates flipping vis layers immensly and eliminates need for recursion to find these nodes
-
-	[Export]
-	public InventoryItem ItemResource {get; set;}
+	[Export] public InventoryItem ItemResource {get; set;}
 
 	[Export]
 	public InteractComponent InteractComponent {get; set;}
@@ -41,14 +41,13 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 
 	
 
-	public void SetHeld(bool held) {
-		
-		
+	public void SetHeld(bool held, bool by_player=false) {
+	
 		if (held) 
 		{
 			FreezeMode = FreezeModeEnum.Static;
 			SetCollision(false);
-			SetVis(held);
+			if (by_player) SetVis(held);
 		}
 		else
 		{
@@ -61,7 +60,6 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		{
 			InteractComponent.SetDisabled(held);
 		}
-		
 
 		Freeze = held;
 		
@@ -104,15 +102,10 @@ public partial class Item3D : RigidBody3D //base for all items and tools visible
 		{
 			Node child = GetNodeOrNull<Node>(child_path);
 
-			if (GetNode(child_path) is MeshInstance3D vis)
-			{
-				vis.SetLayerMaskValue(2, is_held);
-				vis.SetLayerMaskValue(1, !is_held);
-			}
-			else if (child == null)
-			{
-				GD.PrintErr("WE'RE FUCKED COULDN'T GET CHILD IT'S NULL ITEM3D bitCH");
-			}
+			if (GetNode(child_path) is not MeshInstance3D vis) return;
+			vis.SetLayerMaskValue(2, is_held);
+			vis.SetLayerMaskValue(1, !is_held);
+			
 		}
 	}
 

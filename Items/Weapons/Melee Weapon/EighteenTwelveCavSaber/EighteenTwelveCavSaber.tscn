@@ -1,8 +1,8 @@
 [gd_scene load_steps=21 format=4 uid="uid://bvlxi6skdgcr2"]
 
-[ext_resource type="Script" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/EighteenTwelveCavSaber.cs" id="1_3tpfj"]
-[ext_resource type="Texture2D" uid="uid://b8bsf2vt5sapb" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="2_noo1o"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_tmg7v"]
+[ext_resource type="Script" uid="uid://c2mvel6tt2sm8" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/EighteenTwelveCavSaber.cs" id="1_3tpfj"]
+[ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="2_noo1o"]
+[ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_tmg7v"]
 [ext_resource type="AudioStream" uid="uid://d1dgcvplyf0ct" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/422506__nightflame__swinging-staff-whoosh-strong-01.wav" id="4_rssdi"]
 [ext_resource type="PackedScene" uid="uid://bjoeuwsju5qos" path="res://components/InteractComponent.tscn" id="5_7sc07"]
 [ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="6_fpjvg"]
@@ -276,8 +276,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3evw2"]
 _data = {
-"RESET": SubResource("Animation_itp7m"),
-"SWING": SubResource("Animation_sguwu")
+&"RESET": SubResource("Animation_itp7m"),
+&"SWING": SubResource("Animation_sguwu")
 }
 
 [sub_resource type="Resource" id="Resource_dwe3p"]

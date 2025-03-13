@@ -7,7 +7,6 @@ uniform vec3 bottom_color: source_color;
 uniform float ambient_occlusion_factor: hint_range(0.0, 1.0, 0.01) = 0.3;
 uniform float specular_strength: hint_range(0.0, 1.0, 0.01) = 0.4;
 
-
 uniform vec3 wind_direction; // Use a negative y component to give it an extra touch (For displacement effect and noise scroll direction)
 uniform float wind_strength: hint_range(0.0, 1.0, 0.01) = 0.3;
 uniform sampler2D wind_noise; // Periln FBM Noise looks Best

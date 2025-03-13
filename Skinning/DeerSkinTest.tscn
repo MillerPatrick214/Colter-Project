@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw0mtrrkpq73g"]
 
 [ext_resource type="Texture2D" uid="uid://c4i222w3oia72" path="res://Skinning/DeerTemp.png" id="1_k7dbq"]
-[ext_resource type="Script" path="res://Skinning/DeerSkinTest.cs" id="2_xcra8"]
+[ext_resource type="Script" uid="uid://cnuqp4ybb1nmc" path="res://Skinning/DeerSkinTest.cs" id="2_xcra8"]
 [ext_resource type="Texture2D" uid="uid://b0jtic11l51ir" path="res://Items/TestFur/DeerSkinTestWorldItem_Inventory.png" id="3_6lnva"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/FurInvItem.cs" id="4_rvpms"]
+[ext_resource type="Script" uid="uid://cgw1ko3rd5bl2" path="res://Items/Classes/InventoryItems/FurInvItem.cs" id="4_rvpms"]
 
 [sub_resource type="Resource" id="Resource_kwx6p"]
 script = ExtResource("4_rvpms")

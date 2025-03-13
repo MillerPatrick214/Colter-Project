@@ -1,24 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bjoeuwsju5qos"]
 
-[ext_resource type="Script" path="res://components/InteractComponent.cs" id="1_cuihk"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/SkinLogic.cs" id="2_1ed8g"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/TalkLogic.cs" id="3_3c5yw"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/LootLogic.cs" id="4_xjmgu"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="5_1f17u"]
-
-[sub_resource type="Resource" id="Resource_e8njk"]
-script = ExtResource("2_1ed8g")
-SkinnableScenePath = ""
-
-[sub_resource type="Resource" id="Resource_pi5gy"]
-script = ExtResource("3_3c5yw")
-DialogueStart = "start"
-
-[sub_resource type="Resource" id="Resource_3by8w"]
-script = ExtResource("4_xjmgu")
-
-[sub_resource type="Resource" id="Resource_b5ex5"]
-script = ExtResource("5_1f17u")
+[ext_resource type="Script" uid="uid://chjhonw51peyb" path="res://components/InteractComponent.cs" id="1_cuihk"]
 
 [node name="InteractComponent" type="Area3D"]
 collision_layer = 4

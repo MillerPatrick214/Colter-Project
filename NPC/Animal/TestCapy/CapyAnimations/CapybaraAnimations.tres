@@ -10,9 +10,9 @@ resource_name = "Death"
 
 [resource]
 _data = {
-"CapyGraze": ExtResource("1_p8oom"),
-"CapyHeadDown": ExtResource("3_dpctn"),
-"CapyHeadUp": ExtResource("4_lwjv4"),
-"CapyWalk": ExtResource("2_mrdoo"),
-"Death": SubResource("Animation_7tgc0")
+&"CapyGraze": ExtResource("1_p8oom"),
+&"CapyHeadDown": ExtResource("3_dpctn"),
+&"CapyHeadUp": ExtResource("4_lwjv4"),
+&"CapyWalk": ExtResource("2_mrdoo"),
+&"Death": SubResource("Animation_7tgc0")
 }

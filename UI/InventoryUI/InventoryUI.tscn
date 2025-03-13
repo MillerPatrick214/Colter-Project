@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cgrey8ixgno8a"]
 
-[ext_resource type="Script" path="res://UI/InventoryUI/InventoryUI.cs" id="1_p674b"]
-[ext_resource type="Script" path="res://UI/InventoryUI/EquipSlotUI.cs" id="3_cpqf1"]
+[ext_resource type="Script" uid="uid://31yxd3ginsub" path="res://UI/InventoryUI/InventoryUI.cs" id="1_p674b"]
+[ext_resource type="Script" uid="uid://d08vs8g4wumui" path="res://UI/InventoryUI/EquipSlotUI.cs" id="3_cpqf1"]
 [ext_resource type="Texture2D" uid="uid://bu7ofo2htop1u" path="res://Base Layer Sprite1.png" id="3_g2yt5"]
 [ext_resource type="Texture2D" uid="uid://dnmtut1sqjpwu" path="res://UI/9Rect.png" id="4_qlu7x"]
-[ext_resource type="Script" path="res://UI/InventoryUI/InvSlotUI.cs" id="4_t40oi"]
+[ext_resource type="Script" uid="uid://bnrovglttp4ve" path="res://UI/InventoryUI/InvSlotUI.cs" id="4_t40oi"]
 
 [node name="InventoryUI" type="Control"]
 layout_mode = 3

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjjpqy7hvjrvt"]
+
+[ext_resource type="Script" uid="uid://c50ivhl6g3pus" path="res://Items/Traps/Trap.cs" id="1_fr20i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhk0o"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2mbf7"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq7yj"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.470588)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ercl"]
+material = SubResource("StandardMaterial3D_gq7yj")
+
+[node name="Trap" type="RigidBody3D" node_paths=PackedStringArray("TriggerArea")]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_fr20i")
+TriggerArea = NodePath("TriggerArea")
+MeshNodes = Array[NodePath]([NodePath("TempMesh")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.286184, 0)
+shape = SubResource("BoxShape3D_yhk0o")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TriggerArea" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.403484, 0)
+shape = SubResource("SphereShape3D_2mbf7")
+
+[node name="TempMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00705409, 0.407512, 0.00183582)
+mesh = SubResource("SphereMesh_7ercl")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")

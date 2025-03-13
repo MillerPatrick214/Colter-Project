@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Colter"
 run/main_scene="res://Level/FreeRoamMainMenu.tscn"
-config/features=PackedStringArray("4.3", "C#", "Forward Plus")
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/max_fps=144
 run/delta_smoothing=false
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ Settings="*res://Settings/Settings.cs"
 Events="*res://Singletons/Events.cs"
 LevelManager="*res://Level/LevelManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ShaderManager="*res://Singletons/ShaderManager.cs"
 
 [dialogue_manager]
 
@@ -46,13 +47,14 @@ project/assembly_name="Colter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/level/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [global_group]
 
 Human="Any and all entities considered human"
 ThreatLevel3="Describes relative intimidation factor of the entity"
 PlayerCamera="PlayerCameraGroup"
+Capybara="Capybara"
 
 [gui]
 

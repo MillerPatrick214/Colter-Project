@@ -39,6 +39,7 @@ public partial class NPCWalk : NPCState
 		NPC.NavAgent.TargetPosition = newRandLocation;
 		//NPC.setAnimation("CapybaraAnimations/CapyWalk");
 		enterComplete = true;
+		
 	}
 
 	public override void PhysicsUpdate(double delta)

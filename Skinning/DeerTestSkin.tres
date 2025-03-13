@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="FurInvItem" load_steps=3 format=3 uid="uid://b31xjq0lq7s35"]
 
 [ext_resource type="Texture2D" uid="uid://l2decie41c3o" path="res://Items/TestFur/DeerSkinTestWorldItem_Cube-export.png" id="1_hjr71"]
-[ext_resource type="Script" path="res://Items/Classes/InventoryItems/FurInvItem.cs" id="2_tj5h4"]
+[ext_resource type="Script" uid="uid://cgw1ko3rd5bl2" path="res://Items/Classes/InventoryItems/FurInvItem.cs" id="2_tj5h4"]
 
 [resource]
 resource_local_to_scene = true

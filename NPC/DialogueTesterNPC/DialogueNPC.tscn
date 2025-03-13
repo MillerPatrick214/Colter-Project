@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=4 uid="uid://cs0m8fumuuyhw"]
 
-[ext_resource type="Script" path="res://NPC/Humanoid/Humanoid.cs" id="1_gn00u"]
+[ext_resource type="Script" uid="uid://bkbeg31xtdmd3" path="res://NPC/Humanoid/Humanoid.cs" id="1_gn00u"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="4_jt0uy"]
 [ext_resource type="Resource" uid="uid://dswnoltgatyh3" path="res://Dialogue/Test/Tester.dialogue" id="5_cpbe6"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/TalkLogic.cs" id="6_1gpws"]
-[ext_resource type="Script" path="res://components/HitBoxComponent.cs" id="9_qlduw"]
-[ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_u2kpq"]
+[ext_resource type="Script" uid="uid://b8xhp0ooga1kf" path="res://components/Interact SubComponents/TalkLogic.cs" id="6_1gpws"]
+[ext_resource type="Script" uid="uid://dq8gkvql1xx5u" path="res://components/HitBoxComponent.cs" id="9_qlduw"]
+[ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="10_u2kpq"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_q0mvx"]
 var/var/name = &"var"

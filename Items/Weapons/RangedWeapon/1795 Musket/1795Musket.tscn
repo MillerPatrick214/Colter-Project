@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="1_1b3rr"]
 [ext_resource type="Texture2D" uid="uid://rlyy8ni5fgsp" path="res://Items/Weapons/RangedWeapon/1795 Musket/1795 musketREAL_gunmetal Base Color.png" id="1_dwws7"]
-[ext_resource type="Script" path="res://Items/Weapons/RangedWeapon/1795 Musket/Seventeen_Ninety_Five_Musket.cs" id="1_h0wpl"]
+[ext_resource type="Script" uid="uid://euenhgoxcqku" path="res://Items/Weapons/RangedWeapon/1795 Musket/Seventeen_Ninety_Five_Musket.cs" id="1_h0wpl"]
 [ext_resource type="Resource" uid="uid://brh6or0x4bks5" path="res://Items/Weapons/RangedWeapon/1795 Musket/InventoryItem/SeventeenNinetyFiveInventoryItem.tres" id="2_ceery"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="4_3o0bd"]
 [ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="4_711rt"]
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="4_e2421"]
 [ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_tj40y"]
-[ext_resource type="PackedScene" uid="uid://bjoeuwsju5qos" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
-[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="10_hxyg4"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="9_qd8h7"]
+[ext_resource type="Script" uid="uid://b5w70f1gxhyiv" path="res://components/Interact SubComponents/PickUpLogic.cs" id="10_hxyg4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfgm7"]
 resource_name = "gunmetal"
@@ -586,7 +586,7 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vr1u2"]
 _data = {
-"RESET": SubResource("Animation_5nxwj")
+&"RESET": SubResource("Animation_5nxwj")
 }
 
 [sub_resource type="Animation" id="Animation_fb5n6"]
@@ -760,9 +760,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_878kn"]
 _data = {
-"DOWN": SubResource("Animation_fb5n6"),
-"FIRE": SubResource("Animation_cvhyg"),
-"UP": SubResource("Animation_ibx18")
+&"DOWN": SubResource("Animation_fb5n6"),
+&"FIRE": SubResource("Animation_cvhyg"),
+&"UP": SubResource("Animation_ibx18")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ley4k"]

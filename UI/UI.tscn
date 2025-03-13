@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://c4x77krwgrmgr"]
 
-[ext_resource type="Script" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
-[ext_resource type="Script" path="res://UI/PauseMenu.cs" id="2_ymhem"]
-[ext_resource type="Script" path="res://UI/InteractText.cs" id="3_wqbe1"]
-[ext_resource type="Script" path="res://UI/FPS.cs" id="4_n6vgp"]
-[ext_resource type="PackedScene" uid="uid://bujq473h6ortl" path="res://Skinning/Skinning.tscn" id="6_bderw"]
+[ext_resource type="Script" uid="uid://ce31ju8nmr6ya" path="res://Player/Character/First Person/UI.cs" id="1_7heha"]
+[ext_resource type="Script" uid="uid://wmvgnn8ket4r" path="res://UI/PauseMenu.cs" id="2_ymhem"]
+[ext_resource type="Script" uid="uid://bdgy3ee7o48lu" path="res://UI/InteractText.cs" id="3_wqbe1"]
+[ext_resource type="Script" uid="uid://c6mjwjh46a3yv" path="res://UI/FPS.cs" id="4_n6vgp"]
+[ext_resource type="PackedScene" uid="uid://t0fd544v45ma" path="res://Skinning/Skinning.tscn" id="6_bderw"]
 [ext_resource type="PackedScene" uid="uid://d2oxyp0wr6oua" path="res://reload.tscn" id="8_jtp4a"]
 [ext_resource type="PackedScene" uid="uid://cgrey8ixgno8a" path="res://UI/InventoryUI/InventoryUI.tscn" id="8_tewgf"]
-[ext_resource type="Script" path="res://UI/InputControl.cs" id="9_hgomv"]
+[ext_resource type="Script" uid="uid://kpk3rbwhw1o2" path="res://UI/InputControl.cs" id="9_hgomv"]
 
 [node name="UI" type="Control"]
 top_level = true

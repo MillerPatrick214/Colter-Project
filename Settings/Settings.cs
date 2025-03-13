@@ -28,39 +28,39 @@ public partial class Settings : Node
 	public override void _Ready() {
         Instance ??= this;
         if (Instance != this) QueueFree();
-		
-		defaultConfig.Load(defaultPath);
 
-		if (SettingsConfig.Load(settingsPath) != Error.Ok) {
-			if (!FileAccess.FileExists(settingsPath)) {
-				GD.Print($"[color=red]Settings: [/color] No file found at {settingsPath}");
-				GD.Print($"[color=red]Settings: [/color] Generating default settings.");
+        defaultConfig.Load(defaultPath);
+
+        if (SettingsConfig.Load(settingsPath) != Error.Ok) {
+            if (!FileAccess.FileExists(settingsPath)) {
+                GD.Print($"[color=red]Settings: [/color] No file found at {settingsPath}");
+                GD.Print($"[color=red]Settings: [/color] Generating default settings.");
 
 				string absDir = ProjectSettings.GlobalizePath(settingsPath.GetBaseDir());
 				Error dirErr = DirAccess.MakeDirAbsolute(absDir);
 				if (dirErr != Error.Ok) { GD.PrintErr($"Error creating directory: {absDir}"); }
 				FileAccess.Open(settingsPath, FileAccess.ModeFlags.WriteRead);
 
-				defaultConfig.Save(settingsPath);
-				SettingsConfig.Load(settingsPath);
-			}
-			else { GD.PrintErr($"Can't load ConfigFile at {settingsPath}"); }
-		}
-		settingsConfigFile.Load(settingsPath);
+                defaultConfig.Save(settingsPath);
+                SettingsConfig.Load(settingsPath);
+            }
+            else { GD.PrintErr($"Can't load ConfigFile at {settingsPath}"); }
+        }
+        settingsConfigFile.Load(settingsPath);
 
-		settingActionDict = new() {
-			// [gameplay]
-			// [graphics]
-			{"window_mode", new Callable(this, MethodName.WindowMode)},
-			{"resolution", new Callable(this, MethodName.Resolution)},
-			{"vsync", new Callable(this, MethodName.VSync)},
-			{"max_fps", new Callable(this, MethodName.MaxFPS)},
-			// [audio]
-			// {"master_volume", new Callable(this, MethodName.MasterVolumne)}
-		};
+        settingActionDict = new() {
+            // [gameplay]
+            // [graphics]
+            {"window_mode", new Callable(this, MethodName.WindowMode)},
+            {"resolution", new Callable(this, MethodName.Resolution)},
+            {"vsync", new Callable(this, MethodName.VSync)},
+            {"max_fps", new Callable(this, MethodName.MaxFPS)},
+            // [audio]
+            // {"master_volume", new Callable(this, MethodName.MasterVolumne)}
+        };
 
-		LoadDefaults();
-	}
+        LoadDefaults();
+    }
 
 	private void LoadDefaults() {
 		// loop through default file and check the settings file has all settings
