@@ -1,11 +1,8 @@
 using Godot;
-using System;
-using System.Reflection.Metadata;
 
 public partial class InputControl : Node
 {
-	[Signal]
-	public delegate void TransitionControlEventHandler(string TransitionTo);
+	[Signal] public delegate void TransitionControlEventHandler(string TransitionTo);
 
 	public const string SKINNING = "Skinning";
 	public const string RELOADING = "Reloading";
@@ -13,8 +10,8 @@ public partial class InputControl : Node
 	public const string PAUSE = "PauseMenu";
 	public const string INVENTORY = "InventoryUI";
 
-	public override void _Ready()
-	{
+	public override void _Ready() {
+		Events.Instance.BeginSkinning += (skinning_scene) => EnterSkinning();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,13 +22,13 @@ public partial class InputControl : Node
 			EmitSignal(SignalName.TransitionControl, INVENTORY);
 		}
 
-		if (Input.IsActionJustPressed("InteractWorld"))
-		{
-			EmitSignal(SignalName.TransitionControl, SKINNING);
-		}
-
 		if (Input.IsActionJustPressed("PauseMenu")) {
 			EmitSignal(SignalName.TransitionControl, PAUSE);
 		}
 	}
+
+	public void EnterSkinning() {
+		EmitSignal(SignalName.TransitionControl, SKINNING);
+	}
 }
+

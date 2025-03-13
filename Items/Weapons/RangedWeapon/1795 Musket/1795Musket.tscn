@@ -1242,6 +1242,9 @@ shape = SubResource("CapsuleShape3D_2g2ad")
 
 [node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("9_qd8h7")]
 CollisionShape = NodePath("CollisionShape3D")
+SkinLogic = null
+TalkLogic = null
+LootLogic = null
 PickUpLogic = SubResource("Resource_0f0yk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]

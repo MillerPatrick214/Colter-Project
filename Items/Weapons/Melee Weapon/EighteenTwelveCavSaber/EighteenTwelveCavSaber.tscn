@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://6r4fpw5c0flg" path="res://NPC/Animal/TestCapy/CapyBoy_capybara2_texture.png" id="2_noo1o"]
 [ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_tmg7v"]
 [ext_resource type="AudioStream" uid="uid://d1dgcvplyf0ct" path="res://Items/Weapons/Melee Weapon/EighteenTwelveCavSaber/422506__nightflame__swinging-staff-whoosh-strong-01.wav" id="4_rssdi"]
-[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="5_7sc07"]
-[ext_resource type="Script" uid="uid://b5w70f1gxhyiv" path="res://components/Interact SubComponents/PickUpLogic.cs" id="6_fpjvg"]
+[ext_resource type="PackedScene" uid="uid://bjoeuwsju5qos" path="res://components/InteractComponent.tscn" id="5_7sc07"]
+[ext_resource type="Script" path="res://components/Interact SubComponents/PickUpLogic.cs" id="6_fpjvg"]
 
 [sub_resource type="Resource" id="Resource_bfxi0"]
 resource_local_to_scene = true
@@ -322,8 +322,9 @@ libraries = {
 "": SubResource("AnimationLibrary_3evw2")
 }
 
-[node name="InteractComponent" parent="." instance=ExtResource("5_7sc07")]
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("5_7sc07")]
 transform = Transform3D(-3.61999e-06, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 9.36921e-07, -3.49664e-06, 0.415, -0.3, -0.5)
+CollisionShape = NodePath("CollisionShape3D2")
 PickUpLogic = SubResource("Resource_dwe3p")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractComponent"]

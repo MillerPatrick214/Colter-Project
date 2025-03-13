@@ -313,7 +313,7 @@ radius = 7.0
 
 [sub_resource type="Resource" id="Resource_ip3hn"]
 script = ExtResource("13_5r5f4")
-SkinningNodePath = "uid://cw0mtrrkpq73g"
+SkinnableScenePath = "uid://cw0mtrrkpq73g"
 
 [node name="LimboCapybara" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree", "InteractComponent", "HitBoxComponent")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)

@@ -1,14 +1,12 @@
 using Godot;
-using System;
 
 [GlobalClass]
 public partial class SkinLogic : InteractLogic
 {
-	[Export]
-	public string SkinningNodePath; 
+	[Export] public string SkinnableScenePath; 
 	public override void Interact()
 	{
-		PackedScene SkinningScene = GD.Load<PackedScene>(SkinningNodePath);
-		Events.Instance.EmitSignal(Events.SignalName.BeginSkinning, SkinningScene);
+		PackedScene SkinnableScene = GD.Load<PackedScene>(SkinnableScenePath);
+		Events.Instance.EmitSignal(Events.SignalName.BeginSkinning, SkinnableScene);
 	}
 }

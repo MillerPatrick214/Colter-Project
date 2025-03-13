@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://e0tx8m20kwns"]
+[gd_scene load_steps=10 format=3 uid="uid://bjoeuwsju5qos"]
 
 [ext_resource type="Script" uid="uid://chjhonw51peyb" path="res://components/InteractComponent.cs" id="1_cuihk"]
 
@@ -6,4 +6,8 @@
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_cuihk")
-CurrentInteractMode = 4
+CurrentInteractMode = 1
+SkinLogic = SubResource("Resource_e8njk")
+TalkLogic = SubResource("Resource_pi5gy")
+LootLogic = SubResource("Resource_3by8w")
+PickUpLogic = SubResource("Resource_b5ex5")

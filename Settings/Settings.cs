@@ -36,10 +36,10 @@ public partial class Settings : Node
                 GD.Print($"[color=red]Settings: [/color] No file found at {settingsPath}");
                 GD.Print($"[color=red]Settings: [/color] Generating default settings.");
 
-                string absDir = ProjectSettings.GlobalizePath(settingsPath.GetBaseDir());
-                Error dirErr = DirAccess.MakeDirAbsolute(absDir);
-                if (dirErr != Error.Ok) { GD.PrintErr($"Error creating directory: {absDir}"); }
-                FileAccess.Open(settingsPath, FileAccess.ModeFlags.WriteRead);
+				string absDir = ProjectSettings.GlobalizePath(settingsPath.GetBaseDir());
+				Error dirErr = DirAccess.MakeDirAbsolute(absDir);
+				if (dirErr != Error.Ok) { GD.PrintErr($"Error creating directory: {absDir}"); }
+				FileAccess.Open(settingsPath, FileAccess.ModeFlags.WriteRead);
 
                 defaultConfig.Save(settingsPath);
                 SettingsConfig.Load(settingsPath);
