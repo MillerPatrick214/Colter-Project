@@ -71,7 +71,7 @@ public partial class ConfirmThreat : BTAction
         if (target.IsZeroApprox()) {return;}
 
         Transform3D transform = agent.Transform;
-		 Basis a = agent.Transform.Basis;			
+		Basis a = agent.Transform.Basis;			
 
 		Basis b =  Basis.LookingAt(-target);
 

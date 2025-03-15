@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://caytjncvn5bm2"]
+
+[ext_resource type="Script" uid="uid://bjb2ephgbu65q" path="res://AnimalHurtBox.cs" id="1_f4vul"]
+
+[node name="AnimalHurtBox" type="Area3D"]
+script = ExtResource("1_f4vul")

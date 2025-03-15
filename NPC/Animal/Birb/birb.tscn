@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://bat607k3ayyyo"]
+
+[ext_resource type="Script" uid="uid://dc2tnhf1a00l6" path="res://Birb.cs" id="1_glf8g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vg261"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ajdb7"]
+material = SubResource("StandardMaterial3D_vg261")
+radius = 0.05
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdctq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_slnxr"]
+material = SubResource("StandardMaterial3D_bdctq")
+size = Vector3(0.03, 0.085, 0.125)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d02fb"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_rdet4"]
+material = SubResource("StandardMaterial3D_d02fb")
+size = Vector3(0.02, 0.02, 0.01)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h550i"]
+radius = 0.01
+height = 0.02
+
+[node name="Birb" type="CharacterBody3D"]
+script = ExtResource("1_glf8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ajdb7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-3.9616e-08, -1.84732e-08, 1, -0.422618, 0.906308, 0, -0.906308, -0.422618, -4.37114e-08, -0.000149235, 0.0167746, 0.00762311)
+mesh = SubResource("BoxMesh_slnxr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0406112, -0.0552777)
+mesh = SubResource("PrismMesh_rdet4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.058, -0.0406813)
+mesh = SubResource("SphereMesh_h550i")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0.058, -0.0406813)
+mesh = SubResource("SphereMesh_h550i")

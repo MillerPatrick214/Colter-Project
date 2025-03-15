@@ -20,7 +20,7 @@ public partial class FeatureDisplayCam : Marker3D
 		float curr_y = curr_rot.Y;
 
 		curr_y = Mathf.LerpAngle(curr_y, parent_y_rot, PivotSpeed * (float)delta);
-
+		
 		curr_rot = new(curr_rot.X, curr_y, curr_rot.Z);
 	}
 }

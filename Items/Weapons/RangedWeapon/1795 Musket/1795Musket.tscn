@@ -1174,8 +1174,8 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_vr1u2"),
-"Chune?": SubResource("AnimationLibrary_878kn")
+&"": SubResource("AnimationLibrary_vr1u2"),
+&"Chune?": SubResource("AnimationLibrary_878kn")
 }
 movie_quit_on_finish = true
 

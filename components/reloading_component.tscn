@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://byon45yrjvpcm"]
+
+[ext_resource type="Script" uid="uid://bosq0seeksb0j" path="res://components/ReloadingComponent.cs" id="1_6t25p"]
+
+[node name="ReloadingComponent" type="Node3D" node_paths=PackedStringArray("OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera")]
+script = ExtResource("1_6t25p")
+OverviewMarker = NodePath("Finish_End")
+MechanismMarker = NodePath("Mechanism")
+BarrelEndMarker = NodePath("BarrelEnd")
+ReloadCamera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Finish_End" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 0)
+
+[node name="Mechanism" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.135, 0, 0)
+
+[node name="BarrelEnd" type="Marker3D" parent="."]
+transform = Transform3D(1.07967e-08, -0.246999, 0.969016, -1, -4.37114e-08, 0, 4.2357e-08, -0.969016, -0.246999, 0.135, 0, -0.279)

@@ -1,0 +1,388 @@
+[gd_scene load_steps=60 format=4 uid="uid://8rg5vm4nwgx7"]
+
+[ext_resource type="Script" uid="uid://dtph8oysge0mn" path="res://NPC/Animal/Cougar/Cougar.cs" id="1_axqba"]
+[ext_resource type="Script" uid="uid://dblnc636sjb26" path="res://ai/tasks/Trapped.cs" id="2_c77w5"]
+[ext_resource type="Texture2D" uid="uid://baqeke7a85mcs" path="res://NPC/Animal/Cougar/cat.png" id="2_rdll2"]
+[ext_resource type="Script" uid="uid://cgnqwy7wpirh3" path="res://ai/tasks/Predators/ConfirmPrey.cs" id="3_axqba"]
+[ext_resource type="Script" uid="uid://bij5enfn35yfs" path="res://ai/tasks/Freeze.cs" id="3_rdll2"]
+[ext_resource type="Script" uid="uid://bxcwwx1l7nyqq" path="res://ai/tasks/Predators/Cats/StalkPrey.cs" id="4_c77w5"]
+[ext_resource type="Script" uid="uid://dqoqntwm2bavq" path="res://ai/tasks/Predators/Cats/Pounce.cs" id="7_c77w5"]
+[ext_resource type="Script" uid="uid://dq8gkvql1xx5u" path="res://components/HitBoxComponent.cs" id="8_ld4kt"]
+[ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="9_3ldcn"]
+[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="10_ab8vj"]
+[ext_resource type="PackedScene" uid="uid://caytjncvn5bm2" path="res://AnimalAttack.tscn" id="11_axqba"]
+[ext_resource type="Script" uid="uid://41ae8c7i2jwb" path="res://components/Interact SubComponents/SkinLogic.cs" id="11_cpq8b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ee02"]
+custom_solver_bias = 0.012
+height = 2.008
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oom7v"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("2_rdll2")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6wtve"]
+resource_name = "cat_2-80_Cube_001"
+_blend_shape_names = PackedStringArray("Key 1", "Key 2")
+_surfaces = [{
+"aabb": AABB(-0.368904, -0.96092, -1.46716, 0.720475, 2.34797, 2.81538),
+"attribute_data": PackedByteArray("YyZbP1oJCz+yM78+XIY4P482Bz4YwZs+ZbB+Ppw4Lz98OVo+Y3V8P76GKj+yqzk/Pyg4P0icdj8VI04/S350P5mdWT9Yiis/UNHTPgrmpz4vtZk+1Ok4PpKuZD7cKi0+3HyaPtj9yj6SrmQ+3CotPjCTKj/IUp49dsVZPxDOrD7xWC0/BjehPsgnOz+w3Go9/M5CP+zPOT9rnyg/gEo3P0hJKj9tii0/gRfLPvvNKj+ibyg/RCg3P6IPzT5gDzU//XSmPl4TNz9Y48w+2Zc1P2MmWz9aCQs/sjO/PlyGOD9Sa1I/WgkLP482Bz4YwZs+ZbB+Ppw4Lz98OVo+Y3V8P76GKj+yqzk/Pyg4P0icdj8VI04/S350P5mdWT9Yiis/yQZbP+vpCj9Q0dM+CuanPpKuZD7cKi0+L7WZPtTpOD7cfJo+2P3KPpKuZD7cKi0+MJMqP8hSnj12xVk/EM6sPsgnOz+w3Go98VgtPwY3oT5IC5Q+QAQEP85FBj0Iffs+wDmkPlQX8j73NhQ/DJsKP4q4UT/Aeeg+O8lvP+gwkj61VX0/XOOWPk9FUD+BWFY/VDFoP2IZUT/KkGA/9JZIPulXST+0ZUA+SAuUPkAEBD96zJ8+I85+P/c2FD8Mmwo/SixBPsxazz7ORQY9CH37PsA5pD5UF/I+irhRP8B56D5J7FI/TukoP09FUD+BWFY/O8lvP+gwkj61VX0/XOOWPuHznT5cCQA+6VdJP7RlQD56zJ8+I85+P146jj6s7SQ/3POMPjJQbD9u3yI+0HAHP7vnGT5iBAo/SixBPsxazz675xk+YgQKP3rWAD6sxe8+Izd8PISW2D7Knss9eq6ZPo82Bz4YwZs+r8oQPxZl8z7u0Ws+Wn6jPmNaRT5QzKk+LyRzP7DUBD7LXmY/UOMFPknsUj9O6Sg/nAhjP8KvUj8FaEU/a0F5P2NaRT5QzKk+SixBPsxazz6PNgc+GMGbPhfAhz7U6mo+4fOdPlwJAD4LX28/MOEXPgkzdT8cEJo+LyRzP7DUBD7LXmY/UOMFPq/KED8WZfM+nAhjP8KvUj9UMWg/YhlRPwVoRT9rQXk/7tFrPlp+oz6o+0U+8hyqPl46jj6s7SQ/bt8iPtBwBz/c84w+MlBsP7vnGT5iBAo/yp7LPXqumT6PNgc+GMGbPnrWAD6sxe8+Izd8PISW2D675xk+YgQKP2piMT9A0iQ8yCc7P7Dcaj0wkyo/yFKePUhJKj9tii0/qPtFPvIcqj6PNgc+GMGbPkosQT7MWs8+F8CHPtTqaj5qYjE/QNIkPDCTKj/IUp49yCc7P7Dcaj3KkGA/9JZIPoEXyz77zSo/"),
+"blend_shapes": PackedByteArray("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"),
+"format": 34359742487,
+"index_count": 342,
+"index_data": PackedByteArray("AQBGAEcABABIAEYARgBIAEcAAwBHAEgAAwBJAEcAAwBKAEkALgABAEcASQAuAEcAMQABAC4AAQAxAAUASwAuAEkALwBJAEwALwBNAEkATQBLAEkATQAvAE4ATwBNAE4ATQBPAEsATwBQAEsAMAAuAEsAUQAuADAAUQAxAC4AMABLAFIASwBTAFIAUwACAFIAMgAxAFEAMgAAADEAMwAAADIAAAAzADQANAAzAFQAVQBUADMAAABWADEABQAxAFYAVgAAAAgABQBWADUAVwBWAAgAVgBXADUAVwAIADYAWAA1AFcAWABXADYABgA1AFgAWAA2AAcAWQBaAFsAXAANAAoADABcAAoACQAMAAoACQAKAF0ACwBdAAoAQwBeAF8AQwBgAF4AGgBDAF8AYABhAF4AYQBCAF4AXwBeAEIAGgBfABwAHABfAEIAQgA/ABwAPwA7ABwAPwBiADsAIwAkABwAQAAjABwAHAA7AEAAYwAjAEAAYwBkACMAZQBkAGMAZQAiAGQAZQBjAEEAQABBAGMAIQBlAEEAIABBAEAAIABAADsAGwAgADsAYgA5ADsAOwA5ABsAYgA+ADkAPgA8ADkAPgBmADwAZwBmAB0APABmAGcAOQBoABsAGwBoADoAPABpADkAaQBoADkAOgBoAGoAHwA6AGoAHgBqAGgAHgBoAGkAHgBpAGsAbAA8AG0AbgA8AGwAbgBpADwAbABvAG4AbgBvAD0APQBpAG4APQBwAGkAcQByAHMADgA3ADgADgARADcAOAA3AA8AOAAPABAAEgATAHQAdQB2AHcAeAAnACkAKAAnAHgAJQAnACgAJQBEACcAJgAnAEQAeQB6AHsAKgB8ACwAKgBFAHwARQArAHwARQAtACsAFQAWABcAFQAUABYAGAB9ABkA"),
+"lods": [0.203337, PackedByteArray("AQAEAC4AAwAuAAQAAwAvAC4AAgAuAC8AMAAuAAIAMQABAC4AMAAxAC4AAQAxAAUAMgAxADAABQAxAAAAMgAAADEAMwAAADIAAAAzADQABQAAADUAAAA2ADUANgAAAAgABgA1ADYABgA2AAcACQAKAAsACQAMAAoADAANAAoADgA3ADgADgARADcAOAA3AA8AOAAPABAAEgATABQAFQAUABYAFQAWABcAGAAVABkAGwA5ADoAOgA5AB8AHgAfADkAOwA5ABsAGwAgADsAHgA5ADwAPQAeADwAHQA9ADwAPgAdADwAPgA8ADkAPgA5ADsAPwA+ADsAIABAADsAIABBAEAAPwA7ABwAHAA7AEAAQgA/ABwAHABDAEIAGgBDABwAQAAjABwAQQAjAEAAIwAkABwAQQAiACMAIQAiAEEAJQBEACcAJgAnAEQAJQAnACgAKAAnACkAKgBFACwARQArACwARQAtACsA"), 0.435665, PackedByteArray("AAABAAIAAgABAAMAAwABAAQABQABAAAABQAAAAYAAAAHAAYABwAAAAgACQAKAAsACQAMAAoADAANAAoADgAPABAADgARAA8AEgATABQAFQAUABYAFQAWABcAGAAVABkAGgAbABwAGgAdABsAHgAbAB0AHgAfABsAIAAcABsAIAAhABwAHAAhACIAIgAjABwAIwAkABwAJQAmACcAJQAnACgAKAAnACkAKgArACwAKgAtACsA")],
+"material": SubResource("StandardMaterial3D_oom7v"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 126,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+metadata/extras = {
+"targetNames": ["Key 1", "Key 2"]
+}
+
+[sub_resource type="Animation" id="Animation_kxct8"]
+resource_name = "KeyAction"
+length = 1.20833
+tracks/0/type = "blend_shape"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_001:Key 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0416667, 1, 1, 0.0833333, 1, 0.985423, 0.125, 1, 0.944606, 0.166667, 1, 0.881924, 0.208333, 1, 0.801749, 0.25, 1, 0.708455, 0.291667, 1, 0.606414, 0.375, 1, 0.393586, 0.416667, 1, 0.291545, 0.458333, 1, 0.198251, 0.5, 1, 0.118076, 0.541667, 1, 0.0553937, 0.583333, 1, 0.0145772, 0.625, 1, 0, 0.666667, 1, 0.0127407, 0.708333, 1, 0.0485926, 0.75, 1, 0.104, 0.791667, 1, 0.175407, 0.833333, 1, 0.259259, 0.875, 1, 0.352, 0.916667, 1, 0.450074, 0.958333, 1, 0.549926, 1, 1, 0.648, 1.04167, 1, 0.740741, 1.08333, 1, 0.824593, 1.125, 1, 0.896, 1.16667, 1, 0.951408, 1.20833, 1, 0.987259)
+tracks/1/type = "blend_shape"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_001:Key 2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.0416667, 1, 0, 0.0833333, 1, 0.0145773, 0.125, 1, 0.0553936, 0.166667, 1, 0.118076, 0.208333, 1, 0.198251, 0.25, 1, 0.291545, 0.291667, 1, 0.393586, 0.375, 1, 0.606414, 0.416667, 1, 0.708455, 0.458333, 1, 0.801749, 0.5, 1, 0.881924, 0.541667, 1, 0.944606, 0.583333, 1, 0.985423, 0.625, 1, 1, 0.666667, 1, 0.987259, 0.708333, 1, 0.951407, 0.75, 1, 0.896, 0.791667, 1, 0.824593, 0.833333, 1, 0.740741, 0.875, 1, 0.648, 0.916667, 1, 0.549926, 0.958333, 1, 0.450074, 1, 1, 0.352, 1.04167, 1, 0.259259, 1.08333, 1, 0.175407, 1.125, 1, 0.104, 1.16667, 1, 0.0485924, 1.20833, 1, 0.0127409)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kb0si"]
+_data = {
+&"KeyAction": SubResource("Animation_kxct8")
+}
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_jy2mn"]
+var/hasFocus/name = &"hasFocus"
+var/hasFocus/type = 1
+var/hasFocus/value = false
+var/hasFocus/hint = 0
+var/hasFocus/hint_string = ""
+var/Focus/name = &"Focus"
+var/Focus/type = 24
+var/Focus/hint = 34
+var/Focus/hint_string = ""
+var/IsTrapped/name = &"IsTrapped"
+var/IsTrapped/type = 1
+var/IsTrapped/value = false
+var/IsTrapped/hint = 0
+var/IsTrapped/hint_string = ""
+var/PreyFocus/name = &"PreyFocus"
+var/PreyFocus/type = 24
+var/PreyFocus/hint = 34
+var/PreyFocus/hint_string = ""
+var/DistanceToPrey/name = &"DistanceToPrey"
+var/DistanceToPrey/type = 3
+var/DistanceToPrey/value = 0.0
+var/DistanceToPrey/hint = 0
+var/DistanceToPrey/hint_string = ""
+var/DistanceToAbort/name = &"DistanceToAbort"
+var/DistanceToAbort/type = 2
+var/DistanceToAbort/value = 100
+var/DistanceToAbort/hint = 0
+var/DistanceToAbort/hint_string = ""
+var/DistanceToLaunchAttack/name = &"DistanceToLaunchAttack"
+var/DistanceToLaunchAttack/type = 2
+var/DistanceToLaunchAttack/value = 10
+var/DistanceToLaunchAttack/hint = 0
+var/DistanceToLaunchAttack/hint_string = ""
+var/NavTarget/name = &"NavTarget"
+var/NavTarget/type = 9
+var/NavTarget/value = Vector3(0, 0, 0)
+var/NavTarget/hint = 0
+var/NavTarget/hint_string = ""
+var/IsFull/name = &"IsFull"
+var/IsFull/type = 1
+var/IsFull/value = false
+var/IsFull/hint = 0
+var/IsFull/hint_string = ""
+var/ConfirmedPrey/name = &"ConfirmedPrey"
+var/ConfirmedPrey/type = 1
+var/ConfirmedPrey/value = false
+var/ConfirmedPrey/hint = 0
+var/ConfirmedPrey/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_7e3rr"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_shfb5"]
+variable = &"IsTrapped"
+value = SubResource("BBVariant_7e3rr")
+
+[sub_resource type="BTAction" id="BTAction_bxdbc"]
+script = ExtResource("2_c77w5")
+
+[sub_resource type="BTSequence" id="BTSequence_gqsns"]
+custom_name = "CheckTrapped"
+children = [SubResource("BTCheckVar_shfb5"), SubResource("BTAction_bxdbc")]
+
+[sub_resource type="BBVariant" id="BBVariant_c77w5"]
+resource_name = "<null>"
+type = 24
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_rdll2"]
+variable = &"PreyFocus"
+check_type = 5
+value = SubResource("BBVariant_c77w5")
+
+[sub_resource type="BBVariant" id="BBVariant_gwaog"]
+resource_name = "false"
+saved_value = false
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_uh1mj"]
+variable = &"ConfirmedPrey"
+value = SubResource("BBVariant_gwaog")
+
+[sub_resource type="BTAction" id="BTAction_ld4kt"]
+script = ExtResource("3_rdll2")
+
+[sub_resource type="BTAction" id="BTAction_3ldcn"]
+script = ExtResource("3_axqba")
+SusSpeed = 70
+UnusSpeed = 30
+
+[sub_resource type="BBVariant" id="BBVariant_ld4kt"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTSetVar" id="BTSetVar_3ldcn"]
+variable = &"ConfirmedPrey"
+value = SubResource("BBVariant_ld4kt")
+
+[sub_resource type="BTSequence" id="BTSequence_ab8vj"]
+custom_name = "Focus W/O confirmation"
+children = [SubResource("BTCheckVar_rdll2"), SubResource("BTCheckVar_uh1mj"), SubResource("BTAction_ld4kt"), SubResource("BTAction_3ldcn"), SubResource("BTSetVar_3ldcn")]
+
+[sub_resource type="BBVariant" id="BBVariant_rdll2"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_gwaog"]
+variable = &"PreyFocus"
+value = SubResource("BBVariant_rdll2")
+
+[sub_resource type="BBVariant" id="BBVariant_uh1mj"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_yc428"]
+variable = &"ConfirmedPrey"
+value = SubResource("BBVariant_uh1mj")
+
+[sub_resource type="BBVariant" id="BBVariant_yc428"]
+resource_name = "false"
+saved_value = false
+type = 1
+
+[sub_resource type="BTSetVar" id="BTSetVar_lj7g2"]
+variable = &"ConfirmedPrey"
+value = SubResource("BBVariant_yc428")
+
+[sub_resource type="BTSequence" id="BTSequence_lj7g2"]
+custom_name = "Confirmed But No Focus"
+children = [SubResource("BTCheckVar_gwaog"), SubResource("BTCheckVar_yc428"), SubResource("BTSetVar_lj7g2")]
+
+[sub_resource type="BBVariant" id="BBVariant_3ldcn"]
+resource_name = "false"
+saved_value = false
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_ab8vj"]
+variable = &"IsFull"
+value = SubResource("BBVariant_3ldcn")
+
+[sub_resource type="BBVariant" id="BBVariant_qh2lo"]
+resource_name = "<null>"
+type = 24
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_u2316"]
+variable = &"PreyFocus"
+check_type = 5
+value = SubResource("BBVariant_qh2lo")
+
+[sub_resource type="BBVariant" id="BBVariant_lj7g2"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_ld4kt"]
+variable = &"ConfirmedPrey"
+value = SubResource("BBVariant_lj7g2")
+
+[sub_resource type="BTAction" id="BTAction_rdll2"]
+script = ExtResource("4_c77w5")
+DistanceToLaunchAttack = 10
+DistanceToAbort = 50
+
+[sub_resource type="BTDelay" id="BTDelay_c77w5"]
+children = [SubResource("BTAction_rdll2")]
+
+[sub_resource type="BTAction" id="BTAction_yc428"]
+script = ExtResource("7_c77w5")
+IntialVelocity = 15.0
+
+[sub_resource type="BBVariant" id="BBVariant_ab8vj"]
+resource_name = "true"
+saved_value = true
+type = 1
+
+[sub_resource type="BTSetVar" id="BTSetVar_cpq8b"]
+variable = &"IsFull"
+value = SubResource("BBVariant_ab8vj")
+
+[sub_resource type="BTSequence" id="BTSequence_c77w5"]
+custom_name = "Confirmed and Has Focus"
+children = [SubResource("BTCheckVar_ab8vj"), SubResource("BTCheckVar_u2316"), SubResource("BTCheckVar_ld4kt"), SubResource("BTDelay_c77w5"), SubResource("BTAction_yc428"), SubResource("BTSetVar_cpq8b")]
+
+[sub_resource type="BTSelector" id="BTSelector_c77w5"]
+children = [SubResource("BTSequence_ab8vj"), SubResource("BTSequence_lj7g2"), SubResource("BTSequence_c77w5")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_pnat6"]
+children = [SubResource("BTSequence_gqsns"), SubResource("BTSelector_c77w5")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_0euad"]
+blackboard_plan = SubResource("BlackboardPlan_jy2mn")
+root_task = SubResource("BTDynamicSelector_pnat6")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_eqgah"]
+resource_local_to_scene = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rvt4i"]
+points = PackedVector3Array(0, 0, 0, 5, -5, 50, -5, -5, 50, 5, 5, 50, -5, 5, 50)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1snyy"]
+radius = 7.0
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_38cjf"]
+
+[sub_resource type="Resource" id="Resource_m0epq"]
+script = ExtResource("11_cpq8b")
+SkinningNodePath = "uid://cw0mtrrkpq73g"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c77w5"]
+size = Vector3(0.75, 0.75, 0.5)
+
+[node name="Cougar" type="CharacterBody3D" node_paths=PackedStringArray("AnimalHurtBox", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree", "InteractComponent", "HitBoxComponent")]
+script = ExtResource("1_axqba")
+SpeciesGroup = &"cougar"
+AnimalHurtBox = NodePath("HurtBox")
+SpeciesThreatLevel = 5
+RunSpeed = 13.0
+NavAgent = NodePath("NavigationAgent3D")
+AniTree = NodePath("AnimationTree")
+VisionRay = NodePath("VisionCone/VisionRay")
+HearingArea = NodePath("HearingArea")
+VisionCone = NodePath("VisionCone")
+BehaviorTree = NodePath("BTPlayer")
+InteractComponent = NodePath("InteractComponent")
+HitBoxComponent = NodePath("HitBoxComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00692475, 0.309785, 0.145884)
+shape = SubResource("CapsuleShape3D_4ee02")
+
+[node name="Cube_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.785735, 0)
+mesh = SubResource("ArrayMesh_6wtve")
+skeleton = NodePath("")
+"blend_shapes/Key 1" = 1.0
+"blend_shapes/Key 2" = 0.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kb0si")
+}
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = SubResource("BehaviorTree_0euad")
+blackboard_plan = SubResource("BlackboardPlan_eqgah")
+
+[node name="HitBoxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HealthComponent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692475, 0.016282, 0.0323615)
+script = ExtResource("8_ld4kt")
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
+shape = SubResource("CapsuleShape3D_4ee02")
+
+[node name="VisionCone" type="Area3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.00692475, 0.016282, 0.0323615)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00210404, 0.298008, -0.515976)
+shape = SubResource("ConvexPolygonShape3D_rvt4i")
+
+[node name="VisionRay" type="RayCast3D" parent="VisionCone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, 0, 8)
+
+[node name="HearingArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692475, 0.016282, 0.0323615)
+
+[node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
+shape = SubResource("SphereShape3D_1snyy")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("9_3ldcn")
+MaxHealth = 50.0
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("")
+tree_root = SubResource("AnimationRootNode_38cjf")
+
+[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("10_ab8vj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00692475, 0.016282, 0.0323615)
+CurrentInteractMode = 1
+CollisionShape = NodePath("CollisionShape3D")
+SkinLogic = SubResource("Resource_m0epq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.293503, 0.113522)
+shape = SubResource("CapsuleShape3D_4ee02")
+
+[node name="HurtBox" parent="." instance=ExtResource("11_axqba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101308, 0.0162823, -2.20808)
+StrikeDamage = 55.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273418, 1)
+shape = SubResource("BoxShape3D_c77w5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+navigation_layers = 3
+avoidance_enabled = true
+radius = 1.0
+neighbor_distance = 10.0
+time_horizon_agents = 0.1
+time_horizon_obstacles = 0.1
+max_speed = 15.0
+avoidance_layers = 3
+avoidance_mask = 3
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 6.0

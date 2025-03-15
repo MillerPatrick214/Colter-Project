@@ -9,9 +9,7 @@ public partial class MoveHerd : BTAction
     Animal agent;
     HerdComponent comp;
     NavigationAgent3D NavAgent;
-
     Status status;
-
     Vector3 SafeVel;
     
     public override string _GenerateName()
@@ -36,7 +34,10 @@ public partial class MoveHerd : BTAction
         if (comp == null) comp = agent.HerdComponent;
         if (NavAgent == null ) NavAgent = agent.NavAgent;
         
-        if (comp == null) GD.PrintErr($"CRAP! Comp is null in MoveHerd:{GetParent().GetPath()}!!!");
+        if (comp == null) 
+        {
+            GD.PrintErr($"CRAP! Comp is null in MoveHerd:{GetParent().GetPath()}!!!");
+        }
     }
 
     public override void _Exit()
@@ -92,7 +93,7 @@ public partial class MoveHerd : BTAction
         {
             agent.Rotate(agent.Velocity);
         }
-
+        
         return status;
     }
     

@@ -5,8 +5,8 @@ using System;
 public partial class MoveTo : BTAction
 {
     Vector3 SafeVelocity;
+    Vector3 Target; 
     NPCBase agent;
-    HerdComponent comp;
     public override string _GenerateName()
     {
         return "MoveTo";
@@ -19,15 +19,13 @@ public partial class MoveTo : BTAction
             this.agent = agent;
             agent.NavAgent.VelocityComputed += (vel) => SafeVelocity = vel;
         }
-
-        if (Agent is Animal animal)
-        {
-            comp = animal.HerdComponent;
-        }
     }
 
     public override void _Enter()
-    {
+    { 
+        Target = (Vector3)Blackboard.GetVar("NavTarget");
+        agent.NavAgent.TargetPosition = Target;
+        
     }
 
     public override void _Exit()
@@ -35,20 +33,12 @@ public partial class MoveTo : BTAction
         agent.NavAgent.TargetPosition = Vector3.Zero;
         agent.NavAgent.Velocity = Vector3.Zero;
         agent.Velocity = Vector3.Zero;
-
-        if (!agent.HasNode("HerdComponent")) return;
-
-        HerdComponent comp = agent.GetNode<HerdComponent>("HerdComponent");
-       // comp.UpdatePositionWithinHerd();
     }
 
     public override Status _Tick(double delta)
     {
 		Godot.Vector3 destination = agent.NavAgent.GetNextPathPosition();
-		Godot.Vector3 LocalDestination = destination - agent.GlobalPosition;
-
-        
-		
+		Godot.Vector3 LocalDestination = agent.NavAgent.GetNextPathPosition() - agent.GlobalPosition;
 		Godot.Vector3 direction = LocalDestination.Normalized();
 
 		direction.Y = 0;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cs0m8fumuuyhw"]
+[gd_scene load_steps=14 format=4 uid="uid://cs0m8fumuuyhw"]
 
 [ext_resource type="Script" uid="uid://bkbeg31xtdmd3" path="res://NPC/Humanoid/Humanoid.cs" id="1_gn00u"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="4_jt0uy"]
@@ -6,18 +6,6 @@
 [ext_resource type="Script" uid="uid://b8xhp0ooga1kf" path="res://components/Interact SubComponents/TalkLogic.cs" id="6_1gpws"]
 [ext_resource type="Script" uid="uid://dq8gkvql1xx5u" path="res://components/HitBoxComponent.cs" id="9_qlduw"]
 [ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="10_u2kpq"]
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_q0mvx"]
-var/var/name = &"var"
-var/var/type = 3
-var/var/value = 0.0
-var/var/hint = 0
-var/var/hint_string = ""
-
-[sub_resource type="BehaviorTree" id="BehaviorTree_lr8vt"]
-blackboard_plan = SubResource("BlackboardPlan_q0mvx")
-
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_t7obh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwvfe"]
 resource_name = "Humanoid_NotOverlapping"
@@ -84,10 +72,6 @@ HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
 InteractComponent = NodePath("InteractComponent")
 IsInteractable = true
-
-[node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = SubResource("BehaviorTree_lr8vt")
-blackboard_plan = SubResource("BlackboardPlan_t7obh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

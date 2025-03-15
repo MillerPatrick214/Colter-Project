@@ -4,6 +4,10 @@ using System;
 [Tool]
 public partial class NewWanderPosition : BTAction
 {
+    Godot.Vector3 newRandLocation = new Godot.Vector3(0,0,0);
+
+    NavigationAgent3D NavAgent;
+    NPCBase agent;
     public override string _GenerateName()
     {
         return "NewWanderPosition";
@@ -11,40 +15,61 @@ public partial class NewWanderPosition : BTAction
 
     public override void _Setup()
     {
+        if (Agent is NPCBase agent)
+        {
+            this.agent = agent;
+            NavAgent = agent.NavAgent;
+        }
     }
 
     public override void _Enter()
     {
-        if (Agent is NPCBase agent)
-        {
-            //agent.NavAgent.NavigationFinished += NavFinished;
-		    GD.Print("Entering enter function in CapyWalk now... See if I'm Before or After ");
-		    //GD.Print ("Anitree isWalking set to TRUE");
+		newRandLocation = new Godot.Vector3(0,0,0);
+		Random rnd = new Random();
 
-		    Godot.Vector3 newRandLocation = new Godot.Vector3(0,0,0);
-		    Random rnd = new Random();
+		newRandLocation.X = rnd.Next(-100, 100) + agent.GlobalPosition.X;     
+		newRandLocation.Z = rnd.Next(-100, 100) + agent.GlobalPosition.Z;
 
-		    newRandLocation.X = rnd.Next(-100, 100) + agent.GlobalPosition.X;
-		    newRandLocation.Z = rnd.Next(-100, 100) + agent.GlobalPosition.Z;
+		GD.Print("Before bounds check: ", newRandLocation);
 
-		    GD.Print("Before bounds check: ", newRandLocation);
+		newRandLocation = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), newRandLocation);
 
-		    newRandLocation = NavigationServer3D.MapGetClosestPoint(agent.NavAgent.GetNavigationMap(), newRandLocation);
+		GD.Print("After bounds check: ", newRandLocation);
 
-		    GD.Print("After bounds check: ", newRandLocation);
-
-		    agent.NavAgent.TargetPosition = newRandLocation;        
-        }
+		agent.NavAgent.TargetPosition = newRandLocation;     
+        
     }
 
     public override void _Exit()
     {
+        Blackboard.SetVar("NavTarget", newRandLocation);
+        newRandLocation = new Godot.Vector3(0,0,0);
+    }
+
+    public Vector3 PickRandPoint()
+    {
+        newRandLocation = new Godot.Vector3(0,0,0);
+		Random rnd = new Random();
+
+		newRandLocation.X = rnd.Next(-100, 100) + agent.GlobalPosition.X;     
+		newRandLocation.Z = rnd.Next(-100, 100) + agent.GlobalPosition.Z;
+
+		GD.Print("Before bounds check: ", newRandLocation);
+
+		newRandLocation = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), newRandLocation);
+
+		GD.Print("After bounds check: ", newRandLocation);
+
+		NavAgent.TargetPosition = newRandLocation;
+        return newRandLocation;
     }
 
     public override Status _Tick(double delta)
     {
-
-        return Status.Success;
+        PickRandPoint();
+        if (newRandLocation != Vector3.Zero) return Status.Success;
+        GD.PrintErr("Error in NewWanderPosition -- May be stuck in loop where I cannot find a random map value! If you only see me once, disregard");
+        return Status.Running; 
     }
 
     public override string[] _GetConfigurationWarnings()

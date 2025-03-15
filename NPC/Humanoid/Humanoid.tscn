@@ -167,7 +167,7 @@ points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 30, -5, 0, 30, 5, 5, 30, -
 [sub_resource type="SphereShape3D" id="SphereShape3D_j2l3g"]
 radius = 7.0
 
-[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
+[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 3
 script = ExtResource("1_5we11")
@@ -177,6 +177,7 @@ AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
+BehaviorTree = NodePath("BTPlayer")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_pmo6d")

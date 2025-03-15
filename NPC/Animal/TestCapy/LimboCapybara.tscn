@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://ftwq8vi5isjx" path="res://components/HealthComponent.cs" id="13_t1s4s"]
 [ext_resource type="PackedScene" uid="uid://ccygd4wouya0s" path="res://components/Herd/HerdComponent.tscn" id="14_mh11t"]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_jy2mn"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_oi7ko"]
 var/Target/name = &"Target"
 var/Target/type = 9
 var/Target/value = Vector3(0, 0, 0)
@@ -45,166 +45,171 @@ var/IsTrapped/type = 1
 var/IsTrapped/value = false
 var/IsTrapped/hint = 0
 var/IsTrapped/hint_string = ""
+var/IsFull/name = &"IsFull"
+var/IsFull/type = 3
+var/IsFull/value = 0.0
+var/IsFull/hint = 0
+var/IsFull/hint_string = ""
 
-[sub_resource type="BBVariant" id="BBVariant_7e3rr"]
+[sub_resource type="BBVariant" id="BBVariant_n2b2d"]
 resource_name = "true"
 saved_value = true
 type = 1
 
-[sub_resource type="BTCheckVar" id="BTCheckVar_shfb5"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_fh0d5"]
 variable = &"IsTrapped"
-value = SubResource("BBVariant_7e3rr")
+value = SubResource("BBVariant_n2b2d")
 
-[sub_resource type="BTAction" id="BTAction_bxdbc"]
+[sub_resource type="BTAction" id="BTAction_mwh4g"]
 script = ExtResource("2_qxr7o")
 
-[sub_resource type="BTSequence" id="BTSequence_gqsns"]
+[sub_resource type="BTSequence" id="BTSequence_ydvc2"]
 custom_name = "CheckTrapped"
-children = [SubResource("BTCheckVar_shfb5"), SubResource("BTAction_bxdbc")]
+children = [SubResource("BTCheckVar_fh0d5"), SubResource("BTAction_mwh4g")]
 
-[sub_resource type="BBVariant" id="BBVariant_nndm1"]
+[sub_resource type="BBVariant" id="BBVariant_soyw4"]
 resource_name = "false"
 saved_value = false
 type = 1
 
-[sub_resource type="BTCheckVar" id="BTCheckVar_u2316"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_wq2j6"]
 variable = &"hasFocus"
-value = SubResource("BBVariant_nndm1")
+value = SubResource("BBVariant_soyw4")
 
-[sub_resource type="BBNode" id="BBNode_2d0tl"]
+[sub_resource type="BBNode" id="BBNode_43lu4"]
 resource_name = "AnimationPlayer"
 saved_value = NodePath("AnimationPlayer")
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_tfxkp"]
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_46k7a"]
 await_completion = 1.0
-animation_player = SubResource("BBNode_2d0tl")
+animation_player = SubResource("BBNode_43lu4")
 animation_name = &"CapybaraAnimations/CapyHeadDown"
 
-[sub_resource type="BBVariant" id="BBVariant_qerwn"]
+[sub_resource type="BBVariant" id="BBVariant_orscl"]
 resource_name = "true"
 saved_value = true
 type = 1
 
-[sub_resource type="BTSetVar" id="BTSetVar_j23lb"]
+[sub_resource type="BTSetVar" id="BTSetVar_3787q"]
 variable = &"isHeadDown"
-value = SubResource("BBVariant_qerwn")
+value = SubResource("BBVariant_orscl")
 
-[sub_resource type="BBNode" id="BBNode_v1am8"]
+[sub_resource type="BBNode" id="BBNode_x5l25"]
 resource_name = "AnimationPlayer"
 saved_value = NodePath("AnimationPlayer")
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_4qasw"]
-animation_player = SubResource("BBNode_v1am8")
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_cilen"]
+animation_player = SubResource("BBNode_x5l25")
 animation_name = &"CapybaraAnimations/CapyGraze"
 
-[sub_resource type="BTRandomWait" id="BTRandomWait_l48bx"]
+[sub_resource type="BTRandomWait" id="BTRandomWait_5xcoj"]
 min_duration = 2.0
 max_duration = 3.0
 
-[sub_resource type="BBVariant" id="BBVariant_uyefc"]
+[sub_resource type="BBVariant" id="BBVariant_ymgtl"]
 resource_name = "false"
 saved_value = false
 type = 1
 
-[sub_resource type="BTSetVar" id="BTSetVar_74172"]
+[sub_resource type="BTSetVar" id="BTSetVar_4esuu"]
 variable = &"isHeadDown"
-value = SubResource("BBVariant_uyefc")
+value = SubResource("BBVariant_ymgtl")
 
-[sub_resource type="BBNode" id="BBNode_oxo4o"]
+[sub_resource type="BBNode" id="BBNode_rbbwk"]
 resource_name = "AnimationPlayer"
 saved_value = NodePath("AnimationPlayer")
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_7bjt1"]
-animation_player = SubResource("BBNode_oxo4o")
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_omy31"]
+animation_player = SubResource("BBNode_rbbwk")
 animation_name = &"CapybaraAnimations/CapyWalk"
 speed = 3.0
 
-[sub_resource type="BTAction" id="BTAction_nev3t"]
+[sub_resource type="BTAction" id="BTAction_04xvh"]
 script = ExtResource("2_2e18s")
 
-[sub_resource type="BTSequence" id="BTSequence_di6sm"]
+[sub_resource type="BTSequence" id="BTSequence_8wbms"]
 custom_name = "Graze"
-children = [SubResource("BTPlayAnimation_tfxkp"), SubResource("BTSetVar_j23lb"), SubResource("BTPlayAnimation_4qasw"), SubResource("BTRandomWait_l48bx"), SubResource("BTSetVar_74172"), SubResource("BTPlayAnimation_7bjt1"), SubResource("BTAction_nev3t")]
+children = [SubResource("BTPlayAnimation_46k7a"), SubResource("BTSetVar_3787q"), SubResource("BTPlayAnimation_cilen"), SubResource("BTRandomWait_5xcoj"), SubResource("BTSetVar_4esuu"), SubResource("BTPlayAnimation_omy31"), SubResource("BTAction_04xvh")]
 
-[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_mkvnv"]
-children = [SubResource("BTCheckVar_u2316"), SubResource("BTSequence_di6sm")]
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_5l64u"]
+children = [SubResource("BTCheckVar_wq2j6"), SubResource("BTSequence_8wbms")]
 
-[sub_resource type="BTAction" id="BTAction_5r1xr"]
+[sub_resource type="BTAction" id="BTAction_pdbq7"]
 script = ExtResource("2_sfyec")
 
-[sub_resource type="BBVariant" id="BBVariant_13pom"]
+[sub_resource type="BBVariant" id="BBVariant_3el5b"]
 resource_name = "true"
 saved_value = true
 type = 1
 
-[sub_resource type="BTCheckVar" id="BTCheckVar_g856x"]
+[sub_resource type="BTCheckVar" id="BTCheckVar_kixei"]
 variable = &"isHeadDown"
-value = SubResource("BBVariant_13pom")
+value = SubResource("BBVariant_3el5b")
 
-[sub_resource type="BBNode" id="BBNode_i0h1j"]
+[sub_resource type="BBNode" id="BBNode_xaeyr"]
 resource_name = "AnimationPlayer"
 saved_value = NodePath("AnimationPlayer")
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_wrl6d"]
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_kclij"]
 await_completion = 1.0
-animation_player = SubResource("BBNode_i0h1j")
+animation_player = SubResource("BBNode_xaeyr")
 animation_name = &"CapybaraAnimations/CapyHeadDown"
 speed = -2.0
 from_end = true
 
-[sub_resource type="BBVariant" id="BBVariant_f4du1"]
+[sub_resource type="BBVariant" id="BBVariant_4by81"]
 resource_name = "false"
 saved_value = false
 type = 1
 
-[sub_resource type="BTSetVar" id="BTSetVar_d18y0"]
+[sub_resource type="BTSetVar" id="BTSetVar_h7amd"]
 variable = &"isHeadDown"
-value = SubResource("BBVariant_f4du1")
+value = SubResource("BBVariant_4by81")
 
-[sub_resource type="BTSequence" id="BTSequence_v2vid"]
+[sub_resource type="BTSequence" id="BTSequence_1wk7a"]
 custom_name = "RaiseHead"
-children = [SubResource("BTCheckVar_g856x"), SubResource("BTPlayAnimation_wrl6d"), SubResource("BTSetVar_d18y0")]
+children = [SubResource("BTCheckVar_kixei"), SubResource("BTPlayAnimation_kclij"), SubResource("BTSetVar_h7amd")]
 
-[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_wmlbj"]
-children = [SubResource("BTSequence_v2vid")]
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_3xjxy"]
+children = [SubResource("BTSequence_1wk7a")]
 
-[sub_resource type="BTAction" id="BTAction_wtmu8"]
+[sub_resource type="BTAction" id="BTAction_tdua7"]
 script = ExtResource("4_jtgjo")
 SusSpeed = 10
 UnusSpeed = 5
 
-[sub_resource type="BTInvert" id="BTInvert_mi6o4"]
-children = [SubResource("BTAction_wtmu8")]
+[sub_resource type="BTInvert" id="BTInvert_jq63o"]
+children = [SubResource("BTAction_tdua7")]
 
-[sub_resource type="BTSequence" id="BTSequence_it7n1"]
+[sub_resource type="BTSequence" id="BTSequence_hhm6l"]
 custom_name = "Alert"
-children = [SubResource("BTAction_5r1xr"), SubResource("BTAlwaysSucceed_wmlbj"), SubResource("BTInvert_mi6o4")]
+children = [SubResource("BTAction_pdbq7"), SubResource("BTAlwaysSucceed_3xjxy"), SubResource("BTInvert_jq63o")]
 
-[sub_resource type="BBNode" id="BBNode_7dq7g"]
+[sub_resource type="BBNode" id="BBNode_a4b2c"]
 resource_name = "AnimationPlayer"
 saved_value = NodePath("AnimationPlayer")
 
-[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_dg4iv"]
-animation_player = SubResource("BBNode_7dq7g")
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_v7fts"]
+animation_player = SubResource("BBNode_a4b2c")
 animation_name = &"CapybaraAnimations/CapyWalk"
 speed = 3.5
 
-[sub_resource type="BTAction" id="BTAction_m6tn0"]
+[sub_resource type="BTAction" id="BTAction_qhqk1"]
 script = ExtResource("6_7jh8d")
 
-[sub_resource type="BTSequence" id="BTSequence_3aw1o"]
+[sub_resource type="BTSequence" id="BTSequence_hy06h"]
 custom_name = "Flee"
-children = [SubResource("BTPlayAnimation_dg4iv"), SubResource("BTAction_m6tn0")]
+children = [SubResource("BTPlayAnimation_v7fts"), SubResource("BTAction_qhqk1")]
 
-[sub_resource type="BTSequence" id="BTSequence_x8eqc"]
-children = [SubResource("BTDynamicSequence_mkvnv"), SubResource("BTSequence_it7n1"), SubResource("BTSequence_3aw1o")]
+[sub_resource type="BTSequence" id="BTSequence_lry8h"]
+children = [SubResource("BTDynamicSequence_5l64u"), SubResource("BTSequence_hhm6l"), SubResource("BTSequence_hy06h")]
 
-[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_pnat6"]
-children = [SubResource("BTSequence_gqsns"), SubResource("BTSequence_x8eqc")]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_8656o"]
+children = [SubResource("BTSequence_ydvc2"), SubResource("BTSequence_lry8h")]
 
 [sub_resource type="BehaviorTree" id="BehaviorTree_7ahmb"]
-blackboard_plan = SubResource("BlackboardPlan_jy2mn")
-root_task = SubResource("BTDynamicSelector_pnat6")
+blackboard_plan = SubResource("BlackboardPlan_oi7ko")
+root_task = SubResource("BTDynamicSelector_8656o")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_0s5l1"]
 resource_local_to_scene = true
@@ -322,9 +327,10 @@ safe_margin = 0.01
 script = ExtResource("1_g31wg")
 isHerding = true
 SpeciesGroup = &"Capybara"
+SpeciesThreatLevel = 1
 NavAgent = NodePath("NavigationAgent3D")
 AniTree = NodePath("AnimationTree")
-VisionRay = NodePath("HearingArea/VisionRay")
+VisionRay = NodePath("VisionCone/VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
 BehaviorTree = NodePath("BTPlayer")
@@ -344,71 +350,71 @@ bones/1/name = "Bone.001"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.32478e-23, 6.63037e-24, 1.32478e-23, 1, 0, -6.63037e-24, 0, 1, 2.3283e-10, 1.06973, -0.00194299)
 bones/1/enabled = true
-bones/1/position = Vector3(0.201257, 1.08272, -0.00196656)
+bones/1/position = Vector3(-2.35922e-16, 1.06973, -0.00194297)
 bones/1/rotation = Quaternion(0, 3.31518e-24, 6.62391e-24, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
-bones/2/position = Vector3(2.3283e-10, 2.1388, -0.0408518)
-bones/2/rotation = Quaternion(0.000748262, 2.42761e-17, 7.89561e-18, 1)
+bones/2/position = Vector3(-4.44089e-16, 2.1388, -0.0408517)
+bones/2/rotation = Quaternion(-0.0696346, 2.60077e-17, 2.60077e-17, 0.997573)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1
 bones/3/rest = Transform3D(1, 7.95808e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, 0.521562, 2.51634, 0.746557)
 bones/3/enabled = true
-bones/3/position = Vector3(0.521562, 2.36677, 0.751503)
+bones/3/position = Vector3(0.521562, 2.51634, 0.746557)
 bones/3/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/3/scale = Vector3(1, 1, 1.00001)
 bones/4/name = "LowerBone.004.R"
 bones/4/parent = -1
 bones/4/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, 0.521562, 2.62876, 1.35067)
 bones/4/enabled = true
-bones/4/position = Vector3(0.521562, 2.17394, 1.37148)
-bones/4/rotation = Quaternion(0.691793, 1.03297e-06, 9.89617e-07, 0.722096)
+bones/4/position = Vector3(0.521562, 2.62876, 1.35067)
+bones/4/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "UpperBone.005.R"
 bones/5/parent = -1
 bones/5/rest = Transform3D(1, 4.54747e-13, 2.861e-06, 2.7712e-06, -0.248596, -0.968604, 7.11237e-07, 0.968607, -0.248596, 0.521562, 0.229447, 0.820321)
 bones/5/enabled = true
-bones/5/position = Vector3(0.521562, 0.383709, 0.824715)
+bones/5/position = Vector3(0.521562, 0.229447, 0.820321)
 bones/5/rotation = Quaternion(0.790125, 8.76822e-07, 1.13028e-06, 0.612945)
 bones/5/scale = Vector3(1, 1, 0.999997)
 bones/6/name = "LowerBone.006.R"
 bones/6/parent = -1
 bones/6/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, 0.521562, 0.0831632, 1.40116)
 bones/6/enabled = true
-bones/6/position = Vector3(0.521562, 0.485776, 1.45562)
-bones/6/rotation = Quaternion(0.320611, 1.355e-06, 4.58639e-07, 0.947211)
+bones/6/position = Vector3(0.521562, 0.0831631, 1.40116)
+bones/6/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "UpperBone.007.R"
 bones/7/parent = -1
 bones/7/rest = Transform3D(1, 3.41061e-13, 2.86105e-06, 2.83429e-06, 0.136422, -0.990656, -3.90309e-07, 0.990651, 0.136423, -0.526884, 2.53763, 0.746518)
 bones/7/enabled = true
-bones/7/position = Vector3(-0.526884, 2.64047, 0.746331)
+bones/7/position = Vector3(-0.526884, 2.53763, 0.746518)
 bones/7/rotation = Quaternion(0.657107, 1.07832e-06, 9.40003e-07, 0.753798)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerBone.008.R"
 bones/8/parent = -1
 bones/8/rest = Transform3D(1, -2.27374e-13, 2.86102e-06, 2.56746e-06, 0.441231, -0.897393, -1.26237e-06, 0.897394, 0.44123, -0.526884, 2.65005, 1.35063)
 bones/8/enabled = true
-bones/8/position = Vector3(-0.526884, 3.12211, 1.32964)
-bones/8/rotation = Quaternion(0.4159, 1.30092e-06, 5.9495e-07, 0.90941)
+bones/8/position = Vector3(-0.526884, 2.65005, 1.35063)
+bones/8/rotation = Quaternion(0.528568, 1.21435e-06, 7.56122e-07, 0.848891)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "UpperBone.009.R"
 bones/9/parent = -1
 bones/9/rest = Transform3D(1, 4.54747e-13, 3.33783e-06, 3.23306e-06, -0.248596, -0.968603, 8.29776e-07, 0.968607, -0.248595, -0.526884, 0.250735, 0.820282)
 bones/9/enabled = true
-bones/9/position = Vector3(-0.526884, 0.143149, 0.778409)
+bones/9/position = Vector3(-0.526884, 0.250735, 0.820282)
 bones/9/rotation = Quaternion(0.790125, 1.02296e-06, 1.31866e-06, 0.612945)
 bones/9/scale = Vector3(1, 1, 0.999996)
 bones/10/name = "LowerBone.010.R"
 bones/10/parent = -1
 bones/10/rest = Transform3D(1, 6.82121e-13, 2.86102e-06, 2.30257e-06, 0.593535, -0.804808, -1.69812e-06, 0.804808, 0.593535, -0.526884, 0.104451, 1.40113)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.526884, -0.165043, 1.36266)
-bones/10/rotation = Quaternion(0.601953, 1.14231e-06, 8.61101e-07, 0.798532)
+bones/10/position = Vector3(-0.526884, 0.104451, 1.40113)
+bones/10/rotation = Quaternion(0.450813, 1.2769e-06, 6.44891e-07, 0.892618)
 bones/10/scale = Vector3(1, 1, 1)
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
@@ -455,6 +461,10 @@ shape = SubResource("CapsuleShape3D_48exc")
 
 [node name="VisionCone" type="Area3D" parent="."]
 
+[node name="VisionRay" type="RayCast3D" parent="VisionCone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+target_position = Vector3(0, 0, 8)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone"]
 shape = SubResource("ConvexPolygonShape3D_h0vrs")
 
@@ -462,10 +472,6 @@ shape = SubResource("ConvexPolygonShape3D_h0vrs")
 
 [node name="HearingCollision" type="CollisionShape3D" parent="HearingArea"]
 shape = SubResource("SphereShape3D_pkh7y")
-
-[node name="VisionRay" type="RayCast3D" parent="HearingArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-target_position = Vector3(0, 0, 8)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("13_t1s4s")

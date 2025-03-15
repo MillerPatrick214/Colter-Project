@@ -5,8 +5,31 @@ using Godot;
 [GlobalClass]
 public partial class NPCBase : CharacterBody3D
 {	
-	
+	public enum ThreatLevel 
+	{
+		RUN_NOW_ITS_OVER = 6,
+		TERRIFYING = 5,
+		SCARY = 4,
+		IMTIMIDATING = 3,
+		LARGE_PREY = 2,
+		MEDIUM_PREY = 1, 
+		EASY_PREY = 0
+	}
+
+	public enum Dietary
+	{
+		CARNI_PREDATOR,
+		CARNI_SCAVANGER,
+		OMNI_PREDATOR,
+		OMNI_SCAVANGER,
+		VEGETARIAN
+	}
+
 	[Signal] public delegate void SensedEventHandler();
+
+	[Export] public ThreatLevel SpeciesThreatLevel;
+	[Export] public Dietary SpeciesDiet;
+
 	[Export] public float WalkSpeed = 5.0f;
 	[Export] public float RunSpeed = 7.5f;
 	[Export] public float JumpVelocity = 4.5f;
@@ -31,10 +54,11 @@ public partial class NPCBase : CharacterBody3D
 	public bool IsInteractable = false;	
 	public Node3D Focus = null;
 	protected BTPlayer BTPlayer; 
-	public virtual string InteractSceneString {get; set;} = "";         //Currently, capybara has a SkinningScene var that esentially replaces this. Depending on where the interact features and maybe even dialouge implementation go, this might be what we want to use in the future?
 
     public override void _Ready()
     {
+		this.AddToGroup(SpeciesThreatLevel.ToString());
+
 		UpdateConfigurationWarnings();
 
 		VisNotifier = new();
@@ -87,6 +111,7 @@ public partial class NPCBase : CharacterBody3D
 
 	virtual public void Death() //Note this is called Death but signal is DeathSignal
 	{
+		Velocity = Vector3.Zero;
 		BTPlayer.Active = false; 
 		isDead = true;
 		IsInteractable = true;
@@ -162,7 +187,7 @@ public partial class NPCBase : CharacterBody3D
 	}
 
 
-    public void SensedAdd(Node3D body) 
+    public virtual void SensedAdd(Node3D body) 
 	{
 		//if (!SensedBodies.Any()) {					//This should catch any body that enters despite which state we're in and change the mode to Alert\
 		GD.Print($"Body that was detected is of {body.GetClass()}");
@@ -175,8 +200,7 @@ public partial class NPCBase : CharacterBody3D
 				EmitSignal(SignalName.Sensed);
 				BTPlayer.Blackboard.SetVar("hasFocus", true);
 			}
-		}
-		
+		}		
 	}
 
     public override void _Process(double delta)
@@ -193,6 +217,7 @@ public partial class NPCBase : CharacterBody3D
 		IsVisibleOnScreen = false;
 		//ShaderManager.Instance.OutOfSight(this);		SAVED FOR SHADERMANAGER UPDATE
 	}
+
 	public void OnScreen()
 	{
 		IsVisibleOnScreen = true;
@@ -212,7 +237,7 @@ public partial class NPCBase : CharacterBody3D
 		MoveAndSlide();
 	}
 
-	public void SensedRemove(Node3D body) 
+	public virtual void SensedRemove(Node3D body) 
 	{
 
 		if ( Focus != null && !HearingArea.OverlapsBody(Focus) && !VisionCone.OverlapsBody(Focus)) //This needs to be totally changed. 

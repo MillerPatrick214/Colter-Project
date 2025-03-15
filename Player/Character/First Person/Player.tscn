@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://djdku4ekx1emk"]
+[gd_scene load_steps=18 format=3 uid="uid://djdku4ekx1emk"]
 
 [ext_resource type="Script" uid="uid://cqu6voja3odmj" path="res://Player/Character/First Person/Player.cs" id="1_fdc88"]
 [ext_resource type="Shader" uid="uid://bqkiltmfmd7e" path="res://Player/Character/First Person/UnderWater.gdshader" id="2_c45b1"]
@@ -31,6 +31,9 @@ custom_solver_bias = 0.1
 margin = 0.08
 radius = 0.2
 height = 1.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kgf27"]
+radius = 2.5
 
 [node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
@@ -126,3 +129,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0550108, 0)
 shape = SubResource("CapsuleShape3D_s8qte")
 
 [node name="Node" type="Node" parent="."]
+
+[node name="BulletWhiz" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Whiz" type="CollisionShape3D" parent="BulletWhiz"]
+shape = SubResource("SphereShape3D_kgf27")
