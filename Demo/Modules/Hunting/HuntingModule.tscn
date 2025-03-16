@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbhou1extfs86"]
+[gd_scene load_steps=12 format=3 uid="uid://r8fa1r20p3ry"]
 
 [ext_resource type="PackedScene" uid="uid://ccdcdhajuhd2u" path="res://NPC/Animal/TestCapy/LimboCapybara.tscn" id="1_4b5ei"]
 [ext_resource type="PackedScene" uid="uid://8rg5vm4nwgx7" path="res://NPC/Animal/Cougar/Cougar.tscn" id="2_we0ib"]
@@ -128,7 +128,7 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1402.5
 transform = Transform3D(-0.985121, 0.171862, 1.508e-05, 0.171201, 0.981342, -0.0875075, -0.015054, -0.0862029, -0.996164, 1392.76, 31.8031, 989.379)
 
 [node name="Player" parent="." instance=ExtResource("3_we0ib")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1362.61, 38.5477, 1070.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1362.61, 47.77, 1070.2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.929096, 0.193482, 0.315191, -0.292935, 0.905231, 0.307808, -0.225765, -0.378314, 0.897724, 0, 1177, 0)

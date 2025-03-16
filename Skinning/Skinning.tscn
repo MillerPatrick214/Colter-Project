@@ -20,6 +20,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_g7j4h")
+DistanceWeight = null
+DeviationWeight = null
+ReversalWeight = null
+JitterWeight = null
+PerfectScoreThreshold = null
+GoodScoreThreshold = null
+DecentScoreThreshold = null
+PoorScoreThreshold = null
+ShiteScoreThreshold = null
+CutLengthRatio = null
+Segments = null
 
 [node name="Skinning Factory" type="Control" parent="."]
 layout_mode = 1

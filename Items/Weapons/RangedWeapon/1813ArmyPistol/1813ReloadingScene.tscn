@@ -1,153 +1,54 @@
-[gd_scene load_steps=55 format=4 uid="uid://c5ntwqe7kftaw"]
+[gd_scene load_steps=35 format=4 uid="uid://deeq0ua00j6hx"]
 
-[ext_resource type="Script" uid="uid://dq3rtvrdpnrd8" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
-[ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
-[ext_resource type="Texture2D" uid="uid://hku8yokjnvni" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/1813ArmyPistol.png" id="2_0r2lh"]
-[ext_resource type="Texture2D" uid="uid://cfhphvrmju17a" path="res://Items/smoke_07.png" id="2_7ruvr"]
-[ext_resource type="Material" uid="uid://c65byojxwyedq" path="res://Items/Weapons/RangedWeapon/Particle Materials/Smoke.tres" id="2_c0nem"]
-[ext_resource type="Script" uid="uid://cpmgudq8l16gv" path="res://Items/Classes/InventoryItems/Equippable.cs" id="3_d54wb"]
-[ext_resource type="Texture2D" uid="uid://cnwwi0okwjmpp" path="res://Blended_GunShot..png" id="4_eqlaj"]
-[ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_mh4wq"]
-[ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_4yhk7"]
-[ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/RangedWeapon/Particle Materials/Sparks.tres" id="6_udhe1"]
-[ext_resource type="Shader" uid="uid://cx37h3ubfkuha" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Highlight.gdshader" id="8_c5n5c"]
-[ext_resource type="Script" uid="uid://be0j33njchckh" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EighteenThirteenFrizzen.cs" id="8_fx05f"]
-[ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="11_302nq"]
-[ext_resource type="Script" uid="uid://b5w70f1gxhyiv" path="res://components/Interact SubComponents/PickUpLogic.cs" id="12_lp8x7"]
+[ext_resource type="Script" uid="uid://bosq0seeksb0j" path="res://components/Reloading Component/ReloadingComponent.cs" id="1_q8hkg"]
+[ext_resource type="Texture2D" uid="uid://dpq4a25oo3hg2" path="res://Particles/GunpowderFleck.png" id="2_rluop"]
+[ext_resource type="Script" uid="uid://be0j33njchckh" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EighteenThirteenFrizzen.cs" id="3_1cmrp"]
+[ext_resource type="Shader" uid="uid://cx37h3ubfkuha" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Highlight.gdshader" id="4_fq6y3"]
+[ext_resource type="Script" uid="uid://0blabcijig03" path="res://components/Reloading Component/SelectableComponentHammer.cs" id="4_rluop"]
+[ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/RangedWeapon/Particle Materials/Sparks.tres" id="5_c6sdb"]
+[ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_o6ksi"]
 
-[sub_resource type="Resource" id="Resource_ithbi"]
-resource_local_to_scene = true
-script = ExtResource("3_d54wb")
-SlotType = 3
-Name = "1813 Army Pistol"
-Description = "No Description"
-Texture = ExtResource("2_0r2lh")
-Quantity = 1
-IsStackable = false
-CurrentStack = 1
-MaxStack = 1
-Value = 0
-ScenePath = "uid://c5ntwqe7kftaw"
-row = -1
-column = -1
-slot = -1
+[sub_resource type="BoxShape3D" id="BoxShape3D_1cmrp"]
+size = Vector3(0.02, 0.02, 0.02)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kb4ot"]
-radius = 0.18
-height = 0.7
+[sub_resource type="SphereShape3D" id="SphereShape3D_w8y8g"]
+radius = 0.02
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0l2f1"]
-animation = &"UP"
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xw1mb"]
+direction = Vector3(0, 0, 1)
+spread = 2.0
+initial_velocity_min = 0.01
+initial_velocity_max = 1.0
+angular_velocity_min = -3.00002
+angular_velocity_max = 2.99998
+gravity = Vector3(0, 0, 1)
+attractor_interaction_enabled = false
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0vhp"]
-animation = &"DOWN"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wlxnp"]
-animation = &"FIRE"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_2pbbo"]
-sync = true
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_msc4f"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wikc5"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_wlxnp")
-nodes/Animation/position = Vector2(-140, 340)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0l2f1")
-"nodes/Animation 2/position" = Vector2(-520, 180)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_y0vhp")
-"nodes/Animation 3/position" = Vector2(-600, -40)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_2pbbo")
-nodes/Blend2/position = Vector2(-220, 80)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_msc4f")
-nodes/OneShot/position = Vector2(180, 220)
-nodes/output/position = Vector2(460, 200)
-node_connections = [&"Blend2", 0, &"Animation 3", &"Blend2", 1, &"Animation 2", &"OneShot", 0, &"Blend2", &"OneShot", 1, &"Animation", &"output", 0, &"OneShot"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdjbb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8y8g"]
 transparency = 1
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_7ruvr")
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-grow_amount = 7.172
+albedo_texture = ExtResource("2_rluop")
+metallic = 0.61
+billboard_mode = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_d1qvr"]
-material = SubResource("StandardMaterial3D_qdjbb")
-size = Vector2(2, 2)
+[sub_resource type="QuadMesh" id="QuadMesh_fyae8"]
+material = SubResource("StandardMaterial3D_w8y8g")
+size = Vector2(0.03, 0.03)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_agrhg"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="SphereShape3D" id="SphereShape3D_fyae8"]
+radius = 0.02
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmhu5"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5n5c"]
+direction = Vector3(0, -1, 0)
+spread = 2.0
+initial_velocity_min = 0.01
+initial_velocity_max = 1.0
+angular_velocity_min = 0.0999839
+angular_velocity_max = 0.999984
+gravity = Vector3(0, -1, 0)
+attractor_interaction_enabled = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ovwow"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3xfdp"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2fvej"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cjci1"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pebu5"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fwqw8"]
-atlas = ExtResource("4_eqlaj")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_scjv6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_agrhg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hmhu5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ovwow")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3xfdp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2fvej")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cjci1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pebu5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fwqw8")
-}, {
-"duration": 1.0,
-"texture": null
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q8hkg"]
+points = PackedVector3Array(0.272038, 0.248627, 0.161106, 0.272038, 0.675852, 0.151861, 0.152606, 0.248627, 0.161106, 0.22304, 0.0526355, 0.0740154, 0.22304, 0.0176508, 0.0384607, 0.272038, 0.165901, 0.0325437, 0.274624, 0.200756, 0.0683097, 0.276038, 0.235612, 0.104076, 0.272038, 0.556401, 0.115408, 0.22304, 0.0282815, -0.108751, 0.152606, 0.675852, 0.151861, 0.152606, 0.0526355, 0.0740154, 0.152606, 0.0176508, 0.0384607, 0.152606, 0.0289258, -0.1078)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ppa1"]
 resource_name = "Action Material"
@@ -171,7 +72,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_28iqv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_rluop"]
 resource_name = "1813ArmyPistol_Cube_003"
 _surfaces = [{
 "aabb": AABB(0.152606, 0.0176508, -0.108751, 0.123444, 0.658201, 0.269857),
@@ -190,12 +91,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fx05f")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xw1mb"]
-points = PackedVector3Array(0.272038, 0.248627, 0.161106, 0.272038, 0.675852, 0.151861, 0.152606, 0.248627, 0.161106, 0.22304, 0.0526355, 0.0740154, 0.22304, 0.0176508, 0.0384607, 0.272038, 0.165901, 0.0325437, 0.274624, 0.200756, 0.0683097, 0.276038, 0.235612, 0.104076, 0.272038, 0.556401, 0.115408, 0.22304, 0.0282815, -0.108751, 0.152606, 0.675852, 0.151861, 0.152606, 0.0526355, 0.0740154, 0.152606, 0.0176508, 0.0384607, 0.152606, 0.0289258, -0.1078)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5n5c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1cmrp"]
 render_priority = 0
-shader = ExtResource("8_c5n5c")
+shader = ExtResource("4_fq6y3")
 shader_parameter/mouseIsOver = false
 shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/size = 1.05
@@ -265,7 +163,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_pir4l"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fq6y3"]
 resource_name = "1813ArmyPistol_Cube"
 _surfaces = [{
 "aabb": AABB(0.164046, 0.193863, 0.17239, 0.0913699, 0.233594, 0.165818),
@@ -322,7 +220,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_w8y8g")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c5n5c"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c6sdb"]
 points = PackedVector3Array(0.160337, -0.0889572, 0.667581, 0.160337, -0.0637574, 0.576154, 0.206546, -0.0634864, 0.576154, 0.218344, -0.0860443, 0.665597, 0.207505, -0.0556962, 0.783234, 0.160337, -0.0478382, 0.802601, 0.151308, 0.258556, 0.213251, 0.153166, 0.215473, 0.21024, 0.156764, 0.153151, 0.184235, 0.260826, 0.153489, 0.183346, 0.232793, -0.0450608, 0.558909, 0.270789, 0.0459837, 0.679831, 0.270813, 0.0505224, 0.727529, 0.231349, -0.0299544, 0.782481, 0.208073, -0.0302254, 0.81225, 0.20754, 0.035416, 0.848178, 0.160337, 0.0562126, 0.855432, 0.149924, 0.393091, 0.308305, 0.153663, 0.547812, 0.21113, 0.155403, 0.564612, 0.193679, 0.159391, 0.552012, 0.181909, 0.165224, 0.290259, 0.168701, 0.164041, 0.245753, 0.172328, 0.252886, 0.245753, 0.172328, 0.2595, 0.290259, 0.168701, 0.264068, 0.551199, 0.20764, 0.270801, 0.0890672, 0.639661, 0.270778, 0.0651545, 0.6528, 0.270813, 0.16006, 0.668129, 0.270789, 0.164599, 0.715827, 0.270778, 0.145428, 0.742927, 0.270778, 0.0869672, 0.75675, 0.231373, 0.0667125, 0.832027, 0.209517, 0.0733512, 0.849067, 0.160337, 0.145089, 0.821762, 0.160337, 0.17835, 0.786998, 0.160337, 0.471874, 0.45051, 0.160337, 0.572741, 0.330683, 0.160337, 0.587779, 0.295303, 0.163449, 0.582563, 0.197922, 0.165508, 0.576602, 0.181293, 0.168431, 0.566373, 0.171986, 0.189009, 0.564341, 0.158641, 0.208688, 0.545915, 0.156383, 0.171378, 0.545983, 0.16918, 0.228379, 0.564341, 0.158641, 0.245999, 0.545983, 0.16918, 0.248945, 0.566373, 0.171986, 0.257986, 0.552012, 0.181909, 0.260613, 0.567863, 0.190326, 0.259796, 0.571115, 0.212704, 0.2595, 0.560615, 0.360178, 0.270778, 0.123615, 0.638976, 0.26563, 0.144209, 0.755108, 0.268103, 0.130186, 0.759693, 0.2595, 0.530402, 0.391315, 0.265441, 0.112099, 0.766194, 0.232414, 0.163989, 0.793157, 0.206049, 0.144683, 0.821968, 0.165224, 0.560615, 0.360178, 0.20657, 0.17835, 0.786519, 0.217102, 0.603089, 0.203465, 0.192477, 0.600921, 0.203876, 0.174218, 0.592318, 0.206955, 0.207529, 0.587102, 0.295987, 0.176052, 0.589812, 0.184099, 0.185341, 0.590895, 0.175887, 0.185897, 0.578431, 0.164869, 0.211765, 0.576941, 0.158983, 0.233219, 0.581412, 0.167743, 0.243324, 0.586628, 0.180745, 0.253939, 0.582563, 0.197922, 0.243159, 0.592318, 0.206955, 0.233443, 0.596789, 0.1906, 0.213729, 0.600921, 0.186357, 0.19037, 0.59916, 0.188068, 0.203079, 0.591844, 0.170207, 0.222604, 0.592386, 0.173149)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fyae8"]
@@ -340,7 +238,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fxqa1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o6ksi"]
 resource_name = "1813ArmyPistol_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.0628657, -0.480627, 0.794517, 0.105374, 0.261883, 0.157927),
@@ -436,7 +334,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_86j22"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bsmet"]
 resource_name = "1813ArmyPistol_Sphere_005"
 _surfaces = [{
 "aabb": AABB(-0.0276265, -0.100827, 0.0681181, 0.337922, 0.270128, 0.359365),
@@ -510,7 +408,7 @@ shadow_mesh = SubResource("ArrayMesh_gvcl4")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lupnr"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("6_4yhk7")
+albedo_texture = ExtResource("6_o6ksi")
 emission_enabled = true
 emission = Color(0.999998, 0.822566, 0.291201, 1)
 emission_energy_multiplier = 6.0
@@ -519,64 +417,79 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_u3aa5"]
+[sub_resource type="QuadMesh" id="QuadMesh_lex30"]
 material = SubResource("StandardMaterial3D_lupnr")
 size = Vector2(0.02, 0.02)
 
-[sub_resource type="Resource" id="Resource_qf8fy"]
-script = ExtResource("12_lp8x7")
+[node name="ReloadingComponent" type="Node3D" node_paths=PackedStringArray("OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera", "PanParticleCollision", "BarrelEndParticleCollision", "BarrelEmitterBody", "PanEmitterBody", "SelectableBodies")]
+script = ExtResource("1_q8hkg")
+OverviewMarker = NodePath("Start_End")
+MechanismMarker = NodePath("Mechanism")
+BarrelEndMarker = NodePath("BarrelEnd")
+ReloadCamera = NodePath("Camera3D")
+PanParticleCollision = NodePath("PanParticleCollision")
+BarrelEndParticleCollision = NodePath("BarrelEndParticleCollision")
+BarrelEmitterBody = NodePath("BarrelEmitterBody")
+PanEmitterBody = NodePath("PanEmitterBody")
+SelectableBodies = []
 
-[node name="1813ArmyPistol" type="RigidBody3D" node_paths=PackedStringArray("InteractComponent")]
-script = ExtResource("1_amlpt")
-MeshNodes = Array[NodePath]([NodePath("Skeleton3D/Frizzen_2/Frizzen_2"), NodePath("Skeleton3D/Hammer/StaticBody3D2/Hammer"), NodePath("Skeleton3D/Trigger/Trigger"), NodePath("Skeleton3D/PistolBody/PistolBody")])
-ItemResource = SubResource("Resource_ithbi")
-InteractComponent = NodePath("InteractComponent")
-isHeld = true
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.392, 0, 0)
+keep_aspect = 0
+cull_mask = 3
+current = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_kb4ot")
+[node name="Start_End" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.392, 0, 0)
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
-callback_mode_discrete = 1
-tree_root = SubResource("AnimationNodeBlendTree_wikc5")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Blend2/blend_amount = 1.0
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
+[node name="Mechanism" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 1.13133e-08, -4.2222e-08, 0.13, 0.04, 0.015)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": ExtResource("1_toa45")
-}
+[node name="BarrelEnd" type="Marker3D" parent="."]
+transform = Transform3D(1.07967e-08, -0.246999, 0.969016, -1, -4.37114e-08, 0, 4.2357e-08, -0.969016, -0.246999, 0.135, 0, -0.279)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="HornPanPosition" type="Marker3D" parent="."]
 
-[node name="WeaponEnd" type="Marker3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.0499315, 0.0026168, 0, -0.0026168, 0.0499315, 0, 0.00801725, -0.378239)
+[node name="BarrelEndParticleCollision" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.237394)
+size = Vector3(0.02, 0.02, 0.02)
 
-[node name="Smoke" type="GPUParticles3D" parent="WeaponEnd"]
-transform = Transform3D(2.83, 0, 0, 0, 2.83, 8.43405e-08, 0, -8.43405e-08, 2.83, 0, 0, 0)
-emitting = false
-lifetime = 4.0
-explosiveness = 1.0
-process_material = ExtResource("2_c0nem")
-draw_pass_1 = SubResource("QuadMesh_d1qvr")
+[node name="BarrelEndArea" type="Area3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="WeaponEnd"]
-transform = Transform3D(1, 0, 7.10542e-15, 0, 1, 0, -7.10542e-15, 0, 1, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrelEndArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.238258)
+shape = SubResource("BoxShape3D_1cmrp")
+
+[node name="PanParticleCollision" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0272072, 0.0107556, 0.0202523)
+size = Vector3(0.02, 0.02, 0.02)
+
+[node name="BarrelEmitterBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00152445, -0.476032)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrelEmitterBody"]
+shape = SubResource("SphereShape3D_w8y8g")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="BarrelEmitterBody"]
 layers = 3
-light_color = Color(0.997214, 0.691001, 1.15514e-06, 1)
-light_energy = 0.0
-omni_range = 5.06471
+amount = 2000
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_xw1mb")
+draw_pass_1 = SubResource("QuadMesh_fyae8")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="WeaponEnd"]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
-billboard = 1
-sprite_frames = SubResource("SpriteFrames_scjv6")
-speed_scale = 10.0
+[node name="PanEmitterBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0272072, 0.0680248, 0.023461)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PanEmitterBody"]
+shape = SubResource("SphereShape3D_fyae8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="PanEmitterBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0101967, 0)
+layers = 3
+amount = 2000
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_c5n5c")
+draw_pass_1 = SubResource("QuadMesh_fyae8")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
@@ -592,7 +505,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.82146e-07, 3.19049e-07, 4.61673e-07, 0.220604, -0.975363, 5.94957e-07, 0.975363, 0.220604, 0.210136, 1.96814, -0.754647)
 bones/1/enabled = true
 bones/1/position = Vector3(0.210136, 1.96814, -0.754647)
-bones/1/rotation = Quaternion(0.126, 0, 0, 0.898)
+bones/1/rotation = Quaternion(0.440535, -1.03607e-07, 2.55628e-07, 0.897735)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Frizzen_2"
 bones/2/parent = 1
@@ -606,7 +519,7 @@ bones/3/parent = 0
 bones/3/rest = Transform3D(1, -6.1614e-07, 1.45205e-07, 4.14331e-07, 0.463655, -0.886016, 4.78585e-07, 0.886016, 0.463655, 0.208017, 1.56936, -0.242483)
 bones/3/enabled = true
 bones/3/position = Vector3(0.208017, 1.56936, -0.242483)
-bones/3/rotation = Quaternion(-0.0611806, -1.19524e-07, -4.52438e-08, 0.998127)
+bones/3/rotation = Quaternion(0.074, 0, 0, 0.998)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Hammer"
 bones/4/parent = 3
@@ -637,39 +550,50 @@ bones/7/position = Vector3(0.00900185, 1.91673, -0.829533)
 bones/7/rotation = Quaternion(0.341563, -3.3612e-07, 1.22152e-07, 0.939859)
 bones/7/scale = Vector3(1, 1, 1)
 
+[node name="Frizzen" type="BoneAttachment3D" parent="Skeleton3D"]
+transform = Transform3D(1, 1.5486e-08, 4.76838e-07, 8.67111e-08, 0.976927, -0.213573, -4.69144e-07, 0.213573, 0.976927, 0.201134, 0.0874926, 0.0244064)
+bone_name = "Frizzen"
+bone_idx = 1
+
+[node name="SelectableComponentPan" type="StaticBody3D" parent="Skeleton3D/Frizzen"]
+transform = Transform3D(1, 3.81182e-19, 0, 2.03282e-20, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("3_1cmrp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/Frizzen/SelectableComponentPan"]
+shape = SubResource("ConvexPolygonShape3D_q8hkg")
+
 [node name="Frizzen_2" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1, 1.32147e-07, 2.44669e-07, -2.51352e-07, 0.805908, 0.592041, -1.18944e-07, -0.592041, 0.805908, -8.04663e-07, 0.00253001, 0.0565414)
+transform = Transform3D(1, -2.62901e-12, 9.9476e-13, 2.68585e-12, 1, 2.563e-06, -1.02318e-12, -2.563e-06, 1, -7.89762e-07, -4.74602e-06, 3.14973e-06)
 bone_name = "Frizzen_2"
 bone_idx = 2
 
 [node name="Frizzen_2" type="MeshInstance3D" parent="Skeleton3D/Frizzen_2"]
-transform = Transform3D(1, -2.84217e-14, -7.10543e-15, 0, 1, 0, 1.42109e-14, 0, 1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_28iqv")
+transform = Transform3D(1, 5.98022e-19, 0, 2.03282e-20, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_rluop")
 skeleton = NodePath("")
 
-[node name="SelectableComponentPan" type="StaticBody3D" parent="Skeleton3D/Frizzen_2"]
-transform = Transform3D(1, 3.81182e-19, 0, 2.03282e-20, 1, 0, 0, 0, 1, 0, 0, 0)
-script = ExtResource("8_fx05f")
+[node name="HammerBone" type="BoneAttachment3D" parent="Skeleton3D"]
+transform = Transform3D(1, 1.05489e-07, 7.07434e-07, -4.59224e-07, 0.852977, 0.521948, -5.48366e-07, -0.521948, 0.852977, 0.199016, 0.110591, 0.673101)
+bone_name = "HammerBone"
+bone_idx = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/Frizzen_2/SelectableComponentPan"]
-shape = SubResource("ConvexPolygonShape3D_xw1mb")
+[node name="StaticBody3D2" type="StaticBody3D" parent="Skeleton3D/HammerBone"]
+transform = Transform3D(1, -3.60509e-07, -3.12595e-07, 1.7587e-08, 0.682516, -0.73087, 4.76837e-07, 0.73087, 0.682516, -0.199015, 0.416469, -0.540231)
+script = ExtResource("4_rluop")
+
+[node name="Hammer" type="MeshInstance3D" parent="Skeleton3D/HammerBone/StaticBody3D2"]
+transform = Transform3D(1, 1.69408e-21, 0, -5.0822e-21, 1, 0, 5.42101e-20, 0, 1, 0, 0, 0)
+material_overlay = SubResource("ShaderMaterial_1cmrp")
+mesh = SubResource("ArrayMesh_fq6y3")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/HammerBone/StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_c6sdb")
 
 [node name="Hammer" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1, 1.42109e-13, 6.53699e-13, -5.68434e-14, 1, 2.68221e-07, -7.67386e-13, -2.68221e-07, 1, 3.12924e-07, -9.23872e-07, -7.15256e-07)
+transform = Transform3D(1, 2.28531e-07, 9.31415e-08, -1.95338e-07, 0.963647, -0.267178, -1.50814e-07, 0.267178, 0.963647, 2.23517e-07, 0.183857, -0.00507921)
 bone_name = "Hammer"
 bone_idx = 4
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Skeleton3D/Hammer"]
-transform = Transform3D(1, -1.69405e-21, 0, 8.47036e-21, 1, -2.84217e-14, -5.42101e-20, 2.84217e-14, 1, 0, 0, 0)
-
-[node name="Hammer" type="MeshInstance3D" parent="Skeleton3D/Hammer/StaticBody3D2"]
-transform = Transform3D(1, 1.69408e-21, 0, -5.0822e-21, 1, 0, 5.42101e-20, 0, 1, 0, 0, 0)
-material_overlay = SubResource("ShaderMaterial_c5n5c")
-mesh = SubResource("ArrayMesh_pir4l")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/Hammer/StaticBody3D2"]
-shape = SubResource("ConvexPolygonShape3D_c5n5c")
 
 [node name="Trigger" type="BoneAttachment3D" parent="Skeleton3D"]
 transform = Transform3D(1, 8.81403e-09, 8.81118e-09, -9.62677e-09, 1, 7.97212e-07, -9.03492e-09, -8.49366e-07, 1, -1.58325e-08, -1.07288e-06, -7.7486e-07)
@@ -677,7 +601,7 @@ bone_name = "Trigger"
 bone_idx = 6
 
 [node name="Trigger" type="MeshInstance3D" parent="Skeleton3D/Trigger"]
-mesh = SubResource("ArrayMesh_fxqa1")
+mesh = SubResource("ArrayMesh_o6ksi")
 skeleton = NodePath("")
 
 [node name="PistolBody" type="BoneAttachment3D" parent="Skeleton3D"]
@@ -686,7 +610,7 @@ bone_name = "PistolBody"
 bone_idx = 7
 
 [node name="PistolBody" type="MeshInstance3D" parent="Skeleton3D/PistolBody"]
-mesh = SubResource("ArrayMesh_86j22")
+mesh = SubResource("ArrayMesh_bsmet")
 skeleton = NodePath("")
 
 [node name="PanSparks" type="GPUParticles3D" parent="Skeleton3D"]
@@ -696,20 +620,8 @@ amount = 30
 lifetime = 0.3
 one_shot = true
 explosiveness = 0.83
-process_material = ExtResource("6_udhe1")
-draw_pass_1 = SubResource("QuadMesh_u3aa5")
+process_material = ExtResource("5_c6sdb")
+draw_pass_1 = SubResource("QuadMesh_lex30")
 
-[node name="AudioEffect" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(-1, -2.64698e-23, -8.74231e-08, 4.57537e-09, 0.998629, -0.052336, 8.73032e-08, -0.052336, -0.998629, -1.65715e-07, -0.004669, -0.372099)
-stream = ExtResource("5_mh4wq")
-volume_db = 38.75
-max_db = 6.0
-max_distance = 100.0
-
-[node name="InteractComponent" parent="." node_paths=PackedStringArray("CollisionShape") instance=ExtResource("11_302nq")]
-CollisionShape = NodePath("CollisionShape3D")
-PickUpLogic = SubResource("Resource_qf8fy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_kb4ot")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0156026, 0, 0.999878, 0, 1, 0, -0.999878, 0, -0.0156026, 2.21331, 0, 0)

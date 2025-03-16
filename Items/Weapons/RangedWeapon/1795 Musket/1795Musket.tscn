@@ -927,9 +927,17 @@ script = ExtResource("10_hxyg4")
 collision_layer = 3
 script = ExtResource("1_h0wpl")
 ADSPosition = Vector3(0, -0.013, 0)
+ADSRotation = null
+SwayFactor = null
+DefaultPlayerPosition = null
+DefaultPlayerRotation = null
+DefaultNPCPosition = null
+DefaultNPCRotation = null
+IsInteractable = null
 MeshNodes = Array[NodePath]([NodePath("Skeleton3D/hammer_001/hammer_001"), NodePath("Skeleton3D/Cube/Cube"), NodePath("Skeleton3D/trigger/trigger"), NodePath("Skeleton3D/Barrel/Barrel"), NodePath("Skeleton3D/Cylinder_002/Cylinder_002"), NodePath("Skeleton3D/Cylinder_003/Cylinder_003"), NodePath("Skeleton3D/Cylinder_005/Cylinder_005"), NodePath("Skeleton3D/plate/plate"), NodePath("Skeleton3D/tipcowel_005/tipcowel_005"), NodePath("Skeleton3D/tray/tray"), NodePath("Skeleton3D/triiger guard/triiger guard"), NodePath("Skeleton3D/wood/wood"), NodePath("Skeleton3D/Sphere")])
 ItemResource = ExtResource("2_ceery")
 InteractComponent = NodePath("InteractComponent")
+isHeld = null
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.05, 0, 0, 0, 0.0103954, 0.0489074, 0, -0.0489074, 0.0103954, 0, -0.046, 0)
@@ -1057,7 +1065,7 @@ mesh = SubResource("ArrayMesh_7xwlx")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.202922, 0.0213288, -4.83883e-07, 0.0199517, -0.189822, -0.0721226, -0.00753963, 0.0717278, -0.190867, 9.78877e-10, 2.65967, 0.0654372)
+transform = Transform3D(0.202922, 0.0213287, -4.83883e-07, 0.0199517, -0.189822, -0.0721226, -0.00753962, 0.0717277, -0.190867, 9.78877e-10, 2.65967, 0.0654372)
 bone_name = "Cube"
 bone_idx = 4
 

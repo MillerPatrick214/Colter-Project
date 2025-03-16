@@ -51,7 +51,9 @@ size = Vector3(2.64705, 0.128873, 1.8064)
 
 [node name="DeerSkinTestWorldItem" type="RigidBody3D"]
 script = ExtResource("1_f6kwr")
+IsInteractable = null
 ItemResource = ExtResource("2_354r2")
+isHeld = null
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -0.00960255, 0, -0.0354228)

@@ -4,3 +4,4 @@
 
 [node name="AnimalHurtBox" type="Area3D"]
 script = ExtResource("1_f4vul")
+StrikeDamage = null
