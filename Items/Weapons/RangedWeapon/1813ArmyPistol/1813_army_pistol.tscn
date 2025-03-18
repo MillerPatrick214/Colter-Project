@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://c5ntwqe7kftaw"]
+[gd_scene load_steps=53 format=4 uid="uid://c5ntwqe7kftaw"]
 
 [ext_resource type="Script" uid="uid://dq3rtvrdpnrd8" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EightteenThirteenArmyPistol.cs" id="1_amlpt"]
 [ext_resource type="AnimationLibrary" uid="uid://d2q0hf6p4yr15" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Animations/1813_army_pistolAni.res" id="1_toa45"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://b65hdibn2v4sj" path="res://NPC/Placeholder Sound design/Royalty Free/MusketShot.wav" id="5_mh4wq"]
 [ext_resource type="Texture2D" uid="uid://cycwc1gftj3p6" path="res://Particles/PNG (Transparent)/star_01.png" id="6_4yhk7"]
 [ext_resource type="Material" uid="uid://qh3hwhtm6hy5" path="res://Items/Weapons/RangedWeapon/Particle Materials/Sparks.tres" id="6_udhe1"]
-[ext_resource type="Shader" uid="uid://cx37h3ubfkuha" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Highlight.gdshader" id="8_c5n5c"]
 [ext_resource type="Script" uid="uid://be0j33njchckh" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EighteenThirteenFrizzen.cs" id="8_fx05f"]
 [ext_resource type="PackedScene" uid="uid://e0tx8m20kwns" path="res://components/InteractComponent.tscn" id="11_302nq"]
 [ext_resource type="Script" uid="uid://b5w70f1gxhyiv" path="res://components/Interact SubComponents/PickUpLogic.cs" id="12_lp8x7"]
@@ -192,13 +191,6 @@ shadow_mesh = SubResource("ArrayMesh_fx05f")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xw1mb"]
 points = PackedVector3Array(0.272038, 0.248627, 0.161106, 0.272038, 0.675852, 0.151861, 0.152606, 0.248627, 0.161106, 0.22304, 0.0526355, 0.0740154, 0.22304, 0.0176508, 0.0384607, 0.272038, 0.165901, 0.0325437, 0.274624, 0.200756, 0.0683097, 0.276038, 0.235612, 0.104076, 0.272038, 0.556401, 0.115408, 0.22304, 0.0282815, -0.108751, 0.152606, 0.675852, 0.151861, 0.152606, 0.0526355, 0.0740154, 0.152606, 0.0176508, 0.0384607, 0.152606, 0.0289258, -0.1078)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5n5c"]
-render_priority = 0
-shader = ExtResource("8_c5n5c")
-shader_parameter/mouseIsOver = false
-shader_parameter/color = Color(1, 0, 0, 1)
-shader_parameter/size = 1.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2uvk7"]
 resource_name = "Material.001"
@@ -664,7 +656,6 @@ transform = Transform3D(1, -1.69405e-21, 0, 8.47036e-21, 1, -2.84217e-14, -5.421
 
 [node name="Hammer" type="MeshInstance3D" parent="Skeleton3D/Hammer/StaticBody3D2"]
 transform = Transform3D(1, 1.69408e-21, 0, -5.0822e-21, 1, 0, 5.42101e-20, 0, 1, 0, 0, 0)
-material_overlay = SubResource("ShaderMaterial_c5n5c")
 mesh = SubResource("ArrayMesh_pir4l")
 skeleton = NodePath("")
 

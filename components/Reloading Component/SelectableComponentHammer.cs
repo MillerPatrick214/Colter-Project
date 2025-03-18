@@ -51,7 +51,7 @@ public partial class SelectableComponentHammer : GunComponent
             GD.PrintErr($"CurrQuat{curr_quat}");
             GD.PrintErr($"quat_clock{quat_clock}");
 
-            hammer_speed_increaser += 10f;
+            hammer_speed_increaser += 5f;
             Quaternion slerped_quat = curr_quat.Slerp(quat_clock, hammer_speed_increaser * (float)delta);
             GD.PrintErr($"slerped_quat{slerped_quat}");
 

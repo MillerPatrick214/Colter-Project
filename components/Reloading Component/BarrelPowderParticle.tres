@@ -1,0 +1,13 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://b71cnd43dtv7j"]
+
+[resource]
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(0, 0, 1)
+spread = 3.0
+initial_velocity_min = 0.01
+initial_velocity_max = 1.0
+angular_velocity_min = -3.00002
+angular_velocity_max = 2.99998
+gravity = Vector3(0, 0, 0.5)
+attractor_interaction_enabled = false
+collision_mode = 2

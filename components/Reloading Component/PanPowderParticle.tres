@@ -1,0 +1,12 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://dswhbwulksoor"]
+
+[resource]
+direction = Vector3(0, -1, 0)
+spread = 7.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.1
+angular_velocity_min = -2.00002
+angular_velocity_max = 1.99998
+gravity = Vector3(0, -0.3, 0)
+attractor_interaction_enabled = false
+collision_mode = 2

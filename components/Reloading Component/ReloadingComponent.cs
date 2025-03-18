@@ -52,35 +52,46 @@ public partial class ReloadingComponent : Node3D
     bool children_editable = false;
 
     [ExportGroup("Tool Buttons")]
-    [ExportToolButton("Set Camera to Finish/End Marker")] public Callable OverviewButton => Callable.From(CamToOverview);
+    [ExportToolButton("Set Camera to Overview Marker")] public Callable OverviewButton => Callable.From(CamToOverview);
     [ExportToolButton("Set Camera to Mechanism Marker")]  public Callable MechanismButton => Callable.From(CamToMechanism);
     [ExportToolButton("Set Camera to Barrel End Marker")] public Callable BarrelEndButton => Callable.From(CamToBarrelEnd);
     [ExportToolButton("Make Children Editable")] public Callable MakeEditableButton => Callable.From(MakeEditable);
 
-    /*
     [ExportGroup("Save & Load Settings")]
     [ExportSubgroup("Save")]
     [ExportToolButton("Save Settings Resource")] public Callable SaveTresButton => Callable.From(SaveSettings);
     [Export] public string FileName = "";
+    [Export] public string Path = "";
     [Export] public EditorPaths ResourceDestination;
     [Export] bool Override_Existing = false;
 
 
     [ExportSubgroup("Load")]
     [ExportToolButton("Load Settings Resource")] public Callable LoadTresButton => Callable.From(LoadSettings);
-    [Export] public EditorPaths ResourceLocation;
-    */
+    [Export] public ReloadSettings SettingsResource;
+    
 
     public override void _Ready()
     {
-        ReloadCamera.Transform = OverviewMarker.Transform;
-        PanEmitterBody.Position = new Vector3(PanParticleCollision.Position.X, PanEmitterBody.Position.Y, PanEmitterBody.Position.Z);
-        BarrelEmitterBody.Position = new Vector3(BarrelEndParticleCollision.Position.X,BarrelEmitterBody.Position.Y, BarrelEmitterBody.Position.Z);
+        if (OverviewMarker == null || MechanismMarker == null || BarrelEndMarker == null)
+        {
+            GD.PrintErr("Markers are not assigned!");
+            return; // Exit early if any marker is missing
+        }
+        OverviewTransform = OverviewMarker.Transform;
+        MechanismTransform = MechanismMarker.Transform;
+        BarrelEndTransform = BarrelEndMarker.Transform;
+
+        
+        ReloadCamera.Transform = OverviewTransform;
+        //PanEmitterBody.Position = new Vector3(PanParticleCollision.Position.X, PanEmitterBody.Position.Y, PanEmitterBody.Position.Z);
+        //BarrelEmitterBody.Position = new Vector3(BarrelEndParticleCollision.Position.X,BarrelEmitterBody.Position.Y, BarrelEmitterBody.Position.Z);
         cam_target_marker = OverviewMarker;
     }
     public void SaveSettings()
     {
-        //ResourceSaver.Save();
+        ResourceSaver.Save(new ReloadSettings(OverviewTransform, MechanismTransform, BarrelEndTransform));
+
     }
     public void LoadSettings()
     {
@@ -103,12 +114,31 @@ public partial class ReloadingComponent : Node3D
 
     public void MakeEditable()
     {
+        if (GetParent() == null)
+        {
+            GD.PrintErr($"Parent returned null. ReloadingComponent is Likely the Parent");
+            return;
+        }
+
         GetParent().SetEditableInstance(this, !children_editable);
         children_editable = !children_editable;
     }
 
     public override void _Process(double delta)
     {
+        if (ReloadCamera == null) 
+        {
+            GD.PrintErr($"ReloadCamera is null at {GetPath()}");
+            return; // Avoid processing if ReloadCamera is null
+        }
+        
+        if (cam_target_marker == null) 
+        {
+            GD.PrintErr($"cam_target_marker is null at {GetPath()}");
+            return; // Avoid processing if cam_target_marker is null
+        }
+
+        if (ReloadCamera == null) {GD.PrintErr($"ReloadCamera null {GetPath()}");}
         if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform))
         {
             ReloadCamera.Transform = ReloadCamera.Transform.InterpolateWith(cam_target_marker.Transform, 5.0f * (float)delta);

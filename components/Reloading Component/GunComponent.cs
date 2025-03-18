@@ -26,7 +26,7 @@ public abstract partial class GunComponent : SelectableComponent
             GD.PrintErr($"Error: {GetPath()} in PullSkeleton() parent was not a BoneAttachement3D!");
             return;
         }
-        
+
         BoneAttachment3D bone_attach = (BoneAttachment3D)parent;
         Skeleton = bone_attach.GetSkeleton();
         BoneIdx = bone_attach.BoneIdx;
@@ -67,13 +67,12 @@ public abstract partial class GunComponent : SelectableComponent
             GD.PrintErr($"magnitude: { magnitude}");
 
             float cross_prod_sign = curr_relative_mouse_pos.Cross(Vector2.Up);
-            
 
             int sign;
 
             sign = (MathF.Sign(cross_prod_sign) <= 0) ? 1 : -1;
 
-            float slerp_speed = Mathf.Clamp(magnitude, 0, manip_speed);
+            float slerp_speed = Mathf.Clamp(magnitude/100, 0, manip_speed);
             
             GD.PrintErr($"slerp_speed: {slerp_speed}");
             GD.PrintErr($"sign: {sign}");
