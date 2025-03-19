@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://r8fa1r20p3ry"]
+[gd_scene load_steps=12 format=3 uid="uid://dp3my8vlx8hxj"]
 
 [ext_resource type="PackedScene" uid="uid://ccdcdhajuhd2u" path="res://NPC/Animal/TestCapy/LimboCapybara.tscn" id="1_4b5ei"]
 [ext_resource type="PackedScene" uid="uid://8rg5vm4nwgx7" path="res://NPC/Animal/Cougar/Cougar.tscn" id="2_we0ib"]

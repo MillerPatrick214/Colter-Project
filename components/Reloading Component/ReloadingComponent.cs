@@ -3,12 +3,14 @@ using System;
 
 
 [Tool]
-public partial class ReloadingComponent : Node3D
+public partial class ReloadingComponent : Control
 {
+
+    [Signal] public delegate void ReloadDisabledEventHandler(ReloadingComponent self);
     Marker3D cam_target_marker;
     StaticBody3D curr_body_mouse_on;
 
-    bool is_interacting;
+    
     
     SelectableComponent ComponentMouseOn = null;
     SelectableComponent CurrentComponentSelected = null;
@@ -19,11 +21,28 @@ public partial class ReloadingComponent : Node3D
     [Export] Marker3D BarrelEndMarker;
     [Export] Camera3D ReloadCamera;
 
+    BarrelHole BarrelHole;
+    RodSelectableBody Rod;
+
     public Transform3D OverviewTransform {get; set;}
     public Transform3D MechanismTransform {get; set;}
     public Transform3D BarrelEndTransform {get; set;}
 
-    [Flags]
+
+    //Necessary Conditions
+    //--------------------
+    bool HammerFullCock = false;
+    bool PanPrimed = false;
+    bool FrizzenDown = false;
+    bool BulletInChamber = false;
+    bool PowderInChamber = false;
+
+    bool HoldingBarrelItem = false; //Controls lerp to barrel;
+
+
+/*
+
+    [Flags]                                 I think we should use bitwise operators for this shee. Will hafve to link up with Jarred or learn. 
     enum conditions_met
     {
         HammerFullCock,
@@ -33,6 +52,8 @@ public partial class ReloadingComponent : Node3D
         BulletInBarrel,
         BulletFullySeated,
     }    
+
+    */
 
     [ExportGroup("Particle Collision Boxes")]
     [Export] GpuParticlesCollisionBox3D PanParticleCollision;
@@ -78,6 +99,9 @@ public partial class ReloadingComponent : Node3D
             GD.PrintErr("Markers are not assigned!");
             return; // Exit early if any marker is missing
         }
+
+        BarrelHole = GetNodeOrNull<BarrelHole>("SubViewportContainer/SubViewport/BarrelHole");
+        Rod = GetNodeOrNull<RodSelectableBody>("SubViewportContainer/SubViewport/RodSelectableBody");
         OverviewTransform = OverviewMarker.Transform;
         MechanismTransform = MechanismMarker.Transform;
         BarrelEndTransform = BarrelEndMarker.Transform;
@@ -86,13 +110,31 @@ public partial class ReloadingComponent : Node3D
         ReloadCamera.Transform = OverviewTransform;
         //PanEmitterBody.Position = new Vector3(PanParticleCollision.Position.X, PanEmitterBody.Position.Y, PanEmitterBody.Position.Z);
         //BarrelEmitterBody.Position = new Vector3(BarrelEndParticleCollision.Position.X,BarrelEmitterBody.Position.Y, BarrelEmitterBody.Position.Z);
+        Rod.BarrelLoaded += RodDownBarrel;
         cam_target_marker = OverviewMarker;
     }
     public void SaveSettings()
     {
         ResourceSaver.Save(new ReloadSettings(OverviewTransform, MechanismTransform, BarrelEndTransform));
-
+        
     }
+
+    public void RodDownBarrel()
+    {
+        BallSelectableBody ball = BarrelHole.InTip;
+        GD.PrintErr ($"RodDownBarrel Called: BarrelHole.InTip = {ball}");
+        if (ball == null) return;
+        ball.PushDown();
+        BulletInChamber = true;
+    }
+
+    public void PowderIntoChamber()
+    {
+        if (BulletInChamber) return;
+
+        //await trigger pull, once trigger pulled annouce ReloadDisabled and emit signal
+    }
+
     public void LoadSettings()
     {
 
@@ -142,6 +184,29 @@ public partial class ReloadingComponent : Node3D
         if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform))
         {
             ReloadCamera.Transform = ReloadCamera.Transform.InterpolateWith(cam_target_marker.Transform, 5.0f * (float)delta);
+        }
+        if (Input.IsActionJustPressed("ui_up"))
+        {
+            cam_target_marker = MechanismMarker;
+            return;
+
+        }
+        if (Input.IsActionPressed("ui_left"))
+        {
+            cam_target_marker = OverviewMarker;
+            return;
+
+        }
+        if(Input.IsActionPressed("ui_right"))
+        {
+            cam_target_marker = BarrelEndMarker;
+            return;
+            
+        }
+        if (Input.IsActionJustPressed("ui_down"))
+        {
+            cam_target_marker = OverviewMarker;
+            return;
         }
     }
     

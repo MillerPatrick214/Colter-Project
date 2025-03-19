@@ -81,7 +81,8 @@ CameraPath = NodePath("../../../CamPivot/Camera3D")
 [node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/GunCam" groups=["PlayerCamera"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0159696, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/GunCam/Area3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60097, 0)
 shape = SubResource("BoxShape3D_1ltv5")
 
 [node name="CamPivot" type="Marker3D" parent="."]

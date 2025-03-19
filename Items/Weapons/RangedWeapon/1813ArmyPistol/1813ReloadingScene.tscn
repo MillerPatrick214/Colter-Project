@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://deeq0ua00j6hx"]
+[gd_scene load_steps=44 format=4 uid="uid://deeq0ua00j6hx"]
 
 [ext_resource type="Script" uid="uid://bosq0seeksb0j" path="res://components/Reloading Component/ReloadingComponent.cs" id="1_q8hkg"]
 [ext_resource type="Texture2D" uid="uid://dpq4a25oo3hg2" path="res://Particles/GunpowderFleck.png" id="2_rluop"]
@@ -6,6 +6,9 @@
 [ext_resource type="Material" uid="uid://dswhbwulksoor" path="res://components/Reloading Component/PanPowderParticle.tres" id="4_c6sdb"]
 [ext_resource type="Script" uid="uid://dmcg7qi56w2h5" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/RodSelectableBody.cs" id="4_q8hkg"]
 [ext_resource type="Script" uid="uid://0blabcijig03" path="res://components/Reloading Component/SelectableComponentHammer.cs" id="4_rluop"]
+[ext_resource type="AnimationLibrary" uid="uid://ds0k1pjo2xc1y" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/Animations/RamRoadAnimations.res" id="5_1cmrp"]
+[ext_resource type="Script" uid="uid://di0ve27iblfmv" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/BallSelectableBody.cs" id="6_fq6y3"]
+[ext_resource type="Script" uid="uid://bg2rjaguaeba4" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/BarrelHole.cs" id="9_fq6y3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ppa1"]
 resource_name = "Action Material"
@@ -458,9 +461,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hut7d")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_w8y8g"]
-radius = 0.02
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q8hkg"]
 direction = Vector3(0, 0, 1)
 spread = 7.0
@@ -481,6 +481,9 @@ billboard_mode = 2
 material = SubResource("StandardMaterial3D_w8y8g")
 size = Vector2(0.01, 0.01)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_w8y8g"]
+radius = 0.02
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_fyae8"]
 radius = 0.02
 
@@ -490,20 +493,44 @@ radius = 0.01
 [sub_resource type="SphereShape3D" id="SphereShape3D_q8hkg"]
 radius = 0.01
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1cmrp"]
-radius = 0.01
-
-[node name="ReloadingComponent" type="Node3D" node_paths=PackedStringArray("OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera", "BarrelEmitterBody", "PanEmitterBody", "SelectableBodies")]
+[node name="Control" type="Control" node_paths=PackedStringArray("OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera", "BarrelEmitterBody", "PanEmitterBody", "SelectableBodies")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_q8hkg")
-OverviewMarker = NodePath("Start_End")
-MechanismMarker = NodePath("Mechanism")
-BarrelEndMarker = NodePath("BarrelEnd")
-ReloadCamera = NodePath("Camera3D")
-BarrelEmitterBody = NodePath("BarrelEmitterBody")
-PanEmitterBody = NodePath("PanEmitterBody")
+OverviewMarker = NodePath("SubViewportContainer/SubViewport/Start_End")
+MechanismMarker = NodePath("SubViewportContainer/SubViewport/Mechanism")
+BarrelEndMarker = NodePath("SubViewportContainer/SubViewport/BarrelEnd")
+ReloadCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
+BarrelEmitterBody = NodePath("SubViewportContainer/SubViewport/BarrelEmitterBody")
+PanEmitterBody = NodePath("SubViewportContainer/SubViewport/PanEmitterBody")
 SelectableBodies = []
 
-[node name="Skeleton3D" type="Skeleton3D" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(2560, 1440)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
 bones/0/name = "HandleBone"
 bones/0/parent = -1
@@ -569,109 +596,114 @@ bones/8/position = Vector3(0.00900186, 1.91673, -0.829534)
 bones/8/rotation = Quaternion(0.341563, -3.40756e-07, 1.23837e-07, 0.939859)
 bones/8/scale = Vector3(1, 1, 1)
 
-[node name="Frizzen" type="BoneAttachment3D" parent="Skeleton3D"]
+[node name="Frizzen" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Skeleton3D"]
 transform = Transform3D(1, 7.06001e-09, 4.94256e-07, 2.93975e-07, 0.795354, -0.606145, -3.97388e-07, 0.606145, 0.795354, 0.201134, 0.0874926, 0.0244064)
 bone_name = "Frizzen"
 bone_idx = 1
 
-[node name="SelectableComponentPan" type="StaticBody3D" parent="Skeleton3D/Frizzen"]
+[node name="SelectableComponentPan" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Skeleton3D/Frizzen"]
 transform = Transform3D(1, 3.81182e-19, 0, 2.03282e-20, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("3_1cmrp")
 
-[node name="Frizzen_2" type="MeshInstance3D" parent="Skeleton3D/Frizzen/SelectableComponentPan"]
+[node name="Frizzen_2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Skeleton3D/Frizzen/SelectableComponentPan"]
 transform = Transform3D(1, 8.67096e-08, -4.69143e-07, 1.54884e-08, 0.976927, 0.213575, 4.76837e-07, -0.213575, 0.976927, -0.201135, -0.0906904, -0.00515328)
 mesh = SubResource("ArrayMesh_rluop")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/Frizzen/SelectableComponentPan"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Skeleton3D/Frizzen/SelectableComponentPan"]
 transform = Transform3D(1, 0, 0, 0, 0.968583, 0.24869, 0, -0.24869, 0.968583, -0.156034, 0, -7.82311e-08)
 shape = SubResource("ConvexPolygonShape3D_q8hkg")
 
-[node name="HammerBone" type="BoneAttachment3D" parent="Skeleton3D"]
+[node name="HammerBone" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Skeleton3D"]
 transform = Transform3D(1, -3.39302e-09, 7.25113e-07, -4.65558e-07, 0.763657, 0.645622, -5.55929e-07, -0.645622, 0.763657, 0.199016, 0.110592, 0.673101)
 bone_name = "HammerBone"
 bone_idx = 3
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Skeleton3D/HammerBone"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Skeleton3D/HammerBone"]
 transform = Transform3D(1, -3.60509e-07, -3.12595e-07, 1.7587e-08, 0.682516, -0.73087, 4.76837e-07, 0.73087, 0.682516, -0.199015, 0.416469, -0.540231)
 script = ExtResource("4_rluop")
 
-[node name="Hammer" type="MeshInstance3D" parent="Skeleton3D/HammerBone/StaticBody3D2"]
+[node name="Hammer" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Skeleton3D/HammerBone/StaticBody3D2"]
 transform = Transform3D(1, 0, 1.05471e-15, 0, 1, -2.98023e-08, 1.11022e-16, 2.98023e-08, 1, 0.000572205, -0.00320101, -0.00120366)
 mesh = SubResource("ArrayMesh_fq6y3")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/HammerBone/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Skeleton3D/HammerBone/StaticBody3D2"]
 shape = SubResource("ConvexPolygonShape3D_c6sdb")
 
-[node name="Trigger" type="BoneAttachment3D" parent="Skeleton3D"]
+[node name="Trigger" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Skeleton3D"]
 transform = Transform3D(1, -1.07244e-08, -9.51786e-10, 1.02166e-08, 1, 9.98378e-07, 5.22959e-10, -1.05053e-06, 1, 9.31323e-10, 6.55651e-07, -1.01328e-06)
 bone_name = "Trigger"
 bone_idx = 6
 
-[node name="Trigger" type="MeshInstance3D" parent="Skeleton3D/Trigger"]
+[node name="Trigger" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Skeleton3D/Trigger"]
 mesh = SubResource("ArrayMesh_crkj5")
 skeleton = NodePath("")
 
-[node name="PistolBody" type="BoneAttachment3D" parent="Skeleton3D"]
+[node name="PistolBody" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Skeleton3D"]
 transform = Transform3D(1, 2.84217e-14, -5.68434e-14, 2.84217e-14, 1, 0, -5.68434e-14, 0, 1, -9.31323e-10, -2.32458e-06, 4.76837e-07)
 bone_name = "PistolBody"
 bone_idx = 7
 
-[node name="PistolBody" type="MeshInstance3D" parent="Skeleton3D/PistolBody"]
+[node name="PistolBody" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Skeleton3D/PistolBody"]
 transform = Transform3D(1, 0, 0, 9.18355e-41, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_6xkh0")
 skeleton = NodePath("")
 
-[node name="RodSelectableBody" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99863, -0.052336, 0, 0.052336, 0.99863, -0.000210494, -0.00812954, -0.193898)
+[node name="RodSelectableBody" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0641527, -0.11)
 script = ExtResource("4_q8hkg")
 
-[node name="Cylinder" type="MeshInstance3D" parent="RodSelectableBody"]
+[node name="Cylinder" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/RodSelectableBody"]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, -5.12227e-09, 0, 1.81608e-08, 0.06, 0, 0.0632235, 0.0225433)
 mesh = SubResource("ArrayMesh_20ymx")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RodSelectableBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/RodSelectableBody"]
 transform = Transform3D(1, 0, 0, 0, -0.078459, 0.996917, 0, -0.996917, -0.078459, 0, 0.0503215, 0.0017098)
 shape = SubResource("CylinderShape3D_q8hkg")
 
-[node name="BallSelectableBody" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25157e-05, 0, 0.000368163)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/RodSelectableBody"]
+libraries = {
+&"": ExtResource("5_1cmrp")
+}
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BallSelectableBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.270426)
+[node name="BallSelectableBody" type="RigidBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.28289)
+axis_lock_linear_x = true
+gravity_scale = 0.0
+script = ExtResource("6_fq6y3")
+camera = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/BallSelectableBody"]
 shape = SubResource("SphereShape3D_350i0")
 
-[node name="Sphere" type="MeshInstance3D" parent="BallSelectableBody"]
-transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
+[node name="Sphere" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/BallSelectableBody"]
+transform = Transform3D(0.11, 3.55271e-15, 0, 3.55271e-15, 0.11, 7.47618e-15, 0, 7.47618e-15, 0.11, 0, 0, 0.273)
 mesh = SubResource("ArrayMesh_0khjn")
 skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0, -0.246998, 0.969016, -1, -1.19209e-07, 1.19209e-07, 0, -0.969016, -0.246998, 0.25, -0.095, -0.359)
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(2.98023e-07, -9.17843e-07, 0.999999, 1.19371e-12, 0.999999, 9.17843e-07, -0.999999, 9.09494e-13, 2.98023e-07, 0.391999, 1.40236e-07, 5.25885e-08)
 keep_aspect = 0
 cull_mask = 3
 current = true
 
-[node name="Start_End" type="Marker3D" parent="."]
+[node name="Start_End" type="Marker3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.392, 0, 0)
 
-[node name="Mechanism" type="Marker3D" parent="."]
+[node name="Mechanism" type="Marker3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 1.13133e-08, -4.2222e-08, 0.13, 0.04, 0.015)
 
-[node name="BarrelEnd" type="Marker3D" parent="."]
+[node name="BarrelEnd" type="Marker3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1.07967e-08, -0.246999, 0.969016, -1, -4.37114e-08, 0, 4.2357e-08, -0.969016, -0.246999, 0.25, -0.095, -0.359)
 
-[node name="HornPanPosition" type="Marker3D" parent="."]
+[node name="HornPanPosition" type="Marker3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="BarrelEmitterBody" type="StaticBody3D" parent="."]
+[node name="BarrelEmitterBody" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.390278)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrelEmitterBody"]
-shape = SubResource("SphereShape3D_w8y8g")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="BarrelEmitterBody"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/BarrelEmitterBody"]
 layers = 3
 amount = 5000
 lifetime = 2.0
@@ -679,13 +711,16 @@ visibility_aabb = AABB(-0.0980445, -4.05096, -0.0976857, 0.197606, 4.08096, 0.19
 process_material = SubResource("ParticleProcessMaterial_q8hkg")
 draw_pass_1 = SubResource("QuadMesh_fyae8")
 
-[node name="PanEmitterBody" type="StaticBody3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/BarrelEmitterBody"]
+shape = SubResource("SphereShape3D_w8y8g")
+
+[node name="PanEmitterBody" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0272072, 0.108728, 0.023461)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PanEmitterBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/PanEmitterBody"]
 shape = SubResource("SphereShape3D_fyae8")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="PanEmitterBody"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/PanEmitterBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0155822, 0)
 layers = 3
 amount = 5000
@@ -694,40 +729,35 @@ visibility_aabb = AABB(-0.0980445, -4.05096, -0.0976857, 0.197606, 4.08096, 0.19
 process_material = ExtResource("4_c6sdb")
 draw_pass_1 = SubResource("QuadMesh_fyae8")
 
-[node name="RayCast3D" type="RayCast3D" parent="PanEmitterBody"]
+[node name="RayCast3D" type="RayCast3D" parent="SubViewportContainer/SubViewport/PanEmitterBody"]
 collide_with_areas = true
 collide_with_bodies = false
 debug_shape_thickness = 1
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.0156026, 0, 0.999878, 0, 1, 0, -0.999878, 0, -0.0156026, 2.21331, 0, 0)
+[node name="BarrelCollision" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="BarrelCollision" type="Node3D" parent="."]
-
-[node name="BarrelParticleCollision" type="GPUParticlesCollisionSphere3D" parent="BarrelCollision"]
+[node name="BarrelParticleCollision" type="GPUParticlesCollisionSphere3D" parent="SubViewportContainer/SubViewport/BarrelCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.229652)
 layers = 3
 radius = 0.01
 
-[node name="PanCollision" type="Node3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/BarrelCollision"]
+transform = Transform3D(-0.0156026, 0, 0.999878, 0, 1, 0, -0.999878, 0, -0.0156026, 2.21331, 0, 0)
 
-[node name="PanParticleCollision" type="GPUParticlesCollisionSphere3D" parent="PanCollision"]
+[node name="PanCollision" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="PanParticleCollision" type="GPUParticlesCollisionSphere3D" parent="SubViewportContainer/SubViewport/PanCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0293592, 0.0137515, 0.0213272)
 radius = 0.01
 
-[node name="PanArea" type="Area3D" parent="PanCollision/PanParticleCollision"]
+[node name="PanArea" type="Area3D" parent="SubViewportContainer/SubViewport/PanCollision/PanParticleCollision"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PanCollision/PanParticleCollision/PanArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/PanCollision/PanParticleCollision/PanArea"]
 shape = SubResource("SphereShape3D_rluop")
 
-[node name="BarrelHole" type="Area3D" parent="."]
+[node name="BarrelHole" type="Area3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.91414e-06, 6.85155e-05, -0.246134)
+script = ExtResource("9_fq6y3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BarrelHole"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/BarrelHole"]
 shape = SubResource("SphereShape3D_q8hkg")
-
-[node name="RodHole" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.019, -0.156)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RodHole"]
-shape = SubResource("SphereShape3D_1cmrp")
