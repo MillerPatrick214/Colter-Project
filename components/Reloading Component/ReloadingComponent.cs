@@ -5,29 +5,31 @@ using System;
 [Tool]
 public partial class ReloadingComponent : Control
 {
-
+    public static ReloadingComponent Instance;
     [Signal] public delegate void ReloadDisabledEventHandler(ReloadingComponent self);
-    Marker3D cam_target_marker;
+    public Marker3D cam_target_marker;
     StaticBody3D curr_body_mouse_on;
-
-    
-    
     SelectableComponent ComponentMouseOn = null;
     SelectableComponent CurrentComponentSelected = null;
 
     [ExportGroup("Particle Collision Boxes")]
-    [Export] Marker3D OverviewMarker;
-    [Export] Marker3D MechanismMarker;
-    [Export] Marker3D BarrelEndMarker;
-    [Export] Camera3D ReloadCamera;
+    [Export] public Marker3D OverviewMarker;
+    [Export] public Marker3D MechanismMarker;
+    [Export] public Marker3D BarrelEndMarker;
+    [Export] public Camera3D ReloadCamera;
 
     BarrelHole BarrelHole;
     RodSelectableBody Rod;
 
+
+    // Reloading Item data
+    public static float powder_comp_x_offset = .2f;
+    RigidBody3D Horn;
+    RigidBody3D PowderMeasure;
+
     public Transform3D OverviewTransform {get; set;}
     public Transform3D MechanismTransform {get; set;}
     public Transform3D BarrelEndTransform {get; set;}
-
 
     //Necessary Conditions
     //--------------------
@@ -61,7 +63,6 @@ public partial class ReloadingComponent : Control
 
     [ExportGroup("Gun Powder Emitters")]
     [Export] StaticBody3D BarrelEmitterBody;
-    [Export] StaticBody3D PanEmitterBody;
 
     /// <summary>
     /// Array for all Selectable Bodies in the Scene. Includes 
@@ -94,6 +95,8 @@ public partial class ReloadingComponent : Control
 
     public override void _Ready()
     {
+        if (Instance != null) return;
+        Instance ??= this;
         if (OverviewMarker == null || MechanismMarker == null || BarrelEndMarker == null)
         {
             GD.PrintErr("Markers are not assigned!");
@@ -102,6 +105,8 @@ public partial class ReloadingComponent : Control
 
         BarrelHole = GetNodeOrNull<BarrelHole>("SubViewportContainer/SubViewport/BarrelHole");
         Rod = GetNodeOrNull<RodSelectableBody>("SubViewportContainer/SubViewport/RodSelectableBody");
+        Horn = GetNodeOrNull<RigidBody3D>("SubViewportContainer/SubViewport/Horn");
+        PowderMeasure = GetNodeOrNull<RigidBody3D>("SubViewportContainer/SubViewport/PowderMeasure");
         OverviewTransform = OverviewMarker.Transform;
         MechanismTransform = MechanismMarker.Transform;
         BarrelEndTransform = BarrelEndMarker.Transform;
@@ -113,6 +118,7 @@ public partial class ReloadingComponent : Control
         Rod.BarrelLoaded += RodDownBarrel;
         cam_target_marker = OverviewMarker;
     }
+    
     public void SaveSettings()
     {
         ResourceSaver.Save(new ReloadSettings(OverviewTransform, MechanismTransform, BarrelEndTransform));
