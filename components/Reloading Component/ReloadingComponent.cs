@@ -6,7 +6,9 @@ using System;
 public partial class ReloadingComponent : Control
 {
     public static ReloadingComponent Instance;
-    [Signal] public delegate void ReloadDisabledEventHandler(ReloadingComponent self);
+    public static bool IsItemSelected = false;
+
+
     public Marker3D cam_target_marker;
     StaticBody3D curr_body_mouse_on;
     SelectableComponent ComponentMouseOn = null;
@@ -21,18 +23,36 @@ public partial class ReloadingComponent : Control
     BarrelHole BarrelHole;
     RodSelectableBody Rod;
 
-
     // Reloading Item data
     public static float powder_comp_x_offset = .2f;
-    RigidBody3D Horn;
-    RigidBody3D PowderMeasure;
+    TextureRect Horn;
+    bool IsMouseOnHorn = false;
+    TextureRect PowderMeasure;
+    bool IsMouseOnMeasure = false;
 
+    //Markers for Camera Transforms ----------------
     public Transform3D OverviewTransform {get; set;}
     public Transform3D MechanismTransform {get; set;}
     public Transform3D BarrelEndTransform {get; set;}
+    //-----------------------------------------------
+
+
+    //--Areas for Mouse Over camera control/Hint when close -----------------------------
+
+    public Area2D ToOverviewArea;
+    public HintSlerpCircle ToBarrelArea;
+    public HintSlerpCircle ToPanArea;
+    public HintSlerpCircle CurrentHintCircle = null;
+    bool TransformInterpolating = false; // needed so hints don't lerp position while we are manipulating transforms when transfering between markers
+    bool HintActivated = false;
+
+    Godot.Collections.Dictionary<HintSlerpCircle, Vector3> HintPosPairing;
+    //-------------------------------------------------------------------------------------
+
+
 
     //Necessary Conditions
-    //--------------------
+    //-----------------------------------------------------------------------------------------------
     bool HammerFullCock = false;
     bool PanPrimed = false;
     bool FrizzenDown = false;
@@ -41,9 +61,7 @@ public partial class ReloadingComponent : Control
 
     bool HoldingBarrelItem = false; //Controls lerp to barrel;
 
-
-/*
-
+    /*
     [Flags]                                 I think we should use bitwise operators for this shee. Will hafve to link up with Jarred or learn. 
     enum conditions_met
     {
@@ -54,8 +72,8 @@ public partial class ReloadingComponent : Control
         BulletInBarrel,
         BulletFullySeated,
     }    
-
     */
+    //-----------------------------------------------------------------------------------------------
 
     [ExportGroup("Particle Collision Boxes")]
     [Export] GpuParticlesCollisionBox3D PanParticleCollision;
@@ -95,6 +113,8 @@ public partial class ReloadingComponent : Control
 
     public override void _Ready()
     {
+
+        
         if (Instance != null) return;
         Instance ??= this;
         if (OverviewMarker == null || MechanismMarker == null || BarrelEndMarker == null)
@@ -105,18 +125,54 @@ public partial class ReloadingComponent : Control
 
         BarrelHole = GetNodeOrNull<BarrelHole>("SubViewportContainer/SubViewport/BarrelHole");
         Rod = GetNodeOrNull<RodSelectableBody>("SubViewportContainer/SubViewport/RodSelectableBody");
-        Horn = GetNodeOrNull<RigidBody3D>("SubViewportContainer/SubViewport/Horn");
-        PowderMeasure = GetNodeOrNull<RigidBody3D>("SubViewportContainer/SubViewport/PowderMeasure");
+        Horn = GetNodeOrNull<TextureRect>("SubViewportContainer/SubViewport/Horn");
+        PowderMeasure = GetNodeOrNull<TextureRect>("SubViewportContainer/SubViewport/PowderMeasure");
+
+
+        //-------------------Mouse Controls for camera ----------------------------------------
+        ToOverviewArea = GetNodeOrNull<Area2D>("SubViewportContainer/SubViewport/ToOverview");
+        ToBarrelArea = GetNodeOrNull<HintSlerpCircle>("SubViewportContainer/SubViewport/ToBarrel");
+        ToPanArea = GetNodeOrNull<HintSlerpCircle>("SubViewportContainer/SubViewport/ToPan");
+
+        if (ToBarrelArea == null || ToPanArea == null)
+        {
+            GD.PrintErr("Error: To ToBarrelArea || ToPanArea is null!"); 
+        }
+
+        ToOverviewArea.MouseEntered += CamToOverview;
+        ToBarrelArea.MouseEntered +=  CamToBarrelEnd;
+        ToPanArea.MouseEntered += CamToMechanism;
+
+        ToBarrelArea.Hint += (circ, tf) => ManageHint(circ, tf);
+
+        //------------------------------------------------------------------------------------
+
+        //Copy over transforms from markers-------------------------------------------------
         OverviewTransform = OverviewMarker.Transform;
         MechanismTransform = MechanismMarker.Transform;
         BarrelEndTransform = BarrelEndMarker.Transform;
-
+        //----------------------------------------------------------------------------------
         
         ReloadCamera.Transform = OverviewTransform;
         //PanEmitterBody.Position = new Vector3(PanParticleCollision.Position.X, PanEmitterBody.Position.Y, PanEmitterBody.Position.Z);
         //BarrelEmitterBody.Position = new Vector3(BarrelEndParticleCollision.Position.X,BarrelEmitterBody.Position.Y, BarrelEmitterBody.Position.Z);
         Rod.BarrelLoaded += RodDownBarrel;
         cam_target_marker = OverviewMarker;
+        HintPosPairing = new()
+        {
+            { ToBarrelArea, BarrelEndMarker.GlobalPosition },
+            { ToPanArea, MechanismMarker.GlobalPosition }
+        };
+
+        CamToOverview();
+    }
+
+    public void ManageHint(HintSlerpCircle circ, bool tf)
+    {
+        CurrentHintCircle = circ;
+        HintActivated = tf;
+
+        GD.PrintErr($"HintActivated is {HintActivated}. tf is {tf}");
     }
     
     public void SaveSettings()
@@ -132,6 +188,7 @@ public partial class ReloadingComponent : Control
         if (ball == null) return;
         ball.PushDown();
         BulletInChamber = true;
+        GD.PrintErr("Bullet is in Chamber!");
     }
 
     public void PowderIntoChamber()
@@ -145,19 +202,33 @@ public partial class ReloadingComponent : Control
     {
 
     }
+
     public void CamToOverview()
     {
+        HintActivated = false;
         cam_target_marker = OverviewMarker;
+        ToOverviewArea.Hide();
+        ToBarrelArea.Show();
+        ToPanArea.Show();
+
     }
 
     public void CamToMechanism()
     {
+        HintActivated = false;
         cam_target_marker = MechanismMarker;
+        ToOverviewArea.Show();
+        ToBarrelArea.Hide();
+        ToPanArea.Hide();
     }
 
     public void CamToBarrelEnd()
     {
+        HintActivated = false;
         cam_target_marker = BarrelEndMarker;
+        ToOverviewArea.Show();
+        ToBarrelArea.Hide();
+        ToPanArea.Hide();
     }
 
     public void MakeEditable()
@@ -186,33 +257,25 @@ public partial class ReloadingComponent : Control
             return; // Avoid processing if cam_target_marker is null
         }
 
-        if (ReloadCamera == null) {GD.PrintErr($"ReloadCamera null {GetPath()}");}
-        if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform))
+        if (HintActivated)
         {
+            if (CurrentHintCircle == null) GD.PrintErr("Error in Reloading Component. CurrentHintCircle is null but HintActivated is true!");
+        
+            ReloadCamera.GlobalPosition = CurrentHintCircle.GetHintLerp(ReloadCamera.GlobalPosition, HintPosPairing[CurrentHintCircle], 5.0f * (float)delta);
+            GD.PrintErr($"new CurrCamPosition: {ReloadCamera.GlobalPosition}");
+        }
+
+        if (ReloadCamera == null) {GD.PrintErr($"ReloadCamera null {GetPath()}");}
+
+        
+        if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform) && !HintActivated)
+        {
+            TransformInterpolating = true;
             ReloadCamera.Transform = ReloadCamera.Transform.InterpolateWith(cam_target_marker.Transform, 5.0f * (float)delta);
         }
-        if (Input.IsActionJustPressed("ui_up"))
+        else
         {
-            cam_target_marker = MechanismMarker;
-            return;
-
-        }
-        if (Input.IsActionPressed("ui_left"))
-        {
-            cam_target_marker = OverviewMarker;
-            return;
-
-        }
-        if(Input.IsActionPressed("ui_right"))
-        {
-            cam_target_marker = BarrelEndMarker;
-            return;
-            
-        }
-        if (Input.IsActionJustPressed("ui_down"))
-        {
-            cam_target_marker = OverviewMarker;
-            return;
+            TransformInterpolating = false;
         }
     }
     

@@ -129,6 +129,7 @@ value = SubResource("BBVariant_7e3rr")
 
 [sub_resource type="BTAction" id="BTAction_bxdbc"]
 script = ExtResource("2_c77w5")
+IsTrapped = false
 
 [sub_resource type="BTSequence" id="BTSequence_gqsns"]
 custom_name = "CheckTrapped"
@@ -159,6 +160,9 @@ script = ExtResource("3_rdll2")
 script = ExtResource("3_axqba")
 SusSpeed = 70
 UnusSpeed = 30
+Susometer = 0.0
+PreyFocus = null
+agent = null
 
 [sub_resource type="BBVariant" id="BBVariant_ld4kt"]
 resource_name = "true"
@@ -232,7 +236,12 @@ value = SubResource("BBVariant_lj7g2")
 
 [sub_resource type="BTAction" id="BTAction_rdll2"]
 script = ExtResource("4_c77w5")
+PreyFocus = null
+agent = null
+safe_vel = Vector3(0, 0, 0)
 DistanceToLaunchAttack = 10
+speed = 0.0
+status = 1
 DistanceToAbort = 50
 
 [sub_resource type="BTDelay" id="BTDelay_c77w5"]
@@ -241,6 +250,15 @@ children = [SubResource("BTAction_rdll2")]
 [sub_resource type="BTAction" id="BTAction_yc428"]
 script = ExtResource("7_c77w5")
 IntialVelocity = 15.0
+HurtBox = null
+PreyFocus = null
+prey_pos = Vector3(0, 0, 0)
+prey_vel = Vector3(0, 0, 0)
+target = Vector3(0, 0, 0)
+target_dir = Vector3(0, 0, 0)
+dist_to_target = 0.0
+agent = null
+speed = 0.0
 
 [sub_resource type="BBVariant" id="BBVariant_ab8vj"]
 resource_name = "true"
@@ -285,10 +303,16 @@ size = Vector3(0.75, 0.75, 0.5)
 
 [node name="Cougar" type="CharacterBody3D" node_paths=PackedStringArray("AnimalHurtBox", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree", "InteractComponent", "HitBoxComponent")]
 script = ExtResource("1_axqba")
+isHerding = null
 SpeciesGroup = &"cougar"
+SkinningScenePath = null
 AnimalHurtBox = NodePath("HurtBox")
 SpeciesThreatLevel = 5
+SpeciesDiet = null
+WalkSpeed = null
 RunSpeed = 13.0
+JumpVelocity = null
+isDead = null
 NavAgent = NodePath("NavigationAgent3D")
 AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("VisionCone/VisionRay")
@@ -297,6 +321,7 @@ VisionCone = NodePath("VisionCone")
 BehaviorTree = NodePath("BTPlayer")
 InteractComponent = NodePath("InteractComponent")
 HitBoxComponent = NodePath("HitBoxComponent")
+IsInteractable = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00692475, 0.309785, 0.145884)

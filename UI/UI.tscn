@@ -116,9 +116,12 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Reloading" parent="." instance=ExtResource("8_jtp4a")]
+[node name="Reloading" parent="." node_paths=PackedStringArray("BarrelOpening", "BarrelOpeningCollisionShape") instance=ExtResource("8_jtp4a")]
 visible = false
 layout_mode = 1
+curr_text_size = Vector2(100, 400)
+BarrelOpening = NodePath("AspectRatioContainer/BarrelTextRect/BarrelOpening")
+BarrelOpeningCollisionShape = NodePath("AspectRatioContainer/BarrelTextRect/BarrelOpening/OpeningCollision")
 
 [node name="InputControl" type="Node" parent="."]
 script = ExtResource("9_hgomv")

@@ -25,16 +25,6 @@ public partial class BallSelectableBody : RigidBody3D
         Vector3 projected_position  = camera.ProjectPosition(mouse_pos_vect2, camera.Position.X);
         projected_position = new Vector3 (0, projected_position.Y, projected_position.Z);
 
-        if (push_down)
-        {
-            if (timer == null)
-            {
-                timer ??= GetTree().CreateTimer(250);
-                timer.Timeout += QueueFree;
-            }
-            PushDownMovement(delta);
-            return;
-        }
 
         if(is_mouse_over && Input.IsActionPressed("UseItem"))
         {
@@ -69,7 +59,7 @@ public partial class BallSelectableBody : RigidBody3D
     
     public void PushDown()
     {
-        push_down = true;
+        QueueFree();
     }
 
     public void PushDownMovement(double delta)

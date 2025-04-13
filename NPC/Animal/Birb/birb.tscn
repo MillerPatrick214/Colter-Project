@@ -30,6 +30,15 @@ height = 0.02
 
 [node name="Birb" type="CharacterBody3D"]
 script = ExtResource("1_glf8g")
+isHerding = null
+SkinningScenePath = null
+SpeciesThreatLevel = null
+SpeciesDiet = null
+WalkSpeed = null
+RunSpeed = null
+JumpVelocity = null
+isDead = null
+IsInteractable = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ajdb7")

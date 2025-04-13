@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 [GlobalClass]
 public abstract partial class SelectableComponent : StaticBody3D

@@ -62,6 +62,7 @@ value = SubResource("BBVariant_n2b2d")
 
 [sub_resource type="BTAction" id="BTAction_mwh4g"]
 script = ExtResource("2_qxr7o")
+IsTrapped = false
 
 [sub_resource type="BTSequence" id="BTSequence_ydvc2"]
 custom_name = "CheckTrapped"
@@ -126,6 +127,11 @@ speed = 3.0
 
 [sub_resource type="BTAction" id="BTAction_04xvh"]
 script = ExtResource("2_2e18s")
+agent = null
+comp = null
+NavAgent = null
+status = 0
+SafeVel = Vector3(0, 0, 0)
 
 [sub_resource type="BTSequence" id="BTSequence_8wbms"]
 custom_name = "Graze"
@@ -177,6 +183,8 @@ children = [SubResource("BTSequence_1wk7a")]
 script = ExtResource("4_jtgjo")
 SusSpeed = 10
 UnusSpeed = 5
+Susometer = 0.0
+agent = null
 
 [sub_resource type="BTInvert" id="BTInvert_jq63o"]
 children = [SubResource("BTAction_tdua7")]
@@ -196,6 +204,11 @@ speed = 3.5
 
 [sub_resource type="BTAction" id="BTAction_qhqk1"]
 script = ExtResource("6_7jh8d")
+threatPosition = Vector3(0, 0, 0)
+agent = null
+SafeVelocity = Vector3(0, 0, 0)
+Focus = null
+Traveling = false
 
 [sub_resource type="BTSequence" id="BTSequence_hy06h"]
 custom_name = "Flee"
@@ -327,7 +340,13 @@ safe_margin = 0.01
 script = ExtResource("1_g31wg")
 isHerding = true
 SpeciesGroup = &"Capybara"
+SkinningScenePath = null
 SpeciesThreatLevel = 1
+SpeciesDiet = null
+WalkSpeed = null
+RunSpeed = null
+JumpVelocity = null
+isDead = null
 NavAgent = NodePath("NavigationAgent3D")
 AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("VisionCone/VisionRay")
@@ -336,6 +355,7 @@ VisionCone = NodePath("VisionCone")
 BehaviorTree = NodePath("BTPlayer")
 InteractComponent = NodePath("InteractComponent")
 HitBoxComponent = NodePath("HitBoxComponent")
+IsInteractable = null
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -490,4 +510,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2
 shape = SubResource("CapsuleShape3D_48exc")
 
 [node name="HerdComponent" parent="." node_paths=PackedStringArray("Parent") groups=["Capybara"] instance=ExtResource("14_mh11t")]
+separation_factor = null
+basis_matching_factor = null
+centering_factor = null
+personal_space = null
+herd_radius = null
+frequency_bias = null
+bias_magnitude = null
 Parent = NodePath("..")

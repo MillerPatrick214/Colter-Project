@@ -107,10 +107,5 @@ public abstract partial class GunComponent : SelectableComponent
             curr_quat = Skeleton.GetBonePoseRotation(BoneIdx).Normalized();            
         }
     }
-    
-    public void Highlight()
-    {
-
-    }
 }
 

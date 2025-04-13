@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://t2pq81ar5pod"]
 
 [ext_resource type="Material" uid="uid://dswhbwulksoor" path="res://components/Reloading Component/PanPowderParticle.tres" id="1_d8jj4"]
-[ext_resource type="Script" uid="uid://dwug544fw67s3" path="res://Items/Reloading/PowderHorn.cs" id="1_uw5pn"]
+[ext_resource type="Script" uid="uid://dwug544fw67s3" path="res://Items/Reloading/PowderHornOutdated.cs" id="1_uw5pn"]
 [ext_resource type="Texture2D" uid="uid://dpq4a25oo3hg2" path="res://Particles/GunpowderFleck.png" id="2_uw5pn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd7t0"]
@@ -57,6 +57,7 @@ points = PackedVector3Array(0.0350233, -0.170497, 0.064911, -0.0173168, -0.19516
 [node name="Horn" type="RigidBody3D"]
 gravity_scale = 0.0
 script = ExtResource("1_uw5pn")
+pour_speed = null
 
 [node name="Cone" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 7.54979e-08, 1.30766e-07, 1.30766e-07, -0.866025, -0.5, 7.54979e-08, 0.5, -0.866025, 0.005, 0.2, 0)
