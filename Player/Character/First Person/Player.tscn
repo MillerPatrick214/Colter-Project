@@ -38,23 +38,6 @@ radius = 2.5
 [node name="Player" type="CharacterBody3D" groups=["Human", "PlayerCharacter", "ThreatLevel3"]]
 unique_name_in_owner = true
 script = ExtResource("1_fdc88")
-SprintSpeed = null
-Speed = null
-JumpManueverSpeed = null
-JumpImpulse = null
-LeanAngle = null
-LeanSpeed = null
-CameraPivotRotation = null
-ItemSwayAmount = null
-ItemPivotRotation = null
-BobAmount = null
-BobFrequency = null
-StandingHeight = null
-CrouchingHeight = null
-StandingCameraPivot = null
-CrouchingCameraPivot = null
-YRotationMinimum = null
-YRotationMaximum = null
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_f4xyh")

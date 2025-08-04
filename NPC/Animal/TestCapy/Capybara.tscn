@@ -190,8 +190,8 @@ script = ExtResource("1_7dout")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_aq1vd"),
-"CapybaraAnimations": ExtResource("4_xeeau")
+&"": SubResource("AnimationLibrary_aq1vd"),
+&"CapybaraAnimations": ExtResource("4_xeeau")
 }
 
 [node name="capybara_Cube_002" type="MeshInstance3D" parent="."]
@@ -225,7 +225,7 @@ bones/2/parent = -1
 bones/2/rest = Transform3D(1, -5.55111e-17, 4.8267e-17, 4.8267e-17, 0.990302, 0.138931, -5.55111e-17, -0.138931, 0.990302, 2.3283e-10, 2.1388, -0.0408518)
 bones/2/enabled = true
 bones/2/position = Vector3(1.00005e-09, 2.13949, 0.338126)
-bones/2/rotation = Quaternion(0.256484, -0.00292289, 0.00226016, 0.966541)
+bones/2/rotation = Quaternion(0.243958, -0.00289616, 0.002265, 0.969779)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "UpperBone.003.R"
 bones/3/parent = -1

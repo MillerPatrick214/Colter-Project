@@ -167,7 +167,7 @@ points = PackedVector3Array(0, 0, 0, 0, 0.5, 0, 5, 0, 30, -5, 0, 30, 5, 5, 30, -
 [sub_resource type="SphereShape3D" id="SphereShape3D_j2l3g"]
 radius = 7.0
 
-[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone", "BehaviorTree")]
+[node name="NPC" type="CharacterBody3D" node_paths=PackedStringArray("itemMarker", "NavAgent", "AniTree", "VisionRay", "HearingArea", "VisionCone")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 3
 script = ExtResource("1_5we11")
@@ -177,7 +177,6 @@ AniTree = NodePath("AnimationTree")
 VisionRay = NodePath("VisionRay")
 HearingArea = NodePath("HearingArea")
 VisionCone = NodePath("VisionCone")
-BehaviorTree = NodePath("BTPlayer")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_pmo6d")
@@ -199,7 +198,6 @@ transform = Transform3D(-0.772073, -0.100703, 0.627504, 0.495789, 0.522294, 0.69
 [node name="1813ArmyPistol" parent="NPCItemMarker" instance=ExtResource("2_cv25x")]
 IsInteractable = false
 ItemResource = SubResource("Resource_s07wk")
-isHeld = true
 
 [node name="HitBoxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HealthComponent")]
 collision_layer = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp3my8vlx8hxj"]
+[gd_scene load_steps=12 format=3 uid="uid://djljjlykjt8d3"]
 
 [ext_resource type="PackedScene" uid="uid://ccdcdhajuhd2u" path="res://NPC/Animal/TestCapy/LimboCapybara.tscn" id="1_4b5ei"]
 [ext_resource type="PackedScene" uid="uid://8rg5vm4nwgx7" path="res://NPC/Animal/Cougar/Cougar.tscn" id="2_we0ib"]
@@ -78,193 +78,64 @@ metadata/_edit_lock_ = true
 
 [node name="LimboCapybara" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1388.83, 31.1457, 1049.17)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara2" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1389.29, 31.5344, 1052.77)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara3" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1391.27, 31.8525, 1051.14)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara4" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1389.58, 31.2606, 1049.11)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara5" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1384.83, 31.1457, 1049.17)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara6" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1385.29, 31.5344, 1052.77)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara7" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1387.27, 31.8525, 1051.14)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara8" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1385.58, 31.2606, 1049.11)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara9" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1393.83, 31.1457, 1049.17)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara10" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1394.29, 31.5344, 1052.77)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara11" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1396.27, 31.8525, 1051.14)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara12" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1394.58, 31.2606, 1049.11)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara13" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1401.83, 31.1457, 1049.17)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara14" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1402.29, 31.5344, 1052.77)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara15" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1404.27, 31.8525, 1051.14)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="LimboCapybara16" parent="." instance=ExtResource("1_4b5ei")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 1402.58, 31.2606, 1049.11)
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-RunSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
 
 [node name="Cougar" parent="." instance=ExtResource("2_we0ib")]
 transform = Transform3D(-0.985121, 0.171862, 1.508e-05, 0.171201, 0.981342, -0.0875075, -0.015054, -0.0862029, -0.996164, 1392.76, 31.8031, 989.379)
-isHerding = null
-SkinningScenePath = null
-SpeciesDiet = null
-WalkSpeed = null
-JumpVelocity = null
-isDead = null
-IsInteractable = null
+isHerding = false
+SkinningScenePath = "res://Skinning/DeerSkinTest.tscn"
+SpeciesDiet = 0
+WalkSpeed = 5.0
+JumpVelocity = 4.5
+isDead = false
+IsInteractable = false
 
 [node name="Player" parent="." instance=ExtResource("3_we0ib")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1362.61, 47.77, 1070.2)
-SprintSpeed = null
-Speed = null
-JumpManueverSpeed = null
-JumpImpulse = null
-LeanAngle = null
-LeanSpeed = null
-CameraPivotRotation = null
-ItemSwayAmount = null
-ItemPivotRotation = null
-BobAmount = null
-BobFrequency = null
-StandingHeight = null
-CrouchingHeight = null
-StandingCameraPivot = null
-CrouchingCameraPivot = null
-YRotationMinimum = null
-YRotationMaximum = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.929096, 0.193482, 0.315191, -0.292935, 0.905231, 0.307808, -0.225765, -0.378314, 0.897724, 0, 1177, 0)

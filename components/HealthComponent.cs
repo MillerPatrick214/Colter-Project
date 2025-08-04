@@ -25,6 +25,4 @@ public partial class HealthComponent : Node
 	{
 		return health;
 	}
-
-
 }

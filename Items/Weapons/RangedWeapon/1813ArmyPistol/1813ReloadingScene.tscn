@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://deeq0ua00j6hx"]
+[gd_scene load_steps=53 format=4 uid="uid://deeq0ua00j6hx"]
 
 [ext_resource type="Script" uid="uid://bosq0seeksb0j" path="res://components/Reloading Component/ReloadingComponent.cs" id="1_q8hkg"]
 [ext_resource type="Script" uid="uid://be0j33njchckh" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/EighteenThirteenFrizzen.cs" id="3_1cmrp"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bg2rjaguaeba4" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/BarrelHole.cs" id="9_fq6y3"]
 [ext_resource type="Script" uid="uid://27hfd8beoor5" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/PowderHorn.cs" id="9_o6ksi"]
 [ext_resource type="Texture2D" uid="uid://dpq4a25oo3hg2" path="res://Particles/GunpowderFleck.png" id="10_bsmet"]
-[ext_resource type="Script" uid="uid://dfppfoek825i2" path="res://Items/Weapons/RangedWeapon/1813ArmyPistol/HintSlerpCircle.cs" id="12_bsmet"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ppa1"]
 resource_name = "Action Material"
@@ -517,14 +516,8 @@ radius = 0.01
 [sub_resource type="SphereShape3D" id="SphereShape3D_q8hkg"]
 radius = 0.01
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lex30"]
-radius = 300.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_o6ksi"]
 radius = 100.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_62rh2"]
-radius = 300.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bsmet"]
 radius = 100.0
@@ -532,7 +525,7 @@ radius = 100.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62rh2"]
 size = Vector2(2560, 100)
 
-[node name="1813ReloadingScene" type="Control" node_paths=PackedStringArray("cam_target_marker", "OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera", "Rod", "Horn", "PowderMeasure", "ToOverviewArea")]
+[node name="1813ReloadingScene" type="Control" node_paths=PackedStringArray("OverviewMarker", "MechanismMarker", "BarrelEndMarker", "ReloadCamera", "SelectableBodies")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -543,44 +536,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_q8hkg")
-OverviewTransform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-MechanismTransform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-BarrelEndTransform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-cam_target_marker = NodePath("SubViewportContainer/SubViewport/Start_End")
-curr_body_mouse_on = null
-ComponentMouseOn = null
-CurrentComponentSelected = null
 OverviewMarker = NodePath("SubViewportContainer/SubViewport/Start_End")
 MechanismMarker = NodePath("SubViewportContainer/SubViewport/Mechanism")
 BarrelEndMarker = NodePath("SubViewportContainer/SubViewport/BarrelEnd")
 ReloadCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
-BarrelHole = null
-Rod = NodePath("SubViewportContainer/SubViewport/RodSelectableBody")
-Horn = NodePath("SubViewportContainer/SubViewport/Horn")
-IsMouseOnHorn = false
-PowderMeasure = NodePath("SubViewportContainer/SubViewport/PowderMeasure")
-IsMouseOnMeasure = false
-ToOverviewArea = NodePath("SubViewportContainer/SubViewport/ToOverview")
-ToBarrelArea = null
-ToPanArea = null
-CurrentHintCircle = null
-TransformInterpolating = false
-HintActivated = false
-HintPosPairing = {}
-HammerFullCock = false
-PanPrimed = false
-FrizzenDown = false
-BulletInChamber = false
-PowderInChamber = false
-HoldingBarrelItem = false
 SelectableBodies = []
-children_editable = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1101.0
+offset_top = -61.0
+offset_right = -1101.0
+offset_bottom = -61.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -721,13 +691,9 @@ bone_idx = 7
 mesh = SubResource("ArrayMesh_6xkh0")
 skeleton = NodePath("")
 
-[node name="RodSelectableBody" type="StaticBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("AniPlayer")]
+[node name="RodSelectableBody" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0641527, -0.11)
 script = ExtResource("4_q8hkg")
-AniPlayer = NodePath("AnimationPlayer")
-curr_rod_state = 0
-mouse_on = false
-animation_finished = true
 
 [node name="Cylinder" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/RodSelectableBody"]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, -5.12227e-09, 0, 1.81608e-08, 0.06, 0, 0.0632235, 0.0225433)
@@ -880,13 +846,6 @@ shape = SubResource("SphereShape3D_q8hkg")
 position = Vector2(498, 754)
 
 [node name="ToPan" type="Area2D" parent="SubViewportContainer/SubViewport"]
-script = ExtResource("12_bsmet")
-
-[node name="HintZone" type="Area2D" parent="SubViewportContainer/SubViewport/ToPan"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/ToPan/HintZone"]
-position = Vector2(1212, 679)
-shape = SubResource("CircleShape2D_lex30")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/ToPan"]
 position = Vector2(1212, 679)
@@ -894,17 +853,12 @@ shape = SubResource("CircleShape2D_o6ksi")
 
 [node name="ToBarrel" type="Area2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(1971, 720)
-script = ExtResource("12_bsmet")
-
-[node name="HintZone" type="Area2D" parent="SubViewportContainer/SubViewport/ToBarrel"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/ToBarrel/HintZone"]
-shape = SubResource("CircleShape2D_62rh2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/ToBarrel"]
 shape = SubResource("CircleShape2D_bsmet")
 
 [node name="ToOverview" type="Area2D" parent="SubViewportContainer/SubViewport"]
+visible = false
 
 [node name="HintZone" type="Area2D" parent="SubViewportContainer/SubViewport/ToOverview"]
 

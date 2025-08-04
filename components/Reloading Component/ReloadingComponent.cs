@@ -40,13 +40,13 @@ public partial class ReloadingComponent : Control
     //--Areas for Mouse Over camera control/Hint when close -----------------------------
 
     public Area2D ToOverviewArea;
-    public HintSlerpCircle ToBarrelArea;
-    public HintSlerpCircle ToPanArea;
-    public HintSlerpCircle CurrentHintCircle = null;
-    bool TransformInterpolating = false; // needed so hints don't lerp position while we are manipulating transforms when transfering between markers
-    bool HintActivated = false;
+    public Area2D ToBarrelArea;
+    public Area2D ToPanArea;
+    //public HintSlerpCircle CurrentHintCircle = null;
+    //bool TransformInterpolating = false; // needed so hints don't lerp position while we are manipulating transforms when transfering between markers
+    //bool HintActivated = false;
 
-    Godot.Collections.Dictionary<HintSlerpCircle, Vector3> HintPosPairing;
+    //Godot.Collections.Dictionary<HintSlerpCircle, Vector3> HintPosPairing;
     //-------------------------------------------------------------------------------------
 
 
@@ -131,8 +131,9 @@ public partial class ReloadingComponent : Control
 
         //-------------------Mouse Controls for camera ----------------------------------------
         ToOverviewArea = GetNodeOrNull<Area2D>("SubViewportContainer/SubViewport/ToOverview");
-        ToBarrelArea = GetNodeOrNull<HintSlerpCircle>("SubViewportContainer/SubViewport/ToBarrel");
-        ToPanArea = GetNodeOrNull<HintSlerpCircle>("SubViewportContainer/SubViewport/ToPan");
+        
+        ToBarrelArea = GetNodeOrNull<Area2D>("SubViewportContainer/SubViewport/ToBarrel");
+        ToPanArea = GetNodeOrNull<Area2D>("SubViewportContainer/SubViewport/ToPan");
 
         if (ToBarrelArea == null || ToPanArea == null)
         {
@@ -142,8 +143,9 @@ public partial class ReloadingComponent : Control
         ToOverviewArea.MouseEntered += CamToOverview;
         ToBarrelArea.MouseEntered +=  CamToBarrelEnd;
         ToPanArea.MouseEntered += CamToMechanism;
+        
 
-        ToBarrelArea.Hint += (circ, tf) => ManageHint(circ, tf);
+        //ToBarrelArea.Hint += (circ, tf) => ManageHint(circ, tf);
 
         //------------------------------------------------------------------------------------
 
@@ -158,15 +160,18 @@ public partial class ReloadingComponent : Control
         //BarrelEmitterBody.Position = new Vector3(BarrelEndParticleCollision.Position.X,BarrelEmitterBody.Position.Y, BarrelEmitterBody.Position.Z);
         Rod.BarrelLoaded += RodDownBarrel;
         cam_target_marker = OverviewMarker;
+       /*
         HintPosPairing = new()
         {
             { ToBarrelArea, BarrelEndMarker.GlobalPosition },
             { ToPanArea, MechanismMarker.GlobalPosition }
         };
+        */
 
         CamToOverview();
     }
 
+    /*
     public void ManageHint(HintSlerpCircle circ, bool tf)
     {
         CurrentHintCircle = circ;
@@ -174,6 +179,7 @@ public partial class ReloadingComponent : Control
 
         GD.PrintErr($"HintActivated is {HintActivated}. tf is {tf}");
     }
+    */
     
     public void SaveSettings()
     {
@@ -205,7 +211,7 @@ public partial class ReloadingComponent : Control
 
     public void CamToOverview()
     {
-        HintActivated = false;
+        //HintActivated = false;
         cam_target_marker = OverviewMarker;
         ToOverviewArea.Hide();
         ToBarrelArea.Show();
@@ -215,7 +221,7 @@ public partial class ReloadingComponent : Control
 
     public void CamToMechanism()
     {
-        HintActivated = false;
+        //HintActivated = false;
         cam_target_marker = MechanismMarker;
         ToOverviewArea.Show();
         ToBarrelArea.Hide();
@@ -224,7 +230,7 @@ public partial class ReloadingComponent : Control
 
     public void CamToBarrelEnd()
     {
-        HintActivated = false;
+        //HintActivated = false;
         cam_target_marker = BarrelEndMarker;
         ToOverviewArea.Show();
         ToBarrelArea.Hide();
@@ -256,7 +262,7 @@ public partial class ReloadingComponent : Control
             GD.PrintErr($"cam_target_marker is null at {GetPath()}");
             return; // Avoid processing if cam_target_marker is null
         }
-
+        /*
         if (HintActivated)
         {
             if (CurrentHintCircle == null) GD.PrintErr("Error in Reloading Component. CurrentHintCircle is null but HintActivated is true!");
@@ -264,19 +270,22 @@ public partial class ReloadingComponent : Control
             ReloadCamera.GlobalPosition = CurrentHintCircle.GetHintLerp(ReloadCamera.GlobalPosition, HintPosPairing[CurrentHintCircle], 5.0f * (float)delta);
             GD.PrintErr($"new CurrCamPosition: {ReloadCamera.GlobalPosition}");
         }
+        */
 
         if (ReloadCamera == null) {GD.PrintErr($"ReloadCamera null {GetPath()}");}
 
         
-        if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform) && !HintActivated)
+        if (!ReloadCamera.Transform.IsEqualApprox(cam_target_marker.Transform)) //&& !HintActivated)
         {
-            TransformInterpolating = true;
+            //TransformInterpolating = true;
             ReloadCamera.Transform = ReloadCamera.Transform.InterpolateWith(cam_target_marker.Transform, 5.0f * (float)delta);
         }
+       /*
         else
         {
             TransformInterpolating = false;
         }
+        */
     }
     
     //Quick Notes
